@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputNachname">Nachname</label>
-                        <input type="text" class="form-control" id="inputNachname" name="inputNachname" required="required" pattern="[A-Za-z0-9]{1,} placeholder="Nachname">
+                        <input type="text" class="form-control" id="inputNachname" name="inputNachname" required="required" pattern="[A-Za-z0-9]{1,}" placeholder="Nachname">
                     </div>
                     <div class="form-group">
                         <label for="inputGeb">Geburtsdatum</label>

@@ -7,12 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Password/PassMD5.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/handler/LoginHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/handler/LoginHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/registration.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handler/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/LoginHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handler/RegistrationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/RegistrationHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/registration.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -143,7 +140,7 @@
       <updated>1569063465734</updated>
       <workItem from="1569063469701" duration="3268000" />
       <workItem from="1569067107869" duration="10493000" />
-      <workItem from="1569088452269" duration="6693000" />
+      <workItem from="1569088452269" duration="7910000" />
     </task>
     <servers />
   </component>
