@@ -43,7 +43,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                <button type="button" onclick="submitRegistration() class="btn btn-primary">Registrieren</button>
+                <button type="button" onclick="submitRegistration()" class="btn btn-primary">Registrieren</button>
             </div>
         </div>
     </div>

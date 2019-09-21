@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.Date;
 
 @WebServlet(name = "RegistrationForm")
 public class RegistrationHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getParameter("inputVorname");
-        request.getParameter("inputNachname");
-        request.getParameter("inputGeb");
-        request.getParameter("inputEmail");
-        request.getParameter("inputPasswordReg");
-        request.getParameter("inputPasswordRegWdh");
+        String firstname = request.getParameter("inputVorname");
+        String lastname = request.getParameter("inputNachname");
+        String date = request.getParameter("inputGeb");
+        String email = request.getParameter("inputEmail");
+        String pass = request.getParameter("inputPasswordReg");
 
 
         Connection c = null;
@@ -28,23 +28,17 @@ public class RegistrationHandler extends HttpServlet {
         c = Connector.getConnection();
         if (c == null)
             response.getOutputStream().print("Geht nicht!");
-        String sql = QueryBuilder.createLoginQuery();
-        ResultSet rs = Connector.getQueryResult(c, sql);
+        String sql = QueryBuilder.createUser(firstname, lastname, date, email, pass);
+        //Connector.executeQuery(c, sql);
 
-        try {
-            if (rs.next() == false ) {
-                response.getOutputStream().print("Leer");
-            } else {
-                do {
-                    response.getOutputStream().print("top");
-                    response.sendRedirect("success.jsp");
-                    String data = rs.getString("Vorname");
-                    response.getOutputStream().print(data);
-                } while (rs.next());
-            }
+        response.getOutputStream().print(sql);
+
+        /*try {
+            response.sendRedirect("success.jsp");
+
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         response.getOutputStream().print("flop1");
         Connector.closeConnection(c);
     }
