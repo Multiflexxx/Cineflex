@@ -6,7 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
+    <list default="true" id="ce5aefbb-6567-4066-bc8c-13c4b297cf77" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handler/RegistrationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/RegistrationHandler.java" afterDir="false" />
@@ -37,12 +37,6 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1265" />
-    <option name="y" value="859" />
-    <option name="width" value="1215" />
-    <option name="height" value="1032" />
-  </component>
   <component name="ProjectId" id="1R8zMtfPLFBm2ngZCcGiElHB2Wx" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -55,12 +49,12 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web\javascript" />
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -126,7 +120,7 @@
       <option name="presentableId" value="Default" />
       <updated>1569063465734</updated>
       <workItem from="1569063469701" duration="3268000" />
-      <workItem from="1569067107869" duration="10493000" />
+      <workItem from="1569067107869" duration="11333000" />
     </task>
     <servers />
   </component>
@@ -138,9 +132,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
