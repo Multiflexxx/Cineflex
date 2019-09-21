@@ -32,7 +32,7 @@ public class LoginHandler extends HttpServlet {
             } else {
                 do {
                     response.getOutputStream().print("top");
-                    //response.sendRedirect("success.jsp");
+                    response.sendRedirect("success.jsp");
                     String data = rs.getString("Vorname");
                     response.getOutputStream().print(data);
                 } while (rs.next());

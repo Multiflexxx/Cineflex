@@ -7,7 +7,7 @@ public class Connector {
         Connection c = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/Tristan", "multiflex", "multiflexxx123");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/Cineflex", "multiflex", "multiflexxx123");
         } catch (Exception e) {
             e.printStackTrace();
         }
