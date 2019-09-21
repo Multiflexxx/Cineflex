@@ -8,8 +8,8 @@ function submitRegistration() {
     var inputNachname = document.getElementById("inputNachname").value;
     var inputGeb = document.getElementById("inputGeb").value;
     var inputEmail = document.getElementById("inputEmail").value;
-    var inputPasswortReg = document.getElementById("inputPasswortRegWdh").value;
-    var inputPasswortRegWdh = document.getElementById("inputPasswortRegWdh").value;
+    var inputPasswortReg = document.getElementById("inputPasswordReg").value;
+    var inputPasswortRegWdh = document.getElementById("inputPasswordRegWdh").value;
 
     // check passwords are not equal
     if(inputPasswortReg != inputPasswortRegWdh )
