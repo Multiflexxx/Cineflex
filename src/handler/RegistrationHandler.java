@@ -1,5 +1,6 @@
 package handler;
 
+import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +26,11 @@ public class RegistrationHandler extends HttpServlet {
         String pass = request.getParameter("inputPasswordReg");
         String passWdh = request.getParameter("inputPasswordRegWdh");
 
-
+        try {
+            pass = PassMD5.hash(pass);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
         Connection c = null;
 
