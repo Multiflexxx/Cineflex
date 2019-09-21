@@ -6,12 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="Cookie">
-      <change afterPath="$PROJECT_DIR$/web/javascript/cookie_url.js" afterDir="false" />
+    <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="Was da los">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/elements/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/elements/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/elements/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/elements/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/header.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,12 +48,12 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web" />
+      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web\javascript" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web\javascript" />
-      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -141,7 +138,7 @@
       <updated>1569063465734</updated>
       <workItem from="1569063469701" duration="3268000" />
       <workItem from="1569067107869" duration="10493000" />
-      <workItem from="1569088452269" duration="18747000" />
+      <workItem from="1569088452269" duration="21075000" />
     </task>
     <task id="LOCAL-00001" summary="Update menu">
       <created>1569099030773</created>
@@ -157,7 +154,21 @@
       <option name="project" value="LOCAL" />
       <updated>1569105328418</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Cookie">
+      <created>1569108525001</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1569108525002</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Was da los">
+      <created>1569109571067</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1569109571067</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +190,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update menu" />
     <MESSAGE value="Cookie" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cookie" />
+    <MESSAGE value="Was da los" />
+    <option name="LAST_COMMIT_MESSAGE" value="Was da los" />
   </component>
 </project>
