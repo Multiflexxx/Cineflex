@@ -59,6 +59,7 @@
             </form>
         </div>
     </nav>
+    <script src="/javascript/cookie_url.js"></script>
 </header>
 
-<script src="/javascript/cookie_url.js"></script>
+
