@@ -1,3 +1,9 @@
+<%@ page import="db_connector.Connector" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="db_connector.QueryBuilder" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="java.io.Writer" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <header>
@@ -15,7 +21,19 @@
             <div class="dropdown">
                 <a class="navbar-brand dropwdown dropdown-toggle" href="#" id="navbarDropdownCity" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mannheim</a>
+
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <%
+                    Connection c = Connector.getConnection();
+                    ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
+
+                    while(rs.next()) {
+                        out.println("<a class=\"dropdown-item\" href=\"404.html\">" + rs.getString("Ortsname") + "</a>");
+                    }
+                    Connector.closeConnection(c);
+                %>
+                </div>
+                <%--<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="404.html">Augsburg</a>
                     <a class="dropdown-item" href="404.html">Berlin</a>
                     <a class="dropdown-item" href="404.html">Bremen</a>
@@ -32,7 +50,7 @@
                     <a class="dropdown-item" href="404.html">München</a>
                     <a class="dropdown-item" href="404.html">Potsdam</a>
                     <a class="dropdown-item" href="404.html">Stuttgart</a>
-                </div>
+                </div>--%>
             </div>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">

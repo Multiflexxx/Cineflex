@@ -23,7 +23,16 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://E:/Tristan/DHBW/Fallstudie/mysql-connector-java-8.0.17/mysql-connector-java-8.0.17.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Fallstudie/mysql-connector-java-8.0.17/mysql-connector-java-8.0.17.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../Fallstudie/taglibs/taglibs-standard-jstlel-1.2.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -1,7 +1,32 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ page import="db_connector.Connector" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="db_connector.QueryBuilder" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!-- Cookies -->
+<%
+    Cookie city = null;
+    Cookie cookies [] = null;
+
+    cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (int i=0; i<cookies.length; i++) {
+            if (cookies[i].getName().equals("city")){
+                city = cookies[i];
+            }
+        }
+    } else {
+        city = new Cookie("city", request.getParameter(""));
+    }
+%>
+
+<c:url value = "/index.jsp" var = "myURL">
+    <c:param name = "trackingId" value = "1234"/>
+    <c:param name = "reportType" value = "summary"/>
+</c:url>
 
 <header>
     <!-- Navbar -->
@@ -19,29 +44,16 @@
                 <a class="navbar-brand dropwdown dropdown-toggle" href="#" id="navbarDropdownCity" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mannheim</a>
 
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <%
                     Connection c = Connector.getConnection();
-                    Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
+                    ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
 
+                    while(rs.next()) {
+                        out.println("<a class=\"dropdown-item\" href=\"404.html\">" + rs.getString("Ortsname") + "</a>");
+                    }
+                    Connector.closeConnection(c);
                 %>
-
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="404.html">Augsburg</a>
-                    <a class="dropdown-item" href="404.html">Berlin</a>
-                    <a class="dropdown-item" href="404.html">Bremen</a>
-                    <a class="dropdown-item" href="404.html">Celle</a>
-                    <a class="dropdown-item" href="404.html">Chemnitz</a>
-                    <a class="dropdown-item" href="404.html">Hamburg</a>
-                    <a class="dropdown-item" href="404.html">Hannover</a>
-                    <a class="dropdown-item" href="404.html">Heidelberg</a>
-                    <a class="dropdown-item" href="404.html">Ingolstadt</a>
-                    <a class="dropdown-item" href="404.html">Karlsruhe</a>
-                    <a class="dropdown-item" href="404.html">Kassel</a>
-                    <a class="dropdown-item" href="404.html">Köln</a>
-                    <a class="dropdown-item" href="404.html">Mannheim</a>
-                    <a class="dropdown-item" href="404.html">München</a>
-                    <a class="dropdown-item" href="404.html">Potsdam</a>
-                    <a class="dropdown-item" href="404.html">Stuttgart</a>
                 </div>
             </div>
             <ul class="navbar-nav mr-auto">

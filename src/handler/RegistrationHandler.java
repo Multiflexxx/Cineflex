@@ -31,7 +31,7 @@ public class RegistrationHandler extends HttpServlet {
             return;
         }
 
-        if(pass.length < 6 || passWdh.length < 6)
+        if(pass.length() < 6 || passWdh.length() < 6)
         {
             return;
         }
