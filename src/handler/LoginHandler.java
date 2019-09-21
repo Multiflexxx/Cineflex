@@ -14,8 +14,8 @@ import java.sql.ResultSet;
 //@WebServlet(name = "LoginHandler")
 public class LoginHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String un = request.getParameter("username");
-        String pw = request.getParameter("password");
+        String un = request.getParameter("inputEmail");
+        String pw = request.getParameter("inputPassword");
 
         Connection c = null;
 

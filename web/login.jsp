@@ -12,12 +12,12 @@
                 <form name="LoginForm" action="LoginHandler" method="post">
                     <div class="form-group">
                         <label for="inputEmail">E-Mail / Benutzername</label>
-                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
+                        <input type="text" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
                         <small id="emailHelp" class="form-text text-muted">Wir geben deine E-Mail Adresse nicht weiter.</small>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword">Passwort</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Passwort">
+                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Passwort">
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="stayLoggedIn">

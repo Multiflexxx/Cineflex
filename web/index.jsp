@@ -4,6 +4,8 @@
   <body>
   <jsp:include page="elements/header.jsp" />
 
+  <jsp:include page="login.jsp" />
+
 
 <%--  <!-- Karussell-->
   <!-- Bitte nur Bilder der größe 1656x630 einfügen-->
@@ -205,7 +207,7 @@
         </div>
       </div>
     </div>
-  </div>--%>
+  </div>
 
 
 
@@ -214,7 +216,7 @@
     Benutzername :<input type="text" name="username"> <br>
     Passwort :<input type="password" name="password"><br>
     <input type="submit" value="Login">
-  </form>
+  </form>--%>
   <jsp:include page="elements/footer.jsp" />
   </body>
 </html>
