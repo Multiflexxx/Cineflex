@@ -1,16 +1,52 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: trise
-  Date: 21.09.2019
-  Time: 17:20
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<!-- Registrieren Screen-->
+<div class="modal fade" id="registerDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerDialogTitle">Registrieren</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="RegistrationForm" action="RegistrationHandler" method="post">
+                    <div class="form-group">
+                        <label for="inputVorname">Vorname</label>
+                        <input type="text" class="form-control" id="inputVorname" name="inputVorname" placeholder="Vorname">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNachname">Nachname</label>
+                        <input type="text" class="form-control" id="inputNachname" name="inputNachname" placeholder="Nachname">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputGeb">Geburtsdatum</label>
+                        <input type="text" class="form-control" id="inputGeb" name="inputGeb" placeholder="YYYY-MM-DD">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">E-Mail</label>
+                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
+                        <small id="emailHelp" class="form-text text-muted">Wir werden dir eine Verifizierungsmail schicken.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPasswordReg">Passwort</label>
+                        <input type="password" class="form-control" id="inputPasswordReg" name="inputPasswordReg" placeholder="Passwort">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPasswordRegWdh">Passwort wiederholen</label>
+                        <input type="password" class="form-control" id="inputPasswordRegWdh" name="inputPasswordRegWdh" placeholder="Passwort">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="receiveMails">
+                        <label class="form-check-label" for="receiveMails">Ich möchte tägliche E-Mails zu neuen Angeboten von Multiflex erhalten. Außerdem bin ich damit einverstanden, dass meine Daten an dritte Verkauft werden.</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                <button type="button" onclick="submitRegistration() class="btn btn-primary">Registrieren</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+<script src="javascript/login_registration.js" crossorigin="anonymous"></script>

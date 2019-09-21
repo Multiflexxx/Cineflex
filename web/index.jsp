@@ -5,8 +5,8 @@
   <jsp:include page="elements/header.jsp" />
 
   <jsp:include page="login.jsp" />
-
-
+  <jsp:include page="registration.jsp" />
+ÄÄÄÄÄÄÄ
 <%--  <!-- Karussell-->
   <!-- Bitte nur Bilder der größe 1656x630 einfügen-->
   <div class="karussell">
@@ -85,84 +85,6 @@
       </div>
     </div>
   </div>
-  <!-- Login Screen-->
-  <div class="modal fade" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="inputEmail">E-Mail</label>
-              <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
-              <small id="emailHelp" class="form-text text-muted">Wir geben deine E-Mail Adresse nicht weiter.</small>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword">Passwort</label>
-              <input type="password" class="form-control" id="inputPassword" placeholder="Passwort">
-            </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="stayLoggedIn">
-              <label class="form-check-label" for="stayLoggedIn">Angemeldet bleiben</label>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-          <button type="button" class="btn btn-primary">Einloggen</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Registrieren Screen-->
-  <div class="modal fade" id="registerDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="registerDialogTitle">Registrieren</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="inputEmail">E-Mail</label>
-              <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
-              <small id="emailHelp" class="form-text text-muted">Wir werden dir eine Verifizierungsmail schicken.</small>
-            </div>
-            <div class="form-group">
-              <label for="inputPassword">Passwort</label>
-              <input type="password" class="form-control" id="inputPasswordReg" placeholder="Passwort">
-            </div>
-            <div class="form-group">
-              <label for="inputPassword">Passwort wiederholen</label>
-              <input type="password" class="form-control" id="inputPasswordRegWdh" placeholder="Passwort">
-            </div>
-            <div class="form-group">
-              <label for="formControlRange">Telefonnummer</label>
-              <input type="range" class="form-control-range" id="formControlRange" min="0" max="9999999999999" oninput="test()">
-              <p id="telefonout"></p>
-            </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="receiveMails">
-              <label class="form-check-label" for="stayLoggedIn">Ich möchte tägliche E-Mails und Anrufe zu neuen Angeboten von Multiflex erhalten. Außerdem bin ich damit einverstanden, dass meine Daten an dritte Verkauft werden.</label>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-          <button type="button" class="btn btn-primary">Registrieren</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <script type="text/javascript">function test()
   {
@@ -181,42 +103,8 @@
       <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
   </nav>
-  <!--Footer-->
-  <div class="jumbotron text-center footer" style="border-top: 4px solid #4a9be8">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col">
-          <h5>Unsere Kinos: </h5>
-          <p>Augsburg, Berlin, Bremen, Celle, Chemnitz, Hamburg, Hannover, Heidelberg, Ingolstadt, Karlsruhe, Kassel, Köln, Mannheim, München, Potsdam, Stuttgart</p>
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col">
-          <a href="#">Kontakt</a>
-        </div>
-        <div class="col">
-          <a href="#">Impressum</a>
-        </div>
-        <div class="col">
-          <a href="anfahrt.html">Anfahrt</a>
-        </div>
-      </div>
-      <div class="row text-center">
-        <div class="col">
-          <a>&copy; Cineflex 2019</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
-
-
-
-  <form action="LoginHandler" method="post">
-    Benutzername :<input type="text" name="username"> <br>
-    Passwort :<input type="password" name="password"><br>
-    <input type="submit" value="Login">
-  </form>--%>
+--%>
   <jsp:include page="elements/footer.jsp" />
   </body>
 </html>

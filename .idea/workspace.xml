@@ -7,14 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ce5aefbb-6567-4066-bc8c-13c4b297cf77" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/handler/RegistrationHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/handler/LoginHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/handler/LoginHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/javascript/loginSubmit.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CineflexV1/handler/LoginHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CineflexV1/handler/LoginHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handler/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/LoginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/registration.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/javascript/loginSubmit.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/javascript/login_registration.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/registration.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -125,7 +128,7 @@
       <option name="presentableId" value="Default" />
       <updated>1569063465734</updated>
       <workItem from="1569063469701" duration="3268000" />
-      <workItem from="1569067107869" duration="7390000" />
+      <workItem from="1569067107869" duration="10493000" />
     </task>
     <servers />
   </component>

@@ -12,4 +12,14 @@
         <servlet-name>LoginHandler</servlet-name>
         <url-pattern>/LoginHandler</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegistrationHandler</servlet-name>
+        <servlet-class>handler.RegistrationHandler</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegistrationHandler</servlet-name>
+        <url-pattern>/RegistrationHandler</url-pattern>
+    </servlet-mapping>
 </web-app>

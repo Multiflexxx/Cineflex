@@ -31,7 +31,6 @@
             </div>
         </div>
     </div>
-
-    <script src="javascript/loginSubmit.js" crossorigin="anonymous"></script>
-
 </div>
+
+<script src="javascript/login_registration.js" crossorigin="anonymous"></script>
