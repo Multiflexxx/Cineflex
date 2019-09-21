@@ -26,7 +26,7 @@
                     ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
 
                     while(rs.next()) {
-                        out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl(" + rs.getString("Ortsname") + "\"\\>"+ rs.getString("Ortsname") + "</a>");
+                        out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl(" + rs.getString("Ortsname") + ")\"\\>"+ rs.getString("Ortsname") + "</a>");
                     }
                     Connector.closeConnection(c);
                 %>
