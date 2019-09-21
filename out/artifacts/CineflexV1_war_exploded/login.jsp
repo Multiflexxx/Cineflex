@@ -9,13 +9,6 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                <form action="LoginHandler" method="post">
-                    Benutzername :<input type="text" name="username"> <br>
-                    Passwort :<input type="password" name="password"><br>
-                    <input type="submit" value="Login">
-                </form>
-
                 <form name="LoginForm" action="LoginHandler" method="post">
                     <div class="form-group">
                         <label for="inputEmail">E-Mail / Benutzername</label>
