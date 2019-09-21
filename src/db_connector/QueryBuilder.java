@@ -1,9 +1,9 @@
 package db_connector;
 
 public class QueryBuilder {
-    public static String createLoginQuery(String username, String passwordHash)
+    public static String createLoginQuery(String email, String passwordHash)
     {
-        return "SELECT * FROM Person WHERE `Vorname` = '" + username + "' AND `Passwort` = '" + passwordHash + "' ;";
+        return "SELECT * FROM Person WHERE `E-Mail` = '" + email + "' AND `Passwort` = '" + passwordHash + "' ;";
     }
 
     public static String createUser(String name, String lastname, String gebDate, String email, String passwordHash)
