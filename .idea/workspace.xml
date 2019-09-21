@@ -45,6 +45,12 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1265" />
+    <option name="y" value="859" />
+    <option name="width" value="1215" />
+    <option name="height" value="1032" />
+  </component>
   <component name="ProjectId" id="1R8zMtfPLFBm2ngZCcGiElHB2Wx" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
