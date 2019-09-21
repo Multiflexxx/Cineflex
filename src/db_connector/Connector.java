@@ -7,7 +7,7 @@ public class Connector {
         Connection c = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/Cineflex", "multiflex", "multiflexxx123");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/Cineflex?allowMultiQueries=true", "multiflex", "multiflexxx123");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -17,7 +17,7 @@ public class Connector {
     public static void executeQuery(Connection c, String sql) {
         try {
             PreparedStatement ps = c.prepareStatement(sql);
-            ps.executeQuery();
+            ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
