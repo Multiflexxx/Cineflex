@@ -2,7 +2,7 @@
 <html>
   <jsp:include page="elements/head.jsp" />
   <body>
-  <jsp:include page="elements/header.jsp" />
+  <jsp:include page="header.jsp" />
 
   <jsp:include page="login.jsp" />
   <jsp:include page="registration.jsp" />
