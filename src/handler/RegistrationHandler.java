@@ -22,6 +22,8 @@ public class RegistrationHandler extends HttpServlet {
         String date = request.getParameter("inputGeb");
         String email = request.getParameter("inputEmail");
         String pass = request.getParameter("inputPasswordReg");
+        String passWdh = request.getParameter("inputPasswordRegWdh");
+
 
 
         Connection c = null;

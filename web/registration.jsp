@@ -12,28 +12,28 @@
                 <form name="RegistrationForm" action="RegistrationHandler" method="post">
                     <div class="form-group">
                         <label for="inputVorname">Vorname</label>
-                        <input type="text" class="form-control" id="inputVorname" name="inputVorname" placeholder="Vorname">
+                        <input type="text" class="form-control" id="inputVorname" name="inputVorname" required="required" pattern="[A-Za-z0-9]{1,}" placeholder="Vorname">
                     </div>
                     <div class="form-group">
                         <label for="inputNachname">Nachname</label>
-                        <input type="text" class="form-control" id="inputNachname" name="inputNachname" placeholder="Nachname">
+                        <input type="text" class="form-control" id="inputNachname" name="inputNachname" required="required" pattern="[A-Za-z0-9]{1,} placeholder="Nachname">
                     </div>
                     <div class="form-group">
                         <label for="inputGeb">Geburtsdatum</label>
-                        <input type="text" class="form-control" id="inputGeb" name="inputGeb" placeholder="YYYY-MM-DD">
+                        <input type="text" class="form-control" id="inputGeb" name="inputGeb" required="required" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="form-group">
                         <label for="inputEmail">E-Mail</label>
-                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
+                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" required="required" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
                         <small id="emailHelp" class="form-text text-muted">Wir werden dir eine Verifizierungsmail schicken.</small>
                     </div>
                     <div class="form-group">
                         <label for="inputPasswordReg">Passwort</label>
-                        <input type="password" class="form-control" id="inputPasswordReg" name="inputPasswordReg" placeholder="Passwort">
+                        <input type="password" class="form-control" id="inputPasswordReg" name="inputPasswordReg" required="required" placeholder="Passwort">
                     </div>
                     <div class="form-group">
                         <label for="inputPasswordRegWdh">Passwort wiederholen</label>
-                        <input type="password" class="form-control" id="inputPasswordRegWdh" name="inputPasswordRegWdh" placeholder="Passwort">
+                        <input type="password" class="form-control" id="inputPasswordRegWdh" name="inputPasswordRegWdh" required="required" placeholder="Passwort">
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="receiveMails">

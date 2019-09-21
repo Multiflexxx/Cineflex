@@ -7,16 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Password/PassMD5.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/Connector.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/Connector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/handler/LoginHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/handler/LoginHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/registration.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_connector/Connector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_connector/Connector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_connector/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_connector/QueryBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handler/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/LoginHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/handler/RegistrationHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/RegistrationHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/registration.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,10 +24,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="jsf" />
         <option value="Jsp File" />
         <option value="JavaScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -77,7 +73,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 8.5.45">
+    <configuration name="PassMD5" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Password.PassMD5" />
+      <module name="CineflexV1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Password.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tomcat 8.5.45" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.45" ALTERNATIVE_JRE_ENABLED="false">
       <deployment>
         <artifact name="CineflexV1:war exploded">
@@ -116,6 +125,11 @@
         </option>
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.PassMD5" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -129,7 +143,7 @@
       <updated>1569063465734</updated>
       <workItem from="1569063469701" duration="3268000" />
       <workItem from="1569067107869" duration="10493000" />
-      <workItem from="1569088452269" duration="2921000" />
+      <workItem from="1569088452269" duration="6693000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,6 @@
 package handler;
 
+import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -15,7 +17,12 @@ import java.sql.ResultSet;
 public class LoginHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String un = request.getParameter("inputEmail");
-        String pw = request.getParameter("inputPassword");
+        String pw = null;
+        try {
+            pw = PassMD5.hash(request.getParameter("inputPassword"));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
         Connection c = null;
 

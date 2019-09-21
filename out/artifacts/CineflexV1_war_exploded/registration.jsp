@@ -12,7 +12,7 @@
                 <form name="RegistrationForm" action="RegistrationHandler" method="post">
                     <div class="form-group">
                         <label for="inputVorname">Vorname</label>
-                        <input type="text" class="form-control" id="inputVorname" name="inputVorname" placeholder="Vorname">
+                        <input type="text" class="form-control" id="inputVorname" name="inputVorname" required="required" pattern="[A-Za-z0-9]{1,20}" placeholder="Vorname">
                     </div>
                     <div class="form-group">
                         <label for="inputNachname">Nachname</label>
