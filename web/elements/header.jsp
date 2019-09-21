@@ -1,3 +1,6 @@
+<%@ page import="db_connector.Connector" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="db_connector.QueryBuilder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <header>
@@ -15,6 +18,13 @@
             <div class="dropdown">
                 <a class="navbar-brand dropwdown dropdown-toggle" href="#" id="navbarDropdownCity" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mannheim</a>
+
+                <%
+                    Connection c = Connector.getConnection();
+                    Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
+
+                %>
+
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="404.html">Augsburg</a>
                     <a class="dropdown-item" href="404.html">Berlin</a>
