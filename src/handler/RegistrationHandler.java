@@ -26,6 +26,21 @@ public class RegistrationHandler extends HttpServlet {
         String pass = request.getParameter("inputPasswordReg");
         String passWdh = request.getParameter("inputPasswordRegWdh");
 
+        if(pass != passWdh)
+        {
+            return;
+        }
+
+        if(pass.length < 6 || passWdh.length < 6)
+        {
+            return;
+        }
+
+        if(firstname == "" || lastname == "" || date == "" || email == "" || pass == "" || passWdh == "")
+        {
+
+        }
+
         try {
             pass = PassMD5.hash(pass);
         } catch (NoSuchAlgorithmException e) {
