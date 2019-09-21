@@ -2,8 +2,6 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="db_connector.QueryBuilder" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.io.IOException" %>
-<%@ page import="java.io.Writer" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <header>
@@ -28,29 +26,11 @@
                     ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
 
                     while(rs.next()) {
-                        out.println("<a class=\"dropdown-item\" href=\"404.html\">" + rs.getString("Ortsname") + "</a>");
+                        out.println("<a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\""+ rs.getString("Ortsname") + "\>" + rs.getString("Ortsname") + "</a>");
                     }
                     Connector.closeConnection(c);
                 %>
                 </div>
-                <%--<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="404.html">Augsburg</a>
-                    <a class="dropdown-item" href="404.html">Berlin</a>
-                    <a class="dropdown-item" href="404.html">Bremen</a>
-                    <a class="dropdown-item" href="404.html">Celle</a>
-                    <a class="dropdown-item" href="404.html">Chemnitz</a>
-                    <a class="dropdown-item" href="404.html">Hamburg</a>
-                    <a class="dropdown-item" href="404.html">Hannover</a>
-                    <a class="dropdown-item" href="404.html">Heidelberg</a>
-                    <a class="dropdown-item" href="404.html">Ingolstadt</a>
-                    <a class="dropdown-item" href="404.html">Karlsruhe</a>
-                    <a class="dropdown-item" href="404.html">Kassel</a>
-                    <a class="dropdown-item" href="404.html">Köln</a>
-                    <a class="dropdown-item" href="404.html">Mannheim</a>
-                    <a class="dropdown-item" href="404.html">München</a>
-                    <a class="dropdown-item" href="404.html">Potsdam</a>
-                    <a class="dropdown-item" href="404.html">Stuttgart</a>
-                </div>--%>
             </div>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -80,3 +60,5 @@
         </div>
     </nav>
 </header>
+
+<script src="/javascript/cookie_url.js"></script>

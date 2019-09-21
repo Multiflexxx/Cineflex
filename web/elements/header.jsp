@@ -1,32 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ page import="db_connector.Connector" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="db_connector.QueryBuilder" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<!-- Cookies -->
-<%
-    Cookie city = null;
-    Cookie cookies [] = null;
-
-    cookies = request.getCookies();
-
-    if (cookies != null) {
-        for (int i=0; i<cookies.length; i++) {
-            if (cookies[i].getName().equals("city")){
-                city = cookies[i];
-            }
-        }
-    } else {
-        city = new Cookie("city", request.getParameter(""));
-    }
-%>
-
-<c:url value = "/index.jsp" var = "myURL">
-    <c:param name = "trackingId" value = "1234"/>
-    <c:param name = "reportType" value = "summary"/>
-</c:url>
 
 <header>
     <!-- Navbar -->
@@ -50,7 +26,7 @@
                     ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
 
                     while(rs.next()) {
-                        out.println("<a class=\"dropdown-item\" href=\"404.html\">" + rs.getString("Ortsname") + "</a>");
+                        out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick='setCookieUrl(" + rs.getString("Ortsname") + ")'\>" + rs.getString("Ortsname") + "</a>");
                     }
                     Connector.closeConnection(c);
                 %>
@@ -84,3 +60,5 @@
         </div>
     </nav>
 </header>
+
+<script src="/javascript/cookie_url.js"></script>
