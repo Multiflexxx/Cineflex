@@ -16,17 +16,23 @@ public class QueryBuilder {
 
     public static String showCinemaImaginationsToday()
     {
-        return "SELECT * FROM Vorstellung WHERE `Datum` = '"+ getDateAsString() +"'; ";
+        return "SELECT * FROM Vorstellung WHERE `Datum` = '" + getDateAsString() + "' AND `Uhrzeit` >= '"+getTimeAsString()+"';";
     }
 
     public static String showCinemaImaginationsThisWeek()
     {
-        return "SELECT * FROM Vorstellung WHERE `Datum` >= '"+ getDateAsString() +"'; ";
+        return "SELECT * FROM Vorstellung WHERE `Datum` >= '" + getDateAsString() + "' AND `Uhrzeit` >= '" + getTimeAsString() + "';";
     }
 
     private static String getDateAsString()
     {
-        DateFormat formatter = new SimpleDateFormat("yyy-MM-dd");
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(new Date());
+    }
+
+    private static String getTimeAsString()
+    {
+        DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         return formatter.format(new Date());
     }
 }
