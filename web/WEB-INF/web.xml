@@ -22,4 +22,9 @@
         <servlet-name>RegistrationHandler</servlet-name>
         <url-pattern>/RegistrationHandler</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SearchHandler</servlet-name>
+        <url-pattern>/SearchHandler</url-pattern>
+    </servlet-mapping>
 </web-app>
