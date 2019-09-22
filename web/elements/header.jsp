@@ -28,11 +28,14 @@
                         for (int i = 0; i < cookies.length; i++) {
                             if (cookies[i].getName().equals("city")) {
                                 cookie = cookies[i];
+                                out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
+                                        "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + cookie.getValue() + "</a>");
                                 break;
+                            } else {
+                                out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
+                                        "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Standort</a>");
                             }
                         }
-                        out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
-                                "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + cookie.getValue() + "</a>");
                     } else {
                         out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
                                 "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Standort</a>");
