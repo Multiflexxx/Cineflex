@@ -28,6 +28,7 @@ public class SearchHandler extends HttpServlet {
         out.print("Time Input: " + time + "\n");
         out.print("FSK Input: " + fsk + "\n");
         out.print("Search Text: " + searchText + "\n");
+        out.print(QueryBuilder.defaultSearchQuery(searchText, date, time, Integer.parseInt(fsk)));
 
 
         //out.print(QueryBuilder.showSearchResults(searchText, date, time, Integer.parseInt(fsk)));

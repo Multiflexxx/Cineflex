@@ -78,8 +78,8 @@ public class QueryBuilder {
         } else {
             return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink` " +
                     "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
-                    "WHERE `Datum` >= " + date + " " +
-                    "AND `Uhrzeit`>= " + time + " "+
+                    "WHERE `Datum` >= '" + date + "' " +
+                    "AND `Uhrzeit`>= '" + time + "' "+
                     "AND `FSK` <= " + fsk + " ;";
         }
 
