@@ -43,19 +43,19 @@ public class LoginHandler extends HttpServlet {
                 response.sendRedirect("login.jsp");
             } else {
                 do {
-                    PrintWriter out = response.getWriter();
+//                    PrintWriter out = response.getWriter();
 
                     HttpSession session = request.getSession(true);
-                    out.println(session.getId());
+ /*                   out.println(session.getId());
                     out.println("<br>");
                     out.println("Session created: ");
                     out.println(new Date(session.getCreationTime()) + "<br>");
                     out.println("Session last accessed: ");
-                    out.println(new Date(session.getLastAccessedTime()));
+                    out.println(new Date(session.getLastAccessedTime()));*/
 
                     session.setAttribute("email", email);
-                    out.println("User: ");
-                    out.println(session.getAttribute("email"));
+/*                    out.println("User: ");
+                    out.println(session.getAttribute("email"));*/
 
                     String lastaccessed = request.getParameter("lastaccessed");
                     String time = request.getParameter("time");
@@ -63,7 +63,7 @@ public class LoginHandler extends HttpServlet {
                         session.setAttribute(lastaccessed, time);
                     }
                     session.setMaxInactiveInterval(10);
-
+                    response.sendRedirect("index.jsp");
                     //response.getOutputStream().print("top");
                     //response.sendRedirect("success.jsp");
                 } while (rs.next());
@@ -71,7 +71,7 @@ public class LoginHandler extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        response.getOutputStream().print("flop1");
+        //response.getOutputStream().print("flop1");
         Connector.closeConnection(c);
     }
 

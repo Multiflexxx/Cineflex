@@ -62,13 +62,20 @@
                     <a class="nav-link" href="#">Snacks</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAccount" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+                    <%
+                        if (session.isNew()) {
+                            out.println("<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownAccount\" role=\"button\"\n" +
+                                    "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Account</a>");
+                        } else {
+                            out.println("<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownAccount\" role=\"button\"\n" +
+                                    "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + session.getAttribute("email") + "</a>");
+                        }
+                    %>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginDialog">Login</a>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registerDialog">Register</a>
                         <%
-                            if (session.isNew()) {
+                            if (!session.isNew()) {
                                 out.println(session.getAttribute("email"));
                                 out.println("<a class=\"dropdown-item\" href=\"javascript:void(0)\">Logout</a>");
                             }
