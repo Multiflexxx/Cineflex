@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form name="SearchForm" action="SearchHandler" method="get">
+                <form name="SearchForm" action="SearchHandler" method="get" accept-charset="UTF-8">
                     <div class="form-group">
                         <label for="inputSearchText">Suchtext</label>
                         <input type="text" class="form-control" id="inputSearchText" name="inputSearchText" placeholder="Schwanz">
