@@ -40,21 +40,23 @@ public class SearchHandler extends HttpServlet {
                 request.getRequestDispatcher("filter.jsp").include(request, response);
                 out.write("<div class=\"container\">");
                 while (rs.next()) {
-                    out.write("<div class=\"row\">");
-                    out.write("<div class=\"col-sm\">");
-                    out.write("<div class=\"card\" style=\"width: 20rem;\">");
-
+                    //out.write("<div class=\"row\">");
+                    //out.write("<div class=\"col\">");
+                    out.write("<div class=\"card mb-3\" style=\"max-width: 1200px;>");
+                    out.write("<div class=\"row no-gutters\">");
+                    out.write("<div class=\"col-md-4\">");
                     out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img-top\" alt='" + rs.getString("Titel") + "'>");
+                    out.write("</div>");
+                    out.write("<div class=\"col-md-8\">");
                     out.write("<div class=\"card-body\">");
-
                     out.write("<h5 class=\"card-title\">" + rs.getString("Titel") + "</h5>");
-
-                    out.write("<p class=\"card-text\">Some quick example text to build on the card title and make up the bulk of the card's content.</p>");
+                    out.write("<p class=\"card-text\">" + rs.getString("Film.Beschreibung") + "</p>");
                     out.write("<a href=\"#\" class=\"btn btn-primary\">Zum Film</a>");
                     out.write("</div>");
                     out.write("</div>");
                     out.write("</div>");
-                    out.write("</div>");
+                    //out.write("</div>");
+                    //out.write("</div>");
                 }
                 out.write("</div>");
                 request.getRequestDispatcher("elements/footer.jsp").include(request, response);
