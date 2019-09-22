@@ -17,8 +17,27 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <div class="dropdown">
-                <a class="navbar-brand dropwdown dropdown-toggle" href="#" id="navbarDropdownCity" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mannheim</a>
+                <%
+                    Cookie cookie = null;
+                    Cookie[] cookies = null;
+
+                    cookies = request.getCookies();
+
+                    if( cookies != null ) {
+
+                        for (int i = 0; i < cookies.length; i++) {
+                            if (cookies[i].getName().equals("city")) {
+                                cookie = cookies[i];
+                                break;
+                            }
+                        }
+                        out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
+                                "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + cookie.getValue() + "</a>");
+                    } else {
+                        out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
+                                "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Standort</a>");
+                    }
+                %>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <%
@@ -26,7 +45,7 @@
                     ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
 
                     while(rs.next()) {
-                        out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl(" + rs.getString("Ortsname") + ")\">"+ rs.getString("Ortsname") + "</a>");
+                        out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "')\">"+ rs.getString("Ortsname") + "</a>");
                     }
                     Connector.closeConnection(c);
                 %>
