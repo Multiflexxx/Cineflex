@@ -1,6 +1,7 @@
 package handler;
 
 import Password.PassMD5;
+import com.mysql.cj.Session;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 
@@ -8,15 +9,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.Date;
 
 //@WebServlet(name = "LoginHandler")
 public class LoginHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String un = request.getParameter("inputEmail");
+        String email = request.getParameter("inputEmail");
         String pw = null;
         try {
             pw = PassMD5.hash(request.getParameter("inputPassword"));
@@ -29,19 +33,39 @@ public class LoginHandler extends HttpServlet {
         c = Connector.getConnection();
         if (c == null)
             response.getOutputStream().print("Geht nicht!");
-        //String sql = "SELECT * FROM Person where Vorname='" + un + "' and Passwort='" + pw + "'";
-        String sql = QueryBuilder.createLoginQuery(un, pw);
+        //String sql = "SELECT * FROM Person where Vorname='" + email + "' and Passwort='" + pw + "'";
+        String sql = QueryBuilder.createLoginQuery(email, pw);
         ResultSet rs = Connector.getQueryResult(c, sql);
 
         try {
             if (rs.next() == false ) {
-                response.getOutputStream().print("Leer");
+                //response.getOutputStream().print("Leer");
+                response.sendRedirect("login.jsp");
             } else {
                 do {
-                    response.getOutputStream().print("top");
-                    response.sendRedirect("success.jsp");
-                    String data = rs.getString("Vorname");
-                    response.getOutputStream().print(data);
+                    PrintWriter out = response.getWriter();
+
+                    HttpSession session = request.getSession(true);
+                    out.println(session.getId());
+                    out.println("<br>");
+                    out.println("Session created: ");
+                    out.println(new Date(session.getCreationTime()) + "<br>");
+                    out.println("Session last accessed: ");
+                    out.println(new Date(session.getLastAccessedTime()));
+
+                    session.setAttribute("email", email);
+                    out.println("User: ");
+                    out.println(session.getAttribute("email"));
+
+                    String lastaccessed = request.getParameter("lastaccessed");
+                    String time = request.getParameter("time");
+                    if (lastaccessed != null && time != null) {
+                        session.setAttribute(lastaccessed, time);
+                    }
+                    session.setMaxInactiveInterval(10);
+
+                    //response.getOutputStream().print("top");
+                    //response.sendRedirect("success.jsp");
                 } while (rs.next());
             }
         } catch (Exception e) {

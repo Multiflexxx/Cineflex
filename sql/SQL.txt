@@ -1,0 +1,129 @@
+CREATE TABLE `Person`(`PID` INT NOT NULL AUTO_INCREMENT, `Vorname` TEXT NOT NULL, `Nachname` TEXT NOT NULL, `GebDatum` DATE, `E-Mail` TEXT NOT NULL  COMMENT '',`Passwort` TEXT NOT NULL  COMMENT '',
+PRIMARY KEY(`PID`)) ENGINE = InnoDB COMMENT '';
+
+INSERT INTO `Person`(`PID`, `Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`) VALUES (NULL, 'Tizian', 'Gross', '1999-05-29', 'tizian.gross@flex.de', '123456');
+INSERT INTO `Person`(`PID`, `Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`) VALUES (NULL, 'Tristan', 'Emig', '2000-01-27', 'tristan.emig@flex.de', '456789');
+INSERT INTO `Person`(`PID`, `Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`) VALUES (NULL, 'Marcel', 'Mertens', '1999-07-07', 'marcel@flexxx.de', '654321');
+INSERT INTO `Person`(`PID`, `Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`) VALUES (NULL, 'Benno', 'Grimm', '2000-05-18', 'benno.grimm@flex.de', '987654');
+INSERT INTO `Person`(`PID`, `Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`) VALUES (NULL, 'Anton', 'Ochel', '2000-04-17', 'anton.ochel@flex.de', '123789');
+INSERT INTO `Person`(`PID`, `Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`) VALUES (NULL, 'Anna-Lena', 'Richert', '1999-03-14', 'anna-lena.richert@flex.de', '987321');
+
+
+CREATE TABLE `Admin`(`PID` INT NOT NULL  COMMENT '',`MID` INT NOT NULL AUTO_INCREMENT  COMMENT '',
+PRIMARY KEY(`MID`), FOREIGN KEY(`PID`) REFERENCES `Person`(`PID`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Kunde`(`PID` INT NOT NULL  COMMENT '',`KID` INT NOT NULL AUTO_INCREMENT  COMMENT '', `Treuepunkte` INT COMMENT '',
+PRIMARY KEY(`KID`), FOREIGN KEY(`PID`) REFERENCES `Person`(`PID`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Ort`(`PLZ` INT NOT NULL COMMENT '', `Ortsname` TEXT NOT NULL COMMENT '',
+PRIMARY KEY(`PLZ`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Gebäude`(`GebäudeID` INT NOT NULL AUTO_INCREMENT COMMENT '', `Straße` TEXT NOT NULL COMMENT '', Hausnummer INT NOT NULL COMMENT '', `PLZ` INT NOT NULL COMMENT '',
+PRIMARY KEY(`GebäudeID`), FOREIGN KEY(`PLZ`) REFERENCES `Ort`(`PLZ`)) ENGINE = InnoDB COMMENT '';
+
+INSERT INTO Gebäude (`Straße`, `Hausnummer`, `PLZ`) VALUES ('Willy-Brandt-Platz', 1, 86153), ('Regensburger Straße', 10, 85055), ('Gutsmuthsstraße', 27, 12163), ('Kaiserstraße', 152, 76133), ('Hans-Bredow-Straße', 9, 28307), ('Goethestraße', 31, 34119), ('Neue Str.', 14, 29221), ('Hohenzollernring', 22, 50672), ('Zwickauer Str.', 11, 9112), ('N7', 17, 68161), ('Mönckebergstraße', 17, 20095), ('Türkenstraße', 91, 80799), ('Nikolaistraße', 8, 30159), ('Babelsberger Str.', 10, 14473), ('Eppelheimer Str.', 6, 69115), ('Robert-Bosch-Platz', 1, 70174);
+
+CREATE TABLE `Kinosaal`(`SaalID` INT NOT NULL AUTO_INCREMENT COMMENT '', `GebäudeID` INT NOT NULL COMMENT '', `Saalbezeichnung` TEXT COMMENT '',
+PRIMARY KEY(`SaalID`), FOREIGN KEY(`GebäudeID`) REFERENCES `Gebäude`(`GebäudeID`)) ENGINE = InnoDB COMMENT '';
+
+INSERT INTO Kinosaal (`GebäudeID`, `Saalbezeichnung`) VALUES (1, "Saal 1"), (1, "Saal 2"), (1, "Saal 3"), (1, "Saal 4"), (1, "Saal 5"), (1, "Saal 6"), (1, "Saal 7"), (2, "Saal 1"), (2, "Saal 2"), (2, "Saal 3"), (2, "Saal 4"), (2, "Saal 5"), (2, "Saal 6"), (2, "Saal 7"), (3, "Saal 1"), (3, "Saal 2"), (3, "Saal 3"), (3, "Saal 4"), (3, "Saal 5"), (3, "Saal 6"), (3, "Saal 7"), (4, "Saal 1"), (4, "Saal 2"), (4, "Saal 3"), (4, "Saal 4"), (4, "Saal 5"), (4, "Saal 6"), (4, "Saal 7"), (5, "Saal 1"), (5, "Saal 2"), (5, "Saal 3"), (5, "Saal 4"), (5, "Saal 5"), (5, "Saal 6"), (5, "Saal 7"), (6, "Saal 1"), (6, "Saal 2"), (6, "Saal 3"), (6, "Saal 4"), (6, "Saal 5"), (6, "Saal 6"), (6, "Saal 7"), (7, "Saal 1"), (7, "Saal 2"), (7, "Saal 3"), (7, "Saal 4"), (7, "Saal 5"), (7, "Saal 6"), (7, "Saal 7"), (8, "Saal 1"), (8, "Saal 2"), (8, "Saal 3"), (8, "Saal 4"), (8, "Saal 5"), (8, "Saal 6"), (8, "Saal 7"), (9, "Saal 1"), (9, "Saal 2"), (9, "Saal 3"), (9, "Saal 4"), (9, "Saal 5"), (9, "Saal 6"), (9, "Saal 7"), (10, "Saal 1"), (10, "Saal 2"), (10, "Saal 3"), (10, "Saal 4"), (10, "Saal 5"), (10, "Saal 6"), (10, "Saal 7"), (11, "Saal 1"), (11, "Saal 2"), (11, "Saal 3"), (11, "Saal 4"), (11, "Saal 5"), (11, "Saal 6"), (11, "Saal 7"), (12, "Saal 1"), (12, "Saal 2"), (12, "Saal 3"), (12, "Saal 4"), (12, "Saal 5"), (12, "Saal 6"), (12, "Saal 7"), (13, "Saal 1"), (13, "Saal 2"), (13, "Saal 3"), (13, "Saal 4"), (13, "Saal 5"), (13, "Saal 6"), (13, "Saal 7"), (14, "Saal 1"), (14, "Saal 2"), (14, "Saal 3"), (14, "Saal 4"), (14, "Saal 5"), (14, "Saal 6"), (14, "Saal 7"), (15, "Saal 1"), (15, "Saal 2"), (15, "Saal 3"), (15, "Saal 4"), (15, "Saal 5"), (15, "Saal 6"), (15, "Saal 7"), (16, "Saal 1"), (16, "Saal 2"), (16, "Saal 3"), (16, "Saal 4"), (16, "Saal 5"), (16, "Saal 6"), (16, "Saal 7");
+
+CREATE TABLE `Sitzplan`(`SitzplanID` INT NOT NULL AUTO_INCREMENT COMMENT '', `SaalID` INT NOT NULL COMMENT '',
+PRIMARY KEY(`SitzplanID`), FOREIGN KEY(`SaalID`) REFERENCES `Kinosaal`(`SaalID`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Sitz`(`SitzplatzID` INT NOT NULL AUTO_INCREMENT COMMENT '', `SitzplanID` INT NOT NULL COMMENT '', `Reihe` CHAR(1) NOT NULL COMMENT '', `Nummer` INT NOT NULL COMMENT '', `Sitzklasse` ChAR(1) NOT NULL COMMENT '',
+PRIMARY KEY(`SitzplatzID`), FOREIGN KEY(`SitzplanID`) REFERENCES `Sitzplan`(`SitzplanID`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Film`(`FilmID` INT NOT NULL AUTO_INCREMENT  COMMENT '',`Titel` TEXT NOT NULL  COMMENT '',`Beschreibung` TEXT NULL  COMMENT '',`Dauer` INT NOT NULL  COMMENT '',`FSK` INT NOT NULL  COMMENT '',`3D` TINYINT(1) NOT NULL  COMMENT '',
+PRIMARY KEY(`FilmID`)) ENGINE = InnoDB COMMENT '';
+
+INSERT INTO `Film` (`FilmID`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`) VALUES (NULL, 'Der König der Löwen', 'Einfach nur spektakulär! Dieses Meisterwerk sprengt die Grenzen jeder Vorstellungskraft: DER KÖNIG DER LÖWEN kehrt in einer wahrhaft königlichen Live-Action-Fassung zurück auf die große Kinoleinwand. Disney verleiht dieser gefeierten Geschichte einen zeitgemäßen Look und erweckt sie zu völlig neuem Leben. Visionäre Techniken und ein preisgekröntes Team machen Unmögliches möglich und präsentieren die tierischen Protagonisten sowie die atemberaubenden Landschaften in sensationell fotorealistischer Bildgewalt. Für das ganz große Blockbuster-Feeling und unglaubliche Gänsehaut-Momente! Mit dem lebhaften Löwenjungen Simba wird Mufasa ein Sohn und der afrikanischen Savanne ein künftiger König geboren. Doch Mufasas Bruder Scar erhebt selbst Anspruch auf den Thron und seine niederträchtigen Machenschaften führen dazu, dass Simba ins Exil verbannt wird. Mit dem quirligen Erdmännchen Timon und dem lebenslustigen Warzenschwein Pumbaa gewinnt er zwei ungewöhnliche, neue Freunde an deren Seite er unbeschwert heranwächst - bis zu jenem schicksalhaften Tag an dem er beschließt, seinen rechtmäßigen Platz auf dem Königsfelsen einzufordern.', '118', '6', '0');
+INSERT INTO `Film` (`FilmID`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`) VALUES (NULL, 'Once Upon a Time... in Hollywood', 'Quentin Tarantinos "Once Upon a Time... in Hollywood" spielt im Los Angeles von 1969, zu einer Zeit, als alles im Umbruch ist. Auch TV-Star Rick Dalton (Leonardo DiCaprio) und sein langjähriges Stunt-Double Cliff Booth (Brad Pitt) müssen sich in einer Branche zurechtfinden, die sie kaum mehr wiedererkennen.', '161', '16', '0');
+INSERT INTO `Film` (`FilmID`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`) VALUES (NULL, 'Es: Kapitel 2', 'Das Böse taucht erneut in Derry auf: Regisseur Andy Muschietti kehrt mit "ES: Kapitel 2" dahin zurück, wo alles begann, und bringt den Klub der Verlierer - als Kinder und Erwachsene - wieder zusammen. Drei Jahrzehnte nach den Ereignissen des ersten Films führt "ES: Kapitel 2" die Charaktere, deren Wege sich mittlerweile getrennt haben, als Erwachsene erneut zusammen - denn alle 27 Jahre sucht das Böse die kleine Stadt Derry in Maine heim.', '170', '16', '0');
+INSERT INTO `Film` (`FilmID`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`) VALUES (NULL, 'A Toy Story: Alles hört auf kein Kimmando', 'Woody wusste immer um seinen Platz im (Spielzeug-)Universum, seine Priorität war es, sich um "sein" Kind zu kümmern, sei es sein alter Kindheits-Freund Andy oder die süße Bonnie. Aber als Bonnie ein äußerst widerspenstiges neues Spielzeug in ihre Sammlung aufnimmt, hat Woodys ruhiger gewordenes Kinderzimmerleben ein Ende. Denn Forky hat eine schwere Identitätskrise und ist davon überzeugt, kein Spielzeug zu sein. Doch was ist er dann? Müll? Forky ist sich jedenfalls sicher für etwas anderes bestimmt zu sein. Und das versucht er auf abenteuerliche Art zu beweisen. Zusammen mit alten und neuen Freunden erleben Forky und Woody den Roadtrip ihres Lebens und lernen dabei, dass die Welt für ein Spielzeug viel größer ist als jemals gedacht.', '99', '0', '0');
+INSERT INTO `Film` (`FilmID`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`) VALUES (NULL, 'A Toy Story: Alles hört auf kein Kimmando', 'Woody wusste immer um seinen Platz im (Spielzeug-)Universum, seine Priorität war es, sich um "sein" Kind zu kümmern, sei es sein alter Kindheits-Freund Andy oder die süße Bonnie. Aber als Bonnie ein äußerst widerspenstiges neues Spielzeug in ihre Sammlung aufnimmt, hat Woodys ruhiger gewordenes Kinderzimmerleben ein Ende. Denn Forky hat eine schwere Identitätskrise und ist davon überzeugt, kein Spielzeug zu sein. Doch was ist er dann? Müll? Forky ist sich jedenfalls sicher für etwas anderes bestimmt zu sein. Und das versucht er auf abenteuerliche Art zu beweisen. Zusammen mit alten und neuen Freunden erleben Forky und Woody den Roadtrip ihres Lebens und lernen dabei, dass die Welt für ein Spielzeug viel größer ist als jemals gedacht.', '99', '0', '1');
+INSERT INTO `Film` (`FilmID`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`) VALUES (NULL, 'Leberkäsjunkie', 'Schluss mit Leberkäs. Diesmal bekommt es der Eberhofer mit seinem bisher schlimmsten Widersacher zu tun: Cholesterin. Ab jetzt gibt's nur noch gesundes Essen von der Oma (Enzi Fuchs). Zu den Leberkäsentzugserscheinungen gesellen sich brutalster Schlafmangel und stinkende Windeln, weil Halb-Ex-Freundin Susi (Lisa Maria Potthoff) den Franz verpflichtet hat, eine Weile auf den gemeinsamen Sohn Paul aufzupassen. Die Verziehung des Sohnes kriegt er nebenbei gut hin, aber wie immer ist die Idylle von Niederkaltenkirchen durch allerhand Kriminalität getrübt: Brandstiftung, Mord und Bauintrigen. Selbstverständlich eilt Kumpel und selbst ernannter Privatdetektiv Rudi Birkenberger (Simon Schwarz) zu Hilfe, um ungefragt bei Ernährung, Erziehung und Ermittlung zu beraten.', '96', '12', '0');
+
+
+CREATE TABLE `Genre`(`GenreID` INT NOT NULL AUTO_INCREMENT  COMMENT '',`Genrebezeichnung` TEXT NOT NULL  COMMENT '',`Deskriptor` TEXT NULL  COMMENT '',
+PRIMARY KEY(`GenreID`)) ENGINE = InnoDB COMMENT '';
+
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Abenteuer', 'Als Abenteuerfilm bezeichnet man einen Film, in dem die Protagonisten in eine ereignisreiche Handlung, mitunter mit vielen Schauplatzwechseln, verstrickt sind.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Action', 'Als Actionfilm bezeichnet man einen Film, in welchem der Fortgang der äußeren Handlung von zumeist spektakulär inszenierten Kampf- und Gewaltszenen vorangetrieben und illustriert wird.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Animation', 'Animationsfilme bezeichnen mittels Computer generierte oder handgemalte Bilder, welche als Film ausgestellt werden.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Drama', 'Das Drama Genre beinhaltet alle Filme mit einer dramaturgische Handlung.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Erotik', 'Als Erotikfilm oder Softporno werden Spiel- oder Fernsehfilme bezeichnet, die hauptsächlich erotische Inhalte zeigen.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Fantasy', 'Als Fantasyfilm bezeichnet man sämtliche Filme, deren Handlung Elemente enthält, welche nur in der menschlichen Fantasie existieren und in der Realität eigentlich so nicht vorstellbar sind.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Komödie', 'Filmkomödie bezeichnet ein FilmGenre in der Tradition der Theaterkomödie, bei dem der Zuschauer zum Lachen bewegt werden soll.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Horror', 'Der Horrorfilm ist ein FilmGenre, das beim Zuschauer Gefühle der Angst, des Schreckens und Verstörung auszulösen versucht.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Liebe', 'Ein Liebesfilm ist ein Film, dessen Thema die Liebe zwischen zwei Menschen ist.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Porno', 'Ein Pornofilm ist die audiovisuelle Realisation der Pornografie im Medium Film.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Science-Fiction', 'Science-Fiction ist ein FilmGenre, dem Filme zugeordnet werden, die sich mit fiktionalen Techniken sowie wissenschaftlichen Leistungen und deren möglichen Auswirkungen auf die Zukunft beschäftigen.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Sport', 'Ein Sportfilm ist ein Film, in dem Sportler, Sportarten oder sportliche Ereignisse im Mittelpunkt der Handlung stehen.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Thriller', 'Charakteristisch für Thriller ist das Erzeugen eines Thrills, einer Spannung, die nicht nur in kurzen Passagen, sondern während des gesamten Handlungsverlaufs präsent ist, ein beständiges Spiel zwischen Anspannung und Erleichterung.');
+INSERT INTO `Genre` (`GenreID`,`Genrebezeichnung`, `Deskriptor`) VALUES (NULL, 'Western', 'Der Western, ist ein Kino-Genre, in dessen Mittelpunkt der zentrale US-amerikanische Mythos der Eroberung des (wilden) Westens der Vereinigten Staaten im neunzehnten Jahrhundert steht.');
+
+
+CREATE TABLE `FilmGenre`(`FilmID` INT NOT NULL  COMMENT '',`GenreID` INT NOT NULL  COMMENT '', 
+PRIMARY KEY(`FilmID`, `GenreID`), FOREIGN KEY(`FilmID`) REFERENCES `Film`(`FilmID`), FOREIGN KEY(`GenreID`) REFERENCES `Genre`(`GenreID`)) ENGINE = InnoDB COMMENT '';
+
+INSERT INTO `FilmGenre`(`FilmID`, `GenreID`) VALUES ('1', '1');
+INSERT INTO `FilmGenre`(`FilmID`, `GenreID`) VALUES ('1', '3');
+INSERT INTO `FilmGenre`(`FilmID`, `GenreID`) VALUES ('2', '4');
+INSERT INTO `FilmGenre`(`FilmID`, `GenreID`) VALUES ('2', '7');
+INSERT INTO `FilmGenre`(`FilmID`, `GenreID`) VALUES ('3', '8');
+INSERT INTO `FilmGenre`(`FilmID`, `GenreID`) VALUES ('4', '3');
+INSERT INTO `FilmGenre`(`FilmID`, `GenreID`) VALUES ('5', '3');
+INSERT INTO `FilmGenre`(`FilmID`, `GenreID`) VALUES ('6', '6');
+
+
+CREATE TABLE `Sprache` (`SprachID` INT NOT NULL AUTO_INCREMENT COMMENT '', `Sprachenname` TEXT NOT NULL COMMENT '', 
+PRIMARY KEY(`SprachID`)) ENGINE = InnoDB COMMENT '';
+
+INSERT INTO `Sprache`(`SprachID`, `Sprachenname`) VALUES (NULL, 'deutsch');
+INSERT INTO `Sprache`(`SprachID`, `Sprachenname`) VALUES (NULL, 'englisch');
+
+
+CREATE TABLE `Filmsprache` (`FilmID` INT NOT NULL COMMENT '', `SprachID` INT NOT NULL COMMENT '', 
+PRIMARY KEY(`FilmID`, `SprachID`), FOREIGN KEY(`FilmID`) REFERENCES `Film`(`FilmID`), FOREIGN KEY(`SprachID`) REFERENCES `Sprache`(`SprachID`)) ENGINE = InnoDB COMMENT '';
+
+INSERT INTO `Filmsprache`(`FilmID`, `SprachID`) VALUES ('1', '1');
+INSERT INTO `Filmsprache`(`FilmID`, `SprachID`) VALUES ('2', '1');
+INSERT INTO `Filmsprache`(`FilmID`, `SprachID`) VALUES ('3', '1');
+INSERT INTO `Filmsprache`(`FilmID`, `SprachID`) VALUES ('4', '1');
+INSERT INTO `Filmsprache`(`FilmID`, `SprachID`) VALUES ('5', '1');
+INSERT INTO `Filmsprache`(`FilmID`, `SprachID`) VALUES ('6', '1');
+
+
+CREATE TABLE `Vorstellung`(`VorstellungsID` INT NOT NULL AUTO_INCREMENT, `Datum` DATE NOT NULL, `Uhrzeit` TIME NOT NULL, `FilmID` INT NOT NULL, `SaalID` INT NOT NULL, `SprachID` INT NOT NULL,
+PRIMARY KEY(`VorstellungsID`), FOREIGN KEY(`FilmID`) REFERENCES `Film`(`FilmID`), FOREIGN KEY(`SaalID`) REFERENCES `Kinosaal`(`SaalID`), FOREIGN KEY(`SprachID`) REFERENCES `Sprache`(`SprachID`)) ENGINE = InnoDB COMMENT '';
+
+INSERT INTO Vorstellung (`Datum`, `Uhrzeit`, `FilmID`, `SaalID`, `SprachID`) VALUES ('2019-09-23', '16:00:00', 1, 1, 1), ('2019-09-23', '16:00:00', 2, 2, 1), ('2019-09-23', '16:00:00', 3, 3, 2), ('2019-09-23', '16:00:00', 4, 4, 1);
+
+CREATE TABLE `Buchungsbeleg`(`BNR` INT NOT NULL AUTO_INCREMENT, `KID` INT NOT NULL, `VorstellungsID` INT NOT NULL, `Preis` DECIMAL(5,2) NOT NULL,
+PRIMARY KEY(`BNR`), FOREIGN KEY(`KID`) REFERENCES `Kunde`(`KID`), FOREIGN KEY(`VorstellungsID`) REFERENCES `Vorstellung`(`VorstellungsID`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Buchungsposition`(`PositionsID` INT NOT NULL AUTO_INCREMENT, `BNR` INT NOT NULL, `SitzID` INT NOT NULL,
+PRIMARY KEY(`PositionsID`), FOREIGN KEY(`BNR`) REFERENCES `Buchungsbeleg`(`BNR`), FOREIGN KEY(`SitzID`) REFERENCES `Sitz`(`SitzplatzID`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Buchungsstonierung`(`StrnNR` INT NOT NULL AUTO_INCREMENT, `BNR` INT NOT NULL, 
+PRIMARY KEY(`StrnNR`), FOREIGN KEY(`BNR`) REFERENCES `Buchungsbeleg`(`BNR`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Reservierungsbeleg`(`RNR` INT NOT NULL AUTO_INCREMENT, `KID` INT NOT NULL, `VorstellungsID` INT NOT NULL, `Preis` DECIMAL(5,2) NOT NULL,
+PRIMARY KEY(`RNR`), FOREIGN KEY(`KID`) REFERENCES `Kunde`(`KID`), FOREIGN KEY(`VorstellungsID`) REFERENCES `Vorstellung`(`VorstellungsID`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Reservierungsposition`(`PositionsID` INT NOT NULL AUTO_INCREMENT, `RNR` INT NOT NULL, `SitzID` INT NOT NULL,
+PRIMARY KEY(`PositionsID`), FOREIGN KEY(`RNR`) REFERENCES `Reservierungsbeleg`(`RNR`), FOREIGN KEY(`SitzID`) REFERENCES `Sitz`(`SitzplatzID`)) ENGINE = InnoDB COMMENT '';
+
+
+CREATE TABLE `Reservierungsstonierung`(`StrnNR` INT NOT NULL AUTO_INCREMENT, `RNR` INT NOT NULL, 
+PRIMARY KEY(`StrnNR`), FOREIGN KEY(`RNR`) REFERENCES `Reservierungsbeleg`(`RNR`)) ENGINE = InnoDB COMMENT '';
