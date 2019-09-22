@@ -67,6 +67,24 @@ public class QueryBuilder {
         }
     }
 
+    public static String defaultSearchQuery(String search, String date, String time, int fsk) {
+        if(search != "") {
+            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink` " +
+                    "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
+                    "WHERE (`Titel` LIKE '%" + search + "%' OR `Beschreibung` LIKE '%" + search + "%') " +
+                    "AND `Datum` >= " + date + " " +
+                    "AND `Uhrzeit`>= " + time + " "+
+                    "AND `FSK` <= " + fsk + " ;";
+        } else {
+            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink` " +
+                    "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
+                    "WHERE `Datum` >= " + date + " " +
+                    "AND `Uhrzeit`>= " + time + " "+
+                    "AND `FSK` <= " + fsk + " ;";
+        }
+
+    }
+
     private static String getDateAsString()
     {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

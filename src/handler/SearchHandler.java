@@ -1,4 +1,5 @@
 package handler;
+import db_connector.Connector;
 import db_connector.QueryBuilder;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @WebServlet(name = "SearchHandler")
 public class SearchHandler extends HttpServlet {
@@ -26,7 +30,19 @@ public class SearchHandler extends HttpServlet {
         out.print("Search Text: " + searchText + "\n");
 
 
-        out.print(QueryBuilder.showSearchResults(searchText, date, time, Integer.parseInt(fsk)));
+        //out.print(QueryBuilder.showSearchResults(searchText, date, time, Integer.parseInt(fsk)));
+        Connection c = Connector.getConnection();
+        ResultSet rs = Connector.getQueryResult(c, QueryBuilder.defaultSearchQuery(searchText, date, time, Integer.parseInt(fsk)));
+        Connector.closeConnection(c);
+        try {
+            if(rs != null) {
+                while (rs.next()) {
+                    out.print(rs.getString("BildLink") + "\n");
+                }
+            }
+        } catch(SQLException e) {
+
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
