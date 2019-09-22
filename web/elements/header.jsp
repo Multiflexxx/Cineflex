@@ -71,15 +71,15 @@
                                     "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Account</a>");
                         } else {
                             out.println("<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownAccount\" role=\"button\"\n" +
-                                    "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + session.getAttribute("email") + "</a>");
+                                    "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + session.getAttribute("name") + "</a>");
                         }
                     %>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginDialog">Login</a>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registerDialog">Register</a>
                         <%
-                            if (session.getAttribute("email") != null) {
-                                out.println(session.getAttribute("email"));
+                            if (session.getAttribute("email") == null) {
+                                out.println("<a class=\"dropdown-item\" href=\"#\" data-toggle=\"modal\" data-target=\"#loginDialog\">Login</a>");
+                                out.println("<a class=\"dropdown-item\" href=\"#\" data-toggle=\"modal\" data-target=\"#registerDialog\">Register</a>");
+                            } else {
                                 out.println("<a class=\"dropdown-item\" href=\"javascript:void(0)\">Logout</a>");
                             }
                         %>
@@ -89,6 +89,7 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button"  data-toggle="modal" data-target="#filterDialog" >Filter</button>
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>

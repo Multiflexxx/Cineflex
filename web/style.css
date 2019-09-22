@@ -1,0 +1,46 @@
+body {
+    background-color: #111;
+    color: #ffffff;
+}
+
+a {
+    color: white;
+}
+h6{
+    color: #a5a5a5;
+}
+.header,
+.footer,
+.pagination,
+.page-link,
+.card,
+.modal-body,
+.modal-content{
+    padding: 1rem 1rem;
+    height: auto;
+    margin-bottom: 0rem;
+    color: #ffffff;
+    background-color: #343a40;
+    border-radius: 0rem;
+}
+.pagination{
+    position: center;
+    padding-left: 40%;
+}
+.carousel-caption{
+    background-color: hsla(0,0%,0%,0.5);
+}
+.card{
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+.icon{
+    margin-right: 1rem;
+}
+.media{
+    padding: 1rem 30rem;
+    min-width: 50rem;
+}
+.mb-1{
+    padding-bottom: 0.5rem;
+}

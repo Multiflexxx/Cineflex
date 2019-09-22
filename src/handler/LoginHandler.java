@@ -33,7 +33,6 @@ public class LoginHandler extends HttpServlet {
         c = Connector.getConnection();
         if (c == null)
             response.getOutputStream().print("Geht nicht!");
-        //String sql = "SELECT * FROM Person where Vorname='" + email + "' and Passwort='" + pw + "'";
         String sql = QueryBuilder.createLoginQuery(email, pw);
         ResultSet rs = Connector.getQueryResult(c, sql);
 
@@ -54,6 +53,7 @@ public class LoginHandler extends HttpServlet {
                     out.println(new Date(session.getLastAccessedTime()));*/
 
                     session.setAttribute("email", email);
+                    session.setAttribute("name", rs.getString("Vorname"));
 /*                    out.println("User: ");
                     out.println(session.getAttribute("email"));*/
 
