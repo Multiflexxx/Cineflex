@@ -22,7 +22,6 @@
                     Cookie[] cookies = null;
 
                     cookies = request.getCookies();
-                    String outputValue = "Standort";
 
                     String outputValue = "Standort";
 

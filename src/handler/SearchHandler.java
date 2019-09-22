@@ -45,7 +45,7 @@ public class SearchHandler extends HttpServlet {
                     out.write("<div class=\"card mb-3\" style=\"max-width: 1200px;>");
                     out.write("<div class=\"row no-gutters\">");
                     out.write("<div class=\"col-md-4\">");
-                    out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img-top\" alt='" + rs.getString("Titel") + "'>");
+                    out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img\" alt='" + rs.getString("Titel") + "'>");
                     out.write("</div>");
                     out.write("<div class=\"col-md-8\">");
                     out.write("<div class=\"card-body\">");

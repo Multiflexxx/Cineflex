@@ -31,4 +31,13 @@
         <servlet-name>SearchHandler</servlet-name>
         <url-pattern>/SearchHandler</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SingleMovieHandler</servlet-name>
+        <servlet-class>handler.SingleMovieHandler</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SingleMovieHandler</servlet-name>
+        <url-pattern>/SingleMovieHandler</url-pattern>
+    </servlet-mapping>
 </web-app>
