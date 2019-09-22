@@ -38,11 +38,11 @@ public class SearchHandler extends HttpServlet {
         try {
             if(rs != null) {
                 while (rs.next()) {
-                    out.print(rs.getString("BildLink") + "\n");
+                    out.print("Link: " + rs.getString("BildLink") + "\n");
                 }
             }
         } catch(SQLException e) {
-
+            out.print("Failed: SQLException");
         }
     }
 
