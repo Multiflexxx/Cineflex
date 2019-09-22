@@ -24,13 +24,12 @@
                     cookies = request.getCookies();
 
                     if( cookies != null ) {
-
                         for (int i = 0; i < cookies.length; i++) {
                             if (cookies[i].getName().equals("city")) {
                                 cookie = cookies[i];
                                 out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
                                         "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + cookie.getValue() + "</a>");
-                                break;
+                                return;
                             } else {
                                 out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
                                         "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Standort</a>");
@@ -46,9 +45,10 @@
                 <%
                     Connection c = Connector.getConnection();
                     ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
-
-                    while(rs.next()) {
-                        out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "')\">"+ rs.getString("Ortsname") + "</a>");
+                    if (rs != null) {
+                        while(rs.next()) {
+                            out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "')\">"+ rs.getString("Ortsname") + "</a>");
+                        }
                     }
                     Connector.closeConnection(c);
                 %>
@@ -88,13 +88,11 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="button"  data-toggle="modal" data-target="#filterDialog" >Filter</button>
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button"  data-toggle="modal" data-target="#filterDialog">Filter</button>
+<%--            <form class="form-inline my-2 my-lg-0">--%>
+<%--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--%>
+<%--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
+<%--            </form>--%>
         </div>
     </nav>
 </header>
-
-

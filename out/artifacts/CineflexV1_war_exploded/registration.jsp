@@ -37,7 +37,7 @@
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="receiveMails">
-                        <label class="form-check-label" for="receiveMails">Ich möchte tägliche E-Mails zu neuen Angeboten von Multiflex erhalten. Außerdem bin ich damit einverstanden, dass meine Daten an dritte Verkauft werden.</label>
+                        <label class="form-check-label" for="receiveMails">Ich m&#246;chte t&#228;gliche E-Mails zu neuen Angeboten von Multiflex erhalten. Au&#223;erdem bin ich damit einverstanden, dass meine Daten an dritte Verkauft werden.</label>
                     </div>
                 </form>
             </div>

@@ -1,25 +1,18 @@
-<!-- Filter Screen-->
+<!-- Filter Screen -->
 <div class="modal fade" id="filterDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Filter</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Erweiterte Suche</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-
-                <form action="SearchHandler"  method="get">
-
-                </form>
-
-                <form name="SearchForm" action="Search" method="post">
-
+                <form name="SearchForm" action="SearchHandler" method="post">
                     <div class="form-group">
                         <label for="inputSearchText">Suchtext</label>
-                        <input type="text" class="form-control" id="inputSearchText" name="inputSearchText" aria-describedby="searchHelp" placeholder="Schwanz">
-                        <small id="searchHelp" class="form-text text-muted">Gebe einen Filmtitel ein.</small>
+                        <input type="text" class="form-control" id="inputSearchText" name="inputSearchText" placeholder="Schwanz">
                     </div>
                     <div class="form-group">
                         <label for="inputDate">Datum</label>
@@ -33,7 +26,7 @@
                     <div class="form-group">
                         <label for="inputFSK">Datum</label>
                         <select id="inputFSK" name="inputFSK">
-                            <option value="18">Nicht gewählt</option>
+                            <option value="18">Nicht gew&#228;hlt</option>
                             <option value="0">FSK 0</option>
                             <option value="6">FSK 6</option>
                             <option value="12">FSK 12</option>
