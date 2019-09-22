@@ -8,8 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/javascript/cookie_url.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/javascript/cookie_url.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/elements/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +50,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web\elements" />
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web" />
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web\javascript" />
     </key>
@@ -139,7 +140,7 @@
       <updated>1569063465734</updated>
       <workItem from="1569063469701" duration="3268000" />
       <workItem from="1569067107869" duration="10493000" />
-      <workItem from="1569088452269" duration="22607000" />
+      <workItem from="1569088452269" duration="22814000" />
     </task>
     <task id="LOCAL-00001" summary="Update menu">
       <created>1569099030773</created>
@@ -183,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569110669400</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="First Cookie">
+      <created>1569111838386</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1569111838386</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +216,7 @@
     <MESSAGE value="Was da los" />
     <MESSAGE value="Es geht nicht" />
     <MESSAGE value="Script" />
-    <option name="LAST_COMMIT_MESSAGE" value="Script" />
+    <MESSAGE value="First Cookie" />
+    <option name="LAST_COMMIT_MESSAGE" value="First Cookie" />
   </component>
 </project>
