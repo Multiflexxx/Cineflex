@@ -6,15 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_connector/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_connector/QueryBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handler/SingleMovieHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handler/SingleMovieHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/elements/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/elements/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/singleMovie.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/singleMovie.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,35 +21,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/elements/header.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-802">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="-824">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/filter.jsp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
-              <caret line="11" column="77" lean-forward="true" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/input.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/handler/SearchHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="22" column="47" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="47" />
+              <caret line="11" column="99" lean-forward="true" selection-start-line="11" selection-start-column="99" selection-end-line="11" selection-end-column="99" />
             </state>
           </provider>
         </entry>
@@ -86,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/db_connector/QueryBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="122" column="5" selection-start-line="122" selection-start-column="5" selection-end-line="122" selection-end-column="5" />
+            <state relative-caret-position="284">
+              <caret line="100" column="31" selection-start-line="100" selection-start-column="31" selection-end-line="100" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -257,16 +231,16 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\sql" />
+      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\benno\Documents\DHBW\cineflex\CineflexV1\web" />
       <recent name="C:\Users\benno\Documents\DHBW\cineflex\CineflexV1\web\examples" />
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web\elements" />
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web" />
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web\javascript" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\sql" />
-      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -462,10 +436,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18271000" />
+    <option name="totallyTimeSpent" value="18916000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6976744" visible="true" weight="0.14507154" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -482,8 +457,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32969603" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32969603" />
+      <window_info anchor="bottom" id="Application Servers" order="7" visible="true" weight="0.32969603" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32969603" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
@@ -640,8 +615,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/handler/SearchHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="22" column="47" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="47" />
+        <state relative-caret-position="663">
+          <caret line="59" column="40" lean-forward="true" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -657,15 +632,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/elements/header.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-802">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/filter.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="77" lean-forward="true" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
+        <state relative-caret-position="-824">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>
@@ -688,8 +656,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/db_connector/QueryBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="122" column="5" selection-start-line="122" selection-start-column="5" selection-end-line="122" selection-end-column="5" />
+        <state relative-caret-position="284">
+          <caret line="100" column="31" selection-start-line="100" selection-start-column="31" selection-end-line="100" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/filter.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="99" lean-forward="true" selection-start-line="11" selection-start-column="99" selection-end-line="11" selection-end-column="99" />
         </state>
       </provider>
     </entry>
