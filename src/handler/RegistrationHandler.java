@@ -38,7 +38,7 @@ public class RegistrationHandler extends HttpServlet {
 
         if(firstname == "" || lastname == "" || date == "" || email == "" || pass == "" || passWdh == "")
         {
-
+            return;
         }
 
         try {
