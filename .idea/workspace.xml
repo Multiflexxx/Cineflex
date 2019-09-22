@@ -6,13 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
+    <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="Fix">
+      <change afterPath="$PROJECT_DIR$/web/_config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db_connector/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_connector/QueryBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/elements/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/elements/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -150,6 +147,7 @@
       <workItem from="1569141216290" duration="18717000" />
       <workItem from="1569164361882" duration="42000" />
       <workItem from="1569164417259" duration="27579000" />
+      <workItem from="1569193221234" duration="1168000" />
     </task>
     <task id="LOCAL-00001" summary="Update menu">
       <created>1569099030773</created>
@@ -319,7 +317,21 @@
       <option name="project" value="LOCAL" />
       <updated>1569190474953</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Fix">
+      <created>1569194054217</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1569194054217</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Fix">
+      <created>1569194218715</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1569194218715</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
