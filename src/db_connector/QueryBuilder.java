@@ -49,6 +49,46 @@ public class QueryBuilder {
         return "SELECT `Genrebezeichnung`, `Deskriptor` FROM Genre, Film, FilmGenre WHERE FilmGenre.GenreID = Genre.GenreID AND Film.FilmID = FilmGenre.FilmID AND Film.FilmID = " + filmID + ";";
     }
 
+    public static String showSearchResults(String search, String date, String time, int fsk)
+    {
+        // If just one value is set in search query
+        if(!search.isEmpty() && date.isEmpty() && time.isEmpty() && fsk == 0)
+        {
+            return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Titel` LIKE '%" + search + "%' OR `Beschreibung` LIKE '%" + search + "%';";
+        }
+
+        if(search.isEmpty() && !date.isEmpty() && time.isEmpty() && fsk == 0)
+        {
+            return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Datum` >= '" + date + "';";
+        }
+
+        if(search.isEmpty() && date.isEmpty() && !time.isEmpty() && fsk == 0)
+        {
+            return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Uhrzeit` >= '" + time + "';";
+        }
+
+        if(search.isEmpty() && date.isEmpty() && time.isEmpty() && fsk > 0)
+        {
+            return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `FSK` = " + fsk + ";";
+        }
+
+        // two values are set in search query
+        if(!search.isEmpty() && !date.isEmpty() && time.isEmpty() && fsk == 0)
+        {
+            return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Titel` LIKE '%" + search + "%' AND `Datum` >= '" + date +"' OR `Beschreibung` LIKE '%" + search + "%'  AND `Datum` >= '" + date +"';";
+        }
+
+        /*
+        if(search.isEmpty() && date.isEmpty() && time.isEmpty() && fsk > 0)
+        {
+            return "";
+        }
+         */
+
+        return "";
+
+    }
+
     private static String getDateAsString()
     {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
