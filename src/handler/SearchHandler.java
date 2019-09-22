@@ -7,12 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 
 @WebServlet(name = "SearchHandler")
 public class SearchHandler extends HttpServlet {
@@ -22,26 +19,47 @@ public class SearchHandler extends HttpServlet {
         String fsk = request.getParameter("inputFSK");
         String searchText = request.getParameter("inputSearchText");
         time += ":00";
+
         PrintWriter out = response.getWriter();
-        out.print(request.getRequestURL() + "\n");
-        out.print(request.getRequestURI() + "\n");
-        out.print("Date Input: " + date + "\n");
-        out.print("Time Input: " + time + "\n");
-        out.print("FSK Input: " + fsk + "\n");
-        out.print("Search Text: " + searchText + "\n");
-        out.print(QueryBuilder.defaultSearchQuery(searchText, date, time, Integer.parseInt(fsk)));
+        //BufferedReader br = new BufferedReader(new FileReader("V1/elements/head.jsp"));
 
 
-        //out.print(QueryBuilder.showSearchResults(searchText, date, time, Integer.parseInt(fsk)));
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.defaultSearchQuery(searchText, date, time, Integer.parseInt(fsk));
         ResultSet rs = Connector.getQueryResult(c, sql);
 
         try {
             if(rs != null) {
+                response.setContentType("text/html;charset=UTF-8");
+                out.write("<html>");
+                request.getRequestDispatcher("elements/head.jsp").include(request, response);
+                out.write("<body>");
+                request.getRequestDispatcher("elements/header.jsp").include(request, response);
+                request.getRequestDispatcher("login.jsp").include(request, response);
+                request.getRequestDispatcher("registration.jsp").include(request, response);
+                request.getRequestDispatcher("filter.jsp").include(request, response);
+                out.write("<div class=\"container\">");
                 while (rs.next()) {
-                    out.print("Link: " + rs.getString("BildLink") + "\n");
+                    out.write("<div class=\"row\">");
+                    out.write("<div class=\"col-sm\">");
+                    out.write("<div class=\"card\" style=\"width: 20rem;\">");
+
+                    out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img-top\" alt='" + rs.getString("Titel") + "'>");
+                    out.write("<div class=\"card-body\">");
+
+                    out.write("<h5 class=\"card-title\">" + rs.getString("Titel") + "</h5>");
+
+                    out.write("<p class=\"card-text\">Some quick example text to build on the card title and make up the bulk of the card's content.</p>");
+                    out.write("<a href=\"#\" class=\"btn btn-primary\">Zum Film</a>");
+                    out.write("</div>");
+                    out.write("</div>");
+                    out.write("</div>");
+                    out.write("</div>");
                 }
+                out.write("</div>");
+                request.getRequestDispatcher("elements/footer.jsp").include(request, response);
+                out.write("</body>");
+                out.write("</html>");
             }
         } catch(Exception e) {
             e.printStackTrace();
