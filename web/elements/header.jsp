@@ -20,6 +20,7 @@
                 <%
                     Cookie cookie = null;
                     Cookie[] cookies = null;
+                    String outputValue = "Standort";
 
                     cookies = request.getCookies();
 
@@ -43,7 +44,7 @@
                     ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
                     if (rs != null) {
                         while(rs.next()) {
-                            out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "', '"+ rs.getString("PLZ") + "')\">"+ rs.getString("Ortsname") + "</a>");
+                            out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "', '"+ rs.getString("PLZ") + "')>"+ rs.getString("Ortsname") + "</a>");
                         }
                     }
                     Connector.closeConnection(c);
