@@ -1,3 +1,8 @@
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="db_connector.Connector" %>
+<%@ page import="db_connector.QueryBuilder" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -50,6 +55,29 @@
         </a>
     </div>
 </div>
+
+<%
+    Connection c = Connector.getConnection();
+    String sql = QueryBuilder.showTitlePageFilms();
+    ResultSet rs = Connector.getQueryResult(c, sql);
+
+    out.write("<div class=\"container\">");
+    out.write("<div class=\"card-group\" style=\"max-width: 1400px;\">");
+    while (rs.next()) {
+        out.write("<div class=\"card\">");
+        out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img-top\" alt='" + rs.getString("Titel") + "'>");
+        out.write("<div class=\"card-body\">");
+        out.write("<h5 class=\"card-title\">" + rs.getString("Titel") + "</h5>");
+        out.write("<p class=\"card-text\">BlaBla</p>");
+        out.write("<p class=\"card-text\"><small class=\"text-muted\">Last updated 3 mins ago</small></p>");
+        out.write("</div>");
+        out.write("</div>");
+    }
+    out.write("</div>");
+    out.write("</div>");
+
+    Connector.closeConnection(c);
+%>
 
 <%--
    <!--Filme-->
