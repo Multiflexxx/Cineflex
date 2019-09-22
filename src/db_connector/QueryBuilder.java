@@ -86,9 +86,31 @@ public class QueryBuilder {
     }
 
     public static String showMovieById(String id) {
+//        return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` " +
+//                "FROM Vorstellung Join Film ON Film.FilmID = Vorstellung.FilmID Join Sprache ON Vorstellung.SprachID = Sprache.SprachID Join Saal ON Saal.VorstellungsID = Vorstellung.VorstellungsID Join Sitzplan ON Sitzplan.SaalID = Saal.SaalID " +
+//                "Where Vorstellung.FilmID = " + id + " ;";
+
         return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` " +
-                "FROM Vorstellung Join Film ON Film.FilmID = Vorstellung.FilmID Join Sprache ON Vorstellung.SprachID = Sprache.SprachID Join Saal ON Saal.VorstellungsID = Vorstellung.VorstellungsID Join Sitzplan ON Sitzplan.SaalID = Saal.SaalID " +
-                "Where Vorstellung.FilmID = " + id + " ;";
+                    "FROM Vorstellung " +
+                        "Join Film ON Vorstellung.FilmID = Film.FilmID " +
+                        "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
+                        "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
+                        "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
+                        "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
+                    "WHERE Film.ID = " + id + " " +
+                        "JOIN";
+
+//        SELECT DISTINCT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname`
+//        FROM Vorstellung
+//        JOIN Film ON Vorstellung.FilmID = Film.FilmID
+//        JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID
+//        JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID
+//        JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID
+//        WHERE (`Titel` LIKE '%König%' OR `Beschreibung` LIKE '%" + search + "%')
+//        AND `Datum` >= '2019-09-22'
+//        AND `Uhrzeit` >= '08:00:00'
+//        AND `FSK` <= 18
+//        AND Gebäude.PLZ = 86153 ;
     }
 
     private static String getDateAsString()

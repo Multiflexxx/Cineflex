@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <a href="">
+    <a href="SingleMovieHandler?id=1">
         <img src="img/1.jpg" title="White flower" />
     </a>
 </head>

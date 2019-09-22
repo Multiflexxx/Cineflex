@@ -24,8 +24,6 @@
                     cookies = request.getCookies();
                     String outputValue = "Standort";
 
-                    String outputValue = "Standort";
-
                     if( cookies != null ) {
                         for (int i = 0; i < cookies.length; i++) {
                             if (cookies[i].getName().equals("city")) {
