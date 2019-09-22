@@ -127,3 +127,13 @@ PRIMARY KEY(`PositionsID`), FOREIGN KEY(`RNR`) REFERENCES `Reservierungsbeleg`(`
 
 CREATE TABLE `Reservierungsstonierung`(`StrnNR` INT NOT NULL AUTO_INCREMENT, `RNR` INT NOT NULL, 
 PRIMARY KEY(`StrnNR`), FOREIGN KEY(`RNR`) REFERENCES `Reservierungsbeleg`(`RNR`)) ENGINE = InnoDB COMMENT '';
+
+ALTER TABLE Film ADD `BildLink` TEXT NOT NULL;
+ALTER TABLE Film ADD `TrailerLink` TEXT NOT NULL;
+
+UPDATE Film SET `BildLink` = 'img/1.jpg', `TrailerLink` = 'https://www.youtube.com/watch?v=5ZNHFcY6w38' WHERE `FilmID` = 1;
+UPDATE Film SET `BildLink` = 'img/2.jpg', `TrailerLink` = 'https://www.youtube.com/watch?v=9bDdZTB3jXc' WHERE `FilmID` = 2;
+UPDATE Film SET `BildLink` = 'img/3.jpg', `TrailerLink` = 'https://www.youtube.com/watch?v=awkiFRgg_hA' WHERE `FilmID` = 3;
+UPDATE Film SET `BildLink` = 'img/4.jpg', `TrailerLink` = 'https://www.youtube.com/watch?v=-alrxHdI3PE' WHERE `FilmID` = 4;
+UPDATE Film SET `BildLink` = 'img/4.jpg', `TrailerLink` = 'https://www.youtube.com/watch?v=-alrxHdI3PE' WHERE `FilmID` = 5;
+UPDATE Film SET `BildLink` = 'img/6.jpg', `TrailerLink` = 'https://www.youtube.com/watch?v=X_j8fn-TFLs' WHERE `FilmID` = 6;
