@@ -40,12 +40,6 @@ public class SearchHandler extends HttpServlet {
                 request.getRequestDispatcher("filter.jsp").include(request, response);
                 out.write("<div class=\"container\">");
                 while (rs.next()) {
-                    //out.write("<div class=\"row\">");
-                    //out.write("<div class=\"col\">");
-
-
-
-                    //<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     out.write("<div class=\"card mbg-dark text-white\" style=\"max-width: 1400px;\">");
                     out.write("<div class=\"row no-gutters\">");
                     out.write("<div class=\"col-lg-5\">");
@@ -66,6 +60,8 @@ public class SearchHandler extends HttpServlet {
                 request.getRequestDispatcher("elements/footer.jsp").include(request, response);
                 out.write("</body>");
                 out.write("</html>");
+            } else {
+                out.println(sql);
             }
         } catch(Exception e) {
             e.printStackTrace();

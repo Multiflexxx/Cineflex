@@ -62,7 +62,7 @@
     ResultSet rs = Connector.getQueryResult(c, sql);
 
     out.write("<div class=\"container\">");
-    out.write("<div class=\"card-group\" style=\"max-width: 1400px;\">");
+    out.write("<div class=\"card-deck\" style=\"max-width: 1400px;\">");
     while (rs.next()) {
         out.write("<div class=\"card\">");
         out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img-top\" alt='" + rs.getString("Titel") + "'>");

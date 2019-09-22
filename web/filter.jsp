@@ -12,7 +12,7 @@
                 <form name="SearchForm" action="SearchHandler" method="get" accept-charset="UTF-8">
                     <div class="form-group">
                         <label for="inputSearchText">Suchtext</label>
-                        <input type="text" class="form-control" id="inputSearchText" name="inputSearchText" placeholder="Schwanz">
+                        <input type="text" class="form-control" id="inputSearchText" name="inputSearchText" placeholder="'Schwanzus Longus'">
                     </div>
                     <div class="form-group">
                         <label for="inputDate">Datum</label>
