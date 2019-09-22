@@ -66,7 +66,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <%
-                        if (session.isNew()) {
+                        if (session.getAttribute("email") == null) {
                             out.println("<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownAccount\" role=\"button\"\n" +
                                     "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Account</a>");
                         } else {
@@ -78,7 +78,7 @@
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginDialog">Login</a>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registerDialog">Register</a>
                         <%
-                            if (!session.isNew()) {
+                            if (session.getAttribute("email") != null) {
                                 out.println(session.getAttribute("email"));
                                 out.println("<a class=\"dropdown-item\" href=\"javascript:void(0)\">Logout</a>");
                             }
