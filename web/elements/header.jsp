@@ -67,6 +67,12 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginDialog">Login</a>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#registerDialog">Register</a>
+                        <%
+                            if (session.isNew()) {
+                                out.println(session.getAttribute("email"));
+                                out.println("<a class=\"dropdown-item\" href=\"javascript:void(0)\">Logout</a>");
+                            }
+                        %>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Cineflex News</a>
                     </div>
