@@ -6,6 +6,7 @@
 
   <jsp:include page="login.jsp" />
   <jsp:include page="registration.jsp" />
+  <jsp:include page="filter.jsp" />
 
     <!-- Karussell-->
     <!-- Bitte nur Bilder der größe 1656x630 einfügen-->
