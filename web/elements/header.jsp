@@ -29,7 +29,7 @@
                                 cookie = cookies[i];
                                 out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
                                         "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + cookie.getValue() + "</a>");
-                                return;
+                                break;
                             } else {
                                 out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
                                         "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Standort</a>");
