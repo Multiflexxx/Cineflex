@@ -20,12 +20,12 @@
                                min="0000-00-00" max="9999-12-31">
                     </div>
                     <div class="form-group">
-                        <label for="inputTime">Datum</label>
+                        <label for="inputTime">Uhrzeit</label>
                         <input type="time" class="form-control" id="inputTime" name="inputTime" value="08:00" step="3000">
                     </div>
                     <div class="form-group">
-                        <label for="inputFSK">Datum</label>
-                        <select id="inputFSK" name="inputFSK">
+                        <label for="inputFSK">FSK</label>
+                        <select class="form-control" id="inputFSK" name="inputFSK">
                             <option value="18">Nicht gew&#228;hlt</option>
                             <option value="0">FSK 0</option>
                             <option value="6">FSK 6</option>

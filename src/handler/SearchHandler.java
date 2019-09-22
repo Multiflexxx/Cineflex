@@ -54,6 +54,7 @@ public class SearchHandler extends HttpServlet {
                     out.write("<div class=\"col-lg-7\">");
                     out.write("<div class=\"card-body\">");
                     out.write("<h5 class=\"card-title\">" + rs.getString("Titel") + "</h5>");
+                    out.write("<p class=\"card-text\"><small class=\"text-muted\">" + rs.getString("Dauer") + " min | FSK " + rs.getString("FSK") + "</small></p>");
                     out.write("<p class=\"card-text mrb-justify\">" + rs.getString("Film.Beschreibung") + "</p>");
                     out.write("<a href=\"#\" class=\"btn btn-primary\">Zum Film</a>");
                     out.write("</div>");
