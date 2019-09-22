@@ -85,6 +85,12 @@ public class QueryBuilder {
 
     }
 
+    public static String showMovieById(String id) {
+        return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` " +
+                "FROM Vorstellung Join Film ON Film.FilmID = Vorstellung.FilmID Join Sprache ON Vorstellung.SprachID = Sprache.SprachID Join Saal ON Saal.VorstellungsID = Vorstellung.VorstellungsID Join Sitzplan ON Sitzplan.SaalID = Saal.SaalID " +
+                "Where Vorstellung.FilmID = " + id + " ;";
+    }
+
     private static String getDateAsString()
     {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
