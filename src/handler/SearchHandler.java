@@ -16,10 +16,10 @@ import java.sql.SQLException;
 @WebServlet(name = "SearchHandler")
 public class SearchHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String date = request.getParameter("date");
-        String time = request.getParameter("time");
-        String fsk = request.getParameter("fsk");
-        String searchText = request.getParameter("searchText");
+        String date = request.getParameter("inputDate");
+        String time = request.getParameter("inputTime");
+        String fsk = request.getParameter("inputFSK");
+        String searchText = request.getParameter("inputSearchText");
         time += ":00";
         PrintWriter out = response.getWriter();
         out.print(request.getRequestURL() + "\n");
@@ -33,17 +33,21 @@ public class SearchHandler extends HttpServlet {
 
         //out.print(QueryBuilder.showSearchResults(searchText, date, time, Integer.parseInt(fsk)));
         Connection c = Connector.getConnection();
-        ResultSet rs = Connector.getQueryResult(c, QueryBuilder.defaultSearchQuery(searchText, date, time, Integer.parseInt(fsk)));
-        Connector.closeConnection(c);
+        String sql = QueryBuilder.defaultSearchQuery(searchText, date, time, Integer.parseInt(fsk));
+        ResultSet rs = Connector.getQueryResult(c, sql);
+
         try {
             if(rs != null) {
                 while (rs.next()) {
                     out.print("Link: " + rs.getString("BildLink") + "\n");
                 }
             }
-        } catch(SQLException e) {
-            out.print("Failed: SQLException");
+        } catch(Exception e) {
+            e.printStackTrace();
         }
+
+        Connector.closeConnection(c);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
