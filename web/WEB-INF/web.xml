@@ -23,6 +23,11 @@
         <url-pattern>/RegistrationHandler</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SearchHandler</servlet-name>
+        <servlet-class>handler.SearchHandler</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>SearchHandler</servlet-name>
         <url-pattern>/SearchHandler</url-pattern>
