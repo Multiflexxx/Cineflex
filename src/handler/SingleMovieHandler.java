@@ -25,7 +25,7 @@ public class SingleMovieHandler extends HttpServlet {
         // Get PLZ
         Cookie[] cookies = request.getCookies();
         for(Cookie c : cookies) {
-            if(c.getName() == "PLZ") {
+            if(c.getName() == "plz") {
                 plz = c.getValue();
             }
         }
