@@ -42,8 +42,8 @@ public class SearchHandler extends HttpServlet {
                 while (rs.next()) {
                     String hrefURL = "SingleMovieHandler?";
                     hrefURL += "id=" + rs.getString("FilmID");
-                    hrefURL += "date=" + date;
-                    hrefURL += "time=" + time;
+                    hrefURL += "&date=" + date;
+                    hrefURL += "&time=" + time;
                     out.write("<div class=\"card mbg-dark text-white\" style=\"max-width: 1400px;\">");
                     out.write("<div class=\"row no-gutters\">");
                     out.write("<div class=\"col-lg-5\">");
