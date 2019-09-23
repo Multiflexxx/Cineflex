@@ -26,22 +26,21 @@ public class RegistrationHandler extends HttpServlet {
         String pass = request.getParameter("inputPasswordReg");
         String passWdh = request.getParameter("inputPasswordRegWdh");
 
-        response.getOutputStream().println(firstname + lastname + date + email + pass + passWdh);
-        if(pass != passWdh)
+        if(!pass.equals(passWdh))
         {
-            response.getOutputStream().println("Die Passwörter stimen nicht überein!");
+            response.getOutputStream().println("Die Passwörter stimmen nicht überein!");
             return;
         }
 
-        if(pass.length() < 6 || passWdh.length() < 6)
+        if(pass.length() < 6)
         {
             response.getOutputStream().println("Das Passwort muss mindestens 6 Zeichen lang sein!");
             return;
         }
 
-        if(firstname == "" || lastname == "" || date == "" || email == "" || pass == "" || passWdh == "")
+        if(firstname.equals("") || lastname.equals("") || date.equals("") || email.equals("") || pass.equals("") || passWdh.equals(""))
         {
-            response.getOutputStream().println("FEHLER");
+            response.getOutputStream().println("Bitte alle Pflichtfelder ausfüllen!");
             return;
         }
 
