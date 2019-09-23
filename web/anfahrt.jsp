@@ -13,9 +13,11 @@
 <jsp:include page="registration.jsp"/>
 <jsp:include page="filter.jsp"/>
 
-<h1>Hier finden Sie uns:</h1>
-<div class="container" style="margin-top:15px; margin-bottom:15px;">
-    <iframe src="https://www.google.com/maps/d/embed?mid=1iFLu1_eFR5Kvh6D5A1hARlFCm13TXPUb&hl=de" width="1000" height="1000"></iframe>
+<div class="jumbotron jumbotron-fluid footer">
+    <div class="container">
+        <h1 class="display-4">Hier finden Sie uns:</h1>
+        <iframe src="https://www.google.com/maps/d/embed?mid=1iFLu1_eFR5Kvh6D5A1hARlFCm13TXPUb&hl=de" width="1000" height="1000"></iframe>
+    </div>
 </div>
 
 <jsp:include page="elements/footer.jsp"/>
