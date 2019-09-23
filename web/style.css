@@ -29,7 +29,8 @@ h6{
 .carousel-caption{
     background-color: hsla(0,0%,0%,0.5);
 }
-.card{
+.card,
+.card-deck{
     margin-bottom: 2rem;
     margin-top: 2rem;
 }

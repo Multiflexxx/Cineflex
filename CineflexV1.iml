@@ -19,29 +19,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 8.5.45" level="application_server_libraries" />
+    <orderEntry type="library" exported="" name="Tomcat 8.5.45" level="application_server_libraries" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../Fallstudie/mysql-connector-java-8.0.17/mysql-connector-java-8.0.17.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Fallstudie/taglibs/taglibs-standard-jstlel-1.2.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../mysql-connector-java-8.0.17/mysql-connector-java-8.0.17.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

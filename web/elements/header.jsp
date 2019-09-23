@@ -7,7 +7,7 @@
 <header>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand mb-0 h1" href="../index.jsp">Cineflex</a>
+        <a class="navbar-brand mb-0 h1" href="index.jsp">Cineflex</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,10 +20,11 @@
                 <%
                     Cookie cookie = null;
                     Cookie[] cookies = null;
+                    String outputValue = "Standort";
 
                     cookies = request.getCookies();
 
-                    if( cookies != null ) {
+                    if (cookies != null) {
                         for (int i = 0; i < cookies.length; i++) {
                             if (cookies[i].getName().equals("city")) {
                                 cookie = cookies[i];
@@ -38,16 +39,16 @@
                 %>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <%
-                    Connection c = Connector.getConnection();
-                    ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
-                    if (rs != null) {
-                        while(rs.next()) {
-                            out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "', '"+ rs.getString("PLZ") + "')\">"+ rs.getString("Ortsname") + "</a>");
+                    <%
+                        Connection c = Connector.getConnection();
+                        ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
+                        if (rs != null) {
+                            while (rs.next()) {
+                                out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "', '" + rs.getString("PLZ") + "')\">" + rs.getString("Ortsname") + "</a>");
+                            }
                         }
-                    }
-                    Connector.closeConnection(c);
-                %>
+                        Connector.closeConnection(c);
+                    %>
                 </div>
             </div>
             <ul class="navbar-nav mr-auto">
@@ -84,11 +85,13 @@
                     </div>
                 </li>
             </ul>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button"  data-toggle="modal" data-target="#filterDialog">Filter</button>
-<%--            <form class="form-inline my-2 my-lg-0">--%>
-<%--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--%>
-<%--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
-<%--            </form>--%>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal"
+                    data-target="#filterDialog">Suche
+            </button>
+            <%--            <form class="form-inline my-2 my-lg-0">--%>
+            <%--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--%>
+            <%--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
+            <%--            </form>--%>
         </div>
     </nav>
 </header>
