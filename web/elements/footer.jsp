@@ -15,7 +15,7 @@
                 <a href="#">Impressum</a>
             </div>
             <div class="col">
-                <a href="#">Anfahrt</a>
+                <a href="anfahrt.jsp">Anfahrt</a>
             </div>
         </div>
         <div class="row text-center">
