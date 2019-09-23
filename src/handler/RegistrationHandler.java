@@ -26,6 +26,7 @@ public class RegistrationHandler extends HttpServlet {
         String pass = request.getParameter("inputPasswordReg");
         String passWdh = request.getParameter("inputPasswordRegWdh");
 
+        response.getOutputStream().println(firstname + lastname + date + email + pass + passWdh);
         if(pass != passWdh)
         {
             return;
