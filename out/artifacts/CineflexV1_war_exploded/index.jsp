@@ -62,6 +62,14 @@
     String sql = QueryBuilder.showTitlePageFilms();
     ResultSet rs = Connector.getQueryResult(c, sql);
 
+    String plz = "00000";
+    Cookie[] cookies = request.getCookies();
+    for(Cookie cookie : cookies) {
+        if(cookie.getName().equals("plz")) {
+            plz = cookie.getValue();
+        }
+    }
+
 
     out.write("<div class=\"container\">");
     out.write("<div class=\"card-deck\" style=\"max-width: 1400px;\">");
@@ -71,7 +79,6 @@
             if (rs == null) {
                 while (rs.next()) {
                     LocalDate localDate = LocalDate.now();
-
                     hrefURL += rs.getString("FilmID");
                     hrefURL += "&date=" + localDate.toString();
                     hrefURL += "&time=08:00:00";

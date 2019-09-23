@@ -39,7 +39,7 @@ public class LoginHandler extends HttpServlet {
         try {
             if (rs.next() == false ) {
                 //response.getOutputStream().print("Leer");
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("index.jsp");
             } else {
                 do {
 //                    PrintWriter out = response.getWriter();
