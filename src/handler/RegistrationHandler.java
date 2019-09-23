@@ -29,16 +29,19 @@ public class RegistrationHandler extends HttpServlet {
         response.getOutputStream().println(firstname + lastname + date + email + pass + passWdh);
         if(pass != passWdh)
         {
+            response.getOutputStream().println("Die Passwörter stimen nicht überein!");
             return;
         }
 
         if(pass.length() < 6 || passWdh.length() < 6)
         {
+            response.getOutputStream().println("Das Passwort muss mindestens 6 Zeichen lang sein!");
             return;
         }
 
         if(firstname == "" || lastname == "" || date == "" || email == "" || pass == "" || passWdh == "")
         {
+            response.getOutputStream().println("FEHLER");
             return;
         }
 
