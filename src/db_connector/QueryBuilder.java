@@ -96,7 +96,7 @@ public class QueryBuilder {
                     "WHERE Film.FilmID = " + id + " " +
                         "AND `Datum` >= " + date + " " +
                         "AND `Uhrzeit` >= '" + time + "' " +
-                        "AND Gebäude.PLZ = " + plz + " ;"; // 86153
+                        "AND Gebäude.PLZ = " + plz + " ;";
 
     }
 

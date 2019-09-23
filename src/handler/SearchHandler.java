@@ -40,6 +40,10 @@ public class SearchHandler extends HttpServlet {
                 request.getRequestDispatcher("filter.jsp").include(request, response);
                 out.write("<div class=\"container\">");
                 while (rs.next()) {
+                    String hrefURL = "SingleMovieHandler?";
+                    hrefURL += "id=" + rs.getString("FilmID");
+                    hrefURL += "date=" + date;
+                    hrefURL += "time=" + time;
                     out.write("<div class=\"card mbg-dark text-white\" style=\"max-width: 1400px;\">");
                     out.write("<div class=\"row no-gutters\">");
                     out.write("<div class=\"col-lg-5\">");
@@ -50,7 +54,7 @@ public class SearchHandler extends HttpServlet {
                     out.write("<h5 class=\"card-title\">" + rs.getString("Titel") + "</h5>");
                     out.write("<p class=\"card-text\"><small class=\"text-muted\">" + rs.getString("Dauer") + " min | FSK " + rs.getString("FSK") + "</small></p>");
                     out.write("<p class=\"card-text mrb-justify\">" + rs.getString("Film.Beschreibung") + "</p>");
-                    out.write("<a href=\"#\" class=\"btn btn-primary\">Zum Film</a>");
+                    out.write("<a href=\"" + hrefURL + "\" class=\"btn btn-primary\">Zum Film</a>");
                     out.write("</div>");
                     out.write("</div>");
                     out.write("</div>");
