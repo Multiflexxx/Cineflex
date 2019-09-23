@@ -22,7 +22,7 @@ public class RegistrationHandler extends HttpServlet {
         String firstname = request.getParameter("inputVorname");
         String lastname = request.getParameter("inputNachname");
         String date = request.getParameter("inputGeb");
-        String email = request.getParameter("inputEmail");
+        String email = request.getParameter("inputEmailReg");
         String pass = request.getParameter("inputPasswordReg");
         String passWdh = request.getParameter("inputPasswordRegWdh");
 

@@ -20,7 +20,7 @@ import java.util.Date;
 //@WebServlet(name = "LoginHandler")
 public class LoginHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("inputEmail");
+        String email = request.getParameter("inputEmailLog");
         String pw = null;
         try {
             pw = PassMD5.hash(request.getParameter("inputPassword"));

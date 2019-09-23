@@ -8,7 +8,7 @@ function submitRegistration() {
     var inputVorname = document.getElementById("inputVorname").value;
     var inputNachname = document.getElementById("inputNachname").value;
     var inputGeb = document.getElementById("inputGeb").value;
-    var inputEmail = document.getElementById("inputEmail").value;
+    var inputEmail = document.getElementById("inputEmailReg").value;
     var inputPasswortReg = document.getElementById("inputPasswordReg").value;
     var inputPasswortRegWdh = document.getElementById("inputPasswordRegWdh").value;
 
@@ -25,7 +25,7 @@ function submitRegistration() {
         return;
     }
 
-    if(inputVorname == "" || inputNachname == "" || inputGeb == "" || inputEmail == "" || inputPasswortReg == "" || inputPasswortRegWdh == "")
+    if(inputVorname === "" || inputNachname === "" || inputGeb === "" || inputEmail === "" || inputPasswortReg === "" || inputPasswortRegWdh === "")
     {
         alert('Bitte alle Pflichtfelder ausfüllen!');
         return;
