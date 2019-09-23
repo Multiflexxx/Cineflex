@@ -11,8 +11,8 @@
             <div class="modal-body">
                 <form name="LoginForm" action="LoginHandler" method="post">
                     <div class="form-group">
-                        <label for="inputEmail">E-Mail / Benutzername</label>
-                        <input type="text" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
+                        <label for="inputEmailLog">E-Mail / Benutzername</label>
+                        <input type="text" class="form-control" id="inputEmailLog" name="inputEmailLog" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
                         <small id="emailHelp" class="form-text text-muted">Wir geben deine E-Mail Adresse nicht weiter.</small>
                     </div>
                     <div class="form-group">

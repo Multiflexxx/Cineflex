@@ -23,8 +23,8 @@
                         <input type="text" class="form-control" id="inputGeb" name="inputGeb" required="required" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="form-group">
-                        <label for="inputEmail">E-Mail</label>
-                        <input type="email" class="form-control" id="inputEmail" name="inputEmail" required="required" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
+                        <label for="inputEmailReg">E-Mail</label>
+                        <input type="email" class="form-control" id="inputEmailReg" name="inputEmailReg" required="required" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
                         <small id="emailHelp" class="form-text text-muted">Wir werden dir eine Verifizierungsmail schicken.</small>
                     </div>
                     <div class="form-group">
