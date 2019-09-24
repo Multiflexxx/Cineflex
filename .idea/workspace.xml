@@ -7,7 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/oo/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/oo/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/oo/Vorstellung.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/oo/Vorstellung.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -405,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569352294421</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="bugfix">
+      <created>1569356046277</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1569356046277</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,7 +464,8 @@
     <MESSAGE value="film hinzugefügt" />
     <MESSAGE value="Vorstellung hinzugefuegt" />
     <MESSAGE value="person hinzugefügt" />
-    <option name="LAST_COMMIT_MESSAGE" value="person hinzugefügt" />
+    <MESSAGE value="bugfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bugfix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="177" key="#Tomcat_Server" />
