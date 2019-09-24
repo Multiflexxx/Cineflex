@@ -35,10 +35,32 @@ public class FilmFactory {
 
                         counter++;
                     }
-                    return filme;
                 }catch(SQLException e) {
                     e.printStackTrace();
                 }
+                for(Film f : filme) {
+                    sql = QueryBuilder.getGenreNamesById(f.getFilmID());
+                    rs = Connector.getQueryResult(c, sql);
+                    try {
+                        rsSize = SupportMethods.getResultSetSize(rs);
+                        if(rsSize > 0) {
+                            int counter = 0;
+                            String[] genres = null;
+                            while(rs.next()) {
+                                genres = new String[rsSize];
+                                genres[counter] = rs.getString("Genrebezeichnung");
+                                counter++;
+                            }
+                            f.setGenre(genres);
+                        }
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+                return filme;
             }
         }
         return null;

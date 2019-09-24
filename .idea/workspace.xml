@@ -7,8 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/factory/SupportMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db_connector/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db_connector/QueryBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/factory/FilmFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/FilmFactory.java" afterDir="false" />
     </list>
@@ -18,23 +16,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/handler/DisplayMovieHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/registration.jsp">
           <provider selected="true" editor-type-id="text-editor" />
@@ -52,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/db_connector/QueryBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="71" column="134" selection-start-line="71" selection-start-column="134" selection-end-line="71" selection-end-column="134" />
+            <state relative-caret-position="594">
+              <caret line="106" column="5" lean-forward="true" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -73,9 +58,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/oo/Film.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="134" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="134" />
+            <state relative-caret-position="484">
+              <caret line="22" column="134" selection-start-line="22" selection-start-column="134" selection-end-line="22" selection-end-column="134" />
               <folding>
+                <element signature="e#1106#1107#0" expanded="true" />
+                <element signature="e#1142#1143#0" expanded="true" />
+                <element signature="e#1176#1177#0" expanded="true" />
+                <element signature="e#1204#1205#0" expanded="true" />
+                <element signature="e#1248#1249#0" expanded="true" />
+                <element signature="e#1282#1283#0" expanded="true" />
+                <element signature="e#1318#1319#0" expanded="true" />
+                <element signature="e#1348#1349#0" expanded="true" />
+                <element signature="e#1396#1397#0" expanded="true" />
+                <element signature="e#1434#1435#0" expanded="true" />
                 <element signature="e#563#564#0" expanded="true" />
                 <element signature="e#591#592#0" expanded="true" />
                 <element signature="e#633#634#0" expanded="true" />
@@ -113,11 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/factory/FilmFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="25" column="145" selection-start-line="25" selection-start-column="145" selection-end-line="25" selection-end-column="145" />
+            <state relative-caret-position="608">
+              <caret line="58" column="17" lean-forward="true" selection-start-line="40" selection-start-column="16" selection-end-line="58" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -180,8 +175,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/factory/SupportMethods.java" />
-        <option value="$PROJECT_DIR$/src/factory/FilmFactory.java" />
         <option value="$PROJECT_DIR$/src/db_connector/QueryBuilder.java" />
+        <option value="$PROJECT_DIR$/src/factory/FilmFactory.java" />
       </list>
     </option>
   </component>
@@ -204,6 +199,11 @@
             <path>
               <item name="CineflexV1" type="b2602c69:ProjectViewProjectNode" />
               <item name="CineflexV1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CineflexV1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CineflexV1" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CineflexV1" type="b2602c69:ProjectViewProjectNode" />
@@ -305,14 +305,14 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\sql" />
+      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web" />
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web\elements" />
       <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\web\javascript" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1\sql" />
-      <recent name="E:\Tristan\DHBW\GitProjekte\CineflexV1" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -641,19 +641,19 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2670000" />
+    <option name="totallyTimeSpent" value="3823000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1294" height="1407" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.69474834" visible="true" weight="0.21150729" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6943794" visible="true" weight="0.21150729" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
-      <window_info id="Web" order="6" sideWeight="0.30525163" side_tool="true" visible="true" weight="0.21150729" />
+      <window_info id="Web" order="6" sideWeight="0.3056206" side_tool="true" visible="true" weight="0.21150729" />
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -662,8 +662,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32969603" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.28257456" />
+      <window_info anchor="bottom" id="Application Servers" order="7" visible="true" weight="0.32967034" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.28257456" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
@@ -804,11 +804,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/db_connector/QueryBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="106" column="5" lean-forward="true" selection-start-line="106" selection-start-column="5" selection-end-line="106" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/oo/Film.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="134" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="134" />
+        <state relative-caret-position="484">
+          <caret line="22" column="134" selection-start-line="22" selection-start-column="134" selection-end-line="22" selection-end-column="134" />
           <folding>
+            <element signature="e#1106#1107#0" expanded="true" />
+            <element signature="e#1142#1143#0" expanded="true" />
+            <element signature="e#1176#1177#0" expanded="true" />
+            <element signature="e#1204#1205#0" expanded="true" />
+            <element signature="e#1248#1249#0" expanded="true" />
+            <element signature="e#1282#1283#0" expanded="true" />
+            <element signature="e#1318#1319#0" expanded="true" />
+            <element signature="e#1348#1349#0" expanded="true" />
+            <element signature="e#1396#1397#0" expanded="true" />
+            <element signature="e#1434#1435#0" expanded="true" />
             <element signature="e#563#564#0" expanded="true" />
             <element signature="e#591#592#0" expanded="true" />
             <element signature="e#633#634#0" expanded="true" />
@@ -847,18 +864,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/factory/FilmFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="25" column="145" selection-start-line="25" selection-start-column="145" selection-end-line="25" selection-end-column="145" />
+        <state relative-caret-position="608">
+          <caret line="58" column="17" lean-forward="true" selection-start-line="40" selection-start-column="16" selection-end-line="58" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/db_connector/QueryBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="71" column="134" selection-start-line="71" selection-start-column="134" selection-end-line="71" selection-end-column="134" />
         </state>
       </provider>
     </entry>
