@@ -2,15 +2,15 @@ package oo;
 
 public class Vorstellung {
     int vorstellungsID;
-    String Datum, Uhrzeit, Sprache; //gewünschtes Datumsformat: Wochentag, DDMM -> aber für ticket mit jahr
+    private String datum, uhrzeit, sprache; //gewünschtes Datumsformat: Wochentag, DDMM -> aber für ticket mit jahr
     Film film;
     Kinosaal saal;
 
     public Vorstellung(int vorstellungsID, String datum, String uhrzeit, String sprache, Film film, Kinosaal saal) {
         this.vorstellungsID = vorstellungsID;
-        Datum = datum;
-        Uhrzeit = uhrzeit;
-        Sprache = sprache;
+        this.datum = datum;
+        this.uhrzeit = uhrzeit;
+        this.sprache = sprache;
         this.film = film;
         this.saal = saal;
     }
@@ -24,27 +24,27 @@ public class Vorstellung {
     }
 
     public String getDatum() {
-        return Datum;
+        return datum;
     }
 
     public void setDatum(String datum) {
-        Datum = datum;
+        this.datum = datum;
     }
 
     public String getUhrzeit() {
-        return Uhrzeit;
+        return uhrzeit;
     }
 
     public void setUhrzeit(String uhrzeit) {
-        Uhrzeit = uhrzeit;
+        this.uhrzeit = uhrzeit;
     }
 
     public String getSprache() {
-        return Sprache;
+        return sprache;
     }
 
     public void setSprache(String sprache) {
-        Sprache = sprache;
+        this.sprache = sprache;
     }
 
     public Film getFilm() {
