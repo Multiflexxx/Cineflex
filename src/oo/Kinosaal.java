@@ -3,12 +3,12 @@ package oo;
 public class Kinosaal {
   int saalID;
   String bezeichnung;
-  //Sitzplan sitzplan;
+  Sitz[] sitzplan;
 
-  public Kinosaal(int saalID, String bezeichnung /*, Sitzplan sitzplan*/) {
+  public Kinosaal(int saalID, String bezeichnung, Sitz[] sitzplan) {
     this.saalID = saalID;
     this.bezeichnung = bezeichnung;
-    //this.sitzplan = sitzplan;
+    this.sitzplan = sitzplan;
   }
 
   public int getSaalID() {
@@ -18,11 +18,11 @@ public class Kinosaal {
   public String getBezeichnung() {
     return bezeichnung;
   }
-/*
-  public Sitzplan getSitzplan() {
+
+  public Sitz[] getSitzplan() {
     return sitzplan;
   }
-*/
+
   public void setSaalID(int saalID) {
     this.saalID = saalID;
   }
@@ -30,9 +30,8 @@ public class Kinosaal {
   public void setBezeichnung(String bezeichnung) {
     this.bezeichnung = bezeichnung;
   }
-/*
-  public void setSitzplan(Sitzplan sitzplan) {
+
+  public void setSitzplan(Sitz[] sitzplan) {
     this.sitzplan = sitzplan;
   }
-  */
 }
