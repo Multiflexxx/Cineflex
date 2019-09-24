@@ -4,17 +4,17 @@ public abstract class Beleg {
   int belegID;
   float preis;
   Vorstellung vorstellung;
-  //Kunde kunde;
+  Kunde kunde;
   Sitz[] sitzauswahl;
 
   public Beleg() {
   }
 
-  public Beleg(int belegID, float preis, Vorstellung vorstellung /*, Kunde kunde*/, Sitz[] sitzauswahl) {
+  public Beleg(int belegID, float preis, Vorstellung vorstellung, Kunde kunde, Sitz[] sitzauswahl) {
     belegID = belegID;
     this.preis = preis;
     this.vorstellung = vorstellung;
-    //this.kunde = kunde;
+    this.kunde = kunde;
     this.sitzauswahl = sitzauswahl;
   }
 
@@ -30,11 +30,10 @@ public abstract class Beleg {
     return vorstellung;
   }
 
-  /*
   public Kunde getKunde() {
     return kunde;
   }
-*/
+
   public Sitz[] getSitzauswahl() {
     return sitzauswahl;
   }
@@ -51,11 +50,10 @@ public abstract class Beleg {
     this.vorstellung = vorstellung;
   }
 
-  /*
   public void setKunde(Kunde kunde) {
     this.kunde = kunde;
   }
-*/
+
   public void setSitzauswahl(Sitz[] sitzauswahl) {
     this.sitzauswahl = sitzauswahl;
   }
