@@ -6,16 +6,18 @@ public abstract class Beleg {
   Vorstellung vorstellung;
   Kunde kunde;
   Sitz[] sitzauswahl;
+  String uhrzeit;
 
   public Beleg() {
   }
 
-  public Beleg(int belegID, float preis, Vorstellung vorstellung, Kunde kunde, Sitz[] sitzauswahl) {
+  public Beleg(int belegID, float preis, Vorstellung vorstellung, Kunde kunde, Sitz[] sitzauswahl, String uhrzeit) {
     belegID = belegID;
     this.preis = preis;
     this.vorstellung = vorstellung;
     this.kunde = kunde;
     this.sitzauswahl = sitzauswahl;
+    this.uhrzeit = uhrzeit;
   }
 
   public int getBelegID() {
@@ -38,6 +40,10 @@ public abstract class Beleg {
     return sitzauswahl;
   }
 
+  public String getUhrzeit() {
+    return uhrzeit;
+  }
+
   public void setBelegID(int belegID) {
     belegID = belegID;
   }
@@ -56,5 +62,9 @@ public abstract class Beleg {
 
   public void setSitzauswahl(Sitz[] sitzauswahl) {
     this.sitzauswahl = sitzauswahl;
+  }
+
+  public void setUhrzeit(String uhrzeit) {
+    this.uhrzeit = uhrzeit;
   }
 }
