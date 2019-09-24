@@ -83,15 +83,15 @@ public class SingleMovieHandler extends HttpServlet {
                         case 1:
                             counter++;
                             out.write("<tr>");
-                            out.write("<td><button class=\"film-btn\" onclick=\"\" style=\"vertical-align:middle\">" + datum.get(i).toString() + " " + uhrzeit.get(i).toString() + counter + " Uhr</button></td>");
+                            out.write("<td><button class=\"film-btn\" onclick=\"\" style=\"vertical-align:middle\">Mi, 25. Sep<br><div class=\"vl\"></div>16:30 Uhr</button></td>");
                             break;
                         case 2:
                             counter++;
-                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + datum.get(i).toString() + " " + uhrzeit.get(i).toString() + counter + " Uhr</button></td>");
+                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + datum.get(i).toString() + " " + uhrzeit.get(i).toString() + " Uhr</button></td>");
                             break;
                         case 3:
                             counter = 1;
-                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + datum.get(i).toString() + " " + uhrzeit.get(i).toString()  + counter+ " Uhr</button></td>");
+                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + datum.get(i).toString() + " " + uhrzeit.get(i).toString()  + " Uhr</button></td>");
                             out.write("</tr>");
                             break;
                     }
