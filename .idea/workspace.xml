@@ -694,18 +694,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11046000" />
+    <option name="totallyTimeSpent" value="11325000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1630" height="1407" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.69493085" visible="true" weight="0.16624203" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.69397044" visible="true" weight="0.16624203" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
-      <window_info id="Web" order="6" sideWeight="0.30506912" side_tool="true" visible="true" weight="0.16624203" />
+      <window_info id="Web" order="6" sideWeight="0.3060296" side_tool="true" visible="true" weight="0.16624203" />
       <window_info id="Image Layers" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -715,7 +715,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Application Servers" order="7" visible="true" weight="0.32967034" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.28257456" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3100471" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
