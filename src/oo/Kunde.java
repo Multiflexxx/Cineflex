@@ -6,8 +6,8 @@ public class Kunde extends Person {
     public Kunde() {
     }
 
-    public Kunde(String plz, String email, String vorname, String nachname, String passwort, String datum, int personenID, String straße, int hausnummer, int kundenID, int treuepunkte) {
-        super(plz, email, vorname, nachname, passwort, datum, personenID, straße, hausnummer);
+    public Kunde(String plz, String email, String vorname, String nachname, String passwort, String datum, int personenID, String strasse, int hausnummer, int kundenID, int treuepunkte) {
+        super(plz, email, vorname, nachname, passwort, datum, personenID, strasse, hausnummer);
         this.kundenID = kundenID;
         this.treuepunkte = treuepunkte;
     }

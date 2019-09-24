@@ -7,7 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/oo/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/oo/Kunde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/oo/Kunde.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/oo/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/oo/Person.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -415,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569359930664</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Admin hinzugefügt">
+      <created>1569360850793</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1569360850793</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,7 +474,8 @@
     <MESSAGE value="Fix" />
     <MESSAGE value="update" />
     <MESSAGE value="Kunde hinzugefügt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Kunde hinzugefügt" />
+    <MESSAGE value="Admin hinzugefügt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Admin hinzugefügt" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="177" key="#Tomcat_Server" />

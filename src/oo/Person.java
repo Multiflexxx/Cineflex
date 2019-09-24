@@ -4,7 +4,7 @@ public abstract class Person {
     String plz, email, vorname, nachname, passwort, datum;
     int personenID;
     //fremdschlüssel
-    String straße;
+    String strasse;
     int hausnummer;
 
     public Person(String plz, String email, String vorname, String nachname, String passwort, String datum, int personenID) {
@@ -17,7 +17,7 @@ public abstract class Person {
         this.personenID = personenID;
     }
 
-    public Person(String plz, String email, String vorname, String nachname, String passwort, String datum, int personenID, String straße, int hausnummer) {
+    public Person(String plz, String email, String vorname, String nachname, String passwort, String datum, int personenID, String strasse, int hausnummer) {
         this.plz = plz;
         this.email = email;
         this.vorname = vorname;
@@ -25,19 +25,19 @@ public abstract class Person {
         this.passwort = passwort;
         this.datum = datum;
         this.personenID = personenID;
-        this.straße = straße;
+        this.strasse = strasse;
         this.hausnummer = hausnummer;
     }
 
     public Person() {
     }
 
-    public String getStraße() {
-        return straße;
+    public String getStrasse() {
+        return strasse;
     }
 
-    public void setStraße(String straße) {
-        this.straße = straße;
+    public void setStrasse(String strasse) {
+        this.strasse = strasse;
     }
 
     public int getHausnummer() {
