@@ -4,15 +4,15 @@ public class Vorstellung {
     int vorstellungsID;
     String Datum, Uhrzeit, Sprache; //gewünschtes Datumsformat: Wochentag, DDMM -> aber für ticket mit jahr
     Film film;
-    Saal saal;
+    //Saal saal;
 
-    public Vorstellung(int vorstellungsID, String datum, String uhrzeit, String sprache, Film film, Saal saal) {
+    public Vorstellung(int vorstellungsID, String datum, String uhrzeit, String sprache, Film film, /*Saal saal*/) {
         this.vorstellungsID = vorstellungsID;
         Datum = datum;
         Uhrzeit = uhrzeit;
         Sprache = sprache;
         this.film = film;
-        this.saal = saal;
+        //this.saal = saal;
     }
 
     public int getVorstellungsID() {
@@ -54,7 +54,7 @@ public class Vorstellung {
     public void setFilm(Film film) {
         this.film = film;
     }
-
+/*
     public Saal getSaal() {
         return saal;
     }
@@ -62,4 +62,6 @@ public class Vorstellung {
     public void setSaal(Saal saal) {
         this.saal = saal;
     }
+
+ */
 }
