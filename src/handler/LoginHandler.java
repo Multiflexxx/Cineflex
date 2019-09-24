@@ -21,7 +21,6 @@ import java.util.Date;
 public class LoginHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("inputEmailLog");
-        String stay = request.getParameter("inputCheckLogin");
         String pw = null;
 
         try {
@@ -29,13 +28,10 @@ public class LoginHandler extends HttpServlet {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-    /*
-        if(email.equals("") || pw.equals(""))
-        {
-            response.getOutputStream().println("Bitte alle Pflichtfelder ausfüllen!");
-            return;
-        }
-*/
+
+//        Login login = new Login(email, pw);
+//        ResultSet rs = login.getLoginResult();
+
         Connection c = null;
 
         c = Connector.getConnection();
@@ -48,25 +44,14 @@ public class LoginHandler extends HttpServlet {
 
         try {
             if (rs.next() == false ) {
-                //response.getOutputStream().print("Leer");
                 response.sendRedirect("index.jsp");
 
             } else {
                 do {
-//                    PrintWriter out = response.getWriter();
-
                     HttpSession session = request.getSession(true);
- /*                   out.println(session.getId());
-                    out.println("<br>");
-                    out.println("Session created: ");
-                    out.println(new Date(session.getCreationTime()) + "<br>");
-                    out.println("Session last accessed: ");
-                    out.println(new Date(session.getLastAccessedTime()));*/
 
                     session.setAttribute("email", email);
                     session.setAttribute("name", rs.getString("Vorname"));
-/*                    out.println("User: ");
-                    out.println(session.getAttribute("email"));*/
 
                     String lastaccessed = request.getParameter("lastaccessed");
                     String time = request.getParameter("time");
@@ -75,14 +60,11 @@ public class LoginHandler extends HttpServlet {
                     }
                     session.setMaxInactiveInterval(600);
                     response.sendRedirect("index.jsp");
-                    //response.getOutputStream().print("top");
-                    //response.sendRedirect("success.jsp");
                 } while (rs.next());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //response.getOutputStream().print("flop1");
         Connector.closeConnection(c);
     }
 
