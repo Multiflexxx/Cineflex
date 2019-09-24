@@ -9,6 +9,10 @@ import oo.Vorstellung;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class VorstellungsFactory {
     public static Vorstellung[] getVorstellungen(Film film, String date, String time, String plz) {
@@ -24,9 +28,29 @@ public class VorstellungsFactory {
                     int counter = 0;
                     while (rs.next()) {
                         // `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname
+                        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+                        Date date_Datum = null;
+                        try {
+                            date_Datum = dateFormatter.parse(rs.getString("Datum"));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
+                        Date time_Uhrzeit = null;
+                        try {
+                            time_Uhrzeit = timeFormatter.parse(rs.getString("Uhrzeit"));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(date_Datum == null || time_Uhrzeit == null) {
+                            return null;
+                        }
+
                         vorstellungen[counter] = new Vorstellung(rs.getInt("VorstellungsID"),
-                                                                    rs.getString("Datum"),
-                                                                    rs.getString("Uhrzeit"),
+                                                                    date_Datum,
+                                                                    time_Uhrzeit,
                                                                     rs.getString("Sprache.Sprachenname"),
                                                                     film,
                                                                     KinosaalFactory.getKinosaal(rs.getInt("SaalID")));
