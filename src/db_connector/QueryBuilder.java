@@ -87,7 +87,7 @@ public class QueryBuilder {
 
     public static String showMovieById(String id, String date, String time, String plz) {
 
-        return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, `SaalID` " +
+        return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID " +
                     "FROM Vorstellung " +
                         "Join Film ON Vorstellung.FilmID = Film.FilmID " +
                         "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
