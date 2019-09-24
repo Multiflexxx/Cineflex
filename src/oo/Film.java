@@ -1,7 +1,8 @@
 package oo;
 
 public class Film {
-    String title;
-    String description;
+    public String title;
+    public String description;
+
 
 }

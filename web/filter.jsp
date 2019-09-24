@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputTime">Uhrzeit</label>
-                        <input type="time" class="form-control" id="inputTime" name="inputTime" value="08:00" step="3000">
+                        <input type="time" class="form-control" id="inputTime" name="inputTime" value="08:00" step="60">
                     </div>
                     <div class="form-group">
                         <label for="inputFSK">FSK</label>
