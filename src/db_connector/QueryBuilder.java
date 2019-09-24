@@ -96,7 +96,7 @@ public class QueryBuilder {
                     "WHERE Film.FilmID = " + id + " " +
                         "AND `Datum` >= " + date + " " +
                         "AND `Uhrzeit` >= '" + time + "' " +
-                        "AND Gebäude.PLZ = " + plz + " ;";
+                        "AND Gebäude.PLZ = " + plz + " ORDER BY `Datum` ASC LIMIT 3; ";
 
     }
 
