@@ -2,6 +2,8 @@ package handler;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import factory.VorstellungsFactory;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
@@ -30,6 +32,7 @@ public class SingleMovieHandler extends HttpServlet {
         }
 
         PrintWriter out = response.getWriter();
+
         String sql = QueryBuilder.showMovieById(id, date, time, plz);
         Connection c = Connector.getConnection();
         ResultSet rs = Connector.getQueryResult(c, sql);

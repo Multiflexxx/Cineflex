@@ -1,6 +1,8 @@
 package handler;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import factory.FilmFactory;
+import oo.Film;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,13 +25,13 @@ public class SearchHandler extends HttpServlet {
         PrintWriter out = response.getWriter();
         //BufferedReader br = new BufferedReader(new FileReader("V1/elements/head.jsp"));
 
-
-        Connection c = Connector.getConnection();
-        String sql = QueryBuilder.defaultSearchQuery(searchText, date, time, Integer.parseInt(fsk));
-        ResultSet rs = Connector.getQueryResult(c, sql);
+        Film filme [] = FilmFactory.getFilme(searchText, date, time, Integer.parseInt(fsk));
+//        Connection c = Connector.getConnection();
+//        String sql = QueryBuilder.defaultSearchQuery(searchText, date, time, Integer.parseInt(fsk));
+//        ResultSet rs = Connector.getQueryResult(c, sql);
 
         try {
-            if(rs != null) {
+            if(filme != null) {
                 response.setContentType("text/html;charset=UTF-8");
                 out.write("<html>");
                 request.getRequestDispatcher("elements/head.jsp").include(request, response);
@@ -39,21 +41,21 @@ public class SearchHandler extends HttpServlet {
                 request.getRequestDispatcher("registration.jsp").include(request, response);
                 request.getRequestDispatcher("filter.jsp").include(request, response);
                 out.write("<div class=\"container\">");
-                while (rs.next()) {
+                for (Film f : filme) {
                     String hrefURL = "SingleMovieHandler?";
-                    hrefURL += "id=" + rs.getString("FilmID");
+                    hrefURL += "id=" + f.getFilmID();  //getString("FilmID");
                     hrefURL += "&date=" + date;
                     hrefURL += "&time=" + time;
                     out.write("<div class=\"card mt-3 mb-3\">");
                     out.write("<div class=\"row no-gutters\">");
                     out.write("<div class=\"col-lg-5\">");
-                    out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img\" alt='" + rs.getString("Titel") + "'>");
+                    out.write("<img src='" + f.getBildLink() +  "' class=\"card-img\" alt='" + f.getTitel() + "'>");
                     out.write("</div>");
                     out.write("<div class=\"col-lg-7\">");
                     out.write("<div class=\"card-body\">");
-                    out.write("<h5 class=\"card-title\">" + rs.getString("Titel") + "</h5>");
-                    out.write("<p class=\"card-text\"><small class=\"text-muted\">" + rs.getString("Dauer") + " min | FSK " + rs.getString("FSK") + "</small></p>");
-                    out.write("<p class=\"card-text mrb-justify\">" + rs.getString("Film.Beschreibung") + "</p>");
+                    out.write("<h5 class=\"card-title\">" + f.getTitel() + "</h5>");
+                    out.write("<p class=\"card-text\"><small class=\"text-muted\">" + f.getDauer() + " min | FSK " + f.getFsk() + "</small></p>");
+                    out.write("<p class=\"card-text mrb-justify\">" + f.getBeschreibung() + "</p>");
                     out.write("<a href=\"" + hrefURL + "\" class=\"btn btn-primary\">Zum Film</a>");
                     out.write("</div>");
                     out.write("</div>");
@@ -65,13 +67,13 @@ public class SearchHandler extends HttpServlet {
                 out.write("</body>");
                 out.write("</html>");
             } else {
-                out.println(sql);
+                out.println("sql");
             }
         } catch(Exception e) {
             e.printStackTrace();
         }
 
-        Connector.closeConnection(c);
+        //Connector.closeConnection(c);
 
     }
 

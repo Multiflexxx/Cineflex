@@ -4,6 +4,7 @@ import Password.PassMD5;
 //import com.mysql.cj.Session;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import oo.Login;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,16 +30,16 @@ public class LoginHandler extends HttpServlet {
             e.printStackTrace();
         }
 
-//        Login login = new Login(email, pw);
-//        ResultSet rs = login.getLoginResult();
+        Login login = new Login(email, pw);
+        ResultSet rs = login.getLoginResult();
 
-        Connection c = null;
-
-        c = Connector.getConnection();
-        if (c == null)
-            response.getOutputStream().print("Geht nicht!");
-        String sql = QueryBuilder.createLoginQuery(email, pw);
-        ResultSet rs = Connector.getQueryResult(c, sql);
+//        Connection c = null;
+//
+//        c = Connector.getConnection();
+//        if (c == null)
+//            response.getOutputStream().print("Geht nicht!");
+//        String sql = QueryBuilder.createLoginQuery(email, pw);
+//        ResultSet rs = Connector.getQueryResult(c, sql);
 
 
 
@@ -65,7 +66,7 @@ public class LoginHandler extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Connector.closeConnection(c);
+        //Connector.closeConnection(c);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
