@@ -116,6 +116,10 @@ public class QueryBuilder {
         return "Select * From Kinosaal Where SaalID = " + id + " ;";
     }
 
+    public static String getMovieById(int id) {
+        return "Select * FROM Film Where FilmID = " + id + " ;";
+    }
+
 
     private static String getDateAsString()
     {

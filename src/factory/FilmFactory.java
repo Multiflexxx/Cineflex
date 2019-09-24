@@ -86,6 +86,73 @@ public class FilmFactory {
         return null;
     }
 
+    public static Film getFilm(int id) {
+        Film film = null;
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.getMovieById(id);
+        ResultSet rs = Connector.getQueryResult(c, sql);
+
+        if(rs != null) {
+            int rsSize = SupportMethods.getResultSetSize(rs);
+            if(rsSize > 0 && rsSize == 1) {
+                try {
+                    while (rs.next()) {
+                        film = new Film(rs.getString("Titel"),
+                                rs.getString("Beschreibung"),
+                                rs.getString("BildLink"),
+                                rs.getString("TrailerLink"),
+                                rs.getInt("Dauer"),
+                                rs.getInt("FSK"),
+                                rs.getInt("FilmID"),
+                                rs.getBoolean("3D"));
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            sql = QueryBuilder.getGenreNamesById(film.getFilmID());
+            rs = Connector.getQueryResult(c, sql);
+            try {
+                rsSize = SupportMethods.getResultSetSize(rs);
+                if(rsSize > 0) {
+                    int counter = 0;
+                    String[] genres = null;
+                    while(rs.next()) {
+                        genres = new String[rsSize];
+                        genres[counter] = rs.getString("Genrebezeichnung");
+                        counter++;
+                    }
+                    film.setGenre(genres);
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            sql = QueryBuilder.getSpracheById(film.getFilmID());
+            rs = Connector.getQueryResult(c, sql);
+
+            try {
+                rsSize = SupportMethods.getResultSetSize(rs);
+                if(rsSize > 0) {
+                    int counter = 0;
+                    String[] sprachen = null;
+                    while(rs.next()) {
+                        sprachen = new String[rsSize];
+                        sprachen[counter] = rs.getString("Sprachenname");
+                        counter++;
+                    }
+                    film.setSprache(sprachen);
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        return film;
+    }
+
 //    public static Film[] getFilme() {
 //        return null;
 //    }
