@@ -33,7 +33,7 @@ public class SearchHandler extends HttpServlet {
                 response.setContentType("text/html;charset=UTF-8");
                 out.write("<html>");
                 request.getRequestDispatcher("elements/head.jsp").include(request, response);
-                out.write("<body>");
+                out.write("<body class=\"d-flex flex-column h-100\">");
                 request.getRequestDispatcher("elements/header.jsp").include(request, response);
                 request.getRequestDispatcher("login.jsp").include(request, response);
                 request.getRequestDispatcher("registration.jsp").include(request, response);
@@ -44,7 +44,7 @@ public class SearchHandler extends HttpServlet {
                     hrefURL += "id=" + rs.getString("FilmID");
                     hrefURL += "&date=" + date;
                     hrefURL += "&time=" + time;
-                    out.write("<div class=\"card mbg-dark text-white\" style=\"max-width: 1400px;\">");
+                    out.write("<div class=\"card mt-3 mb-3\">");
                     out.write("<div class=\"row no-gutters\">");
                     out.write("<div class=\"col-lg-5\">");
                     out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img\" alt='" + rs.getString("Titel") + "'>");

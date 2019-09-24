@@ -63,7 +63,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <%
-                        if (session.getAttribute("email") == null) {
+                        if (session.getAttribute("email") == null ) {
                             out.println("<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownAccount\" role=\"button\"\n" +
                                     "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Account</a>");
                         } else {

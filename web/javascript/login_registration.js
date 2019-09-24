@@ -7,8 +7,8 @@ function submitLogin () {
     if(inputEmailLog === "" || inputEmailLog === " " || inputPw === "" || inputPw === " "){
         alert('Bitte alle Pflichtfelder ausfüllen');
     }
-    document.LoginForm.submit();
 
+    document.LoginForm.submit();
 }
 
 function submitRegistration() {

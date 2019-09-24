@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="jumbotron text-center footer" style="border-top: 4px solid #4a9be8">
+<div class="jumbotron text-center footer mt-auto py-3" style="border-top: 4px solid #4a9be8">
     <div class="container">
         <div class="row text-center">
             <div class="col">

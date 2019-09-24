@@ -21,6 +21,7 @@ import java.util.Date;
 public class LoginHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("inputEmailLog");
+        String stay = request.getParameter("inputCheckLogin");
         String pw = null;
 
         try {

@@ -29,16 +29,26 @@ h6{
 .carousel-caption{
     background-color: hsla(0,0%,0%,0.5);
 }
-.card,
-.card-deck{
-    margin-bottom: 2rem;
-    margin-top: 2rem;
-}
+
 .mrb-justify{
     text-align: justify;
     -ms-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
+}
+
+.film-btn {
+    color: #4a9be8;
+    padding: 15px;
+    background-color: inherit;
+    border: 2px solid #4a9be8;
+    border-radius: 5px;
+}
+
+.film-btn:hover {
+    background-color: royalblue;
+    transition: all 0.5s;
+    color: white;
 }
 
 .icon{
