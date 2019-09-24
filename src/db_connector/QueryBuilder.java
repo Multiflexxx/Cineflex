@@ -100,6 +100,19 @@ public class QueryBuilder {
 
     }
 
+    public static String getGenreNamesById(int id) {
+        return "Select Genrebezeichnung FROM FilmGenre " +
+                "JOIN Genre ON FilmGenre.GenreID = Genre.GenreID " +
+                "Where FilmID = + " + id + " ;";
+    }
+
+    public static String getSpracheById(int id) {
+        return "Select `Sprachenname` FROM Filmsprache " +
+        "JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID " +
+        " Where `FilmID` = " + id + " ;";
+    }
+
+
     private static String getDateAsString()
     {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
