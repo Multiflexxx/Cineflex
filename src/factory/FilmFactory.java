@@ -56,9 +56,26 @@ public class FilmFactory {
                     }catch (SQLException e) {
                         e.printStackTrace();
                     }
+
+                    sql = QueryBuilder.getSpracheById(f.getFilmID());
+                    rs = Connector.getQueryResult(c, sql);
+
+                    try {
+                        rsSize = SupportMethods.getResultSetSize(rs);
+                        if(rsSize > 0) {
+                            int counter = 0;
+                            String[] sprachen = null;
+                            while(rs.next()) {
+                                sprachen = new String[rsSize];
+                                sprachen[counter] = rs.getString("Sprachenname");
+                                counter++;
+                            }
+                            f.setSprache(sprachen);
+                        }
+                    }catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-
 
                 return filme;
             }

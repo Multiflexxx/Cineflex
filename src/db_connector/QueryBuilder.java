@@ -107,7 +107,7 @@ public class QueryBuilder {
     }
 
     public static String getSpracheById(int id) {
-        return "Select * FROM Filmsprache " +
+        return "Select `Sprachenname` FROM Filmsprache " +
         "JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID " +
         " Where `FilmID` = " + id + " ;";
     }
