@@ -6,7 +6,7 @@ public class Vorstellung {
     Film film;
     //Saal saal;
 
-    public Vorstellung(int vorstellungsID, String datum, String uhrzeit, String sprache, Film film, /*Saal saal*/) {
+    public Vorstellung(int vorstellungsID, String datum, String uhrzeit, String sprache, Film film /*,Saal saal*/) {
         this.vorstellungsID = vorstellungsID;
         Datum = datum;
         Uhrzeit = uhrzeit;
