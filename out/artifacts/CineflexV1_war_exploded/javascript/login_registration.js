@@ -1,6 +1,14 @@
 function submitLogin () {
 
+    var inputEmailLog = document.getElementById("inputEmailLog").value;
+    var inputPw= document.getElementById("inputPassword").value;
+
+    //auf leerheit checken
+    if(inputEmailLog === "" || inputEmailLog === " " || inputPw === "" || inputPw === " "){
+        alert('Bitte alle Pflichtfelder ausfüllen');
+    }
     document.LoginForm.submit();
+
 }
 
 function submitRegistration() {

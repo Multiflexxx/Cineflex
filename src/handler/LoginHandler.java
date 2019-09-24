@@ -22,12 +22,19 @@ public class LoginHandler extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("inputEmailLog");
         String pw = null;
+
         try {
             pw = PassMD5.hash(request.getParameter("inputPassword"));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-
+    /*
+        if(email.equals("") || pw.equals(""))
+        {
+            response.getOutputStream().println("Bitte alle Pflichtfelder ausfüllen!");
+            return;
+        }
+*/
         Connection c = null;
 
         c = Connector.getConnection();
@@ -36,10 +43,13 @@ public class LoginHandler extends HttpServlet {
         String sql = QueryBuilder.createLoginQuery(email, pw);
         ResultSet rs = Connector.getQueryResult(c, sql);
 
+
+
         try {
             if (rs.next() == false ) {
                 //response.getOutputStream().print("Leer");
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("index.jsp");
+
             } else {
                 do {
 //                    PrintWriter out = response.getWriter();
@@ -62,7 +72,7 @@ public class LoginHandler extends HttpServlet {
                     if (lastaccessed != null && time != null) {
                         session.setAttribute(lastaccessed, time);
                     }
-                    session.setMaxInactiveInterval(10);
+                    session.setMaxInactiveInterval(600);
                     response.sendRedirect("index.jsp");
                     //response.getOutputStream().print("top");
                     //response.sendRedirect("success.jsp");

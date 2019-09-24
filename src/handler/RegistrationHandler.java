@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -57,13 +58,35 @@ public class RegistrationHandler extends HttpServlet {
             response.getOutputStream().print("Geht nicht!");
         String sql = QueryBuilder.createUser(firstname, lastname, date, email, pass);
         Connector.executeQuery(c, sql);
+
         try {
             response.sendRedirect("success.jsp");
+            HttpSession session = request.getSession(true);
+ /*                   out.println(session.getId());
+                    out.println("<br>");
+                    out.println("Session created: ");
+                    out.println(new Date(session.getCreationTime()) + "<br>");
+                    out.println("Session last accessed: ");
+                    out.println(new Date(session.getLastAccessedTime()));*/
+
+            session.setAttribute("email", email);
+            session.setAttribute("name", firstname);
+/*                    out.println("User: ");
+                    out.println(session.getAttribute("email"));*/
+
+            String lastaccessed = request.getParameter("lastaccessed");
+            String time = request.getParameter("time");
+            if (lastaccessed != null && time != null) {
+                session.setAttribute(lastaccessed, time);
+            }
+            session.setMaxInactiveInterval(600);
+            response.sendRedirect("index.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         response.getOutputStream().print("flop1");
+
         Connector.closeConnection(c);
     }
 
