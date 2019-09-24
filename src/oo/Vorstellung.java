@@ -12,7 +12,7 @@ public class Vorstellung {
         Uhrzeit = uhrzeit;
         Sprache = sprache;
         this.film = film;
-        //this.saal = saal;
+        this.saal = saal;
     }
 
     public int getVorstellungsID() {
