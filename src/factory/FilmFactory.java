@@ -76,7 +76,10 @@ public class FilmFactory {
                         e.printStackTrace();
                     }
                 }
-
+                return filme;
+            } else {
+                filme = new Film[1];
+                filme[0] = null;
                 return filme;
             }
         }

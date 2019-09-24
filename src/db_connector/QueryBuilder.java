@@ -69,14 +69,14 @@ public class QueryBuilder {
 
     public static String defaultSearchQuery(String search, String date, String time, int fsk) {
         if(search != "") {
-            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D`" +
+            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` " +
                     "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
                     "WHERE (`Titel` LIKE '%" + search + "%' OR `Beschreibung` LIKE '%" + search + "%') " +
                     "AND `Datum` >= '" + date + "' " +
                     "AND `Uhrzeit`>= '" + time + "' "+
                     "AND `FSK` <= " + fsk + " ;";
         } else {
-            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung " +
+            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` " +
                     "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
                     "WHERE `Datum` >= '" + date + "' " +
                     "AND `Uhrzeit`>= '" + time + "' "+
@@ -87,7 +87,7 @@ public class QueryBuilder {
 
     public static String showMovieById(String id, String date, String time, String plz) {
 
-        return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname " +
+        return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, `SaalID` " +
                     "FROM Vorstellung " +
                         "Join Film ON Vorstellung.FilmID = Film.FilmID " +
                         "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
@@ -96,7 +96,7 @@ public class QueryBuilder {
                     "WHERE Film.FilmID = " + id + " " +
                         "AND `Datum` >= " + date + " " +
                         "AND `Uhrzeit` >= '" + time + "' " +
-                        "AND Gebäude.PLZ = " + plz + " ORDER BY `Datum` ASC LIMIT 3; ";
+                        "AND Gebäude.PLZ = " + plz + " ORDER BY `Datum` ASC LIMIT 6; ";
 
     }
 
@@ -110,6 +110,10 @@ public class QueryBuilder {
         return "Select `Sprachenname` FROM Filmsprache " +
         "JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID " +
         " Where `FilmID` = " + id + " ;";
+    }
+
+    public static String getSaalById(int id) {
+        return "Select * From Kinosaal Where SaalID = " + id + " ;";
     }
 
 
