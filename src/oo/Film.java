@@ -4,6 +4,21 @@ public class Film {
     String titel, beschreibung, bildLink, trailerLink;
     int dauer, fsk, filmID;
     boolean dreiD;
+    //fremdschlüssel
+    String genre[], sprache[];
+
+    public Film(String titel, String beschreibung, String bildLink, String trailerLink, int dauer, int fsk, int filmID, boolean dreiD, String[] genre, String[] sprache) {
+        this.titel = titel;
+        this.beschreibung = beschreibung;
+        this.bildLink = bildLink;
+        this.trailerLink = trailerLink;
+        this.dauer = dauer;
+        this.fsk = fsk;
+        this.filmID = filmID;
+        this.dreiD = dreiD;
+        this.genre = genre;
+        this.sprache = sprache;
+    }
 
     public Film(String titel, String beschreibung, String bildLink, String trailerLink, int dauer, int fsk, int filmID, boolean dreiD) {
         this.titel = titel;
@@ -14,6 +29,26 @@ public class Film {
         this.fsk = fsk;
         this.filmID = filmID;
         this.dreiD = dreiD;
+    }
+
+    public Film(int filmID) {
+        this.filmID = filmID;
+    }
+
+    public String[] getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String[] genre) {
+        this.genre = genre;
+    }
+
+    public String[] getSprache() {
+        return sprache;
+    }
+
+    public void setSprache(String[] sprache) {
+        this.sprache = sprache;
     }
 
     public String getTitel() {
