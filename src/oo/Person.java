@@ -17,7 +17,7 @@ public abstract class Person {
         this.personenID = personenID;
     }
 
-    public Person(String plz, String email, String vorname, String nachname, String passwort, String datum, int personenID, String straße, String plz1, int hausnummer) {
+    public Person(String plz, String email, String vorname, String nachname, String passwort, String datum, int personenID, String straße, int hausnummer) {
         this.plz = plz;
         this.email = email;
         this.vorname = vorname;
@@ -26,7 +26,6 @@ public abstract class Person {
         this.datum = datum;
         this.personenID = personenID;
         this.straße = straße;
-        this.plz = plz1;
         this.hausnummer = hausnummer;
     }
 
