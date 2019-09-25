@@ -2,9 +2,11 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import oo.DateFormatter;
 import oo.Film;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -86,6 +88,10 @@ public class FilmFactory {
         return null;
     }
 
+    public static Film[] getFilme() {
+        return getFilme("", DateFormatter.getSQLDate(new Date()), "08:00:00", 18);
+    }
+
     public static Film getFilm(int id) {
         Film film = null;
         Connection c = Connector.getConnection();
@@ -147,9 +153,7 @@ public class FilmFactory {
             }catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
-
         return film;
     }
 
