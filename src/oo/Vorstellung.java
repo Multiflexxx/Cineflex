@@ -1,12 +1,18 @@
 package oo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
+
 public class Vorstellung {
     int vorstellungsID;
-    private String datum, uhrzeit, sprache; //gewünschtes Datumsformat: Wochentag, DDMM -> aber für ticket mit jahr
+    private String sprache; //gewünschtes Datumsformat: Wochentag, DDMM -> aber für ticket mit jahr
     Film film;
     Kinosaal saal;
+    Date datum;
+    Date uhrzeit;
 
-    public Vorstellung(int vorstellungsID, String datum, String uhrzeit, String sprache, Film film, Kinosaal saal) {
+    public Vorstellung(int vorstellungsID, Date datum, Date uhrzeit, String sprache, Film film, Kinosaal saal) {
         this.vorstellungsID = vorstellungsID;
         this.datum = datum;
         this.uhrzeit = uhrzeit;
@@ -23,19 +29,19 @@ public class Vorstellung {
         this.vorstellungsID = vorstellungsID;
     }
 
-    public String getDatum() {
+    public Date getDatum() {
         return datum;
     }
 
-    public void setDatum(String datum) {
+    public void setDatum(Date datum) {
         this.datum = datum;
     }
 
-    public String getUhrzeit() {
+    public Date getUhrzeit() {
         return uhrzeit;
     }
 
-    public void setUhrzeit(String uhrzeit) {
+    public void setUhrzeit(Date uhrzeit) {
         this.uhrzeit = uhrzeit;
     }
 
