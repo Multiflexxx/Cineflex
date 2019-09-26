@@ -22,6 +22,19 @@ public class Test {
         Assert.assertEquals('B', sitz.getSitzklasse());
         Assert.assertEquals("Mein Test Sitz", sitz.getBeschreibung());
         Assert.assertEquals(5.99f, sitz.getGrundpreis(), 0); // delta needed for floating point numbers
+
+        sitz.setSitzID(5);
+        Assert.assertEquals(5, sitz.getSitzID());
+        sitz.setNummer(42);
+        Assert.assertEquals(42, sitz.getNummer());
+        sitz.setReihe('F');
+        Assert.assertEquals('F', sitz.getReihe());
+        sitz.setSitzklasse('P');
+        Assert.assertEquals('P', sitz.getSitzklasse());
+        sitz.setBeschreibung("TEST");
+        Assert.assertEquals("TEST", sitz.getBeschreibung());
+        sitz.setGrundpreis(3.99f);
+        Assert.assertEquals(3.99f, sitz.getGrundpreis(), 0);
     }
     //----
 
@@ -72,6 +85,9 @@ public class Test {
         Assert.assertEquals(19, kunde.getKundenID());
         kunde.setTreuepunkte(1337);
         Assert.assertEquals(1337, kunde.getTreuepunkte());
+
+        Kunde kunde2 = new Kunde();
+        Assert.assertNotEquals(null, kunde2);
     }
 
     // Tests for class Admin
@@ -114,6 +130,9 @@ public class Test {
         Assert.assertEquals("Kleine Straße", admin2.getStrasse());
         admin2.setHausnummer(69);
         Assert.assertEquals(69, admin2.getHausnummer());
+
+        Admin admin3 = new Admin();
+        Assert.assertNotEquals(null, admin3);
     }
     //----
 
@@ -449,6 +468,17 @@ public class Test {
         Assert.assertEquals(genre2, film.getGenre());
         film.setSprache(sprachen2);
         Assert.assertEquals(sprachen2, film.getSprache());
+
+        Film film2 = new Film(5);
+
+        Assert.assertNotEquals(null, film2);
+        Assert.assertEquals(5, film2.getFilmID());
+
+        Film film3 = new Film("Neuer Film", "Neue Beschreibung", "/img/4.jpg", "https://youtube.com", 150, 6, 4, false);
+
+        Assert.assertNotEquals(null, film3);
+        Assert.assertEquals("Neuer Film", film3.getTitel());
+        Assert.assertEquals(4, film3.getFilmID());
     }
     //----
 
