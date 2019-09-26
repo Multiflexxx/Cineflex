@@ -10,6 +10,8 @@ import java.util.Locale;
 public class Test {
 
     // TESTS FOR OO
+
+    // Test for class Sitz
     @org.junit.Test
     public void testeSitz()
     {
@@ -23,7 +25,8 @@ public class Test {
     }
     //----
 
-    // Tests for class Persons childs
+    // Tests for childs of class Person
+    // Tests for class Kunde
     @org.junit.Test
     public void testeKunde()
     {
@@ -71,6 +74,7 @@ public class Test {
         Assert.assertEquals(1337, kunde.getTreuepunkte());
     }
 
+    // Tests for class Admin
     @org.junit.Test
     public void testeAdmin()
     {
@@ -113,7 +117,8 @@ public class Test {
     }
     //----
 
-    // Tests for child classes of Buchung
+    // Tests for child classes of Beleg
+    // Tests for class Buchungsbeleg
     @org.junit.Test
     public void testeBuchungsbeleg()
     {
@@ -244,6 +249,7 @@ public class Test {
         Assert.assertEquals(null, buchungsbeleg.getVorstellung());
     }
 
+    // Tests for class Reservierungsbeleg
     @org.junit.Test
     public void testeReservierungsBeleg()
     {
@@ -480,7 +486,7 @@ public class Test {
     }
     //----
 
-
+    // Tests for class Vortstellung
     @org.junit.Test
     public void testeVorstellung()
     {
@@ -551,8 +557,9 @@ public class Test {
         vorstellung1.setUhrzeit(time2);
         Assert.assertEquals(time2, vorstellung1.getUhrzeit());
     }
+    //----
 
-
+    // Tests for class Login
     @org.junit.Test
     public void testeLogin()
     {
@@ -570,16 +577,7 @@ public class Test {
 
         Assert.assertEquals(null, login.getLoginResult());
     }
-
-
-
-    // TESTS FOR HANDLER
-
-
-    // TESTS FOR FACTORIES
-
-    // TESTS FOR CONNECTOR
-
+    //----
 
     // TESTS FOR PASSWORD
     // Test for class PassMD5
@@ -603,4 +601,11 @@ public class Test {
 
         Assert.assertEquals("e10adc3949ba59abbe56e057f20f883e", hash);
     }
+    //----
+
+    // TESTS FOR HANDLER
+
+    // TESTS FOR FACTORIES
+
+    // TESTS FOR CONNECTOR
 }
