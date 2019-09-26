@@ -29,6 +29,7 @@ public class Test {
         Assert.assertEquals("Mein Test Sitz", sitz.getBeschreibung());
         Assert.assertEquals(5.99f, sitz.getGrundpreis(), 0); // delta needed for floating point numbers
     }
+    //----
 
     // Tests for class Persons childs
     @org.junit.Test
@@ -118,7 +119,6 @@ public class Test {
         admin2.setHausnummer(69);
         Assert.assertEquals(69, admin2.getHausnummer());
     }
-
     //----
 
     // Tests for child classes of Buchung
@@ -133,7 +133,6 @@ public class Test {
     {
 
     }
-
     //----
 
     // Tests for class DateFormatter
@@ -152,7 +151,6 @@ public class Test {
         Assert.assertEquals(sqlDate.format(date), DateFormatter.getSQLDate(date));
         Assert.assertEquals(sqlTime.format(date), DateFormatter.getSQLTime(date));
     }
-
     //----
 
     // Tests for class Film
@@ -204,8 +202,42 @@ public class Test {
         film.setSprache(sprachen2);
         Assert.assertEquals(sprachen2, film.getSprache());
     }
-
     //----
+
+    // Tests for class Kinosaal
+    @org.junit.Test
+    public void testeKinosaal()
+    {
+        Sitz sitz1 = new Sitz(2, 5, 'A', 'L', "Mein Test Sitz", 5.99f);
+        Sitz sitz2 = new Sitz(3, 6, 'A', 'L', "Mein Test Sitz 2", 5.99f);
+        Sitz sitz3 = new Sitz(5, 5, 'B', 'B', "Mein Test Sitz 3", 3.99f);
+
+        Sitz[] sitzplan = {sitz1, sitz2, sitz3};
+
+        Kinosaal kinosaal = new Kinosaal(1, "Saal 1", sitzplan);
+
+        Assert.assertEquals(1, kinosaal.getSaalID());
+        Assert.assertEquals("Saal 1", kinosaal.getBezeichnung());
+        Assert.assertEquals(sitzplan, kinosaal.getSitzplan());
+        Assert.assertEquals(sitz1, kinosaal.getSitzplan()[0]);
+        Assert.assertEquals(sitz2.getReihe(), kinosaal.getSitzplan()[0].getReihe());
+        Assert.assertEquals(5.99f, kinosaal.getSitzplan()[0].getGrundpreis(),0);
+
+        kinosaal.setSaalID(3);
+        Assert.assertEquals(3, kinosaal.getSaalID());
+        kinosaal.setBezeichnung("Saal 2");
+        Assert.assertEquals("Saal 2", kinosaal.getBezeichnung());
+
+        Sitz sitz4 = new Sitz(8, 7, 'C', 'L', "Mein Test Sitz 4", 7.99f);
+        Sitz sitz5 = new Sitz(9, 9, 'D', 'B', "Mein Test Sitz 5", 3.99f);
+        Sitz[] sitzplan2 = {sitz4, sitz5};
+        kinosaal.setSitzplan(sitzplan2);
+
+        Assert.assertEquals(sitzplan2, kinosaal.getSitzplan());
+        Assert.assertEquals(sitzplan2[1].getGrundpreis(), kinosaal.getSitzplan()[1].getGrundpreis(), 0);
+    }
+    //----
+
 
     @org.junit.Test
     public void testeVorstellung()
@@ -225,11 +257,7 @@ public class Test {
 
     }
 
-    @org.junit.Test
-    public void testeKinosaal()
-    {
 
-    }
 
     // TESTS FOR HANDLER
 
