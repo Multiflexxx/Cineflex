@@ -36,8 +36,15 @@ public class SingleMovieHandler extends HttpServlet {
         }
 
         PrintWriter out = response.getWriter();
-        Film film = FilmFactory.getFilm(Integer.parseInt(id));
-        Vorstellung vorstellung [] = VorstellungsFactory.getVorstellungen(film, date, time, plz );
+        Film film = null;
+        Vorstellung vorstellung [] = null;
+        film = FilmFactory.getFilm(Integer.parseInt(id));
+        try {
+            vorstellung = VorstellungsFactory.getVorstellungen(film, date, time, plz);
+        } catch (Exception e) {
+            out.write(id);
+            out.write("Geht nicht!");
+        }
         film = vorstellung[0].getFilm();
 
 //        String sql = QueryBuilder.showMovieById(id, date, time, plz);
