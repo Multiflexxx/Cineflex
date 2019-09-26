@@ -153,6 +153,60 @@ public class Test {
         Assert.assertEquals(sqlTime.format(date), DateFormatter.getSQLTime(date));
     }
 
+    //----
+
+    // Tests for class Film
+    @org.junit.Test
+    public void testeFilm()
+    {
+        String[] genre = {"Animation", "Drama"};
+        String[] sprachen = {"deutsch", "englisch"};
+
+        Film film = new Film("König der Löwen", "Hier kommt die Beschreibung", "/img/1.jpg", "https://youtube.com/", 160, 6, 1, false, genre, sprachen);
+
+        Assert.assertEquals("König der Löwen", film.getTitel());
+        Assert.assertEquals("Hier kommt die Beschreibung", film.getBeschreibung());
+        Assert.assertEquals("/img/1.jpg", film.getBildLink());
+        Assert.assertEquals("https://youtube.com/", film.getTrailerLink());
+        Assert.assertEquals(160, film.getDauer());
+        Assert.assertEquals(6, film.getFsk());
+        Assert.assertEquals(1, film.getFilmID());
+        Assert.assertEquals(false, film.isDreiD());
+        Assert.assertEquals(genre, film.getGenre());
+        Assert.assertEquals("Animation", film.getGenre()[0]);
+        Assert.assertEquals("Drama", film.getGenre()[1]);
+        Assert.assertEquals(sprachen, film.getSprache());
+        Assert.assertEquals(sprachen[0], film.getSprache()[0]);
+        Assert.assertEquals(sprachen[1], film.getSprache()[1]);
+
+        film.setTitel("König der Löwen 2");
+        Assert.assertEquals("König der Löwen 2", film.getTitel());
+        film.setBeschreibung("Neue Beschreibung");
+        Assert.assertEquals("Neue Beschreibung", film.getBeschreibung());
+        film.setBildLink("/img/bild1.jpg");
+        Assert.assertEquals("/img/bild1.jpg", film.getBildLink());
+        film.setTrailerLink("https://vimeo.com");
+        Assert.assertEquals("https://vimeo.com", film.getTrailerLink());
+        film.setDauer(150);
+        Assert.assertEquals(150, film.getDauer());
+        film.setFsk(18);
+        Assert.assertEquals(18, film.getFsk());
+        film.setFilmID(5);
+        Assert.assertEquals(5, film.getFilmID());
+        film.setDreiD(true);
+        Assert.assertEquals(true, film.isDreiD());
+
+        String[] genre2 = {"Komödie"};
+        String[] sprachen2 = {"Türkisch"};
+
+        film.setGenre(genre2);
+        Assert.assertEquals(genre2, film.getGenre());
+        film.setSprache(sprachen2);
+        Assert.assertEquals(sprachen2, film.getSprache());
+    }
+
+    //----
+
     @org.junit.Test
     public void testeVorstellung()
     {
@@ -173,12 +227,6 @@ public class Test {
 
     @org.junit.Test
     public void testeKinosaal()
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeFilm()
     {
 
     }
