@@ -113,7 +113,7 @@ public class QueryBuilder {
     }
 
     public static String getKinosByName(String stadt){
-        return "SELECT Straße, Hausnummer, Gebäude.PLZ, Ortsname FROM Cineflex.Gebäude JOIN Cineflex.Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = \"" + stadt + " \" ;";
+        return "SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = '"+ stadt +"' ;";
     }
 
     public static String getSaalById(int id) {
