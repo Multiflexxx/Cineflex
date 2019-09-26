@@ -7,14 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * CineflexV1
- * <p>
- * Copyright by @author Marcel Mertens
- * Website: https://mertens-web.ddns.net
- * <p>
- * Date: 26.09.2019
- */
 public class Test {
 
     // TESTS FOR OO
@@ -255,7 +247,133 @@ public class Test {
     @org.junit.Test
     public void testeReservierungsBeleg()
     {
+        Sitz sitz1 = new Sitz(1, 7, 'C', 'L', "Mein Test Sitz 1", 6.99f);
+        Sitz sitz2 = new Sitz(2, 9, 'D', 'B', "Mein Test Sitz 2", 4.99f);
+        Sitz sitz3 = new Sitz(3, 10, 'D', 'P', "Mein Test Sitz 3", 5.99f);
+        Sitz sitz4 = new Sitz(4, 11, 'D', 'P', "Mein Test Sitz 4", 5.99f);
+        Sitz sitz5 = new Sitz(5, 12, 'D', 'P', "Mein Test Sitz 5", 5.99f);
+        Sitz sitz6 = new Sitz(6, 12, 'D', 'P', "Mein Test Sitz 6", 5.99f);
 
+
+        Sitz[] sitzplan = {sitz1, sitz2, sitz3, sitz4, sitz5, sitz6};
+
+        // Check if seat was added to array and contains same values
+        Assert.assertEquals(sitzplan[1], sitz2);
+        Assert.assertEquals(sitzplan[1].getGrundpreis(), sitz2.getGrundpreis(), 0);
+
+        Kinosaal kinosaal = new Kinosaal(3, "Saal 3", sitzplan);
+
+        // Check if object created succesfully
+        Assert.assertEquals(3, kinosaal.getSaalID());
+        Assert.assertEquals("Saal 3", kinosaal.getBezeichnung());
+        Assert.assertEquals(sitzplan, kinosaal.getSitzplan());
+
+        String[] genre = {"Drama"};
+        String[] sprachen = {"deutsch", "englisch"};
+
+        Film film = new Film("Toy Story 2", "Cooler Film", "/img/5.jpg", "https://youtube.com", 160, 6, 5, true, genre, sprachen);
+
+        Assert.assertEquals("Toy Story 2", film.getTitel());
+        Assert.assertEquals(genre, film.getGenre());
+
+        // Create a new date and time for testing
+        Date date = null;
+        Date time = null;
+
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse("2019-09-24");
+            time = new SimpleDateFormat("HH:mm:ss").parse("20:30:00");
+        }
+        catch (Exception e)
+        {
+            Assert.assertEquals(1,0);
+        }
+
+        Vorstellung vorstellung = new Vorstellung(3, date, time, "englisch", film, kinosaal);
+
+        // Check if object created successfully
+        Assert.assertEquals(3, vorstellung.getVorstellungsID());
+        Assert.assertEquals(date, vorstellung.getDatum());
+        Assert.assertEquals(time, vorstellung.getUhrzeit());
+        Assert.assertEquals("englisch", vorstellung.getSprache());
+        Assert.assertEquals(film, vorstellung.getFilm());
+        Assert.assertEquals(5,vorstellung.getFilm().getFilmID());
+        Assert.assertEquals(kinosaal, vorstellung.getSaal());
+        Assert.assertEquals(3, vorstellung.getSaal().getSaalID());
+
+        Kunde kunde = new Kunde("32839", "maxi@email.com", "Maximilian", "Mustermann", "sichererPasswortHash", "1999-05-06", 6, "Winkelgasse", 3, 16, 0);
+
+        // Check if object created sucessfully
+        Assert.assertEquals("32839", kunde.getPlz());
+        Assert.assertEquals(6, kunde.getPersonenID());
+        Assert.assertEquals(16, kunde.getKundenID());
+        Assert.assertEquals(0, kunde.getTreuepunkte());
+
+        Sitz[] sitzauswahl = {kinosaal.getSitzplan()[1], kinosaal.getSitzplan()[2]};
+
+        // Check if marked seats are set correctly
+        Assert.assertEquals(sitz2, sitzauswahl[0]);
+        Assert.assertEquals(sitz3, sitzauswahl[1]);
+
+        float preis = 0;
+
+        for(int i = 0; i < sitzauswahl.length; i++)
+        {
+            preis += sitzauswahl[i].getGrundpreis();
+        }
+
+        // Check if price is calculated correctly
+        Assert.assertEquals(10.98f, preis, 0);
+
+        // Format time using the DateFormatter class
+        String buchungsZeit = DateFormatter.getSQLTime(vorstellung.getUhrzeit());
+
+        // Check if formatting was successfully
+        Assert.assertEquals("20:30:00", buchungsZeit);
+
+        // Create new object (main reason for this test)
+        Reservierungsbeleg reservierungsbeleg = new Reservierungsbeleg(2, preis, vorstellung, kunde, sitzauswahl, buchungsZeit);
+
+        // Check if class Buchungsbeleg works as expected
+        Assert.assertEquals(2, reservierungsbeleg.getBelegID());
+        Assert.assertEquals(10.98f, reservierungsbeleg.getPreis(),0);
+        Assert.assertEquals(vorstellung, reservierungsbeleg.getVorstellung());
+        Assert.assertEquals(DateFormatter.getSQLTime(vorstellung.getUhrzeit()), reservierungsbeleg.getUhrzeit());
+
+        Assert.assertEquals(kunde, reservierungsbeleg.getKunde());
+        Assert.assertEquals(kunde.getTreuepunkte(), reservierungsbeleg.getKunde().getTreuepunkte());
+
+        // Set points for customer
+        kunde.setTreuepunkte(30);
+        reservierungsbeleg.setKunde(kunde);
+        Assert.assertEquals(30, reservierungsbeleg.getKunde().getTreuepunkte());
+
+        Assert.assertEquals(sitzauswahl, reservierungsbeleg.getSitzauswahl());
+        Assert.assertEquals(sitzauswahl[0], reservierungsbeleg.getSitzauswahl()[0]);
+        Assert.assertEquals('D', reservierungsbeleg.getSitzauswahl()[0].getReihe());
+
+        Assert.assertEquals(buchungsZeit, reservierungsbeleg.getUhrzeit());
+
+        // Test setters
+        reservierungsbeleg.setBelegID(3);
+        Assert.assertEquals(3, reservierungsbeleg.getBelegID());
+
+        reservierungsbeleg.setPreis(7.69f);
+        Assert.assertEquals(7.69f, reservierungsbeleg.getPreis(),0);
+
+        reservierungsbeleg.setKunde(null);
+        Assert.assertEquals(null, reservierungsbeleg.getKunde());
+
+        Sitz[] sitzauswahlNeu = {};
+
+        reservierungsbeleg.setSitzauswahl(sitzauswahlNeu);
+        Assert.assertEquals(sitzauswahlNeu, reservierungsbeleg.getSitzauswahl());
+
+        reservierungsbeleg.setUhrzeit("19:15:23");
+        Assert.assertEquals("19:15:23", reservierungsbeleg.getUhrzeit());
+
+        reservierungsbeleg.setVorstellung(null);
+        Assert.assertEquals(null, reservierungsbeleg.getVorstellung());
     }
     //----
 
@@ -366,7 +484,6 @@ public class Test {
     @org.junit.Test
     public void testeVorstellung()
     {
-
         Date date = null;
         Date time = null;
         Date date2 = null;
@@ -383,13 +500,11 @@ public class Test {
             Assert.assertEquals(1,0);
         }
 
-
         Sitz sitz1 = new Sitz(2, 5, 'A', 'L', "Mein Test Sitz", 5.99f);
         Sitz sitz2 = new Sitz(3, 6, 'A', 'L', "Mein Test Sitz 2", 5.99f);
         Sitz sitz3 = new Sitz(5, 5, 'B', 'B', "Mein Test Sitz 3", 3.99f);
 
         Sitz[] sitzplan = {sitz1, sitz2, sitz3};
-
 
         Kinosaal kinosaal = new Kinosaal(1, "Saal 1", sitzplan);
 
@@ -397,7 +512,6 @@ public class Test {
         String[] sprachen = {"deutsch", "englisch"};
 
         Film film = new Film("König der Löwen", "Hier kommt die Beschreibung", "/img/1.jpg", "https://youtube.com/", 160, 6, 1, false, genre, sprachen);
-
 
         Vorstellung vorstellung1 = new Vorstellung(1, date, time, sprachen[1], film, kinosaal );
 
@@ -435,8 +549,6 @@ public class Test {
 
         vorstellung1.setUhrzeit(time2);
         Assert.assertEquals(time2, vorstellung1.getUhrzeit());
-
-
     }
 
 
