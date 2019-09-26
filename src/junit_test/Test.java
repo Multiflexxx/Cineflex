@@ -243,13 +243,78 @@ public class Test {
     public void testeVorstellung()
     {
 
+        Date date = null;
+        Date time = null;
+        Date date2 = null;
+        Date time2 = null;
+
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse("2019-09-23");
+            time = new SimpleDateFormat("HH:mm:ss").parse("19:30:00");
+            date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2019-10-06");
+            time2 = new SimpleDateFormat("HH:mm:ss").parse("15:30:00");
+        }
+        catch (Exception e)
+        {
+            Assert.assertEquals(1,0);
+        }
+
+
+        Sitz sitz1 = new Sitz(2, 5, 'A', 'L', "Mein Test Sitz", 5.99f);
+        Sitz sitz2 = new Sitz(3, 6, 'A', 'L', "Mein Test Sitz 2", 5.99f);
+        Sitz sitz3 = new Sitz(5, 5, 'B', 'B', "Mein Test Sitz 3", 3.99f);
+
+        Sitz[] sitzplan = {sitz1, sitz2, sitz3};
+
+
+        Kinosaal kinosaal = new Kinosaal(1, "Saal 1", sitzplan);
+
+        String[] genre = {"Animation", "Drama"};
+        String[] sprachen = {"deutsch", "englisch"};
+
+        Film film = new Film("König der Löwen", "Hier kommt die Beschreibung", "/img/1.jpg", "https://youtube.com/", 160, 6, 1, false, genre, sprachen);
+
+
+        Vorstellung vorstellung1 = new Vorstellung(1, date, time, sprachen[1], film, kinosaal );
+
+        Assert.assertEquals(1, vorstellung1.getVorstellungsID());
+        Assert.assertEquals(date, vorstellung1.getDatum());
+        Assert.assertEquals(time, vorstellung1.getUhrzeit());
+        Assert.assertEquals("englisch", vorstellung1.getSprache());
+        Assert.assertEquals(film, vorstellung1.getFilm());
+        Assert.assertEquals(kinosaal, vorstellung1.getSaal());
+
+        vorstellung1.setSprache("englisch");
+        Assert.assertEquals("englisch", vorstellung1.getSprache());
+
+        vorstellung1.setVorstellungsID(2);
+        Assert.assertEquals(2, vorstellung1.getVorstellungsID());
+
+        Sitz sitz4 = new Sitz(6, 5, 'A', 'L', "Mein Test Sitz 4", 6.99f);
+        Sitz sitz5 = new Sitz(7, 6, 'B', 'L', "Mein Test Sitz 5", 5.99f);
+        Sitz sitz6 = new Sitz(8, 5, 'B', 'B', "Mein Test Sitz 6", 3.99f);
+
+        Sitz[] sitzplan2 = {sitz4, sitz5, sitz6};
+
+        Kinosaal kinosaal2 = new Kinosaal(1, "Saal 1", sitzplan);
+
+        Film film2 = new Film("Once Upon a Time... in Hollywood", "Hier eine andere Beschreibung", "/img/2.jpg", "https://youtube.com/", 161, 16, 2, false, genre, sprachen);
+
+        vorstellung1.setFilm(film2);
+        Assert.assertEquals(film2, vorstellung1.getFilm());
+
+        vorstellung1.setSaal(kinosaal2);
+        Assert.assertEquals(kinosaal2, vorstellung1.getSaal());
+
+        vorstellung1.setDatum(date2);
+        Assert.assertEquals(date2, vorstellung1.getDatum());
+
+        vorstellung1.setUhrzeit(time2);
+        Assert.assertEquals(time2, vorstellung1.getUhrzeit());
+
+
     }
 
-    @org.junit.Test
-    public void testeReservierungsbeleg()
-    {
-
-    }
 
     @org.junit.Test
     public void testeLogin()
