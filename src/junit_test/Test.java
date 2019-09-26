@@ -693,5 +693,28 @@ public class Test {
 
     // TESTS FOR FACTORIES
 
+    @org.junit.Test
+    public void testeFilmFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeKinosaalFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeSupportMethods()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeVorstellungsFactory()
+    {
+
+    }
 
 }
