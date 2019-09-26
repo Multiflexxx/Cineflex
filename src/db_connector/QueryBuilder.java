@@ -112,6 +112,10 @@ public class QueryBuilder {
         "Where `FilmID` = " + id + " ;";
     }
 
+    public static String getKinosByName(String stadt){
+        return "SELECT Straße, Hausnummer, Gebäude.PLZ, Ortsname FROM Cineflex.Gebäude JOIN Cineflex.Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = \"" + stadt + " \" ;";
+    }
+
     public static String getSaalById(int id) {
         return "Select * From Kinosaal Where SaalID = " + id + " ;";
     }
@@ -132,4 +136,5 @@ public class QueryBuilder {
         DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         return formatter.format(new Date());
     }
+
 }
