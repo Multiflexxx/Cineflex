@@ -1,8 +1,11 @@
 package junit_test;
 
 import Password.PassMD5;
+import db_connector.Connector;
 import oo.*;
 import org.junit.Assert;
+
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -633,9 +636,62 @@ public class Test {
     }
     //----
 
+    // TESTS FOR CONNECTOR
+    @org.junit.Test
+    public void testeConnector()
+    {
+        Connection connection = Connector.getConnection();
+
+        Assert.assertEquals(null, connection);
+
+        Connector.closeConnection(connection);
+    }
+
+    @org.junit.Test
+    public void testeQueryBuilder()
+    {
+
+    }
+
     // TESTS FOR HANDLER
+
+    @org.junit.Test
+    public void testeCreateBookingHandler()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeDisplayMovieHandler()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeLoginHandler()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeRegistrationHandler()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeSearchHandler()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeSingleMovieHandler()
+    {
+
+    }
 
     // TESTS FOR FACTORIES
 
-    // TESTS FOR CONNECTOR
+
 }
