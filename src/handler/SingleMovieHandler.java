@@ -2,7 +2,11 @@ package handler;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import factory.FilmFactory;
 import factory.VorstellungsFactory;
+import oo.Film;
+import oo.Vorstellung;
+import org.hamcrest.Factory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -32,10 +36,13 @@ public class SingleMovieHandler extends HttpServlet {
         }
 
         PrintWriter out = response.getWriter();
+        Film film = FilmFactory.getFilm(Integer.parseInt(id));
+        Vorstellung vorstellung [] = VorstellungsFactory.getVorstellungen(film, date, time, plz );
+        film = vorstellung[0].getFilm();
 
-        String sql = QueryBuilder.showMovieById(id, date, time, plz);
-        Connection c = Connector.getConnection();
-        ResultSet rs = Connector.getQueryResult(c, sql);
+//        String sql = QueryBuilder.showMovieById(id, date, time, plz);
+//        Connection c = Connector.getConnection();
+//        ResultSet rs = Connector.getQueryResult(c, sql);
 
         try {
             response.setContentType("text/html;charset=UTF-8");
@@ -49,39 +56,15 @@ public class SingleMovieHandler extends HttpServlet {
             out.write("<div class=\"container\">");
             out.write("<div class=\"col-xl-12\">");
             out.write("<div class=\"card mt-3 mb-3 text-white w-100\">");
-            if(rs.next() != false) {
-                rs.beforeFirst();
-                ArrayList titel = new ArrayList();
-                ArrayList beschreibung = new ArrayList();
-                ArrayList bild = new ArrayList();
-                ArrayList trailer = new ArrayList();
-                ArrayList dauer = new ArrayList();
-                ArrayList fsk = new ArrayList();
-                ArrayList sprache = new ArrayList();
-                ArrayList datum = new ArrayList();
-                ArrayList uhrzeit = new ArrayList();
-                while (rs.next()) {
-                    titel.add(rs.getString("Titel"));
-                    beschreibung.add(rs.getString("Film.Beschreibung"));
-                    bild.add(rs.getString("BildLink"));
-                    trailer.add(rs.getString("TrailerLink"));
-                    dauer.add(rs.getString("Dauer"));
-                    fsk.add(rs.getString("FSK"));
-                    sprache.add(rs.getString("Sprache.Sprachenname"));
-                    datum.add(rs.getString("Datum"));
-                    uhrzeit.add(rs.getString("Uhrzeit"));
-
-                }
+            if(!vorstellung[0].equals(null)) {
                 out.write("<div class=\"row no-gutters\">");
                 out.write("<div class=\"col-lg-5\">");
-                out.write("<a href=\"#\"><img src='" + bild.get(0).toString() +  "' class=\"card-img\" alt='" + titel.get(0).toString() + "'></a>");
-                //out.write("<h6>" + datum.get(0).toString() + "</h6>");
-                //out.write(uhrzeit.get(0).toString());
+                out.write("<a href=\"#\"><img src='" + film.getBildLink() +  "' class=\"card-img\" alt='" + film.getTitel() + "'></a>");
                 out.write("<div class=\"table-responsive mt-2\">");
                 out.write("<table class=\"table text-center\">");
                 out.write("<tbody>");
                 int counter = 1;
-                for (int i = 0; i < datum.size(); i++) {
+                for (int i = 0; i < vorstellung.length; i++) {
                     switch (counter) {
                         case 1:
                             counter++;
@@ -90,11 +73,11 @@ public class SingleMovieHandler extends HttpServlet {
                             break;
                         case 2:
                             counter++;
-                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + datum.get(i).toString() + " " + uhrzeit.get(i).toString() + " Uhr</button></td>");
+                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + vorstellung[i].getDatum() + " " + vorstellung[i].getUhrzeit() + " Uhr</button></td>");
                             break;
                         case 3:
                             counter = 1;
-                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + datum.get(i).toString() + " " + uhrzeit.get(i).toString()  + " Uhr</button></td>");
+                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + vorstellung[0].getDatum() + " " + vorstellung[i].getUhrzeit()  + " Uhr</button></td>");
                             out.write("</tr>");
                             break;
                     }
@@ -113,10 +96,10 @@ public class SingleMovieHandler extends HttpServlet {
                 out.write("</div>");
                 out.write("<div class=\"col-lg-7\">");
                 out.write("<div class=\"card-body\">");
-                out.write("<h5 class=\"card-title\">" + titel.get(0).toString() + "</h5>");
-                out.write("<p class=\"card-text\"><small class=\"text-muted\">" + dauer.get(0).toString() + " Minuten | FSK " + fsk.get(0).toString() + " | Sprache " + sprache.get(0).toString() + "</small></p>");
-                out.write("<p class=\"card-text mrb-justify\">" + beschreibung.get(0).toString() + "</p>");
-                out.write("<iframe width=\"560\" height=\"315\" src=\"" + trailer.get(0).toString() + "\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+                out.write("<h5 class=\"card-title\">" + film.getTitel() + "</h5>");
+                out.write("<p class=\"card-text\"><small class=\"text-muted\">" + film.getDauer() + " Minuten | FSK " + film.getFsk() + " | Sprache " + vorstellung[0].getSprache() + "</small></p>");
+                out.write("<p class=\"card-text mrb-justify\">" + film.getBeschreibung() + "</p>");
+                out.write("<iframe width=\"560\" height=\"315\" src=\"" + film.getBeschreibung() + "\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
                 out.write("</div>");
                 out.write("</div>");
                 out.write("</div>");
