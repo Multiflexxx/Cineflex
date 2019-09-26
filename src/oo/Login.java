@@ -11,6 +11,10 @@ public class Login {
     private String email, passwordHash;
     Connection connection = null;
 
+    public Login(){
+
+    }
+
     public Login(String email, String passwordHash)
     {
         this.email = email;

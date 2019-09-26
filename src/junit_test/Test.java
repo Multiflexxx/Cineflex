@@ -495,6 +495,7 @@ public class Test {
             date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2019-10-06");
             time2 = new SimpleDateFormat("HH:mm:ss").parse("15:30:00");
         }
+
         catch (Exception e)
         {
             Assert.assertEquals(1,0);
@@ -555,7 +556,19 @@ public class Test {
     @org.junit.Test
     public void testeLogin()
     {
+        Login login = new Login();
 
+        Assert.assertNotEquals(null, login);
+
+        try{
+            login = new Login("max.muster@mann.de", "e10adc3949ba59abbe56e057f20f883e");
+        }
+
+        catch (Exception e){
+            Assert.assertEquals(1,0);
+        }
+
+        Assert.assertEquals(null, login.getLoginResult());
     }
 
 
@@ -582,6 +595,7 @@ public class Test {
         {
             hash = PassMD5.hash("123456");
         }
+        
         catch (Exception e)
         {
             Assert.assertEquals(1,0);
