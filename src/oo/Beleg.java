@@ -12,7 +12,7 @@ public abstract class Beleg {
   }
 
   public Beleg(int belegID, float preis, Vorstellung vorstellung, Kunde kunde, Sitz[] sitzauswahl, String uhrzeit) {
-    belegID = belegID;
+    this.belegID = belegID;
     this.preis = preis;
     this.vorstellung = vorstellung;
     this.kunde = kunde;
@@ -45,7 +45,7 @@ public abstract class Beleg {
   }
 
   public void setBelegID(int belegID) {
-    belegID = belegID;
+    this.belegID = belegID;
   }
 
   public void setPreis(float preis) {
