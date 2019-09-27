@@ -54,6 +54,7 @@ public class VorstellungsFactory {
                                                                     rs.getString("Sprache.Sprachenname"),
                                                                     film,
                                                                     KinosaalFactory.getKinosaal(rs.getInt("SaalID")));
+                        counter++;
                     }
                 }catch(SQLException e) {
                     e.printStackTrace();
