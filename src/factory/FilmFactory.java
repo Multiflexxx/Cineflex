@@ -95,7 +95,7 @@ public class FilmFactory {
     public static Film getFilm(int id) {
         Film film = null;
         Connection c = Connector.getConnection();
-        String sql = QueryBuilder.getMovieById(id);
+        String sql = QueryBuilder.getMovieById(id);<
         ResultSet rs = Connector.getQueryResult(c, sql);
 
         if(rs != null) {
