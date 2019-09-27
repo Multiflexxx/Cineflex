@@ -2,6 +2,7 @@ package junit_test;
 
 import Password.PassMD5;
 import db_connector.Connector;
+import db_connector.QueryBuilder;
 import oo.*;
 import org.junit.Assert;
 
@@ -650,7 +651,7 @@ public class Test {
     @org.junit.Test
     public void testeQueryBuilder()
     {
-
+        Assert.assertEquals("SELECT * FROM Person WHERE `E-Mail` = 'dieter@mail.com' AND `Passwort` = 'sicheresPasswort123' ;", QueryBuilder.createLoginQuery("dieter@mail.com", "sicheresPasswort123"));
     }
 
     // TESTS FOR HANDLER
