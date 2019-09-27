@@ -37,6 +37,7 @@ public class VorstellungsFactory {
         if(rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
             vorstellungen = new Vorstellung[rsSize];
+
             if(rsSize > 0) {
                 try {
                     int counter = 0;
