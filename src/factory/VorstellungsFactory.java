@@ -27,6 +27,11 @@ public class VorstellungsFactory {
         String sql = QueryBuilder.showMovieById("" + film.getFilmID(), date, time, plz);
         ResultSet rs = Connector.getQueryResult(c, sql);
 
+        sfilm = film;
+        sdate = date;
+        stime= time;
+        splz = plz;
+
         if(rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
