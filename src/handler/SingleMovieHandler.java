@@ -6,7 +6,7 @@ import factory.FilmFactory;
 import factory.VorstellungsFactory;
 import oo.Film;
 import oo.Vorstellung;
-import org.hamcrest.Factory;
+//import org.hamcrest.Factory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
