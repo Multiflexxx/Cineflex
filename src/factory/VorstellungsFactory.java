@@ -6,6 +6,7 @@ import oo.Film;
 import oo.Kinosaal;
 import oo.Vorstellung;
 
+import javax.management.Query;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,11 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class VorstellungsFactory {
+    private static Film sfilm = null;
+    private static String sdate = "";
+    private static String stime = "";
+    private static String splz = "";
+
     public static Vorstellung[] getVorstellungen(Film film, String date, String time, String plz) {
         Vorstellung[] vorstellungen = null;
         Connection c = Connector.getConnection();
@@ -70,5 +76,9 @@ public class VorstellungsFactory {
 
 
         return null;
+    }
+
+    public static String getLastSQLQuery() {
+        return QueryBuilder.showMovieById("" + sfilm.getFilmID(), sdate, stime, splz);
     }
 }
