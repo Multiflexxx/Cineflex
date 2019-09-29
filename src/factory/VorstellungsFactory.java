@@ -22,13 +22,22 @@ public class VorstellungsFactory {
     private static String splz = "";
 
     public static Vorstellung[] getVorstellungen(Film film, String date, String time, String plz) {
+
+        sfilm = film;
+        sdate = date;
+        stime = time;
+        splz = plz;
+
         Vorstellung[] vorstellungen = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.showMovieById("" + film.getFilmID(), date, time, plz);
         ResultSet rs = Connector.getQueryResult(c, sql);
 
+
         if(rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
+            vorstellungen = new Vorstellung[rsSize];
+
             if(rsSize > 0) {
                 try {
                     int counter = 0;
