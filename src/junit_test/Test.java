@@ -649,10 +649,73 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeQueryBuilder()
-    {
-        Assert.assertEquals("SELECT * FROM Person WHERE `E-Mail` = 'dieter@mail.com' AND `Passwort` = 'sicheresPasswort123' ;", QueryBuilder.createLoginQuery("dieter@mail.com", "sicheresPasswort123"));
+    public void testeQueryBuilder() {
+
+        //createLoginQuery
+        Assert.assertEquals(
+            "SELECT * FROM Person WHERE `E-Mail` = 'dieter@mail.com' AND `Passwort` = 'sicheresPasswort123' ;",
+            QueryBuilder.createLoginQuery("dieter@mail.com", "sicheresPasswort123"));
+
+        //createUser
+        Assert.assertEquals(
+            "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`) VALUES ('Max', 'Mustermann', '1990-08-07', 'max.mustermann@mail.com', 'passwort123'); "
+                + "\n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Max' AND `Nachname` = 'Mustermann' AND `GebDatum` = '1990-08-07' AND `E-Mail` = 'max.mustermann@mail.com' AND `Passwort` = 'passwort123'), 0);",
+            QueryBuilder.createUser("Max", "Mustermann", "1990-08-07", "max.mustermann@mail.com",
+                "passwort123"));
+
+        // ShowAllCinemas
+        Assert.assertEquals("SELECT Ort.Ortsname, Ort.PLZ FROM Ort INNER JOIN Gebäude ON Ort.PLZ=Gebäude.PLZ ORDER BY `Ortsname`;", QueryBuilder.showAllCinemas());
+
+        //showCinemaImaginationsToday
+        //Assert.assertEquals("SELECT * FROM Vorstellung WHERE `Datum` = ' getDateAsString() + ' AND `Uhrzeit` >= '+getTimeAsString()+';", QueryBuilder.showCinemaImaginationsToday()); wie kann ich dne aktuellen Tag herausfinden
+
+        //showCinemaImaginationsThisWeek
+     //   Assert.assertEquals("", QueryBuilder.showCinemaImaginationsThisWeek());
+
+        //showTitlePageTitles
+      //  Assert.assertEquals("SELECT DISTINCT Film.FilmID, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `BildLink` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID WHERE `Datum` >= 'date' LIMIT 3;", QueryBuilder.showTitlePageFilms());
+
+        //showAllFilmInfos
+        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Titel` = 'Der Herr der Ringe'", QueryBuilder.showAllFilmInfos("Der Herr der Ringe"));
+
+        //showGenresForFilmID
+        Assert.assertEquals("SELECT `Genrebezeichnung`, `Deskriptor` FROM Genre, Film, FilmGenre WHERE FilmGenre.GenreID = Genre.GenreID AND Film.FilmID = FilmGenre.FilmID AND Film.FilmID = 1;", QueryBuilder.showGenresForFilmID(1));
+
+        //showGeneresForFilmTitle
+        Assert.assertEquals("SELECT `Genrebezeichnung`, `Deskriptor` FROM Genre, Film, FilmGenre WHERE FilmGenre.GenreID = Genre.GenreID AND Film.FilmID = FilmGenre.FilmID AND `Titel` = 'Der Herr der Ringe';", QueryBuilder.showGenresForFilmTitle("Der Herr der Ringe"));
+
+        //showSearchResults
+        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE (`Titel` LIKE '%Der Herr der Ringe%' OR `Beschreibung` LIKE '%Der Herr der Ringe%') AND `Datum` >= '2019-08-07'AND `Uhrzeit` >= '19:30:00'AND `FSK` <= 12 ;",QueryBuilder.showSearchResults("Der Herr der Ringe", "2019-08-07", "19:30:00", 12));
+        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Datum` >= '2019-08-07'AND `Uhrzeit` >= '19:30:00'AND `FSK` <= 12 ;", QueryBuilder.showSearchResults("","2019-08-07","19:30:00", 12));
+
+        //defaultSearchQuery
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE (`Titel` LIKE '%Der Herr der Ringe%' OR `Beschreibung` LIKE '%Der Herr der Ringe%') AND `Datum` >= '2019-08-07' AND `Uhrzeit`>= '19:30:00' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Der Herr der Ringe", "2019-08-07", "19:30:00", 18));
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Datum` >= '2019-08-07' AND `Uhrzeit`>= '19:30:00' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-07", "19:30:00", 18));
+
+        //showMovieById
+        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung Join Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE Film.FilmID = '1' AND `Datum` >= '2019-08-07' AND `Uhrzeit` >= '19:30:00' AND Gebäude.PLZ = '68159' ORDER BY `Datum` ASC LIMIT 6; ", QueryBuilder.showMovieById("1","2019-08-07", "19:30:00", "68159"));
+
+        //getGenreNamesById
+        Assert.assertEquals("Select Genrebezeichnung FROM FilmGenre JOIN Genre ON FilmGenre.GenreID = Genre.GenreID Where FilmID = 1 ;", QueryBuilder.getGenreNamesById(1));
+
+        //getSpracheById
+       Assert.assertEquals("Select `Sprachenname` FROM Filmsprache JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID Where `FilmID` = 1 ;", QueryBuilder.getSpracheById(1));
+
+        //getSaalById
+        Assert.assertEquals("Select * From Kinosaal Where SaalID = 1 ;", QueryBuilder.getSaalById(1));
+
+        //getDateAsString
+        // ist wieder das Datum
+
+        //getTimeAsString
+
     }
+
+
+
+
+
+
 
     // TESTS FOR HANDLER
 
