@@ -1,10 +1,10 @@
-package factory;
+package helper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SupportMethods {
-    static int getResultSetSize(ResultSet rs) {
+    public static int getResultSetSize(ResultSet rs) {
         try {
             if (rs != null) {
                 if (rs.last()) {

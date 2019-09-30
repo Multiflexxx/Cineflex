@@ -2,7 +2,8 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-import oo.DateFormatter;
+import helper.SupportMethods;
+import helper.DateFormatter;
 import oo.Film;
 
 import java.sql.Connection;

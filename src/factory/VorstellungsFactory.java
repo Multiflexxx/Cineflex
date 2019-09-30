@@ -2,17 +2,15 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import helper.SupportMethods;
 import oo.Film;
-import oo.Kinosaal;
 import oo.Vorstellung;
 
-import javax.management.Query;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 public class VorstellungsFactory {

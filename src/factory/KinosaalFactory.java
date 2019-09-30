@@ -2,6 +2,7 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import helper.SupportMethods;
 import oo.Kinosaal;
 
 import java.sql.Connection;
