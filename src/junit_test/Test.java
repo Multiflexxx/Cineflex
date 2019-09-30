@@ -3,6 +3,7 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import helper.DateFormatter;
 import oo.*;
 import org.junit.Assert;
 

@@ -35,10 +35,12 @@ public class Connector {
     }
 
     public static void closeConnection(Connection c) {
-        try {
-            c.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(c != null) {
+            try {
+                c.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
