@@ -5,10 +5,8 @@ import db_connector.QueryBuilder;
 import factory.FilmFactory;
 import factory.VorstellungsFactory;
 import helper.DateFormatter;
-import oo.DateFormatter;
 import oo.Film;
 import oo.Vorstellung;
-//import org.hamcrest.Factory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
