@@ -19,7 +19,7 @@ import java.util.Date;
 
 @WebServlet(name = "RegistrationForm")
 public class RegistrationHandler extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String firstname = request.getParameter("inputVorname");
         String lastname = request.getParameter("inputNachname");
         String date = request.getParameter("inputGeb");
@@ -90,7 +90,7 @@ public class RegistrationHandler extends HttpServlet {
         Connector.closeConnection(c);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "SingleMovieHandler")
 public class SingleMovieHandler extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String date = request.getParameter("date");
         String time =  request.getParameter("time");
@@ -137,7 +137,7 @@ public class SingleMovieHandler extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
 }

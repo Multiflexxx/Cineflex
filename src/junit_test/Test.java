@@ -3,16 +3,82 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import handler.RegistrationHandler;
+import handler.SingleMovieHandler;
 import helper.DateFormatter;
 import oo.*;
 import org.junit.Assert;
+import org.junit.Before;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Connection;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static org.mockito.Mockito.when;
+
 public class Test {
+
+    // Create Mock Data for HttpServlets
+    @Mock
+    HttpServletRequest request1;
+
+    @Mock
+    HttpServletResponse response1;
+
+    @Mock
+    HttpServletRequest request2;
+
+    @Mock
+    HttpServletResponse response2;
+
+    @Mock
+    HttpServletRequest request3;
+
+    @Mock
+    HttpServletResponse response3;
+
+    @Mock
+    HttpServletRequest request4;
+
+    @Mock
+    HttpServletResponse response4;
+
+    @Mock
+    HttpServletRequest request5;
+
+    @Mock
+    HttpServletResponse response5;
+
+    @Mock
+    HttpServletRequest request6;
+
+    @Mock
+    HttpServletResponse response6;
+
+    @InjectMocks
+    Connector connector;
+    @Mock
+    Connection mockConnection;
+    @Mock
+    Statement mockStatement;
+
+    @Before
+    public void setUp() throws Exception
+    {
+        MockitoAnnotations.initMocks(this);
+    }
 
     // TESTS FOR OO
 
@@ -521,7 +587,7 @@ public class Test {
     }
     //----
 
-    // Tests for class Vortstellung
+    // Tests for class Vorstellung
     @org.junit.Test
     public void testeVorstellung()
     {
@@ -647,6 +713,8 @@ public class Test {
         Assert.assertEquals(null, connection);
 
         Connector.closeConnection(connection);
+
+        Assert.assertEquals(null, connection);
     }
 
     @org.junit.Test
@@ -744,9 +812,30 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeRegistrationHandler()
+    public void testeRegistrationHandler() throws Exception
     {
+        when(request4.getParameter("inputVorname")).thenReturn("Dietmar");
+        when(request4.getParameter("inputNachname")).thenReturn("Hopp");
+        when(request4.getParameter("inputGeb")).thenReturn("1979-05-05");
+        when(request4.getParameter("inputEmailReg")).thenReturn("dietmar.hopp@mail.com");
+        when(request4.getParameter("inputPasswordReg")).thenReturn("sicher123456");
+        when(request4.getParameter("inputPasswordRegWdh")).thenReturn("sicher123456");
 
+        when(mockConnection.createStatement()).thenReturn(mockStatement);
+
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        when(response4.getWriter()).thenReturn(printWriter);
+
+        RegistrationHandler registrationHandler = new RegistrationHandler();
+        registrationHandler.doPost(request4, response4);
+
+        String result = stringWriter.getBuffer().toString();
+
+        System.out.println(result);
+
+        Assert.assertEquals("Geht nicht!", result);
     }
 
     @org.junit.Test
@@ -756,9 +845,30 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeSingleMovieHandler()
+    public void testeSingleMovieHandler() throws Exception
     {
+        Cookie[] cookies = new Cookie[1];
+        cookies[0] = new Cookie("plz", "86165");
 
+        when(request6.getParameter("id")).thenReturn("1");
+        when(request6.getParameter("date")).thenReturn("2019-01-01");
+        when(request6.getParameter("time")).thenReturn("20:30:31");
+        when(request6.getCookies()).thenReturn(cookies);
+        //request6.setCookie();
+
+        //response6.addCookie(cookie);
+
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        when(response6.getWriter()).thenReturn(printWriter);
+
+        SingleMovieHandler singleMovieHandler = new SingleMovieHandler();
+        singleMovieHandler.doGet(request6, response6);
+
+        String result = stringWriter.getBuffer().toString();
+
+        System.out.println(result);
     }
 
     // TESTS FOR FACTORIES
