@@ -4,6 +4,7 @@ import db_connector.Connector;
 import db_connector.QueryBuilder;
 import factory.FilmFactory;
 import factory.VorstellungsFactory;
+import oo.DateFormatter;
 import oo.Film;
 import oo.Vorstellung;
 //import org.hamcrest.Factory;
@@ -41,15 +42,20 @@ public class SingleMovieHandler extends HttpServlet {
         film = FilmFactory.getFilm(Integer.parseInt(id));
         try {
             vorstellung = VorstellungsFactory.getVorstellungen(film, date, time, plz);
+
         } catch (Exception e) {
-            out.write(id);
+            out.write(plz);
             out.write("Geht nicht!");
+        }
+        if (vorstellung[0] == null) {
+            out.write(date + time + plz + " " + Integer.parseInt(id));
+            return;
         }
         film = vorstellung[0].getFilm();
 
-//        String sql = QueryBuilder.showMovieById(id, date, time, plz);
-//        Connection c = Connector.getConnection();
-//        ResultSet rs = Connector.getQueryResult(c, sql);
+        String sql = QueryBuilder.showMovieById(id, date, time, plz);
+        Connection c = Connector.getConnection();
+        ResultSet rs = Connector.getQueryResult(c, sql);
 
         try {
             response.setContentType("text/html;charset=UTF-8");
@@ -76,25 +82,32 @@ public class SingleMovieHandler extends HttpServlet {
                         case 1:
                             counter++;
                             out.write("<tr>");
-                            out.write("<td><button class=\"film-btn\" onclick=\"\" style=\"vertical-align:middle\">Mi, 25. Sep<br><div class=\"vl\"></div>16:30 Uhr</button></td>");
+                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + DateFormatter.getFrontendDate(vorstellung[i].getDatum()) + "<br>" + DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit()) + " Uhr</button></td>");
                             break;
                         case 2:
                             counter++;
-                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + vorstellung[i].getDatum() + " " + vorstellung[i].getUhrzeit() + " Uhr</button></td>");
+                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + DateFormatter.getFrontendDate(vorstellung[i].getDatum()) + "<br>" + DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit()) + " Uhr</button></td>");
                             break;
                         case 3:
                             counter = 1;
-                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + vorstellung[0].getDatum() + " " + vorstellung[i].getUhrzeit()  + " Uhr</button></td>");
+                            out.write("<td><button class=\"film-btn\" onclick=\"\">" + DateFormatter.getFrontendDate(vorstellung[i].getDatum()) + "<br>" + DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())  + " Uhr</button></td>");
                             out.write("</tr>");
                             break;
                     }
                 }
-                if (counter == 2) {
+
+                if (counter == 1) {
+                    out.write("<tr>");
                     out.write("<td></td>");
                     out.write("<td></td>");
+                    out.write("<td><button class=\"film-btn\" onclick=\"\">mehr</button></td>");
+                    out.write("</tr>");
+                } else if (counter == 2) {
+                    out.write("<td></td>");
+                    out.write("<td><button class=\"film-btn\" onclick=\"\">mehr</button></td>");
                     out.write("</tr>");
                 } else if ( counter == 3) {
-                    out.write("<td></td>");
+                    out.write("<td><button class=\"film-btn\" onclick=\"\">mehr</button></td>");
                     out.write("</tr>");
                 }
                 out.write("</tbody>");
@@ -106,7 +119,7 @@ public class SingleMovieHandler extends HttpServlet {
                 out.write("<h5 class=\"card-title\">" + film.getTitel() + "</h5>");
                 out.write("<p class=\"card-text\"><small class=\"text-muted\">" + film.getDauer() + " Minuten | FSK " + film.getFsk() + " | Sprache " + vorstellung[0].getSprache() + "</small></p>");
                 out.write("<p class=\"card-text mrb-justify\">" + film.getBeschreibung() + "</p>");
-                out.write("<iframe width=\"560\" height=\"315\" src=\"" + film.getBeschreibung() + "\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
+                out.write("<iframe width=\"560\" height=\"315\" src=\"" + film.getTrailerLink() + "\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>");
                 out.write("</div>");
                 out.write("</div>");
                 out.write("</div>");
