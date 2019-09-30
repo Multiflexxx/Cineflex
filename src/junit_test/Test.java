@@ -667,13 +667,21 @@ public class Test {
         Assert.assertEquals("SELECT Ort.Ortsname, Ort.PLZ FROM Ort INNER JOIN Gebäude ON Ort.PLZ=Gebäude.PLZ ORDER BY `Ortsname`;", QueryBuilder.showAllCinemas());
 
         //showCinemaImaginationsToday
-        //Assert.assertEquals("SELECT * FROM Vorstellung WHERE `Datum` = ' getDateAsString() + ' AND `Uhrzeit` >= '+getTimeAsString()+';", QueryBuilder.showCinemaImaginationsToday()); wie kann ich dne aktuellen Tag herausfinden
+        Date date1 = new Date();
+        String dateSQL1 = DateFormatter.getSQLDate(date1);
+        String timeSQL1 = DateFormatter.getSQLTime(date1);
+        Assert.assertEquals("SELECT * FROM Vorstellung WHERE `Datum` = '"+ dateSQL1 +"' AND `Uhrzeit` >= '"+timeSQL1+"';", QueryBuilder.showCinemaImaginationsToday());
 
         //showCinemaImaginationsThisWeek
-     //   Assert.assertEquals("", QueryBuilder.showCinemaImaginationsThisWeek());
+        Date date2 = new Date();
+        String dateSQL2 = DateFormatter.getSQLDate(date2);
+        String timeSQL2 = DateFormatter.getSQLTime(date2);
+        Assert.assertEquals("SELECT * FROM Vorstellung WHERE `Datum` >= '"+ dateSQL2 +"' AND `Uhrzeit` >= '"+timeSQL2+"';", QueryBuilder.showCinemaImaginationsThisWeek());
 
         //showTitlePageTitles
-      //  Assert.assertEquals("SELECT DISTINCT Film.FilmID, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `BildLink` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID WHERE `Datum` >= 'date' LIMIT 3;", QueryBuilder.showTitlePageFilms());
+        Date date3 = new Date();
+        String dateSQL3 = DateFormatter.getSQLDate(date3);
+        Assert.assertEquals("SELECT DISTINCT Film.FilmID, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `BildLink` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID WHERE `Datum` >= '"+dateSQL3+"' LIMIT 3;", QueryBuilder.showTitlePageFilms());
 
         //showAllFilmInfos
         Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Titel` = 'Der Herr der Ringe'", QueryBuilder.showAllFilmInfos("Der Herr der Ringe"));
@@ -704,11 +712,8 @@ public class Test {
         //getSaalById
         Assert.assertEquals("Select * From Kinosaal Where SaalID = 1 ;", QueryBuilder.getSaalById(1));
 
-        //getDateAsString
-        // ist wieder das Datum
-
-        //getTimeAsString
-
+        //getMovieById
+        Assert.assertEquals("Select * FROM Film Where FilmID = 1 ;", QueryBuilder.getMovieById(1));
     }
 
 
