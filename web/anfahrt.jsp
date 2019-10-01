@@ -19,17 +19,29 @@
         <h1 class="display-4">Hier finden Sie uns:</h1>
         <%
             try{
-                String baseStringGoogle = "https://www.google.com/maps/search/?api=1&query=";
-                Connection c = Connector.getConnection();
-                ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
-                String ort = rs.getString("Ortsname");
-                rs = Connector.getQueryResult(c, QueryBuilder.getKinosByName(ort));
-                String variableString = "" + rs.getString("Straße") + rs.getString("Hausnummer") + rs.getString("PLZ");
-                variableString = URLEncoder.encode(variableString, "UTF-8");
-                out.println("<iframe src=\"" + baseStringGoogle + variableString + "\" width=\"1000\" height=\"1000\"></iframe>");
+
+                Cookie cookie = null;
+                Cookie[] cookies = null;
+                String outputValue = "Standort";
+
+                cookies = request.getCookies();
+
+                if (cookies != null) {
+                    for (int i = 0; i < cookies.length; i++) {
+                        if (cookies[i].getName().equals("city")) {
+                            cookie = cookies[i];
+                            outputValue = cookie.getValue();
+                            break;
+                        }
+                    }
+                }
+
             }catch(Exception e){
-                out.println("<iframe src=\"https://www.google.com/maps/d/embed?mid=1iFLu1_eFR5Kvh6D5A1hARlFCm13TXPUb&hl=de\" width=\"1000\" height=\"1000\"></iframe>");
+                out.write("<iframe src=\"https://www.google.com/maps/d/embed?mid=1iFLu1_eFR5Kvh6D5A1hARlFCm13TXPUb&hl=de\" width=\"1000\" height=\"1000\"></iframe>");
+            }finally {
+
             }
+
         %>
 
     </div>
