@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="factory.VorstellungsFactory"%>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -18,6 +19,12 @@
     <title></title>
 </head>
 <body>
-
+    <%
+        String id = request.getParameter("id");
+        String date = request.getParameter("date");
+        String time = request.getParameter("time");
+        //VorstellungsFactory.getVorstellungen()
+    %>
+    <p>VorstellungsID: <%=id%> am <%=date%> um <%=time%></p>
 </body>
 </html>

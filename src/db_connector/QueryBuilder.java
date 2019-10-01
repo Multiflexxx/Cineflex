@@ -124,6 +124,10 @@ public class QueryBuilder {
         return "Select * FROM Film Where FilmID = " + id + " ;";
     }
 
+    public static String getVorstellungByID(int id){
+        return "SELECT * FROM Vorstellung WHERE VorstellungsID = " + id + " ;";
+    }
+
 
     private static String getDateAsString()
     {
