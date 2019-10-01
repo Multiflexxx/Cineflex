@@ -7,13 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/web/seats.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/Connector.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/Connector.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/anfahrt.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/anfahrt.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/singleMovie.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/singleMovie.jsp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -249,7 +243,7 @@
       <workItem from="1569164417259" duration="27579000" />
       <workItem from="1569193221234" duration="1168000" />
       <workItem from="1569222488546" duration="5508000" />
-      <workItem from="1569912929169" duration="7537000" />
+      <workItem from="1569912929169" duration="7917000" />
     </task>
     <task id="LOCAL-00001" summary="Update menu">
       <created>1569099030773</created>
@@ -440,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569915561295</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Single Movie auf Vorstellung über link ausgelegt">
+      <created>1569933464888</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1569933464888</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -483,6 +484,7 @@
     <MESSAGE value="Fixes Filter" />
     <MESSAGE value="Fix" />
     <MESSAGE value="Logik ausgelagert" />
-    <option name="LAST_COMMIT_MESSAGE" value="Logik ausgelagert" />
+    <MESSAGE value="Single Movie auf Vorstellung über link ausgelegt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Single Movie auf Vorstellung über link ausgelegt" />
   </component>
 </project>

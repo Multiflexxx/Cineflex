@@ -71,8 +71,8 @@
                             %>
                             <tr>
                                 <td>
-                                    <a href="">
-                                    <button class="film-btn" onclick="<%=hrefURL%>">
+                                    <a href="<%=hrefURL%>">
+                                    <button class="film-btn" onclick="">
                                         <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
                                         <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
                                     </button>
@@ -86,10 +86,12 @@
                                 %>
 
                                 <td>
+                                    <a href="<%=hrefURL%>">
                                     <button class="film-btn" onclick="">
                                         <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
                                         <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
                                     </button>
+                                    </a>
                                 </td>
 
                                 <%
@@ -98,10 +100,12 @@
                                         counter = 1;
                                 %>
                                 <td>
+                                    <a href="<%=hrefURL%>">
                                     <button class="film-btn" onclick="">
                                         <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
                                         <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
                                     </button>
+                                    </a>
                                 </td>
                             </tr>
                             <%
