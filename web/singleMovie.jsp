@@ -64,7 +64,7 @@
                                     String hrefURL = "seats.jsp?";
                                     hrefURL += "id=" + vorstellung[i].getVorstellungsID();
                                     hrefURL += "&date=" + DateFormatter.getSQLDate(vorstellung[i].getDatum());
-                                    hrefURL += "&time=" + DateFormatter.getSQLTime(vorstellung[i].getDatum());
+                                    hrefURL += "&time=" + DateFormatter.getSQLTime(vorstellung[i].getUhrzeit());
                                     switch (counter) {
                                         case 1:
                                             counter++;
