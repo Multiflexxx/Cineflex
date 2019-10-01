@@ -3,14 +3,12 @@ package db_connector;
 import java.sql.*;
 
 public class Connector {
-    public static Connection getConnection() {
+    public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection c = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/Cineflex?allowMultiQueries=true", "multiflex", "multiflexxx123");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        Class.forName("com.mysql.jdbc.Driver");
+        c = DriverManager.getConnection("jdbc:mysql://localhost:3306/Cineflex?allowMultiQueries=true", "multiflex", "multiflexxx123");
+
         return c;
     }
 

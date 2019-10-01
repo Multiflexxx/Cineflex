@@ -11,7 +11,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -21,6 +25,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -706,15 +712,33 @@ public class Test {
 
     // TESTS FOR CONNECTOR
     @org.junit.Test
-    public void testeConnector()
+    public void testeConnector() throws Exception
     {
-        Connection connection = Connector.getConnection();
+
+        //Assert.assertEquals(ClassNotFoundException, Connector.getConnection());
+
+        ///???????????? WAS MACHE ICH HIER EIG??????????
+        ResultSet resultSet = mock(ResultSet.class);
+        PreparedStatement statement = mock(PreparedStatement.class);
+
+        when(statement.getResultSet()).thenReturn(resultSet);
+
+        when(resultSet.getString(eq("plz"))).thenReturn("85055");
+
+        Mockito.when(mockConnection.createStatement()).thenReturn(mockStatement);
+
+
+
+        when(statement.execute()).thenReturn(true);
+
+
+       /* Connection connection = Connector.getConnection();
 
         Assert.assertEquals(null, connection);
 
         Connector.closeConnection(connection);
 
-        Assert.assertEquals(null, connection);
+        Assert.assertEquals(null, connection);*/
     }
 
     @org.junit.Test
