@@ -84,13 +84,13 @@ public class VorstellungsFactory {
 
         return null;
     }
-/*
+
     public static Vorstellung[] getVorstellungById(int id) {
 
 
         Vorstellung[] vorstellungen = null;
         Connection c = Connector.getConnection();
-        String sql = QueryBuilder.showMovieById();
+        String sql = QueryBuilder.getVorstellungByID(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
 
 
@@ -102,7 +102,7 @@ public class VorstellungsFactory {
                 try {
                     int counter = 0;
                     while (rs.next()) {
-                        // `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname
+                        //VorstellungsID, Datum, Uhrzeit, FilmID, SaalID, SprachID, FilmID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, SprachID, Sprachenname, SaalID, GebäudeID,  Saalbezeichnung
                         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
                         Date date_Datum = null;
                         try {
@@ -127,7 +127,7 @@ public class VorstellungsFactory {
                                 date_Datum,
                                 time_Uhrzeit,
                                 rs.getString("Sprache.Sprachenname"),
-                                film,
+                                FilmFactory.getFilm(rs.getInt("FilmID")),
                                 KinosaalFactory.getKinosaal(rs.getInt("SaalID")));
                         counter++;
                     }
@@ -146,7 +146,7 @@ public class VorstellungsFactory {
 
         return null;
     }
-*/
+
     public static String getLastSQLQuery() {
         return QueryBuilder.showMovieById("" + sfilm.getFilmID(), sdate, stime, splz);
     }

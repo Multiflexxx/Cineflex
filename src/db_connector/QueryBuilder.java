@@ -125,7 +125,7 @@ public class QueryBuilder {
     }
 
     public static String getVorstellungByID(int id){
-        return "SELECT * FROM Vorstellung WHERE VorstellungsID = " + id + " ;";
+        return "SELECT DISTINCT * FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID WHERE VorstellungsID = " + id + " ;";
     }
 
 
