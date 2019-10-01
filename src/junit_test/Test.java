@@ -783,6 +783,9 @@ public class Test {
 
         //getMovieById
         Assert.assertEquals("Select * FROM Film Where FilmID = 1 ;", QueryBuilder.getMovieById(1));
+
+        //getKinosByName
+        Assert.assertEquals("SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = 'Berlin' ;",QueryBuilder.getKinosByName("Berlin"));
     }
 
 
@@ -850,13 +853,13 @@ public class Test {
         Cookie[] cookies = new Cookie[1];
         cookies[0] = new Cookie("plz", "86165");
 
+        // Add mock parameters
         when(request6.getParameter("id")).thenReturn("1");
         when(request6.getParameter("date")).thenReturn("2019-01-01");
         when(request6.getParameter("time")).thenReturn("20:30:31");
-        when(request6.getCookies()).thenReturn(cookies);
-        //request6.setCookie();
 
-        //response6.addCookie(cookie);
+        // Add mock cookies
+        when(request6.getCookies()).thenReturn(cookies);
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
