@@ -85,20 +85,16 @@ public class VorstellungsFactory {
         return null;
     }
 
-    public static Vorstellung[] getVorstellungById(int id) {
+    public static Vorstellung getVorstellungById(int id) {
 
 
-        Vorstellung[] vorstellungen = null;
+        Vorstellung vorstellung = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getVorstellungByID(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
 
 
         if(rs != null) {
-            int rsSize = SupportMethods.getResultSetSize(rs);
-            vorstellungen = new Vorstellung[rsSize];
-
-            if(rsSize > 0) {
                 try {
                     int counter = 0;
                     while (rs.next()) {
@@ -123,7 +119,7 @@ public class VorstellungsFactory {
                             return null;
                         }
 
-                        vorstellungen[counter] = new Vorstellung(rs.getInt("VorstellungsID"),
+                        vorstellung = new Vorstellung(rs.getInt("VorstellungsID"),
                                 date_Datum,
                                 time_Uhrzeit,
                                 rs.getString("Sprache.Sprachenname"),
@@ -134,16 +130,8 @@ public class VorstellungsFactory {
                 }catch(SQLException e) {
                     e.printStackTrace();
                 }
-            } else {
-                vorstellungen = new Vorstellung[1];
-                vorstellungen[0] = null;
-                return vorstellungen;
-            }
-
-            return vorstellungen;
+            return vorstellung;
         }
-
-
         return null;
     }
 

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="factory.VorstellungsFactory"%>
+<%@ page import="oo.Vorstellung" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -23,7 +24,7 @@
         String id = request.getParameter("id");
         String date = request.getParameter("date");
         String time = request.getParameter("time");
-        //VorstellungsFactory.getVorstellungen()
+        Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
     %>
     <p>VorstellungsID: <%=id%> am <%=date%> um <%=time%></p>
 </body>
