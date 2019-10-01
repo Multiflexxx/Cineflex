@@ -22,11 +22,9 @@
 <body>
     <%
         String id = request.getParameter("id");
-        String date = request.getParameter("date");
-        String time = request.getParameter("time");
         Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
     %>
-    <p>VorstellungsID: <%=id%> am <%=date%> um <%=time%></p>
+    <p>VorstellungsID: <%=id%></p>
     <p>Film <%=vorstellung.getFilm().getTitel()%> am <%=vorstellung.getDatum()%> um <%=vorstellung.getUhrzeit()%> in der Sprache <%=vorstellung.getSprache()%> im Saal <%=vorstellung.getSaal().getBezeichnung()%></p>
 </body>
 </html>
