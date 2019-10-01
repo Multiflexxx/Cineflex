@@ -27,5 +27,6 @@
         Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
     %>
     <p>VorstellungsID: <%=id%> am <%=date%> um <%=time%></p>
+    <p>Film <%=vorstellung.getFilm().getTitel()%> am <%=vorstellung.getDatum()%> um <%=vorstellung.getUhrzeit()%> in der Sprache <%=vorstellung.getSprache()%> im Saal <%=vorstellung.getSaal().getBezeichnung()%></p>
 </body>
 </html>
