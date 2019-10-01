@@ -61,16 +61,22 @@
                             <%
                                 int counter = 1;
                                 for (int i = 0; i < vorstellung.length; i++) {
+                                    String hrefURL = "seats.jsp?";
+                                    hrefURL += "id=" + vorstellung[i].getVorstellungsID();
+                                    hrefURL += "&date=" + DateFormatter.getSQLDate(vorstellung[i].getDatum());
+                                    hrefURL += "&time=" + DateFormatter.getSQLTime(vorstellung[i].getDatum());
                                     switch (counter) {
                                         case 1:
                                             counter++;
                             %>
                             <tr>
                                 <td>
-                                    <button class="film-btn" onclick="">
+                                    <a href="">
+                                    <button class="film-btn" onclick="<%=hrefURL%>">
                                         <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
                                         <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
                                     </button>
+                                    </a>
                                 </td>
 
                                 <%

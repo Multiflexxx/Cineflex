@@ -74,7 +74,7 @@
     out.write("<div class=\"container\">");
     out.write("<div class=\"card-deck mb-3\" style=\"max-width: 1400px;\">");
     while (rs.next()) {
-        String hrefURL = "SingleMovieHandler?id=";
+        String hrefURL = "singleMovie.jsp?id=";
         LocalDate localDate = LocalDate.now();
         hrefURL += rs.getString("FilmID");
         hrefURL += "&date=" + localDate.toString();
@@ -99,4 +99,3 @@
 <jsp:include page="elements/footer.jsp"/>
 </body>
 </html>
-
