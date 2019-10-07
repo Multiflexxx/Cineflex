@@ -16,7 +16,7 @@ public class QueryBuilder {
 
     public static String showAllCinemas()
     {
-        return "SELECT Ort.Ortsname, Ort.PLZ FROM Ort INNER JOIN Gebäude ON Ort.PLZ=Gebäude.PLZ ORDER BY `Ortsname`;";
+        return "SELECT Ort.Ortsname, Ort.PLZ, `GebäudeId`, `Straße`, `Hausnummer` FROM Ort INNER JOIN Gebäude ON Ort.PLZ=Gebäude.PLZ ORDER BY `Ortsname`;";
     }
 
     public static String showCinemaImaginationsToday()
