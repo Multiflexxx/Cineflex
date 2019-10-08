@@ -96,8 +96,6 @@ public class VorstellungsFactory {
 
         if(rs != null) {
                 try {
-                    int counter = 0;
-                    while (rs.next()) {
                         //VorstellungsID, Datum, Uhrzeit, FilmID, SaalID, SprachID, FilmID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, SprachID, Sprachenname, SaalID, GebäudeID,  Saalbezeichnung
                         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
                         Date date_Datum = null;
@@ -125,8 +123,6 @@ public class VorstellungsFactory {
                                 rs.getString("Sprache.Sprachenname"),
                                 FilmFactory.getFilm(rs.getInt("FilmID")),
                                 KinosaalFactory.getKinosaal(rs.getInt("SaalID")));
-                        counter++;
-                    }
                 }catch(SQLException e) {
                     e.printStackTrace();
                 }

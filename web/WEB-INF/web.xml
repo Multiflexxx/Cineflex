@@ -38,6 +38,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>SingleMovieHandler</servlet-name>
-        <url-pattern>/XXX69XXX420XXXDildo</url-pattern>
+        <url-pattern>/SingleMovieHandler</url-pattern>
     </servlet-mapping>
 </web-app>
