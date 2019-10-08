@@ -35,9 +35,6 @@ import java.util.Locale;
 import static org.mockito.Mockito.when;
 
 public class Test {
-    public static void main(String[] args) {
-        System.out.println("Test 1");
-    }
 
     // Create Mock Data for HttpServlets
     @Mock
@@ -747,10 +744,22 @@ public class Test {
     public void testeConnector() throws Exception
     {
 
+
+
+
+
+
+
+
+
+
+
+
+
         //Assert.assertEquals(ClassNotFoundException, Connector.getConnection());
 
         ///???????????? WAS MACHE ICH HIER EIG??????????
-        ResultSet resultSet = mock(ResultSet.class);
+        /*ResultSet resultSet = mock(ResultSet.class);
         PreparedStatement statement = mock(PreparedStatement.class);
 
         when(statement.getResultSet()).thenReturn(resultSet);
@@ -762,7 +771,7 @@ public class Test {
 
 
         when(statement.execute()).thenReturn(true);
-
+*/
 
        /* Connection connection = Connector.getConnection();
 
@@ -952,6 +961,12 @@ public class Test {
 
     @org.junit.Test
     public void testeVorstellungsFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeGebaeudeFactory()
     {
 
     }
