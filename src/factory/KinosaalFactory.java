@@ -20,6 +20,7 @@ public class KinosaalFactory {
             int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
                 try {
+                    rs.next();
                     kinosaal = new Kinosaal(id, rs.getString("Saalbezeichnung"), null);
                 } catch (SQLException e) {
                     e.printStackTrace();

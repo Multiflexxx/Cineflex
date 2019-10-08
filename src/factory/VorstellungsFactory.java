@@ -87,14 +87,15 @@ public class VorstellungsFactory {
 
 
         Vorstellung vorstellung = null;
+
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getVorstellungByID(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        vorstellung = new Vorstellung(7,null,null,"Deutsch",FilmFactory.getFilm(7),KinosaalFactory.getKinosaal(1));
+        //vorstellung = new Vorstellung(7,null,null,"Deutsch",FilmFactory.getFilm(7),KinosaalFactory.getKinosaal(1));
 
 
         if(rs!=null) {
-            /*
+
                 try {
                         rs.next();
                         //VorstellungsID, Datum, Uhrzeit, FilmID, SaalID, SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, GebäudeID,  Saalbezeichnung
@@ -123,10 +124,11 @@ public class VorstellungsFactory {
                                 KinosaalFactory.getKinosaal(rs.getInt("SaalID")));
                 }catch(SQLException e) {
                     e.printStackTrace();
-                }*/
+                }
             return vorstellung;
         }
-        return null;
+
+        return vorstellung;
     }
 
     public static String getLastSQLQuery() {
