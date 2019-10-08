@@ -6,13 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="Sitzplan hinzugefügt">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/CineflexV1_war_exploded/WEB-INF/classes/db_connector/QueryBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/factory/KinosaalFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/KinosaalFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/factory/VorstellungsFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/factory/VorstellungsFactory.java" afterDir="false" />
+    <list default="true" id="b6862254-6f72-4799-98cc-71ce1bdf4702" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/web/seats.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/seats.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -256,7 +251,7 @@
       <workItem from="1569222488546" duration="5508000" />
       <workItem from="1569912929169" duration="13134000" />
       <workItem from="1570516592874" duration="7439000" />
-      <workItem from="1570539445671" duration="3156000" />
+      <workItem from="1570539445671" duration="3443000" />
     </task>
     <task id="LOCAL-00001" summary="Update menu">
       <created>1569099030773</created>
@@ -510,7 +505,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570517366890</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="seats und saalfactory gefixt">
+      <created>1570542634731</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1570542634731</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -553,7 +555,8 @@
     <MESSAGE value="JSP zeigt Daten" />
     <MESSAGE value="Url übersichtlicher gemacht" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="seats und saalfactory gefixt" />
+    <option name="LAST_COMMIT_MESSAGE" value="seats und saalfactory gefixt" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/V1$Test.ic" NAME="Test Coverage Results" MODIFIED="1570540595181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true">

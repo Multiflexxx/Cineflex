@@ -27,16 +27,20 @@
         Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
         String formatDatum = DateFormatter.getFrontendDate(vorstellung.getDatum());
         String formatUhrzeit = DateFormatter.getFrontendTime(vorstellung.getUhrzeit());
-        if(vorstellung!=null){
-            out.write("<p> Film " + vorstellung.getFilm().getTitel() + " am " + formatDatum + " um " + formatUhrzeit + " in der Sprache " + vorstellung.getSprache() + " im Saal " + vorstellung.getSaal().getBezeichnung()+ "</p>");
-        }else{
-            out.write("<p> Hier ist etwas schiefgelaufen </p>");
-        };%>
+        if(vorstellung ==null){
+            out.write("<div class=\"jumbotron jumbotron-fluid footer\">\n" +
+                    "    <div class=\"container\">\n" +
+                    "        <h1 class=\"display-4\">Hier ist etwas schiefgelaufen</h1>\n" +
+                    "        <p class=\"lead\">Das tut uns leid</p>\n" +
+                    "        <a class=\"btn btn-primary btn-lg\" href=\"index.jsp\" role=\"button\">Zurück zur Startseite</a>\n" +
+                    "    </div>\n" +
+                    "</div>");
+        ;%>
     <div class="container-fluid">
-        <h1><%=vorstellung.getFilm().getTitel()%>></h1>
+        <h1><%=vorstellung.getFilm().getTitel()%></h1>
         <h2><%=formatDatum%> , <%=formatUhrzeit%></h2>
         <span class="badge badge-pill badge-info"><%=vorstellung.getSprache()%></span>
-        <span class="badge badge-pill badge-secondary"><%=vorstellung.getSaal().getBezeichnung()%>></span>
+        <span class="badge badge-pill badge-secondary"><%=vorstellung.getSaal().getBezeichnung()%></span>
     </div>
 
 </body>
