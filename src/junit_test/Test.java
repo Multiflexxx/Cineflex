@@ -686,6 +686,35 @@ public class Test {
     }
     //----
 
+    // Tests for class Login
+    @org.junit.Test
+    public void testeGebaeude()
+    {
+        //public Gebäude(int gebäudeId, String strasse, int hausnummer, int plz, String ortsname) {
+
+        Gebäude gebäude = new Gebäude(1, "Lange Straße", 3, 68165, "Mannheim");
+
+        // Test Getter
+        Assert.assertEquals(1, gebäude.getGebäudeId());
+        Assert.assertEquals("Lange Straße", gebäude.getStrasße());
+        Assert.assertEquals(3, gebäude.getHausnummer());
+        Assert.assertEquals(68165, gebäude.getPlz());
+        Assert.assertEquals("Mannheim", gebäude.getOrtsname());
+
+        // Test Getter and Setter
+        gebäude.setGebäudeId(5);
+        Assert.assertEquals(5, gebäude.getGebäudeId());
+        gebäude.setStrasse("Neue Straße");
+        Assert.assertEquals("Neue Straße", gebäude.getStrasße());
+        gebäude.setHausnummer(15);
+        Assert.assertEquals(15, gebäude.getHausnummer());
+        gebäude.setPlz(32839);
+        Assert.assertEquals(32839, gebäude.getPlz());
+        gebäude.setOrtsname("Steinheim");
+        Assert.assertEquals("Steinheim", gebäude.getOrtsname());
+    }
+    //----
+
     // TESTS FOR PASSWORD
     // Test for class PassMD5
     @org.junit.Test
