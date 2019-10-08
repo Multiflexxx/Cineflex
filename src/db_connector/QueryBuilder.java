@@ -131,6 +131,10 @@ public class QueryBuilder {
         return "Select * From Kinosaal Where SaalID = " + id + " ;";
     }
 
+    public static String getSitzplanBySaalID(int id){
+        return "SELECT Kinosaal.SaalID as SaalID, GebäudeID, Saalbezeichnung, Sitzplan.SitzplanID as SitzplanID, Reihe, Nummer, Sitzklasse FROM Cineflex.Kinosaal JOIN Cineflex.Sitzplan ON Sitzplan.SaalID = Kinosaal.SaalID JOIN Cineflex.Sitz ON Sitzplan.SitzplanID = Sitz.SitzplanID WHERE Kinosaal.SaalID = " + id + ";";
+    }
+
     public static String getMovieById(int id) {
         return "Select * FROM Film Where FilmID = " + id + " ;";
     }
