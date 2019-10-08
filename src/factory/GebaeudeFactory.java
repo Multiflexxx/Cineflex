@@ -14,7 +14,6 @@ public class GebaeudeFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.showAllCinemas();
         ResultSet rs = Connector.getQueryResult(c, sql);
-        System.out.println(sql);
 
         if (rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);

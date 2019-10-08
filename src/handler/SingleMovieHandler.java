@@ -44,7 +44,7 @@ public class SingleMovieHandler extends HttpServlet {
 
         } catch (Exception e) {
             out.write(plz);
-            out.write("Geht nicht!");
+            out.write("Geht nicht von SingleMovieHandler!");
         }
         out.write(VorstellungsFactory.getLastSQLQuery());
         if (vorstellung[0] == null) {

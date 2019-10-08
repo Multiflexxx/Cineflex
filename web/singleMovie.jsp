@@ -26,6 +26,7 @@
         vorstellung = VorstellungsFactory.getVorstellungen(film, date, time, plz);
 
     } catch (Exception e) {
+        out.println(e.getMessage());
         out.println(plz);
         out.println("Geht nicht!");
     }
