@@ -34,6 +34,17 @@ public class QueryBuilder {
         return "SELECT DISTINCT Film.FilmID, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `BildLink` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID WHERE `Datum` >= '" + getDateAsString() +"' LIMIT 3;";
     }
 
+    public static String showTitelPageFilmsbyPLZ(String plz)
+    {
+        return "SELECT DISTINCT Film.FilmID, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `BildLink`, `TrailerLink`, `3D` FROM Vorstellung" +
+                "JOIN Film ON Vorstellung.FilmID = Film.FilmID" +
+                "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID" +
+                "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID" +
+                "WHERE `Datum` >= '" + getDateAsString() +"'" +
+                "AND Gebäude.PLZ = '"+ plz + "'" +
+                "LIMIT 3;";
+    }
+
     public static String showAllFilmInfos(String filmTitel)
     {
         return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Titel` = '" + filmTitel + "'";

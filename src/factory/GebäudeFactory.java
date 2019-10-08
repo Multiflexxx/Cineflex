@@ -20,6 +20,7 @@ public class GebäudeFactory {
             if (rsSize > 0) {
                 try {
                     int counter = 0;
+                    gebäude = new Gebäude[rsSize];
                     while (rs.next()) {
                         gebäude[counter] = new Gebäude(
                                 rs.getInt("GebäudeId"),
