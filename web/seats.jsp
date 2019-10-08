@@ -27,7 +27,7 @@
         Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
         String formatDatum = DateFormatter.getFrontendDate(vorstellung.getDatum());
         String formatUhrzeit = DateFormatter.getFrontendTime(vorstellung.getUhrzeit());
-        if(vorstellung ==null){
+        if(vorstellung ==null) {
             out.write("<div class=\"jumbotron jumbotron-fluid footer\">\n" +
                     "    <div class=\"container\">\n" +
                     "        <h1 class=\"display-4\">Hier ist etwas schiefgelaufen</h1>\n" +
@@ -35,6 +35,7 @@
                     "        <a class=\"btn btn-primary btn-lg\" href=\"index.jsp\" role=\"button\">Zurück zur Startseite</a>\n" +
                     "    </div>\n" +
                     "</div>");
+        }
         ;%>
     <div class="container-fluid">
         <h1><%=vorstellung.getFilm().getTitel()%></h1>
