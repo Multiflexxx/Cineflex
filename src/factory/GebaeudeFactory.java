@@ -8,12 +8,13 @@ import oo.Gebäude;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-public class GebäudeFactory {
+public class GebaeudeFactory {
     public static Gebäude[] getGebäude() {
         Gebäude[] gebäude = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.showAllCinemas();
         ResultSet rs = Connector.getQueryResult(c, sql);
+        System.out.println(sql);
 
         if (rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
