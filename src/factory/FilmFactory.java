@@ -122,44 +122,6 @@ public class FilmFactory {
                 }catch(SQLException e) {
                     e.printStackTrace();
                 }
-//                for(Film f : filme) {
-////                    sql = QueryBuilder.getGenreNamesById(f.getFilmID());
-////                    rs = Connector.getQueryResult(c, sql);
-////                    try {
-////                        rsSize = SupportMethods.getResultSetSize(rs);
-////                        if(rsSize > 0) {
-////                            int counter = 0;
-////                            String[] genres = null;
-////                            while(rs.next()) {
-////                                genres = new String[rsSize];
-////                                genres[counter] = rs.getString("Genrebezeichnung");
-////                                counter++;
-////                            }
-////                            f.setGenre(genres);
-////                        }
-////                    }catch (SQLException e) {
-////                        e.printStackTrace();
-////                    }
-////
-////                    sql = QueryBuilder.getSpracheById(f.getFilmID());
-////                    rs = Connector.getQueryResult(c, sql);
-////
-////                    try {
-////                        rsSize = SupportMethods.getResultSetSize(rs);
-////                        if(rsSize > 0) {
-////                            int counter = 0;
-////                            String[] sprachen = null;
-////                            while(rs.next()) {
-////                                sprachen = new String[rsSize];
-////                                sprachen[counter] = rs.getString("Sprachenname");
-////                                counter++;
-////                            }
-////                            f.setSprache(sprachen);
-////                        }
-////                    }catch (SQLException e) {
-////                        e.printStackTrace();
-////                    }
-////                }
             } else {
                 filme = new Film[1];
                 filme[0] = null;
