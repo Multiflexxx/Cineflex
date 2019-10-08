@@ -42,7 +42,7 @@ public class SearchHandler extends HttpServlet {
                 request.getRequestDispatcher("filter.jsp").include(request, response);
                 out.write("<div class=\"container\">");
                 for (Film f : filme) {
-                    String hrefURL = "SingleMovieHandler?";
+                    String hrefURL = "singleMovie.jsp?";
                     hrefURL += "id=" + f.getFilmID();  //getString("FilmID");
                     hrefURL += "&date=" + date;
                     hrefURL += "&time=" + time;
