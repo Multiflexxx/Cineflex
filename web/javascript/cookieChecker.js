@@ -1,12 +1,7 @@
-var url = new URL(window.location.href);
-var check = url.searchParams.get("check");
-if(check != "false" || check == null) {
-    var plz = getCookie("plz");
-    if(plz == undefined) {
-        window.location.replace("locationPicker.jsp?check=false");
-    }
-}
-
+$('#locationDialog').modal({
+    backdrop: 'static',
+    keyboard: false
+});
 
 function getCookie(name) {
     var value = "; " + document.cookie;
@@ -14,3 +9,20 @@ function getCookie(name) {
     if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
+function checkCookie() {
+    var plz = getCookie("plz");
+    if(plz == undefined) {
+        openLocationDialog();
+    }
+}
+
+function openLocationDialog() {
+    $("#locationDialog").modal("show");
+}
+
+function submitLocation(city, plz) {
+    setCookieUrl(city, plz);
+    $('#locationDialog').modal('hide')
+}
+
+checkCookie();

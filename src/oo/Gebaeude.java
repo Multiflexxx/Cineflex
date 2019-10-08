@@ -1,13 +1,13 @@
 package oo;
 
-public class Gebäude {
+public class Gebaeude {
     int gebäudeId;
     String strasse;
     int hausnummer;
     int plz;
     String ortsname;
 
-    public Gebäude(int gebäudeId, String strasse, int hausnummer, int plz, String ortsname) {
+    public Gebaeude(int gebäudeId, String strasse, int hausnummer, int plz, String ortsname) {
         this.gebäudeId = gebäudeId;
         this.strasse = strasse;
         this.hausnummer = hausnummer;

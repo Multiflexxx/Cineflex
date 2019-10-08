@@ -1,20 +1,49 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: benno
-  Date: 08.10.2019
-  Time: 17:02
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<jsp:include page="elements/head.jsp"/>
-<body class="d-flex flex-column h-100">
-<jsp:include page="elements/header.jsp"/>
+<%@ page import="oo.Gebaeude" %>
+<%@ page import="factory.GebaeudeFactory" %>
+<!-- Location Screen-->
+<div class="modal fade" id="locationDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerDialogTitle">W&auml;hlen Sie bitte eine der folgenden Standorte aus!</h5>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
 
-<jsp:include page="login.jsp"/>
-<jsp:include page="registration.jsp"/>
-<jsp:include page="filter.jsp"/>
+                    <%
+                        try {
+                            Gebaeude[] gebäude = GebaeudeFactory.getGebaeude();
+                            if (gebäude != null) {
+                                for (int i = 0; i < gebäude.length; i++) {
+                                    if (i % 2 == 0) {
+                                        out.write("<tr>");
+                                        out.write("<td><a href=\"javascript:void(0)\" onclick=\"submitLocation('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a></td>");
+                                    } else {
+                                        out.write("<td><a href=\"javascript:void(0)\" onclick=\"submitLocation('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a></td>");
+                                        out.write("</tr>");
+                                    }
+                                }
+                                if (gebäude.length % 2 != 0) {
+                                    out.write("<td></td></tr>");
+                                }
+                            }
+                        } catch (Exception e) {
+                            out.write("Ficken");
+                        }
+                    %>
 
-Dies ist ein Test
-</body>
-</html>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" onclick="submitLocation()" class="btn btn-primary">Speichern</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    checkCookie();
+</script>

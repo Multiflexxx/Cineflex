@@ -11,28 +11,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-import static org.mockito.Mockito.when;
 
 public class Test {
 
@@ -692,7 +685,7 @@ public class Test {
     {
         //public Gebäude(int gebäudeId, String strasse, int hausnummer, int plz, String ortsname) {
 
-        Gebäude gebäude = new Gebäude(1, "Lange Straße", 3, 68165, "Mannheim");
+        Gebaeude gebäude = new Gebaeude(1, "Lange Straße", 3, 68165, "Mannheim");
 
         // Test Getter
         Assert.assertEquals(1, gebäude.getGebäudeId());
