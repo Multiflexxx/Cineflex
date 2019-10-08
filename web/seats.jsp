@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="factory.VorstellungsFactory"%>
 <%@ page import="oo.Vorstellung" %>
+<%@ page import="helper.DateFormatter" %>
+<%@ page import="java.util.Date" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -23,11 +25,19 @@
     <%
         String id = request.getParameter("id");
         Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
+        String formatDatum = DateFormatter.getFrontendDate(vorstellung.getDatum());
+        String formatUhrzeit = DateFormatter.getFrontendTime(vorstellung.getUhrzeit());
         if(vorstellung!=null){
-            out.write("<p> Film" + vorstellung.getFilm().getTitel() + "am" + vorstellung.getDatum() + "um" + vorstellung.getUhrzeit() + "in der Sprache" + vorstellung.getSprache() + "im Saal" + vorstellung.getSaal().getBezeichnung()+ "</p>");
+            out.write("<p> Film " + vorstellung.getFilm().getTitel() + " am " + formatDatum + " um " + formatUhrzeit + " in der Sprache " + vorstellung.getSprache() + " im Saal " + vorstellung.getSaal().getBezeichnung()+ "</p>");
         }else{
             out.write("<p> Hier ist etwas schiefgelaufen </p>");
         };%>
+    <div class="container-fluid">
+        <h1><%=vorstellung.getFilm().getTitel()%>></h1>
+        <h2><%=formatDatum%> , <%=formatUhrzeit%></h2>
+        <span class="badge badge-pill badge-info"><%=vorstellung.getSprache()%></span>
+        <span class="badge badge-pill badge-secondary"><%=vorstellung.getSaal().getBezeichnung()%>></span>
+    </div>
 
 </body>
 </html>
