@@ -91,7 +91,6 @@ public class VorstellungsFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getVorstellungByID(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        //vorstellung = new Vorstellung(7,null,null,"Deutsch",FilmFactory.getFilm(7),KinosaalFactory.getKinosaal(1));
 
 
         if(rs!=null) {
