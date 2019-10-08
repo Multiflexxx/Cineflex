@@ -10,6 +10,7 @@
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
+
 <jsp:include page="elements/header.jsp"/>
 
 <jsp:include page="login.jsp"/>
@@ -70,6 +71,9 @@
         }
     }
 
+    if(plz == "00000") {
+        
+    }
 
     //String sql = QueryBuilder.showTitelPageFilmsbyPLZ(plz);
     String sql = QueryBuilder.showTitlePageFilms();

@@ -2,7 +2,7 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="db_connector.QueryBuilder" %>
 <%@ page import="java.sql.ResultSet" %>
-<%@ page import="oo.Gebäude" %>
+<%@ page import="oo.Gebaeude" %>
 <%@ page import="factory.GebaeudeFactory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -45,7 +45,7 @@
                         //Connection c = Connector.getConnection();
                         //ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
 
-                        Gebäude[] gebäude = GebaeudeFactory.getGebäude();
+                        Gebaeude[] gebäude = GebaeudeFactory.getGebaeude();
 
 
                         if (gebäude != null) {
