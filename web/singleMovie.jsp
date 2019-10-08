@@ -7,10 +7,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String id = request.getParameter("id");
-            String date = request.getParameter("date");
-                    String time = request.getParameter("time");
+    String date = request.getParameter("date");
+    String time = request.getParameter("time");
+    //TODO : Nicht so wirklich?
+    time = "";
                             // Get PLZ
-                            String plz = "00000";
+    String plz = "00000";
     Cookie[] cookies = request.getCookies();
     for (Cookie c : cookies) {
         if (c.getName().equals("plz")) {

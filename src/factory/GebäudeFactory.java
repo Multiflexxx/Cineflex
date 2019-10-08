@@ -17,6 +17,7 @@ public class GebäudeFactory {
 
         if (rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
+            gebäude = new Gebäude[rsSize];
             if (rsSize > 0) {
                 try {
                     int counter = 0;

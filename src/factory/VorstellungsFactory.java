@@ -80,8 +80,6 @@ public class VorstellungsFactory {
 
             return vorstellungen;
         }
-
-
         return null;
     }
 
