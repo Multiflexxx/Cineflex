@@ -17,14 +17,17 @@
 <jsp:include page="filter.jsp"/>
 <html>
 <head>
-    <title></title>
+    <title>TEST</title>
 </head>
 <body>
     <%
         String id = request.getParameter("id");
         Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
-    %>
-    <p>VorstellungsID: <%=id%></p>
-    <p>Film <%=vorstellung.getFilm().getTitel()%> am <%=vorstellung.getDatum()%> um <%=vorstellung.getUhrzeit()%> in der Sprache <%=vorstellung.getSprache()%> im Saal <%=vorstellung.getSaal().getBezeichnung()%></p>
+        if(vorstellung!=null){
+            out.write("<p> Film" + vorstellung.getFilm().getTitel() + "am" + vorstellung.getDatum() + "um" + vorstellung.getUhrzeit() + "in der Sprache" + vorstellung.getSprache() + "im Saal" + vorstellung.getSaal().getBezeichnung()+ "</p>");
+        }else{
+            out.write("<p> Hier ist etwas schiefgelaufen </p>");
+        };%>
+
 </body>
 </html>
