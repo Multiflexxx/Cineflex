@@ -70,6 +70,10 @@
         }
     }
 
+    if(plz == "00000") {
+        
+    }
+
     //String sql = QueryBuilder.showTitelPageFilmsbyPLZ(plz);
     String sql = QueryBuilder.showTitlePageFilms();
     ResultSet rs = Connector.getQueryResult(c, sql);
