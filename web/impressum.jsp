@@ -11,7 +11,7 @@
 <jsp:include page="elements/head.jsp"/>
 <body>
 <jsp:include page="elements/header.jsp"/>
-
+<jsp:include page="locationPicker.jsp"/>
 <jsp:include page="login.jsp"/>
 <jsp:include page="registration.jsp"/>
 <jsp:include page="filter.jsp"/>
