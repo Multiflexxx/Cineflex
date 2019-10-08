@@ -9,9 +9,8 @@
     String id = request.getParameter("id");
     String date = request.getParameter("date");
     String time = request.getParameter("time");
-    //TODO : Nicht so wirklich?
-    time = "";
-                            // Get PLZ
+
+    // Get PLZ
     String plz = "00000";
     Cookie[] cookies = request.getCookies();
     for (Cookie c : cookies) {
@@ -25,14 +24,14 @@
     film = FilmFactory.getFilm(Integer.parseInt(id));
     try {
         vorstellung = VorstellungsFactory.getVorstellungen(film, date, time, plz);
-        out.write(VorstellungsFactory.getLastSQLQuery());
 
     } catch (Exception e) {
         out.println(plz);
         out.println("Geht nicht!");
     }
-    if (vorstellung[0] == null) {
-        out.write(date + time + plz + " " + Integer.parseInt(id));
+    if (vorstellung == null) {
+        out.write(VorstellungsFactory.getLastSQLQuery());
+        //out.write(date + time + plz + " " + Integer.parseInt(id));
         return;
     }
     film = vorstellung[0].getFilm();
