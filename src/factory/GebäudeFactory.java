@@ -30,6 +30,7 @@ public class GebäudeFactory {
                                 rs.getInt("PLZ"),
                                 rs.getString("Ort.Ortsname")
                         );
+                        counter++;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
