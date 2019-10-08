@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 public class KinosaalFactory {
     public static Kinosaal getKinosaal(int id) {
+
         Sitz[] Sitzplan;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getSitzplanBySaalID(id);
@@ -22,13 +23,13 @@ public class KinosaalFactory {
             for(int i =0; i<rsSize;i++) {
                 try {
                     rs.next();
-                    Sitzplan[i]=new Sitz(rs.getInt("SitzplatzID"),rs.getInt("Nummer"),rs.getString("Reihe").charAt(0),rs.getString("Sitzklasse").charAt(0),null, 0.0f); //TODO beschreibung und grundpreis verbinden.
+                    Sitzplan[i]=new Sitz(rs.getInt("SitzplatzID"),rs.getInt("Nummer"),rs.getString("Reihe").charAt(0),rs.getString("Sitzklasse").charAt(0),"", 0.0f); //TODO beschreibung und grundpreis verbinden.
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
         }else{
-            Sitzplan = new Sitz[1];
+            Sitzplan = new Sitz[0];
         }
 
         Kinosaal kinosaal = null;

@@ -19,7 +19,7 @@
 <jsp:include page="filter.jsp"/>
 <html>
 <head>
-    <title>TEST</title>
+    <title></title>
 </head>
 <body>
     <%
@@ -47,6 +47,7 @@
                 <span class="badge badge-pill badge-secondary"><%=vorstellung.getSaal().getBezeichnung()%></span>
             </div>
         </div>
+        <!--<p><=//vorstellung.getSaal().getSitzplan()[1].getBeschreibung()%></p>-->
 
     </div>
 
