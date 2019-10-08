@@ -4,6 +4,7 @@ import db_connector.Connector;
 import db_connector.QueryBuilder;
 import helper.SupportMethods;
 import oo.Kinosaal;
+import oo.Sitz;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,22 +12,41 @@ import java.sql.SQLException;
 
 public class KinosaalFactory {
     public static Kinosaal getKinosaal(int id) {
-        Kinosaal kinosaal = null;
+        Sitz[] Sitzplan;
         Connection c = Connector.getConnection();
-        String sql = QueryBuilder.getSaalById(id);
+        String sql = QueryBuilder.getSitzplanBySaalID(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
+        if(rs != null) {
+            int rsSize = SupportMethods.getResultSetSize(rs);
+            Sitzplan = new Sitz[rsSize];
+            for(int i =0; i<rsSize;i++) {
+                try {
+                    rs.next();
+                    Sitzplan[i]=new Sitz(rs.getInt("SitzplatzID"),rs.getInt("Nummer"),rs.getString("Reihe").charAt(0),rs.getString("Sitzklasse").charAt(0),null, 0.0f); //TODO beschreibung und grundpreis verbinden.
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else{
+            Sitzplan = new Sitz[1];
+        }
 
+        Kinosaal kinosaal = null;
+        sql = QueryBuilder.getSaalById(id);
+        rs = Connector.getQueryResult(c, sql);
         if(rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
                 try {
                     rs.next();
-                    kinosaal = new Kinosaal(id, rs.getString("Saalbezeichnung"), null);
+                    kinosaal = new Kinosaal(id, rs.getString("Saalbezeichnung"), Sitzplan);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
         }
+
+
         return kinosaal;
     }
 }
