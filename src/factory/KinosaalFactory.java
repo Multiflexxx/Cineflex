@@ -29,7 +29,8 @@ public class KinosaalFactory {
                 }
             }
         }else{
-            Sitzplan = new Sitz[0];
+            Sitzplan = new Sitz[1];
+            Sitzplan[0] = new Sitz(1,2,'A','B',"test", 1.6f);
         }
 
         Kinosaal kinosaal = null;

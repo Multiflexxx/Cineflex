@@ -12,13 +12,14 @@ import java.sql.SQLException;
 public class Anfahrtsseite {
 
     public static String getAnfahrtsseite(String ort) throws UnsupportedEncodingException, SQLException {
-        String baseStringGoogle = "https://www.google.com/maps/search/?api=1&query=";
+        String baseStringGoogle = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCM1EeAy6KlTOa-jHIsL_rCEhDghnqZ5Y8&q=";
         Connection c = Connector.getConnection();
         ResultSet rs = Connector.getQueryResult(c, QueryBuilder.getKinosByName(ort));
-        String variableString = "" + rs.getString("Straße") + rs.getString("Hausnummer") + rs.getString("PLZ");
+        rs.next();
+        String variableString = rs.getString("Straße") + rs.getString("Hausnummer") + rs.getString("PLZ");
         variableString = URLEncoder.encode(variableString, "UTF-8");
         Connector.closeConnection(c);
-        return("<iframe src=\"" + baseStringGoogle + variableString + "\" width=\"1000\" height=\"1000\"></iframe>");
+        return("<iframe src=\"" + baseStringGoogle + variableString + "\" width=\"1000\" height=\"1000\"></iframe>"+ baseStringGoogle + variableString );
     }
 
 }

@@ -47,7 +47,72 @@
                 <span class="badge badge-pill badge-secondary"><%=vorstellung.getSaal().getBezeichnung()%></span>
             </div>
         </div>
-        <!--<p><=//vorstellung.getSaal().getSitzplan()[1].getBeschreibung()%></p>-->
+        <%
+            out.write("<div class=\"container\">");
+            int arrayLength = vorstellung.getSaal().getSitzplan().length;
+            int counter = 0;
+            out.write("<div class=\"row\">");
+            while(counter < arrayLength) {
+                out.write("<div class=\"col-sm align-items-center\">");
+                out.write("<button type=\"button\" class=\"btn btn-primary margin: 5 2px\"\">" + vorstellung.getSaal().getSitzplan()[counter].getNummer() + vorstellung.getSaal().getSitzplan()[counter].getReihe() +"</button>");
+                out.write("</div>");
+                if(counter >= arrayLength-1) {
+                out.write("</div>");
+                }
+                else if(vorstellung.getSaal().getSitzplan()[counter].getReihe() != vorstellung.getSaal().getSitzplan()[counter+1].getReihe()) {
+                out.write("</div>");
+                out.write("<div class=\"row\">");
+                }
+
+                counter++;
+            }
+            out.write("</div>");
+        %>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col">
+                    <div class="col" id="sitzplan" style="margin: 0 auto;"></div>
+                    <div id="endgame">
+                        <br>
+                        <button onclick="" style="margin:0 5px">Reservieren</button>
+                        <button onclick="" style="margin: 0 5px">Buchen</button>
+                        <button onclick="" style="margin: 0 5px">Zurück</button>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="col align-self-center">
+                    <div class="cardtext-white bg-dark" style="max-width: 21rem; min-width: 15rem; margin: 0 auto;">
+                        <div class="card-header">
+                            <h5>Ticket Preise</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-dark text-center">
+                                <tbody>
+                                <tr>
+                                    <td>Schüler / Student</td>
+                                    <td>10 €</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Normal</td>
+                                    <td>12 €</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Senior</td>
+                                    <td>10 €</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <p style="text-align: right; font-size: 11px;">* Loge 2 € Aufpreis; Reihen G, H & I</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 

@@ -743,8 +743,15 @@ public class Test {
     @org.junit.Test
     public void testeConnector() throws Exception
     {
+        /* @InjectMocks
+        Connector connector;
+        @Mock
+        Connection mockConnection;
+        @Mock
+        Statement mockStatement;
+        */
 
-
+        //Mockito.when(mockConnection.createStatement());
 
 
 

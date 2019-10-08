@@ -12,7 +12,7 @@
                 <a href="#">Kontakt</a>
             </div>
             <div class="col">
-                <a href="#">Impressum</a>
+                <a href="impressum.jsp">Impressum</a>
             </div>
             <div class="col">
                 <a href="anfahrt.jsp">Anfahrt</a>
