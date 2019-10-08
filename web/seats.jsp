@@ -14,6 +14,7 @@
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
 <jsp:include page="elements/header.jsp"/>
+<jsp:include page="locationPicker.jsp"/>
 <jsp:include page="login.jsp"/>
 <jsp:include page="registration.jsp"/>
 <jsp:include page="filter.jsp"/>
