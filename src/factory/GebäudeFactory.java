@@ -38,7 +38,7 @@ public class GebäudeFactory {
             return gebäude;
         } else {
             gebäude = new Gebäude[1];
-            gebäude[0] = null;
+            gebäude[0] = new Gebäude(-1, "Egal", 0, 0, "RS is Null");
             return gebäude;
         }
     }
