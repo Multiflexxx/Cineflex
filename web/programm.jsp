@@ -35,7 +35,7 @@
     <%
         if (filme != null) {
             for (Film f : filme) {
-                String hrefURL = "SingleMovieHandler?";
+                String hrefURL = "singleMovie.jsp?";
                 hrefURL += "id=" + f.getFilmID();  //getString("FilmID");
                 hrefURL += "&date=" + sd.format(date);
                 ;

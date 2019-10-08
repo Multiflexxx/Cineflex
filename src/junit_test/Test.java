@@ -4,7 +4,7 @@ import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 import handler.RegistrationHandler;
-import handler.SingleMovieHandler;
+import handler.SingleMovieHandler_ALT;
 import helper.DateFormatter;
 import oo.*;
 import org.junit.Assert;
@@ -931,7 +931,7 @@ public class Test {
 
         when(response6.getWriter()).thenReturn(printWriter);
 
-        SingleMovieHandler singleMovieHandler = new SingleMovieHandler();
+        SingleMovieHandler_ALT singleMovieHandler = new SingleMovieHandler_ALT();
         singleMovieHandler.doGet(request6, response6);
 
         String result = stringWriter.getBuffer().toString();
