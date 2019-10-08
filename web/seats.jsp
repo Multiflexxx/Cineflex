@@ -38,10 +38,16 @@
         }
         ;%>
     <div class="container-fluid">
-        <h1><%=vorstellung.getFilm().getTitel()%></h1>
-        <h2><%=formatDatum%> , <%=formatUhrzeit%></h2>
-        <span class="badge badge-pill badge-info"><%=vorstellung.getSprache()%></span>
-        <span class="badge badge-pill badge-secondary"><%=vorstellung.getSaal().getBezeichnung()%></span>
+        <div class="media">
+            <img src="<%=vorstellung.getFilm().getBildLink()%>" class="align-self-start mr-3 img-thumbnail" alt="Bild" width="10%">
+            <div class="media-body">
+                <h1><%=vorstellung.getFilm().getTitel()%></h1>
+                <h2><%=formatDatum%> , <%=formatUhrzeit%></h2>
+                <span class="badge badge-pill badge-info"><%=vorstellung.getSprache()%></span>
+                <span class="badge badge-pill badge-secondary"><%=vorstellung.getSaal().getBezeichnung()%></span>
+            </div>
+        </div>
+
     </div>
 
 </body>
