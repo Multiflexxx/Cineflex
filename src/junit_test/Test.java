@@ -35,6 +35,9 @@ import java.util.Locale;
 import static org.mockito.Mockito.when;
 
 public class Test {
+    public static void main(String[] args) {
+        System.out.println("Test 1");
+    }
 
     // Create Mock Data for HttpServlets
     @Mock
