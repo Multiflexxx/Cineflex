@@ -2,14 +2,14 @@ package oo;
 
 public class Gebäude {
     int gebäudeId;
-    String strasße;
+    String strasse;
     int hausnummer;
     int plz;
     String ortsname;
 
-    public Gebäude(int gebäudeId, String strasße, int hausnummer, int plz, String ortsname) {
+    public Gebäude(int gebäudeId, String strasse, int hausnummer, int plz, String ortsname) {
         this.gebäudeId = gebäudeId;
-        this.strasße = strasße;
+        this.strasse = strasse;
         this.hausnummer = hausnummer;
         this.plz = plz;
         this.ortsname = ortsname;
@@ -24,7 +24,7 @@ public class Gebäude {
     }
 
     public String getStrasße() {
-        return strasße;
+        return strasse;
     }
 
     public int getHausnummer() {
@@ -39,8 +39,8 @@ public class Gebäude {
         this.gebäudeId = gebäudeId;
     }
 
-    public void setStrasße(String strasße) {
-        this.strasße = strasße;
+    public void setStrasse(String strasse) {
+        this.strasse = strasse;
     }
 
     public void setHausnummer(int hausnummer) {

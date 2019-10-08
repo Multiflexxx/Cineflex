@@ -757,7 +757,7 @@ public class Test {
                 "passwort123"));
 
         // ShowAllCinemas
-        Assert.assertEquals("SELECT Ort.Ortsname, Ort.PLZ FROM Ort INNER JOIN Gebäude ON Ort.PLZ=Gebäude.PLZ ORDER BY `Ortsname`;", QueryBuilder.showAllCinemas());
+        Assert.assertEquals("SELECT Ort.Ortsname, Ort.PLZ, `GebäudeId`, `Straße`, `Hausnummer` FROM Ort INNER JOIN Gebäude ON Ort.PLZ=Gebäude.PLZ ORDER BY `Ortsname`;", QueryBuilder.showAllCinemas());
 
         //showCinemaImaginationsToday
         Date date1 = new Date();
