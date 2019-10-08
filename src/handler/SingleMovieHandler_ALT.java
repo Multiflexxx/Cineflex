@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 @WebServlet(name = "SingleMovieHandler")
-public class SingleMovieHandler extends HttpServlet {
+public class SingleMovieHandler_ALT extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         String date = request.getParameter("date");

@@ -34,7 +34,7 @@
 
     <servlet>
         <servlet-name>SingleMovieHandler</servlet-name>
-        <servlet-class>handler.SingleMovieHandler</servlet-class>
+        <servlet-class>handler.SingleMovieHandler_ALT</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SingleMovieHandler</servlet-name>
