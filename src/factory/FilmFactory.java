@@ -93,6 +93,82 @@ public class FilmFactory {
         return getFilme("", DateFormatter.getSQLDate(new Date()), "08:00:00", 18);
     }
 
+    public static Film[] getTitelPageFilme(String plz) {
+        Film[] filme;
+        String splz = plz;
+
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.showTitelPageFilmsbyPLZ(splz);
+        ResultSet rs = Connector.getQueryResult(c, sql);
+
+        if(rs != null) {
+            int rsSize = SupportMethods.getResultSetSize(rs);
+            if(rsSize > 0) {
+                filme = new Film[rsSize];
+                try {
+                    int counter = 0;
+                    while (rs.next()) {
+                        filme[counter] = new Film(rs.getString("Titel"),
+                                rs.getString("Beschreibung"),
+                                rs.getString("BildLink"),
+                                rs.getString("TrailerLink"),
+                                rs.getInt("Dauer"),
+                                rs.getInt("FSK"),
+                                rs.getInt("Vorstellung.FilmID"),
+                                rs.getBoolean("3D"));
+
+                        counter++;
+                    }
+                }catch(SQLException e) {
+                    e.printStackTrace();
+                }
+//                for(Film f : filme) {
+////                    sql = QueryBuilder.getGenreNamesById(f.getFilmID());
+////                    rs = Connector.getQueryResult(c, sql);
+////                    try {
+////                        rsSize = SupportMethods.getResultSetSize(rs);
+////                        if(rsSize > 0) {
+////                            int counter = 0;
+////                            String[] genres = null;
+////                            while(rs.next()) {
+////                                genres = new String[rsSize];
+////                                genres[counter] = rs.getString("Genrebezeichnung");
+////                                counter++;
+////                            }
+////                            f.setGenre(genres);
+////                        }
+////                    }catch (SQLException e) {
+////                        e.printStackTrace();
+////                    }
+////
+////                    sql = QueryBuilder.getSpracheById(f.getFilmID());
+////                    rs = Connector.getQueryResult(c, sql);
+////
+////                    try {
+////                        rsSize = SupportMethods.getResultSetSize(rs);
+////                        if(rsSize > 0) {
+////                            int counter = 0;
+////                            String[] sprachen = null;
+////                            while(rs.next()) {
+////                                sprachen = new String[rsSize];
+////                                sprachen[counter] = rs.getString("Sprachenname");
+////                                counter++;
+////                            }
+////                            f.setSprache(sprachen);
+////                        }
+////                    }catch (SQLException e) {
+////                        e.printStackTrace();
+////                    }
+////                }
+            } else {
+                filme = new Film[1];
+                filme[0] = null;
+            }
+            return filme;
+        }
+        return null;
+    }
+
     public static Film getFilm(int id) {
         Film film = null;
         Connection c = Connector.getConnection();

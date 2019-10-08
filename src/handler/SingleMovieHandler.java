@@ -46,6 +46,7 @@ public class SingleMovieHandler extends HttpServlet {
             out.write(plz);
             out.write("Geht nicht!");
         }
+        out.write(VorstellungsFactory.getLastSQLQuery());
         if (vorstellung[0] == null) {
             out.write(date + time + plz + " " + Integer.parseInt(id));
             return;
