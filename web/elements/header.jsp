@@ -2,6 +2,8 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="db_connector.QueryBuilder" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="oo.Gebäude" %>
+<%@ page import="factory.GebäudeFactory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <header>
@@ -40,14 +42,26 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <%
-                        Connection c = Connector.getConnection();
-                        ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
-                        if (rs != null) {
-                            while (rs.next()) {
-                                out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "', '" + rs.getString("PLZ") + "')\">" + rs.getString("Ortsname") + "</a>");
+                        //Connection c = Connector.getConnection();
+                        //ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
+
+                        Gebäude[] gebäude = GebäudeFactory.getGebäude();
+
+
+                        if (gebäude != null) {
+                            for(int i=0; i<gebäude.length; i++) {
+                                out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
                             }
+                        } else {
+                            out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('')\">Scheiße</a>");
                         }
-                        Connector.closeConnection(c);
+
+//                        if (rs != null) {
+//                            while (rs.next()) {
+//                                out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "', '" + rs.getString("PLZ") + "')\">" + rs.getString("Ortsname") + "</a>");
+//                            }
+//                        }
+                        //Connector.closeConnection(c);
                     %>
                 </div>
             </div>

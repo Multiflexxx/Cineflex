@@ -4,10 +4,12 @@
 <%@ page import="db_connector.QueryBuilder" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.time.LocalDate" %>
+<%@ page import="factory.FilmFactory" %>
+<%@ page import="oo.Film" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
-<body>
+<body class="d-flex flex-column h-100">
 <jsp:include page="elements/header.jsp"/>
 
 <jsp:include page="login.jsp"/>
@@ -16,7 +18,7 @@
 
 <!-- Karussell-->
 <!-- Bitte nur Bilder der größe 1656x630 einfügen-->
-<div class="karussell">
+<div class="karussell mb-3">
     <div id="karussellangebote" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#karussellangebote" data-slide-to="0" class="active"></li>
@@ -59,8 +61,6 @@
 
 <%
     Connection c = Connector.getConnection();
-    String sql = QueryBuilder.showTitlePageFilms();
-    ResultSet rs = Connector.getQueryResult(c, sql);
 
     String plz = "00000";
     Cookie[] cookies = request.getCookies();
@@ -70,96 +70,55 @@
         }
     }
 
+    //String sql = QueryBuilder.showTitelPageFilmsbyPLZ(plz);
+    String sql = QueryBuilder.showTitlePageFilms();
+    ResultSet rs = Connector.getQueryResult(c, sql);
+
+    Film[] titelFilm = FilmFactory.getTitelPageFilme(plz);
 
     out.write("<div class=\"container\">");
-    out.write("<div class=\"card-deck\" style=\"max-width: 1400px;\">");
+    out.write("<div class=\"card-deck mb-3\" style=\"max-width: 1400px;\">");
     while (rs.next()) {
-        String hrefURL = "SingleMovieHandler?id=";
-        try {
-            if (rs == null) {
-                while (rs.next()) {
-                    LocalDate localDate = LocalDate.now();
-                    hrefURL += rs.getString("FilmID");
-                    hrefURL += "&date=" + localDate.toString();
-                    hrefURL += "&time=08:00:00";
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String hrefURL = "singleMovie.jsp?id=";
+        LocalDate localDate = LocalDate.now();
+        hrefURL += rs.getString("FilmID");
+        hrefURL += "&date=" + localDate.toString();
+        hrefURL += "&time=08:00:00";
         out.write("<div class=\"card\">");
         out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img-top\" alt='" + rs.getString("Titel") + "'>");
-        out.write("<div class=\"card-body\">");
+        out.write("<div class=\"card-body text-center\">");
         out.write("<h5 class=\"card-title\">" + rs.getString("Titel") + "</h5>");
-        out.write("<p class=\"card-text\">BlaBla</p>");
         out.write("<p class=\"card-text\"><small class=\"text-muted\">Neu bei uns!</small></p>");
+        //out.write("<div class=\"card-footer text-center\">");
         out.write("<a href=\"" + hrefURL + "\" class=\"btn btn-primary\">Zum Film</a>");
+        //out.write("</div>");
         out.write("</div>");
         out.write("</div>");
     }
+
+//    for (int i = 0; i < titelFilm.length; i++) {
+//    String hrefURL = "singleMovie.jsp?id=";
+//    LocalDate localDate = LocalDate.now();
+//    hrefURL += titelFilm[i].getFilmID();
+//    hrefURL += "&date=" + localDate.toString();
+//    hrefURL += "&time=08:00:00";
+//    out.write("<div class=\"card\">");
+//    out.write("<img src='" + titelFilm[i].getBildLink() +  "' class=\"card-img-top\" alt='" + titelFilm[i].getTitel() + "'>");
+//    out.write("<div class=\"card-body text-center\">");
+//    out.write("<h5 class=\"card-title\">" + titelFilm[i].getTitel() + "</h5>");
+//    out.write("<p class=\"card-text\"><small class=\"text-muted\">Neu bei uns!</small></p>");
+//    //out.write("<div class=\"card-footer text-center\">");
+//    out.write("<a href=\"" + hrefURL + "\" class=\"btn btn-primary\">Zum Film</a>");
+//    //out.write("</div>");
+//    out.write("</div>");
+//    out.write("</div>");
+//}
     out.write("</div>");
     out.write("</div>");
 
     Connector.closeConnection(c);
 %>
 
-<%--
-   <!--Filme-->
-   <div class="container">
-     <div class="row">
-       <div class="col-sm">
-         <div class="card" style="width: 20rem;">
-           <img src="covers/onceupon.jpg" class="card-img-top" alt="Once Upon a Time in Hollywood">
-           <div class="card-body">
-             <h5 class="card-title">Once Upon a Time in Hollywood</h5>
-             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-             <a href="#" class="btn btn-primary">Zum Film</a>
-           </div>
-         </div>
-       </div>
-       <div class="col-sm">
-         <div class="card" style="width: 20rem;">
-           <img src="covers/johnwick3.jpg" class="card-img-top" alt="John Wick 3">
-           <div class="card-body">
-             <h5 class="card-title">John Wick 3</h5>
-             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-             <a href="#" class="btn btn-primary">Zum Film</a>
-           </div>
-         </div>
-       </div>
-       <div class="col-sm">
-         <div class="card" style="width: 20rem;">
-           <img src="covers/lionking.jpg" class="card-img-top" alt="König der Löwen">
-           <div class="card-body">
-             <h5 class="card-title">König der Löwen</h5>
-             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-             <a href="#" class="btn btn-primary">Zum Film</a>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
-
-     <script type="text/javascript">function test()
-     {
-       var slider=document.getElementById("formControlRange");
-       var output=document.getElementById("telefonout");
-       output.innerHTML=slider.value;
-     }</script>
-
-     <!--Pages-->
-     <nav aria-label="Filmseite auswahl" class="pagination-navigation">
-       <ul class="pagination">
-         <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-         <li class="page-item"><a class="page-link" href="#">1</a></li>
-         <li class="page-item"><a class="page-link" href="#">2</a></li>
-         <li class="page-item"><a class="page-link" href="#">3</a></li>
-         <li class="page-item"><a class="page-link" href="#">Next</a></li>
-       </ul>
-     </nav>
-
-   --%>
 <jsp:include page="elements/footer.jsp"/>
 </body>
 </html>
-

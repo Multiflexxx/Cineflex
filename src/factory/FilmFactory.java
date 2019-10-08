@@ -2,7 +2,8 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-import oo.DateFormatter;
+import helper.SupportMethods;
+import helper.DateFormatter;
 import oo.Film;
 
 import java.sql.Connection;
@@ -90,6 +91,44 @@ public class FilmFactory {
 
     public static Film[] getFilme() {
         return getFilme("", DateFormatter.getSQLDate(new Date()), "08:00:00", 18);
+    }
+
+    public static Film[] getTitelPageFilme(String plz) {
+        Film[] filme;
+        String splz = plz;
+
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.showTitelPageFilmsbyPLZ(splz);
+        ResultSet rs = Connector.getQueryResult(c, sql);
+
+        if(rs != null) {
+            int rsSize = SupportMethods.getResultSetSize(rs);
+            if(rsSize > 0) {
+                filme = new Film[rsSize];
+                try {
+                    int counter = 0;
+                    while (rs.next()) {
+                        filme[counter] = new Film(rs.getString("Titel"),
+                                rs.getString("Beschreibung"),
+                                rs.getString("BildLink"),
+                                rs.getString("TrailerLink"),
+                                rs.getInt("Dauer"),
+                                rs.getInt("FSK"),
+                                rs.getInt("Vorstellung.FilmID"),
+                                rs.getBoolean("3D"));
+
+                        counter++;
+                    }
+                }catch(SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                filme = new Film[1];
+                filme[0] = null;
+            }
+            return filme;
+        }
+        return null;
     }
 
     public static Film getFilm(int id) {

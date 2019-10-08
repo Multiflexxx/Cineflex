@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="stayLoggedIn">
-                        <label class="form-check-label" for="stayLoggedIn">Angemeldet bleiben?</label>
+                        <label class="form-check-label" for="stayLoggedIn" value="true" id="inputCheckLogin">Angemeldet bleiben?</label>
                     </div>
                 </form>
             </div>
