@@ -853,25 +853,7 @@ public class Test {
         Assert.assertEquals("SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = 'Berlin' ;",QueryBuilder.getKinosByName("Berlin"));
     }
 
-
-
-
-
-
-
     // TESTS FOR HANDLER
-
-    @org.junit.Test
-    public void testeCreateBookingHandler()
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeDisplayMovieHandler()
-    {
-
-    }
 
     @org.junit.Test
     public void testeLoginHandler()

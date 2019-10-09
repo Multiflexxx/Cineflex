@@ -81,13 +81,16 @@ public class FilmFactory {
 //                        e.printStackTrace();
 //                    }
                 }
+                Connector.closeConnection(c);
                 return filme;
             } else {
                 filme = new Film[1];
                 filme[0] = null;
+                Connector.closeConnection(c);
                 return filme;
             }
         }
+        Connector.closeConnection(c);
         return null;
     }
 
@@ -128,8 +131,10 @@ public class FilmFactory {
                 filme = new Film[1];
                 filme[0] = null;
             }
+            Connector.closeConnection(c);
             return filme;
         }
+        Connector.closeConnection(c);
         return null;
     }
 
@@ -198,6 +203,7 @@ public class FilmFactory {
                 e.printStackTrace();
             }
         }
+        Connector.closeConnection(c);
         return film;
     }
 
@@ -205,6 +211,7 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getGenreNamesById(film.getFilmID());
         ResultSet rs = Connector.getQueryResult(c, sql);
+        Connector.closeConnection(c);
         try {
             int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
@@ -226,6 +233,7 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getSpracheById(film.getFilmID());
         ResultSet rs = Connector.getQueryResult(c, sql);
+        Connector.closeConnection(c);
 
         try {
             int rsSize = SupportMethods.getResultSetSize(rs);

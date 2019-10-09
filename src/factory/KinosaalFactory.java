@@ -48,7 +48,7 @@ public class KinosaalFactory {
             }
         }
 
-
+        Connector.closeConnection(c);
         return kinosaal;
     }
 }
