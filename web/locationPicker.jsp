@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="registerDialogTitle">W&auml;hlen Sie bitte eine der folgenden Standorte aus!</h5>
+                <h5 class="modal-title" id="registerDialogTitle">W&auml;hlen Sie bitte eine der folgenden Standorte aus! Was soll das</h5>
             </div>
             <div class="modal-body">
                 <table class="table">
@@ -41,8 +41,5 @@
 </div>
 
 <script>
-    $('#locationDialog').modal({
-        backdrop: 'static',
-        keyboard: false
-    });
+    checkCookie();
 </script>
