@@ -20,15 +20,19 @@
     }
 
     Film film = null;
-    Vorstellung vorstellung[] = null;
+    Vorstellung [] vorstellung = null;
     film = FilmFactory.getFilm(Integer.parseInt(id));
     try {
         vorstellung = VorstellungsFactory.getVorstellungen(film, date, time, plz);
 
     } catch (Exception e) {
-        out.println(e.getMessage());
-        out.println(plz);
-        out.println("Geht nicht!");
+        if (vorstellung == null) {
+            out.write("qahja");
+        } else {
+            out.println(plz);
+            out.println("ohoh!");
+        }
+
     }
     if (vorstellung == null) {
         out.write(VorstellungsFactory.getLastSQLQuery());

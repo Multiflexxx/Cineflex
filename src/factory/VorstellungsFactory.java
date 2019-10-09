@@ -32,10 +32,10 @@ public class VorstellungsFactory {
         ResultSet rs = Connector.getQueryResult(c, sql);
         Connector.closeConnection(c);
 
+
         if(rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
             vorstellungen = new Vorstellung[rsSize];
-
             if(rsSize > 0) {
                 try {
                     int counter = 0;
@@ -66,7 +66,7 @@ public class VorstellungsFactory {
                                                                     time_Uhrzeit,
                                                                     rs.getString("Sprache.Sprachenname"),
                                                                     film,
-                                                                    KinosaalFactory.getKinosaal(rs.getInt("SaalID")));
+                                                                    KinosaalFactory.getKinosaal(rs.getInt("Kinosaal.SaalID")));
                         counter++;
                     }
                 }catch(SQLException e) {
@@ -77,9 +77,10 @@ public class VorstellungsFactory {
                 vorstellungen[0] = null;
                 return vorstellungen;
             }
-
+            Connector.closeConnection(c);
             return vorstellungen;
         }
+        Connector.closeConnection(c);
         return null;
     }
 
