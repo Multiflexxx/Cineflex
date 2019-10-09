@@ -98,28 +98,30 @@ public class FilmFactory {
         return getFilme("", DateFormatter.getSQLDate(new Date()), "08:00:00", 18);
     }
 
+
     public static Film[] getTitelPageFilme(String plz) {
         Film[] filme;
-        String splz = plz;
+        int rsSize;
 
         Connection c = Connector.getConnection();
-        String sql = QueryBuilder.showTitelPageFilmsbyPLZ(splz);
+        String sql = QueryBuilder.showTitelPageFilmsbyPLZ(plz);
         ResultSet rs = Connector.getQueryResult(c, sql);
 
         if(rs != null) {
-            int rsSize = SupportMethods.getResultSetSize(rs);
+            rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
                 filme = new Film[rsSize];
                 try {
                     int counter = 0;
                     while (rs.next()) {
-                        filme[counter] = new Film(rs.getString("Titel"),
+                        filme[counter] = new Film(
+                                rs.getString("Titel"),
                                 rs.getString("Beschreibung"),
                                 rs.getString("BildLink"),
                                 rs.getString("TrailerLink"),
                                 rs.getInt("Dauer"),
                                 rs.getInt("FSK"),
-                                rs.getInt("Vorstellung.FilmID"),
+                                rs.getInt("Film.FilmID"),
                                 rs.getBoolean("3D"));
 
                         counter++;
@@ -155,7 +157,7 @@ public class FilmFactory {
                                 rs.getString("TrailerLink"),
                                 rs.getInt("Dauer"),
                                 rs.getInt("FSK"),
-                                rs.getInt("FilmID"),
+                                rs.getInt("Film.FilmID"),
                                 rs.getBoolean("3D"));
                     }
                 } catch (SQLException e) {

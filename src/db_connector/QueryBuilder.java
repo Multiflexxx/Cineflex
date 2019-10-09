@@ -37,12 +37,12 @@ public class QueryBuilder {
     public static String showTitelPageFilmsbyPLZ(String plz)
     {
         return "SELECT DISTINCT Film.FilmID, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `BildLink`, `TrailerLink`, `3D` FROM Vorstellung" +
-                "JOIN Film ON Vorstellung.FilmID = Film.FilmID" +
-                "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID" +
-                "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID" +
-                "WHERE `Datum` >= '" + getDateAsString() +"'" +
-                "AND Gebäude.PLZ = '"+ plz + "'" +
-                "LIMIT 3;";
+                " JOIN Film ON Vorstellung.FilmID = Film.FilmID" +
+                " JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID" +
+                " JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID" +
+                " WHERE `Datum` >= '" + getDateAsString() +"'" +
+                " AND Gebäude.PLZ = '"+ plz + "'" +
+                " LIMIT 3;";
     }
 
     public static String showAllFilmInfos(String filmTitel)
