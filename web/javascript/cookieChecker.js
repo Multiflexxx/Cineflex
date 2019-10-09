@@ -22,4 +22,5 @@ function openLocationDialog() {
 function submitLocation(city, plz) {
     setCookieUrl(city, plz);
     $('#locationDialog').modal('hide')
+    window.location.reload();
 };

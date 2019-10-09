@@ -6,4 +6,5 @@ function setCookieUrl(city, plz) {
     document.cookie = "plz=" + plz + ";" + expires + ";path=/";
     history.pushState(null, '', (window.location.pathname + "?city=" + city));
     document.getElementById("navbarDropdownCity").innerHTML = city;
+    window.location.reload();
 }
