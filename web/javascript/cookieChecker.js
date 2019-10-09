@@ -12,15 +12,14 @@ function checkCookie() {
 };
 
 function openLocationDialog() {
-    $("#locationDialog").modal("show");
+    $("#locationDialog").modal({
+        keyboard: false,
+        backdrop: "static"
+    });
+    $("#locationDialog").modal("show")
 };
 
 function submitLocation(city, plz) {
     setCookieUrl(city, plz);
     $('#locationDialog').modal('hide')
 };
-
-$('#locationDialog').modal({
-    backdrop: 'static',
-    keyboard: false
-});
