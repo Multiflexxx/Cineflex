@@ -36,14 +36,13 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="modal-footer">
-                <button type="button" onclick="submitLocation()" class="btn btn-primary">Speichern</button>
-            </div>
         </div>
     </div>
 </div>
 
 <script>
-    checkCookie();
+    $('#locationDialog').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
 </script>

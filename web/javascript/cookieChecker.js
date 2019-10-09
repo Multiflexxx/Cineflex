@@ -1,8 +1,3 @@
-$('#locationDialog').modal({
-    backdrop: 'static',
-    keyboard: false
-});
-
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
@@ -24,5 +19,3 @@ function submitLocation(city, plz) {
     setCookieUrl(city, plz);
     $('#locationDialog').modal('hide')
 }
-
-checkCookie();
