@@ -6,7 +6,7 @@ function getCookie(name) {
 
 function checkCookie() {
     var plz = getCookie("plz");
-    if(plz == undefined) {
+    if(plz == null) {
         openLocationDialog();
     }
 }

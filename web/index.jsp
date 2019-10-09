@@ -17,11 +17,6 @@
 <jsp:include page="registration.jsp"/>
 <jsp:include page="filter.jsp"/>
 
-
-<script>
-    checkCookie();
-</script>
-
 <!-- Karussell-->
 <!-- Bitte nur Bilder der größe 1656x630 einfügen-->
 <div class="karussell mb-3">
