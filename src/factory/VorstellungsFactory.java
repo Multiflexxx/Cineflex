@@ -4,6 +4,8 @@ import db_connector.Connector;
 import db_connector.QueryBuilder;
 import helper.SupportMethods;
 import oo.Film;
+import oo.Kinosaal;
+import oo.Sitz;
 import oo.Vorstellung;
 
 import java.sql.Connection;
@@ -34,12 +36,21 @@ public class VorstellungsFactory {
 
 
         if(rs != null) {
-            try {
-                rs.next();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
             int rsSize = SupportMethods.getResultSetSize(rs);
+
+            /*if(rsSize != 0)
+            {
+               Vorstellung v =  new Vorstellung(5,
+                        null,
+                        null,
+                        "",
+                        new Film(1),
+                        new Kinosaal(1, "", null));
+
+               Vorstellung[] v2 = new Vorstellung[1];
+               v2[0] = v;
+                return v2;
+            }*/
             vorstellungen = new Vorstellung[rsSize];
             if(rsSize > 0) {
                 try {
@@ -82,10 +93,10 @@ public class VorstellungsFactory {
                 vorstellungen[0] = null;
                 return vorstellungen;
             }
-            Connector.closeConnection(c);
+
             return vorstellungen;
         }
-        Connector.closeConnection(c);
+
         return null;
     }
 
