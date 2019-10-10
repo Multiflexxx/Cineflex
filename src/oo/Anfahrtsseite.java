@@ -16,10 +16,10 @@ public class Anfahrtsseite {
         Connection c = Connector.getConnection();
         ResultSet rs = Connector.getQueryResult(c, QueryBuilder.getKinosByName(ort));
         rs.next();
-        String variableString = rs.getString("Straße") + rs.getString("Hausnummer") + rs.getString("PLZ");
+        String variableString = rs.getString("Straße") + " " + rs.getString("Hausnummer") + " " + rs.getString("PLZ");
         variableString = URLEncoder.encode(variableString, "UTF-8");
         Connector.closeConnection(c);
-        return("<iframe src=\"" + baseStringGoogle + variableString + "\" width=\"1000\" height=\"1000\"></iframe>"+ baseStringGoogle + variableString );
+        return ("<iframe src=\"" + baseStringGoogle + variableString + "\" width=\"1000\" height=\"1000\"></iframe>");
     }
 
 }

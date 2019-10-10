@@ -34,6 +34,11 @@ public class VorstellungsFactory {
 
 
         if(rs != null) {
+            try {
+                rs.next();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             int rsSize = SupportMethods.getResultSetSize(rs);
             vorstellungen = new Vorstellung[rsSize];
             if(rsSize > 0) {
