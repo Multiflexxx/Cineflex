@@ -14,11 +14,11 @@ public class SupportMethods {
         }
         else {
             try {
-                rs.beforeFirst();
+//                rs.beforeFirst();
                 while (rs.next()) {
                     rowCount++;
                 }
-                rs.beforeFirst();
+//                rs.beforeFirst();
                 return rowCount;
             } catch(Exception e) {
                 e.printStackTrace();

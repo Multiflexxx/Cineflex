@@ -38,7 +38,7 @@ public class VorstellungsFactory {
         if(rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
 
-            /*if(rsSize != 0)
+            if(rsSize >= 0)
             {
                Vorstellung v =  new Vorstellung(5,
                         null,
@@ -49,8 +49,8 @@ public class VorstellungsFactory {
 
                Vorstellung[] v2 = new Vorstellung[1];
                v2[0] = v;
-                return v2;
-            }*/
+               return v2;
+            }
             vorstellungen = new Vorstellung[rsSize];
             if(rsSize > 0) {
                 try {
