@@ -27,7 +27,7 @@ public class SupportMethods {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return -1;
+            return -2;
         }
 
             /*if (rs != null) {
