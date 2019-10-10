@@ -34,12 +34,16 @@ public class VorstellungsFactory {
 
 
         if(rs != null) {
+            try {
+                rs.next();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             int rsSize = SupportMethods.getResultSetSize(rs);
             vorstellungen = new Vorstellung[rsSize];
             if(rsSize > 0) {
                 try {
                     int counter = 0;
-                    rs.next();
                     while (rs.next()) {
                         // `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname
                         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
