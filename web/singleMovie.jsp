@@ -24,7 +24,6 @@
     film = FilmFactory.getFilm(Integer.parseInt(id));
     try {
         vorstellung = VorstellungsFactory.getVorstellungen(film, date, time, plz);
-
     } catch (Exception e) {
         if (vorstellung == null) {
             out.write("qahja");
@@ -32,7 +31,6 @@
             out.println(plz);
             out.println("ohoh!");
         }
-
     }
     if (vorstellung == null) {
         out.write(VorstellungsFactory.getLastSQLQuery());
