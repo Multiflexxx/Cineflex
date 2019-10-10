@@ -6,17 +6,36 @@ import java.sql.SQLException;
 public class SupportMethods {
 
     public static int getResultSetSize(ResultSet rs) {
-        try {
-            if (rs != null) {
+
+        int rowCount = 0;
+
+        if(rs == null)
+        {
+            return -1;
+        }
+
+        else
+        {
+            try {
+                while (rs.next())
+                {
+                    rowCount++;
+                }
+
+                return rowCount;
+            /*if (rs != null) {
                 if (rs.last()) {
                     int size = rs.getRow();
                     rs.beforeFirst();
                     return size;
                 }
+            }*/
+            } catch(Exception e) {
+                e.printStackTrace();
             }
-        } catch(SQLException e) {
-            e.printStackTrace();
+            return -1;
         }
-        return -1;
+
+
     }
 }
