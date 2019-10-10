@@ -4,6 +4,7 @@
 <%@ page import="factory.FilmFactory" %>
 <%@ page import="factory.VorstellungsFactory" %>
 <%@ page import="helper.DateFormatter" %>
+<%@ page import="helper.ExceptionHandler" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String id = request.getParameter("id");
@@ -26,7 +27,7 @@
         vorstellung = VorstellungsFactory.getVorstellungen(film, date, time, plz);
     } catch (Exception e) {
         if (vorstellung == null) {
-            out.write(e.toString() + "<br />");
+            out.write(ExceptionHandler.exceptionStackTraceToString(e));
             out.write("qahja");
         } else {
             out.println(plz);
