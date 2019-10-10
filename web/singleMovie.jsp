@@ -26,6 +26,7 @@
         vorstellung = VorstellungsFactory.getVorstellungen(film, date, time, plz);
     } catch (Exception e) {
         if (vorstellung == null) {
+            out.write(e.toString() + "<br />");
             out.write("qahja");
         } else {
             out.println(plz);

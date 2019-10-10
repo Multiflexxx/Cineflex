@@ -8,6 +8,7 @@ public class SupportMethods {
     public static int getResultSetSize(ResultSet rs) {
 
         int rowCount = 0;
+        boolean check = false;
 
         if(rs == null) {
             return -1;
@@ -21,13 +22,17 @@ public class SupportMethods {
                 return rowCount;
             } catch(Exception e) {
                 e.printStackTrace();
+                check = true;
             }
             try {
                 rs.beforeFirst();
             } catch (SQLException e) {
                 e.printStackTrace();
+                if(!check) {
+                    return -2;
+                }
             }
-            return -2;
+            return -3;
         }
 
             /*if (rs != null) {
