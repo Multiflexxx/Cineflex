@@ -50,8 +50,8 @@
 
                         if (gebäude != null) {
                             for(int i=0; i<gebäude.length; i++) {
-                                out.println(gebäude.length + ", " + (gebäude[0] == null ? "null" : gebäude[0].getPlz()));
-                                // out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
+                                //out.println(gebäude.length + ", " + (gebäude[0] == null ? "null" : gebäude[0].getPlz()));
+                                 out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
                             }
                         } else {
                             out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('')\">Scheiße</a>");
