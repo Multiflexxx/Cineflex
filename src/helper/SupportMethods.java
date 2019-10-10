@@ -9,20 +9,27 @@ public class SupportMethods {
 
         int rowCount = 0;
 
-        if(rs == null)
-        {
+        if(rs == null) {
+            return -1;
+        }
+        else {
+            try {
+                while (rs.next()) {
+                    rowCount++;
+                }
+                rs.beforeFirst();
+                return rowCount;
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                rs.beforeFirst();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             return -1;
         }
 
-        else
-        {
-            try {
-                while (rs.next())
-                {
-                    rowCount++;
-                }
-
-                return rowCount;
             /*if (rs != null) {
                 if (rs.last()) {
                     int size = rs.getRow();
@@ -30,12 +37,6 @@ public class SupportMethods {
                     return size;
                 }
             }*/
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-            return -1;
-        }
-
 
     }
 }

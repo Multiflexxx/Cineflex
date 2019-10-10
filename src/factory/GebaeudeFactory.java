@@ -17,11 +17,10 @@ public class GebaeudeFactory {
 
         if (rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
-            gebäude = new Gebaeude[rsSize];
             if (rsSize > 0) {
+                int counter = 0;
+                gebäude = new Gebaeude[rsSize];
                 try {
-                    int counter = 0;
-                    gebäude = new Gebaeude[rsSize];
                     while (rs.next()) {
                         gebäude[counter] = new Gebaeude(
                                 rs.getInt("GebäudeId"),
