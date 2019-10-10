@@ -145,6 +145,7 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getMovieById(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
+        Connector.closeConnection(c);
 
         if(rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
@@ -165,47 +166,46 @@ public class FilmFactory {
                 }
             }
 
-//            setSprachen(film);
+            setSprachen(film);
 
-            sql = QueryBuilder.getGenreNamesById(film.getFilmID());
-            rs = Connector.getQueryResult(c, sql);
-            try {
-                rsSize = SupportMethods.getResultSetSize(rs);
-                if(rsSize > 0) {
-                    int counter = 0;
-                    String[] genres = null;
-                    while(rs.next()) {
-                        genres = new String[rsSize];
-                        genres[counter] = rs.getString("Genrebezeichnung");
-                        counter++;
-                    }
-                    film.setGenre(genres);
-                }
-            }catch (SQLException e) {
-                e.printStackTrace();
-            }
+//            String sql2 = QueryBuilder.getGenreNamesById(film.getFilmID());
+//            ResultSet rs2 = Connector.getQueryResult(c, sql2);
+//            try {
+//                int rsSize2 = SupportMethods.getResultSetSize(rs2);
+//                if(rsSize > 0) {
+//                    int counter = 0;
+//                    String[] genres = null;
+//                    while(rs2.next()) {
+//                        genres = new String[rsSize2];
+//                        genres[counter] = rs2.getString("Genrebezeichnung");
+//                        counter++;
+//                    }
+//                    film.setGenre(genres);
+//                }
+//            }catch (SQLException e) {
+//                e.printStackTrace();
+//            }
 
-//            setGenres(film);
-            sql = QueryBuilder.getSpracheById(film.getFilmID());
-            rs = Connector.getQueryResult(c, sql);
-
-            try {
-                rsSize = SupportMethods.getResultSetSize(rs);
-                if(rsSize > 0) {
-                    int counter = 0;
-                    String[] sprachen = null;
-                    while(rs.next()) {
-                        sprachen = new String[rsSize];
-                        sprachen[counter] = rs.getString("Sprachenname");
-                        counter++;
-                    }
-                    film.setSprache(sprachen);
-                }
-            }catch (SQLException e) {
-                e.printStackTrace();
-            }
+            setGenres(film);
+//            sql = QueryBuilder.getSpracheById(film.getFilmID());
+//            rs = Connector.getQueryResult(c, sql);
+//
+//            try {
+//                rsSize = SupportMethods.getResultSetSize(rs);
+//                if(rsSize > 0) {
+//                    int counter = 0;
+//                    String[] sprachen = null;
+//                    while(rs.next()) {
+//                        sprachen = new String[rsSize];
+//                        sprachen[counter] = rs.getString("Sprachenname");
+//                        counter++;
+//                    }
+//                    film.setSprache(sprachen);
+//                }
+//            }catch (SQLException e) {
+//                e.printStackTrace();
+//            }
         }
-        Connector.closeConnection(c);
         return film;
     }
 
@@ -219,8 +219,8 @@ public class FilmFactory {
             if(rsSize > 0) {
                 int counter = 0;
                 String[] genres = null;
+                genres = new String[rsSize];
                 while(rs.next()) {
-                    genres = new String[rsSize];
                     genres[counter] = rs.getString("Genrebezeichnung");
                     counter++;
                 }
@@ -242,8 +242,8 @@ public class FilmFactory {
             if(rsSize > 0) {
                 int counter = 0;
                 String[] sprachen = null;
+                sprachen = new String[rsSize];
                 while(rs.next()) {
-                    sprachen = new String[rsSize];
                     sprachen[counter] = rs.getString("Sprachenname");
                     counter++;
                 }
