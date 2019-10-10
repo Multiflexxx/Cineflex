@@ -5,7 +5,8 @@ import java.sql.SQLException;
 
 public class SupportMethods {
 
-    public static int getResultSetSize(ResultSet rs) {
+
+    public int getResultSetSize(ResultSet rs) {
 
         int rowCount = 0;
 
@@ -18,7 +19,7 @@ public class SupportMethods {
                 while (rs.next()) {
                     rowCount++;
                 }
-//                rs.beforeFirst();
+                rs.beforeFirst();
                 return rowCount;
             } catch(Exception e) {
                 e.printStackTrace();

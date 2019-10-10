@@ -14,9 +14,16 @@ public class GebaeudeFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.showAllCinemas();
         ResultSet rs = Connector.getQueryResult(c, sql);
+        SupportMethods sup = new SupportMethods();
 
         if (rs != null) {
-            int rsSize = SupportMethods.getResultSetSize(rs);
+            int rsSize = sup.getResultSetSize(rs);
+            try {
+                rs.beforeFirst();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             if (rsSize > 0) {
                 int counter = 0;
                 gebäude = new Gebaeude[rsSize];

@@ -1,5 +1,6 @@
 <%@ page import="oo.Gebaeude" %>
 <%@ page import="factory.GebaeudeFactory" %>
+<%@ page import="helper.ExceptionHandler" %>
 <!-- Location Screen-->
 <div class="modal fade" id="locationDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -29,7 +30,7 @@
                                 }
                             }
                         } catch (Exception e) {
-                            out.write("Ficken");
+                            out.write(ExceptionHandler.exceptionStackTraceToString(e));
                         }
                     %>
 

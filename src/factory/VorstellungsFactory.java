@@ -33,10 +33,10 @@ public class VorstellungsFactory {
         String sql = QueryBuilder.showMovieById("" + film.getFilmID(), date, time, plz);
         ResultSet rs = Connector.getQueryResult(c, sql);
         Connector.closeConnection(c);
-
+        SupportMethods sup = new SupportMethods();
 
         if(rs != null) {
-            int rsSize = SupportMethods.getResultSetSize(rs);
+            int rsSize = sup.getResultSetSize(rs);
 
             if(rsSize >= 0)
             {
