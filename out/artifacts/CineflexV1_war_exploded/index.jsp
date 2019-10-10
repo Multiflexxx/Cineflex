@@ -65,63 +65,53 @@
 
     String plz = "00000";
     Cookie[] cookies = request.getCookies();
-    for(Cookie cookie : cookies) {
-        if(cookie.getName().equals("plz")) {
+    for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("plz")) {
             plz = cookie.getValue();
         }
     }
 
-    if(plz == "00000") {
-        
+    if (plz == "00000") {
+
     }
-
-    //String sql = QueryBuilder.showTitelPageFilmsbyPLZ(plz);
-    String sql = QueryBuilder.showTitlePageFilms();
-    ResultSet rs = Connector.getQueryResult(c, sql);
-
-    Film[] titelFilm = FilmFactory.getTitelPageFilme(plz);
 
     out.write("<div class=\"container\">");
     out.write("<div class=\"card-deck mb-3\" style=\"max-width: 1400px;\">");
-    while (rs.next()) {
-        String hrefURL = "singleMovie.jsp?id=";
-        LocalDate localDate = LocalDate.now();
-        hrefURL += rs.getString("FilmID");
-        hrefURL += "&date=" + localDate.toString();
-        hrefURL += "&time=08:00:00";
-        out.write("<div class=\"card\">");
-        out.write("<img src='" + rs.getString("BildLink") +  "' class=\"card-img-top\" alt='" + rs.getString("Titel") + "'>");
-        out.write("<div class=\"card-body text-center\">");
-        out.write("<h5 class=\"card-title\">" + rs.getString("Titel") + "</h5>");
-        out.write("<p class=\"card-text\"><small class=\"text-muted\">Neu bei uns!</small></p>");
-        //out.write("<div class=\"card-footer text-center\">");
-        out.write("<a href=\"" + hrefURL + "\" class=\"btn btn-primary\">Zum Film</a>");
-        //out.write("</div>");
-        out.write("</div>");
-        out.write("</div>");
+    Film[] titelFilm = null;
+    try {
+        titelFilm = FilmFactory.getTitelPageFilme(plz);
+        if (titelFilm[0] != null) {
+        for (int i = 0; i < titelFilm.length; i++) {
+            String hrefURL = "singleMovie.jsp?id=";
+            LocalDate localDate = LocalDate.now();
+            hrefURL += titelFilm[i].getFilmID();
+            hrefURL += "&date=" + localDate.toString();
+            hrefURL += "&time=08:00:00";
+            out.write("<div class=\"card\">");
+            out.write("<img src='" + titelFilm[i].getBildLink() + "' class=\"card-img-top\" alt='" + titelFilm[i].getTitel() + "'>");
+            out.write("<div class=\"card-body text-center\">");
+            out.write("<h5 class=\"card-title\">" + titelFilm[i].getTitel() + "</h5>");
+            out.write("<p class=\"card-text\"><small class=\"text-muted\">Neu bei uns!</small></p>");
+            //out.write("<div class=\"card-footer text-center\">");
+            out.write("<a href=\"" + hrefURL + "\" class=\"btn btn-primary\">Zum Film</a>");
+            //out.write("</div>");
+            out.write("</div>");
+            out.write("</div>");
+        }
+    } else {
+            out.write("<div class=\"card\">");
+            out.write("<div class=\"card-body text-center\">");
+            out.write("<h5 class=\"card-title\">Für dein ausgewähltes Kino gibt es keine Vorstellungen ..</h5>");
+            out.write("<p class=\"card-text\"><small class=\"text-muted\">Gerne kannst Du ein anderes Kino von uns besuchen.</small></p>");
+            out.write("</div>");
+            out.write("</div>");
+        }
+    } catch (Exception e) {
+        out.write("ficken");
     }
-
-//    for (int i = 0; i < titelFilm.length; i++) {
-//    String hrefURL = "singleMovie.jsp?id=";
-//    LocalDate localDate = LocalDate.now();
-//    hrefURL += titelFilm[i].getFilmID();
-//    hrefURL += "&date=" + localDate.toString();
-//    hrefURL += "&time=08:00:00";
-//    out.write("<div class=\"card\">");
-//    out.write("<img src='" + titelFilm[i].getBildLink() +  "' class=\"card-img-top\" alt='" + titelFilm[i].getTitel() + "'>");
-//    out.write("<div class=\"card-body text-center\">");
-//    out.write("<h5 class=\"card-title\">" + titelFilm[i].getTitel() + "</h5>");
-//    out.write("<p class=\"card-text\"><small class=\"text-muted\">Neu bei uns!</small></p>");
-//    //out.write("<div class=\"card-footer text-center\">");
-//    out.write("<a href=\"" + hrefURL + "\" class=\"btn btn-primary\">Zum Film</a>");
-//    //out.write("</div>");
-//    out.write("</div>");
-//    out.write("</div>");
-//}
     out.write("</div>");
     out.write("</div>");
 
-    Connector.closeConnection(c);
 %>
 
 <jsp:include page="elements/footer.jsp"/>
