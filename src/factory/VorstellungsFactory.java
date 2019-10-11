@@ -38,20 +38,20 @@ public class VorstellungsFactory {
         if(rs != null) {
             int rsSize = sup.getResultSetSize(rs);
 
-            if(rsSize >= 0)
-            {
-               Vorstellung v =  new Vorstellung(5,
-                        null,
-                        null,
-                        "",
-                        new Film(1),
-                        new Kinosaal(1, "", null));
-
-               Vorstellung[] v2 = new Vorstellung[1];
-               v2[0] = v;
-              Connector.closeConnection(c);
-               return v2;
-            }
+//            if(rsSize >= 0)
+//            {
+//               Vorstellung v =  new Vorstellung(5,
+//                        null,
+//                        null,
+//                        "",
+//                        new Film(1),
+//                        new Kinosaal(1, "", null));
+//
+//               Vorstellung[] v2 = new Vorstellung[1];
+//               v2[0] = v;
+//              Connector.closeConnection(c);
+//               return v2;
+//            }
             vorstellungen = new Vorstellung[rsSize];
             if(rsSize > 0) {
                 try {
