@@ -111,7 +111,7 @@ public class VorstellungsFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getVorstellungByID(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        Connector.closeConnection(c);
+        // Connector.closeConnection(c);
 
         if(rs!=null) {
 
@@ -144,10 +144,12 @@ public class VorstellungsFactory {
                 }catch(SQLException e) {
                     e.printStackTrace();
                 }
+                Connector.closeConnection(c);
             return vorstellung;
         }
+      Connector.closeConnection(c);
 
-        return vorstellung;
+      return vorstellung;
     }
 
     public static String getLastSQLQuery() {
