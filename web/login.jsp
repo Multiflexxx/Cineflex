@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form name="LoginForm" action="LoginHandler" method="post">
+                <form name="LoginForm" action="loginHandler.jsp" method="post">
                     <div class="form-group">
                         <label for="inputEmailLog">E-Mail / Benutzername</label>
                         <input type="text" class="form-control" id="inputEmailLog" name="inputEmailLog" aria-describedby="emailHelp" placeholder="E-Mail Adresse">
