@@ -1,7 +1,3 @@
-<%@ page import="db_connector.Connector" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="db_connector.QueryBuilder" %>
-<%@ page import="java.sql.ResultSet" %>
 <%@ page import="oo.Gebaeude" %>
 <%@ page import="factory.GebaeudeFactory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -42,27 +38,18 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <%
-                        //Connection c = Connector.getConnection();
-                        //ResultSet rs = Connector.getQueryResult(c, QueryBuilder.showAllCinemas());
 
                         Gebaeude[] gebäude = GebaeudeFactory.getGebaeude();
 
 
                         if (gebäude != null) {
                             for(int i=0; i<gebäude.length; i++) {
-                                out.println(gebäude.length + ", " + (gebäude[0] == null ? "null" : gebäude[0].getPlz()));
-                                // out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
+                                out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
                             }
                         } else {
                             out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('')\">Scheiße</a>");
                         }
 
-//                        if (rs != null) {
-//                            while (rs.next()) {
-//                                out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + rs.getString("Ortsname") + "', '" + rs.getString("PLZ") + "')\">" + rs.getString("Ortsname") + "</a>");
-//                            }
-//                        }
-                        //Connector.closeConnection(c);
                     %>
                 </div>
             </div>
@@ -103,10 +90,6 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal"
                     data-target="#filterDialog">Suche
             </button>
-            <%--            <form class="form-inline my-2 my-lg-0">--%>
-            <%--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">--%>
-            <%--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--%>
-            <%--            </form>--%>
         </div>
     </nav>
 </header>
