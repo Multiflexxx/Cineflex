@@ -43,12 +43,34 @@ public class Film {
         this.genre = genre;
     }
 
+    public String getGenreString() {
+        String genreString = "";
+        for(int i = 0; i < genre.length; i++) {
+            genreString += genre[i];
+            if(i != genre.length - 1) {
+                genreString += ", ";
+            }
+        }
+                return genreString;
+    }
+
     public String[] getSprache() {
         return sprache;
     }
 
     public void setSprache(String[] sprache) {
         this.sprache = sprache;
+    }
+
+    public String getSpracheString() {
+        String spracheString = "";
+        for(int i = 0; i < sprache.length; i++) {
+            spracheString += sprache[i];
+            if(i != sprache.length - 1) {
+                spracheString += ", ";
+            }
+        }
+        return spracheString;
     }
 
     public String getTitel() {

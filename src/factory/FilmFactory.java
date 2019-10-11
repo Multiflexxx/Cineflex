@@ -13,10 +13,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FilmFactory {
-    public static Film[] getFilme(String search, String date, String time, int fsk) {
+    public static Film[] getFilme(String search, String date, String time, int fsk, String plz) {
         Film[] filme;
         Connection c = Connector.getConnection();
-        String sql = QueryBuilder.defaultSearchQuery(search, date, time, fsk);
+        String sql = QueryBuilder.defaultSearchQuery(search, date, time, fsk, plz);
         ResultSet rs = Connector.getQueryResult(c, sql);
         SupportMethods sup = new SupportMethods();
 
@@ -45,42 +45,7 @@ public class FilmFactory {
                 }
                 for(Film f : filme) {
                     setGenres(f);
-//                    sql = QueryBuilder.getGenreNamesById(f.getFilmID());
-//                    rs = Connector.getQueryResult(c, sql);
-//                    try {
-//                        rsSize = SupportMethods.getResultSetSize(rs);
-//                        if(rsSize > 0) {
-//                            int counter = 0;
-//                            String[] genres = null;
-//                            while(rs.next()) {
-//                                genres = new String[rsSize];
-//                                genres[counter] = rs.getString("Genrebezeichnung");
-//                                counter++;
-//                            }
-//                            f.setGenre(genres);
-//                        }
-//                    }catch (SQLException e) {
-//                        e.printStackTrace();
-//                    }
                     setSprachen(f);
-//                    sql = QueryBuilder.getSpracheById(f.getFilmID());
-//                    rs = Connector.getQueryResult(c, sql);
-//
-//                    try {
-//                        rsSize = SupportMethods.getResultSetSize(rs);
-//                        if(rsSize > 0) {
-//                            int counter = 0;
-//                            String[] sprachen = null;
-//                            while(rs.next()) {
-//                                sprachen = new String[rsSize];
-//                                sprachen[counter] = rs.getString("Sprachenname");
-//                                counter++;
-//                            }
-//                            f.setSprache(sprachen);
-//                        }
-//                    }catch (SQLException e) {
-//                        e.printStackTrace();
-//                    }
                 }
                 Connector.closeConnection(c);
                 return filme;
@@ -95,10 +60,9 @@ public class FilmFactory {
         return null;
     }
 
-    public static Film[] getFilme() {
-        return getFilme("", DateFormatter.getSQLDate(new Date()), "08:00:00", 18);
+    public static Film[] getFilme(String plz) {
+        return getFilme("", DateFormatter.getSQLDate(new Date()), "08:00:00", 18, plz);
     }
-
 
     public static Film[] getTitelPageFilme(String plz) {
         Film[] filme;
@@ -131,6 +95,10 @@ public class FilmFactory {
                 }catch(SQLException e) {
                     e.printStackTrace();
                 }
+                for(Film f : filme) {
+                    setGenres(f);
+                    setSprachen(f);
+                }
             } else {
                 filme = new Film[1];
                 filme[0] = null;
@@ -141,6 +109,8 @@ public class FilmFactory {
         Connector.closeConnection(c);
         return null;
     }
+
+
 
     public static Film getFilm(int id) {
         Film film = null;
@@ -170,44 +140,7 @@ public class FilmFactory {
             }
 
             setSprachen(film);
-
-//            String sql2 = QueryBuilder.getGenreNamesById(film.getFilmID());
-//            ResultSet rs2 = Connector.getQueryResult(c, sql2);
-//            try {
-//                int rsSize2 = SupportMethods.getResultSetSize(rs2);
-//                if(rsSize > 0) {
-//                    int counter = 0;
-//                    String[] genres = null;
-//                    while(rs2.next()) {
-//                        genres = new String[rsSize2];
-//                        genres[counter] = rs2.getString("Genrebezeichnung");
-//                        counter++;
-//                    }
-//                    film.setGenre(genres);
-//                }
-//            }catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-
             setGenres(film);
-//            sql = QueryBuilder.getSpracheById(film.getFilmID());
-//            rs = Connector.getQueryResult(c, sql);
-//
-//            try {
-//                rsSize = SupportMethods.getResultSetSize(rs);
-//                if(rsSize > 0) {
-//                    int counter = 0;
-//                    String[] sprachen = null;
-//                    while(rs.next()) {
-//                        sprachen = new String[rsSize];
-//                        sprachen[counter] = rs.getString("Sprachenname");
-//                        counter++;
-//                    }
-//                    film.setSprache(sprachen);
-//                }
-//            }catch (SQLException e) {
-//                e.printStackTrace();
-//            }
         }
         Connector.closeConnection(c);
         return film;
@@ -241,7 +174,6 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getSpracheById(film.getFilmID());
         ResultSet rs = Connector.getQueryResult(c, sql);
-        // Connector.closeConnection(c);
         SupportMethods sup = new SupportMethods();
 
         try {
@@ -261,5 +193,4 @@ public class FilmFactory {
         }
         Connector.closeConnection(c);
     }
-
 }

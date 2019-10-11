@@ -20,7 +20,6 @@
     SimpleDateFormat st = new SimpleDateFormat("HH:mm");
     Date time = new Date();
 
-    Film filme[] = FilmFactory.getFilme();
     String plz = "00000";
     Cookie[] cookies = request.getCookies();
     for (Cookie cookie : cookies) {
@@ -28,6 +27,8 @@
             plz = cookie.getValue();
         }
     }
+
+    Film filme[] = FilmFactory.getFilme(plz);
 
     if (filme != null) {
 %>
@@ -52,7 +53,7 @@
                 <div class="card-body">
                     <h5 class="card-title"><%=f.getTitel()%>
                     </h5>
-                    <p class="card-text"><small class="text-muted"><%=f.getDauer()%> min | FSK <%=f.getFsk()%>
+                    <p class="card-text"><small class="text-muted"><%=f.getDauer()%> min | FSK <%=f.getFsk()%> | <%=f.getGenreString()%> | <%=f.getSpracheString()%>
                     </small></p>
                     <p class="card-text mrb-justify"><%=f.getBeschreibung()%>
                     </p>

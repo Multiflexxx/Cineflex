@@ -6,6 +6,7 @@ import oo.Film;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,15 @@ public class SearchHandler extends HttpServlet {
         PrintWriter out = response.getWriter();
         //BufferedReader br = new BufferedReader(new FileReader("V1/elements/head.jsp"));
 
-        Film filme [] = FilmFactory.getFilme(searchText, date, time, Integer.parseInt(fsk));
+        String plz = "00000";
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("plz")) {
+                plz = cookie.getValue();
+            }
+        }
+
+        Film filme [] = FilmFactory.getFilme(searchText, date, time, Integer.parseInt(fsk), plz);
 //        Connection c = Connector.getConnection();
 //        String sql = QueryBuilder.defaultSearchQuery(searchText, date, time, Integer.parseInt(fsk));
 //        ResultSet rs = Connector.getQueryResult(c, sql);

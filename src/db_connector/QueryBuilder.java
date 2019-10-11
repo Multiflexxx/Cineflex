@@ -78,19 +78,25 @@ public class QueryBuilder {
         }
     }
 
-    public static String defaultSearchQuery(String search, String date, String time, int fsk) {
+    public static String defaultSearchQuery(String search, String date, String time, int fsk, String plz) {
         if(search != "") {
             return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` " +
                     "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
+                    "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
+                    "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
                     "WHERE (`Titel` LIKE '%" + search + "%' OR `Beschreibung` LIKE '%" + search + "%') " +
                     "AND `Datum` >= '" + date + "' " +
                     "AND `Uhrzeit`>= '" + time + "' " +
+                    "AND Gebäude.PLZ = '"+ plz + "' " +
                     "AND `FSK` <= " + fsk + " ;";
         } else {
             return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` " +
                     "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
+                    "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
+                    "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
                     "WHERE `Datum` >= '" + date + "' " +
                     "AND `Uhrzeit`>= '" + time + "' " +
+                    "AND Gebäude.PLZ = '"+ plz + "' " +
                     "AND `FSK` <= " + fsk + " ;";
         }
 
