@@ -6,6 +6,8 @@
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="factory.FilmFactory" %>
 <%@ page import="oo.Film" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -63,6 +65,9 @@
 <%
     Connection c = Connector.getConnection();
 
+    SimpleDateFormat st = new SimpleDateFormat("HH:mm");
+    Date time = new Date();
+
     String plz = "00000";
     Cookie[] cookies = request.getCookies();
     for (Cookie cookie : cookies) {
@@ -86,7 +91,7 @@
             LocalDate localDate = LocalDate.now();
             hrefURL += titelFilm[i].getFilmID();
             hrefURL += "&date=" + localDate.toString();
-            hrefURL += "&time=08:00:00";
+            hrefURL += "&time=" + st.format(time);
             out.write("<div class=\"card\">");
             out.write("<img src='" + titelFilm[i].getBildLink() + "' class=\"card-img-top\" alt='" + titelFilm[i].getTitel() + "'>");
             out.write("<div class=\"card-body text-center\">");

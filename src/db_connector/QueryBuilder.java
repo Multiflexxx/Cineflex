@@ -104,15 +104,25 @@ public class QueryBuilder {
 
     public static String showMovieById(String id, String date, String time, String plz) {
 
+
+//        SELECT `VorstellungsID`, concat(`Datum`,  ' ', `Uhrzeit`) AS timestamp, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung
+//        Join Film ON Vorstellung.FilmID = Film.FilmID
+//        JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID
+//        JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID
+//        JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID
+//        WHERE Film.FilmID = '11'
+//        AND concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-10-11 08:28'
+//        AND Gebäude.PLZ = '86153' ORDER BY `Datum` ASC LIMIT 6;
+
+
         return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID " +
                     "FROM Vorstellung " +
                         "Join Film ON Vorstellung.FilmID = Film.FilmID " +
                         "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
                         "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
                         "JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
-                    "WHERE Film.FilmID = '" + id + "' " +
-                        "AND `Datum` >= '" + date + "' " +
-                        "AND `Uhrzeit` >= '" + time + "' " +
+                        "WHERE Film.FilmID = '" + id + "' " +
+                        "AND concat(`Datum`,  ' ', `Uhrzeit`) >= '" + date + " " + time + "' " +
                         "AND Gebäude.PLZ = '" + plz + "' ORDER BY `Datum` ASC LIMIT 6; ";
 
     }
