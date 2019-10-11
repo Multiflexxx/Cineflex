@@ -32,7 +32,7 @@ public class VorstellungsFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.showMovieById("" + film.getFilmID(), date, time, plz);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        Connector.closeConnection(c);
+        // Connector.closeConnection(c);
         SupportMethods sup = new SupportMethods();
 
         if(rs != null) {
@@ -49,6 +49,7 @@ public class VorstellungsFactory {
 
                Vorstellung[] v2 = new Vorstellung[1];
                v2[0] = v;
+              Connector.closeConnection(c);
                return v2;
             }
             vorstellungen = new Vorstellung[rsSize];
@@ -74,6 +75,7 @@ public class VorstellungsFactory {
                         }
 
                         if(date_Datum == null || time_Uhrzeit == null) {
+                          Connector.closeConnection(c);
                             return null;
                         }
 
@@ -91,12 +93,13 @@ public class VorstellungsFactory {
             } else {
                 vorstellungen = new Vorstellung[1];
                 vorstellungen[0] = null;
+              Connector.closeConnection(c);
                 return vorstellungen;
             }
-
+          Connector.closeConnection(c);
             return vorstellungen;
         }
-
+      Connector.closeConnection(c);
         return null;
     }
 

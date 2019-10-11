@@ -147,7 +147,7 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getMovieById(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        Connector.closeConnection(c);
+        // Connector.closeConnection(c);
         SupportMethods sup = new SupportMethods();
 
         if(rs != null) {
@@ -209,6 +209,7 @@ public class FilmFactory {
 //                e.printStackTrace();
 //            }
         }
+        Connector.closeConnection(c);
         return film;
     }
 
@@ -216,7 +217,7 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getGenreNamesById(film.getFilmID());
         ResultSet rs = Connector.getQueryResult(c, sql);
-        Connector.closeConnection(c);
+        // Connector.closeConnection(c);
         SupportMethods sup = new SupportMethods();
         try {
             int rsSize = sup.getResultSetSize(rs);
@@ -233,13 +234,14 @@ public class FilmFactory {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        Connector.closeConnection(c);
     }
 
     private static void setGenres(Film film) {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getSpracheById(film.getFilmID());
         ResultSet rs = Connector.getQueryResult(c, sql);
-        Connector.closeConnection(c);
+        // Connector.closeConnection(c);
         SupportMethods sup = new SupportMethods();
 
         try {
@@ -257,6 +259,7 @@ public class FilmFactory {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        Connector.closeConnection(c);
     }
 
 }
