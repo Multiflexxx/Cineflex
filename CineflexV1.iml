@@ -23,11 +23,11 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Fallstudie/Mockito/mockito-all-1.9.5.jar!/" />
+          <root url="jar://E:/Fallstudie/Mockito/mockito-all-1.9.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../Fallstudie/Mockito/mockito-all-1.9.5.jar!/" />
+          <root url="jar://E:/Fallstudie/Mockito/mockito-all-1.9.5.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -44,11 +44,12 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Fallstudie/mysql-connector-java-8.0.17/mysql-connector-java-8.0.17.jar!/" />
+          <root url="jar://E:/Fallstudie/mysql-connector-java-8.0.17/mysql-connector-java-8.0.17.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="mockito-all-1.9.5" level="project" />
   </component>
 </module>
