@@ -12,7 +12,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import static db_connector.Connector.executeQuery;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -29,43 +32,6 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Test {
-
-    // Create Mock Data for HttpServlets
-    @Mock
-    HttpServletRequest request1;
-
-    @Mock
-    HttpServletResponse response1;
-
-    @Mock
-    HttpServletRequest request2;
-
-    @Mock
-    HttpServletResponse response2;
-
-    @Mock
-    HttpServletRequest request3;
-
-    @Mock
-    HttpServletResponse response3;
-
-    @Mock
-    HttpServletRequest request4;
-
-    @Mock
-    HttpServletResponse response4;
-
-    @Mock
-    HttpServletRequest request5;
-
-    @Mock
-    HttpServletResponse response5;
-
-    @Mock
-    HttpServletRequest request6;
-
-    @Mock
-    HttpServletResponse response6;
 
     @InjectMocks
     Connector connector;
@@ -737,50 +703,14 @@ public class Test {
     @org.junit.Test
     public void testeConnector() throws Exception
     {
-        /* @InjectMocks
-        Connector connector;
-        @Mock
-        Connection mockConnection;
-        @Mock
-        Statement mockStatement;
-        */
-
-        //Mockito.when(mockConnection.createStatement());
-
-
-
-
-
-
-
-
-
-
-
-        //Assert.assertEquals(ClassNotFoundException, Connector.getConnection());
-
-        ///???????????? WAS MACHE ICH HIER EIG??????????
-        /*ResultSet resultSet = mock(ResultSet.class);
-        PreparedStatement statement = mock(PreparedStatement.class);
-
-        when(statement.getResultSet()).thenReturn(resultSet);
-
-        when(resultSet.getString(eq("plz"))).thenReturn("85055");
+       // Test ExecuteQuery
 
         Mockito.when(mockConnection.createStatement()).thenReturn(mockStatement);
+        Mockito.when(mockConnection.createStatement().executeUpdate(Mockito.any())).thenReturn(1);
 
-
-
-        when(statement.execute()).thenReturn(true);
-*/
-
-        Connection connection = Connector.getConnection();
-
-        Assert.assertNull(connection);
-
-        Connector.closeConnection(connection);
-
-        Assert.assertEquals(null, connection);
+        int value = connector.executeQuery();
+        Assert.assertEquals(value, 1);
+        Mockito.verify(mockConnection.createStatement(), Mockito.times(1));
     }
 
     @org.junit.Test
@@ -866,28 +796,7 @@ public class Test {
     @org.junit.Test
     public void testeRegistrationHandler() throws Exception
     {
-        when(request4.getParameter("inputVorname")).thenReturn("Dietmar");
-        when(request4.getParameter("inputNachname")).thenReturn("Hopp");
-        when(request4.getParameter("inputGeb")).thenReturn("1979-05-05");
-        when(request4.getParameter("inputEmailReg")).thenReturn("dietmar.hopp@mail.com");
-        when(request4.getParameter("inputPasswordReg")).thenReturn("sicher123456");
-        when(request4.getParameter("inputPasswordRegWdh")).thenReturn("sicher123456");
 
-        when(mockConnection.createStatement()).thenReturn(mockStatement);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-
-        when(response4.getWriter()).thenReturn(printWriter);
-
-        RegistrationHandler registrationHandler = new RegistrationHandler();
-        registrationHandler.doPost(request4, response4);
-
-        String result = stringWriter.getBuffer().toString();
-
-        System.out.println(result);
-
-        Assert.assertEquals("Geht nicht!", result);
     }
 
     @org.junit.Test
@@ -899,28 +808,7 @@ public class Test {
     @org.junit.Test
     public void testeSingleMovieHandler() throws Exception
     {
-        Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie("plz", "86165");
 
-        // Add mock parameters
-        when(request6.getParameter("id")).thenReturn("1");
-        when(request6.getParameter("date")).thenReturn("2019-01-01");
-        when(request6.getParameter("time")).thenReturn("20:30:31");
-
-        // Add mock cookies
-        when(request6.getCookies()).thenReturn(cookies);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-
-        when(response6.getWriter()).thenReturn(printWriter);
-
-        SingleMovieHandler_ALT singleMovieHandler = new SingleMovieHandler_ALT();
-        singleMovieHandler.doGet(request6, response6);
-
-        String result = stringWriter.getBuffer().toString();
-
-        System.out.println(result);
     }
 
     // TESTS FOR FACTORIES
