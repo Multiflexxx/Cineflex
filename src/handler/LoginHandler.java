@@ -2,9 +2,7 @@ package handler;
 
 import Password.PassMD5;
 //import com.mysql.cj.Session;
-import db_connector.Connector;
-import db_connector.QueryBuilder;
-import oo.Login;
+import factory.LoginFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,11 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.util.Date;
 
 //@WebServlet(name = "LoginHandler")
 public class LoginHandler extends HttpServlet {
@@ -30,7 +25,7 @@ public class LoginHandler extends HttpServlet {
             e.printStackTrace();
         }
 
-        Login login = new Login(email, pw);
+        LoginFactory login = new LoginFactory(email, pw);
         ResultSet rs = login.getLoginResult();
 
 //        Connection c = null;

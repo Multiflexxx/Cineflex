@@ -1,4 +1,4 @@
-package oo;
+package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
@@ -6,16 +6,16 @@ import db_connector.QueryBuilder;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-public class Login {
+public class LoginFactory {
 
     private String email, passwordHash;
     Connection connection = null;
 
-    public Login(){
+    public LoginFactory(){
 
     }
 
-    public Login(String email, String passwordHash)
+    public LoginFactory(String email, String passwordHash)
     {
         this.email = email;
         this.passwordHash = passwordHash;

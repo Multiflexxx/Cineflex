@@ -3,6 +3,7 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import factory.LoginFactory;
 import handler.RegistrationHandler;
 import handler.SingleMovieHandler_ALT;
 import helper.DateFormatter;
@@ -663,12 +664,12 @@ public class Test {
     @org.junit.Test
     public void testeLogin()
     {
-        Login login = new Login();
+        LoginFactory login = new LoginFactory();
 
         Assert.assertNotEquals(null, login);
 
         try{
-            login = new Login("max.muster@mann.de", "e10adc3949ba59abbe56e057f20f883e");
+            login = new LoginFactory("max.muster@mann.de", "e10adc3949ba59abbe56e057f20f883e");
         }
 
         catch (Exception e){
@@ -773,13 +774,13 @@ public class Test {
         when(statement.execute()).thenReturn(true);
 */
 
-       /* Connection connection = Connector.getConnection();
+        Connection connection = Connector.getConnection();
 
-        Assert.assertEquals(null, connection);
+        Assert.assertNull(connection);
 
         Connector.closeConnection(connection);
 
-        Assert.assertEquals(null, connection);*/
+        Assert.assertEquals(null, connection);
     }
 
     @org.junit.Test

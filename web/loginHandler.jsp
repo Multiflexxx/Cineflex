@@ -1,5 +1,5 @@
 <%@ page import="Password.PassMD5" %>
-<%@ page import="oo.Login" %>
+<%@ page import="factory.LoginFactory" %>
 <%@ page import="java.sql.ResultSet" %>
 
 <%
@@ -15,7 +15,7 @@
         return;
     }
 
-    Login login = new Login(email, pw);
+    LoginFactory login = new LoginFactory(email, pw);
     ResultSet rs = login.getLoginResult();
 
     try {
