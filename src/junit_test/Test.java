@@ -708,8 +708,8 @@ public class Test {
         Mockito.when(mockConnection.createStatement()).thenReturn(mockStatement);
         Mockito.when(mockConnection.createStatement().executeUpdate(Mockito.any())).thenReturn(1);
 
-        int value = connector.executeQuery();
-        Assert.assertEquals(value, 1);
+        connector.executeQuery(mockConnection, "");
+        //Assert.assertEquals(value, 1);
         Mockito.verify(mockConnection.createStatement(), Mockito.times(1));
     }
 
