@@ -69,7 +69,7 @@
                 out.write("<tr>");
                 while (counter < arrayLength) {
                     out.write("<td width=\"1em\">");
-                    out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"seats.js/chooseSeat()\">" + vorstellung.getSaal().getSitzplan()[counter].getNummer() + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</button>");
+                    out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"chooseSeat()\">" + vorstellung.getSaal().getSitzplan()[counter].getNummer() + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</button>");
                     out.write("</td>");
                     if (counter >= arrayLength - 1) {
                         out.write("<td width=\"1em\">");
@@ -140,5 +140,6 @@
 
     </div>
     <jsp:include page="elements/footer.jsp"/>
+    <script src="javascript/seats.js" crossorigin="anonymous" type="text/javascript"></script>
 </body>
 </html>
