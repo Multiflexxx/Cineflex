@@ -80,7 +80,7 @@ public class QueryBuilder {
 
     public static String defaultSearchQuery(String search, String date, String time, int fsk, String plz) {
         if(search != "") {
-            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` " +
+            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` " +
                     "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
                     "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
                     "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
@@ -90,7 +90,7 @@ public class QueryBuilder {
                     "AND Gebäude.PLZ = '"+ plz + "' " +
                     "AND `FSK` <= " + fsk + " ;";
         } else {
-            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` " +
+            return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` " +
                     "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
                     "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
                     "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
@@ -100,6 +100,10 @@ public class QueryBuilder {
                     "AND `FSK` <= " + fsk + " ;";
         }
 
+    }
+
+    public static String getGenres(){
+       return  "SELECT DISTINCT `Genrebezeichnung` FROM Genre";
     }
 
     public static String showMovieById(String id, String date, String time, String plz) {
@@ -128,9 +132,15 @@ public class QueryBuilder {
     }
 
     public static String getGenreNamesById(int id) {
-        return "Select Genrebezeichnung FROM FilmGenre " +
+        return "Select `Genrebezeichnung` FROM FilmGenre " +
                 "JOIN Genre ON FilmGenre.GenreID = Genre.GenreID " +
                 "Where FilmID = " + id + " ;";
+    }
+
+    public static String getGenreByID(int id) {
+        return "Select `Genrebezeichnung` FROM FilmGenre " +
+            "JOIN Genre ON Genre.GenreID = Filmgenre.GenreID " +
+            "Where `GenreID` = " + id + " ;";
     }
 
     public static String getSpracheById(int id) {
