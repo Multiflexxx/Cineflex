@@ -1,17 +1,8 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="db_connector.Connector" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="factory.FilmFactory" %>
-<%@ page import="oo.Film" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
 
-<%@ page import="oo.Gebaeude" %>
-<%@ page import="factory.GebaeudeFactory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <header>
