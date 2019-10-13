@@ -47,6 +47,7 @@
                 <h2><%=formatDatum%> um <%=formatUhrzeit%></h2>
                 <span class="badge badge-pill badge-info"><%=vorstellung.getSprache()%></span>
                 <span class="badge badge-pill badge-secondary"><%=vorstellung.getSaal().getBezeichnung()%></span>
+                <button onclick="chooseSeat()">Test</button>
             </div>
         </div>
         <%
@@ -68,7 +69,7 @@
                 out.write("<tr>");
                 while (counter < arrayLength) {
                     out.write("<td width=\"1em\">");
-                    out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"chooseSeat()\">" + vorstellung.getSaal().getSitzplan()[counter].getNummer() + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</button>");
+                    out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"seats.js/chooseSeat()\">" + vorstellung.getSaal().getSitzplan()[counter].getNummer() + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</button>");
                     out.write("</td>");
                     if (counter >= arrayLength - 1) {
                         out.write("<td width=\"1em\">");
