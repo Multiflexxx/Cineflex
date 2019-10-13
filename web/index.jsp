@@ -1,8 +1,5 @@
-<%@ page import="java.io.PrintWriter" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="db_connector.Connector" %>
-<%@ page import="db_connector.QueryBuilder" %>
-<%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="factory.FilmFactory" %>
 <%@ page import="oo.Film" %>
@@ -112,7 +109,7 @@
             out.write("</div>");
         }
     } catch (Exception e) {
-        out.write("ficken");
+        response.sendRedirect("error500.jsp");
     }
     out.write("</div>");
     out.write("</div>");
