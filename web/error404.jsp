@@ -18,7 +18,7 @@
             <div class="col-lg-7">
                 <div class="card-body">
                     <h5 class="card-title">Error 404</h5>
-                    <p class="card-text"><small class="text-muted">Oh Baby! It´s a triple</small></p>
+                    <p class="card-text"><small class="text-muted">Oh Baby! It´s a 404</small></p>
                     <p class="card-text mrb-justify">Hier ist etwas schief gelaufen! Du kannst gerne unseren Shop besuchen!</p>
                 </div>
             </div>

@@ -76,7 +76,7 @@
             <div class="col-lg-7">
                 <div class="card-body">
                     <h5 class="card-title">Error 500</h5>
-                    <p class="card-text"><small class="text-muted">Oh Baby! It´s a triple</small></p>
+                    <p class="card-text"><small class="text-muted">Oh Baby! It´s a 500</small></p>
                     <p class="card-text mrb-justify">Hier ist etwas schief gelaufen! Dein Multiflex-Team kümmert sich um das Problem.</p>
                 </div>
             </div>
