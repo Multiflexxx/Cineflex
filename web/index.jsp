@@ -109,7 +109,7 @@
             out.write("</div>");
         }
     } catch (Exception e) {
-        response.sendRedirect("error500.jsp");
+        response.sendRedirect("error/error500.jsp");
     }
     out.write("</div>");
     out.write("</div>");
