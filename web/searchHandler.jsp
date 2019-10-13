@@ -4,6 +4,7 @@
     String time = request.getParameter("inputTime");
     String fsk = request.getParameter("inputFSK");
     String searchText = request.getParameter("inputSearchText");
+    int genreID = Integer.parseInt(request.getParameter("inputGenre"));
     time += ":00";
 
     String plz = "00000";
@@ -14,7 +15,13 @@
         }
     }
 
-    Film filme [] = FilmFactory.getFilme(searchText, date, time, Integer.parseInt(fsk), plz);
+    Film filme[] = null;
+
+    if (genreID == -1) {
+        filme = FilmFactory.getFilme(searchText, date, time, Integer.parseInt(fsk), plz);
+    }else{
+        filme = FilmFactory.getFilme(searchText, date, time, Integer.parseInt(fsk), plz, genreID);
+    }
 
     try {
         if(filme != null) {

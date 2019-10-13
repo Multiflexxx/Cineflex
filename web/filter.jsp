@@ -47,7 +47,7 @@
                         out.println("<label for=\"inputGenre\">Genre</label>");
                         out.println("<select class=\"form-control\" id=\"inputGenre\" name=\"inputGenre\">");
 
-                        out.println("<option value=\"0\">Nicht gew&#228;hlt</option>");
+                        out.println("<option value=\"-1\">Nicht gew&#228;hlt</option>");
 
                         for(int i = 0; i < arrayLength; i++)
                         {
