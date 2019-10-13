@@ -33,11 +33,10 @@
     }else{
         filme = FilmFactory.getFilme(searchText, date, time, Integer.parseInt(fsk), plz, genreID);
     }
-
+    out.write("<div class=\"container\">");
     try {
-        if(filme != null) {
 
-            out.write("<div class=\"container\">");
+        if(filme != null) {
             for (Film f : filme) {
                 String hrefURL = "singleMovie.jsp?";
                 hrefURL += "id=" + f.getFilmID();  //getString("FilmID");
@@ -59,13 +58,14 @@
                 out.write("</div>");
                 out.write("</div>");
             }
-            out.write("</div>");
         } else {
             out.println("sql");
         }
+
     } catch(Exception e) {
         e.printStackTrace();
     }
+    out.write("</div>");
 %>
 
 <jsp:include page="elements/footer.jsp"/>
