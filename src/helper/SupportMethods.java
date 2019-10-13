@@ -1,11 +1,8 @@
 package helper;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class SupportMethods {
-
-
     public int getResultSetSize(ResultSet rs) {
 
         int rowCount = 0;
@@ -26,14 +23,5 @@ public class SupportMethods {
             }
             return -2;
         }
-
-            /*if (rs != null) {
-                if (rs.last()) {
-                    int size = rs.getRow();
-                    rs.beforeFirst();
-                    return size;
-                }
-            }*/
-
     }
 }
