@@ -1,4 +1,7 @@
 <!-- Filter Screen -->
+<%@ page import="oo.Genre" %>
+<%@ page import="factory.GenreFactory" %>
+
 <div class="modal fade" id="filterDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -34,6 +37,27 @@
                             <option value="18">FSK 18</option>
                         </select>
                     </div>
+
+                    <%
+                        Genre genre[] = GenreFactory.getGenre();
+
+                        int arrayLength = genre.length;
+
+                        out.println("<div class=\"form-group\">");
+                        out.println("<label for=\"inputGenre\">Genre</label>");
+                        out.println("<select class=\"form-control\" id=\"inputGenre\" name=\"inputGenre\">");
+
+                        out.println("<option value=\"-1\">Nicht gew&#228;hlt</option>");
+
+                        for(int i = 0; i < arrayLength; i++)
+                        {
+                            out.println("<option value=\""+ genre[i].getGenreID() +"\">"+ genre[i].getGenrebezeichnung() +"</option>");
+                        }
+
+                        out.println("</select>");
+                        out.println("</div>");
+                    %>
+
                 </form>
             </div>
             <div class="modal-footer">
