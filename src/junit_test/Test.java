@@ -876,7 +876,11 @@ public class Test {
     {
         IllegalArgumentException exception = new IllegalArgumentException("Argument 'divisor' is 0");
 
-        System.out.println(ExceptionHandler.exceptionStackTraceToString(exception));
+        // Exception Object Exists
+        Assert.assertNotNull(exception);
+
+        // Assert that String length is > 0, so String is build
+        Assert.assertTrue(ExceptionHandler.exceptionStackTraceToString(exception).length() > 0);
     }
 
 }
