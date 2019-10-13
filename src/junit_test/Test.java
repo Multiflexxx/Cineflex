@@ -494,6 +494,14 @@ public class Test {
         Assert.assertNotEquals(null, film3);
         Assert.assertEquals("Neuer Film", film3.getTitel());
         Assert.assertEquals(4, film3.getFilmID());
+
+        //
+        String[] sprachen3 = {"deutsch", "englisch", "türkisch"};
+        String[] genre3 = {"Action", "Komödie"};
+        Film film4 = new Film("König der Löwen 2", "Hier kommt die Beschreibung", "/img/1.jpg", "https://youtube.com/", 161, 12, 12, false, genre3, sprachen3);
+
+        Assert.assertEquals("deutsch, englisch, türkisch", film4.getSpracheString());
+        Assert.assertEquals("Action, Komödie", film4.getGenreString());
     }
     //----
 
@@ -805,6 +813,12 @@ public class Test {
 
     @org.junit.Test
     public void testeGebaeudeFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeAnfahrtseite()
     {
 
     }
