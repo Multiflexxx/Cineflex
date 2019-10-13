@@ -32,7 +32,7 @@ function onClickBuchen()
     // CREATE JSON FILE
     var form = document.createElement("form");
     form.setAttribute("method", "post");
-    form.setAttribute("action", path);
+    form.setAttribute("action", "buchungsHandler.jsp");
 
     var laden = document.getElementById("ladenInput").value;
     var datum = document.getElementById("dateInput").value;
