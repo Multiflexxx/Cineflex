@@ -48,5 +48,3 @@
         </div>
     </div>
 </div>
-
-<script src="javascript/login_registration.js" crossorigin="anonymous"></script>

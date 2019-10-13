@@ -121,20 +121,20 @@ public class QueryBuilder {
 
         return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID " +
                     "FROM Vorstellung " +
-                        "Join Film ON Vorstellung.FilmID = Film.FilmID " +
+                        "JOIN Film ON Vorstellung.FilmID = Film.FilmID " +
                         "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
                         "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
                         "JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
                         "WHERE Film.FilmID = '" + id + "' " +
                         "AND concat(`Datum`,  ' ', `Uhrzeit`) >= '" + date + " " + time + "' " +
-                        "AND Gebäude.PLZ = '" + plz + "' ORDER BY `Datum` ASC LIMIT 6; ";
+                        "AND Gebäude.PLZ = '" + plz + "' ORDER BY `Datum` ASC LIMIT 6;";
 
     }
 
     public static String getGenreNamesById(int id) {
         return "Select `Genrebezeichnung` FROM FilmGenre " +
                 "JOIN Genre ON FilmGenre.GenreID = Genre.GenreID " +
-                "Where FilmID = " + id + " ;";
+                "Where FilmID = " + id + ";";
     }
 
     public static String getGenreByID(int id) {
@@ -146,7 +146,7 @@ public class QueryBuilder {
     public static String getSpracheById(int id) {
         return "Select `Sprachenname` FROM Filmsprache " +
         "JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID " +
-        "Where `FilmID` = " + id + " ;";
+        "Where `FilmID` = " + id + ";";
     }
 
     public static String getKinosByName(String stadt){
@@ -166,9 +166,8 @@ public class QueryBuilder {
     }
 
     public static String getVorstellungByID(int id){
-       return "SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, GebäudeID, Saalbezeichnung FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID WHERE VorstellungsID =" + id + " ;";
+       return "SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, GebäudeID, Saalbezeichnung FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID WHERE VorstellungsID = " + id + " ;";
     }
-
 
     private static String getDateAsString()
     {
@@ -181,5 +180,4 @@ public class QueryBuilder {
         DateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         return formatter.format(new Date());
     }
-
 }

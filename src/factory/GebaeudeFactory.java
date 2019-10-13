@@ -45,8 +45,6 @@ public class GebaeudeFactory {
             Connector.closeConnection(c);
             return gebäude;
         } else {
-            gebäude = new Gebaeude[1];
-            gebäude[0] = new Gebaeude(-1, "Egal", 0, 0, "RS is Null");
             Connector.closeConnection(c);
             return gebäude;
         }

@@ -1,4 +1,4 @@
-package oo;
+package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Anfahrtsseite {
+public class AnfahrtsseiteFactory {
 
     public static String getAnfahrtsseite(String ort) throws UnsupportedEncodingException, SQLException {
         String baseStringGoogle = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCM1EeAy6KlTOa-jHIsL_rCEhDghnqZ5Y8&q=";

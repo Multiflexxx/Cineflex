@@ -8,9 +8,6 @@ public abstract class Beleg {
   Sitz[] sitzauswahl;
   String uhrzeit;
 
-  public Beleg() {
-  }
-
   public Beleg(int belegID, float preis, Vorstellung vorstellung, Kunde kunde, Sitz[] sitzauswahl, String uhrzeit) {
     this.belegID = belegID;
     this.preis = preis;

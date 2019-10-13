@@ -3,15 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <servlet>
-        <servlet-name>LoginHandler</servlet-name>
-        <servlet-class>handler.LoginHandler</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>LoginHandler</servlet-name>
-        <url-pattern>/LoginHandler</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>RegistrationHandler</servlet-name>
@@ -23,21 +14,12 @@
         <url-pattern>/RegistrationHandler</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>SearchHandler</servlet-name>
-        <servlet-class>handler.SearchHandler</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SearchHandler</servlet-name>
-        <url-pattern>/SearchHandler</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>SingleMovieHandler</servlet-name>
-        <servlet-class>handler.SingleMovieHandler_ALT</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SingleMovieHandler</servlet-name>
-        <url-pattern>/SingleMovieHandler</url-pattern>
-    </servlet-mapping>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error500.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error404.jsp</location>
+    </error-page>
 </web-app>

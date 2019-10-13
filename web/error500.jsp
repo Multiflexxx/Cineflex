@@ -1,5 +1,8 @@
-<%@ page import="oo.Gebaeude" %>
-<%@ page import="factory.GebaeudeFactory" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<jsp:include page="elements/head.jsp"/>
+<body class="d-flex flex-column h-100">
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <header>
@@ -13,49 +16,12 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-            <div class="dropdown">
-                <%
-                    Cookie cookie = null;
-                    Cookie[] cookies = null;
-                    String outputValue = "Standort";
-
-                    cookies = request.getCookies();
-
-                    if (cookies != null) {
-                        for (int i = 0; i < cookies.length; i++) {
-                            if (cookies[i].getName().equals("city")) {
-                                cookie = cookies[i];
-                                outputValue = cookie.getValue();
-                                break;
-                            }
-                        }
-                    }
-                    out.println("<a class=\"navbar-brand dropwdown dropdown-toggle\" href=\"#\" id=\"navbarDropdownCity\" role=\"button\"\n" +
-                            "                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + outputValue + "</a>");
-
-                %>
-
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <%
-
-                        Gebaeude[] gebäude = GebaeudeFactory.getGebaeude();
-
-
-                        if (gebäude != null) {
-                            for(int i=0; i<gebäude.length; i++) {
-                                out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
-                            }
-                        } else {
-                            response.sendRedirect("error/error500.jsp");
-                        }
-
-                    %>
-                </div>
-            </div>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="programm.jsp">Programm <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Standort</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Programm</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Specials</a>
@@ -93,3 +59,32 @@
         </div>
     </nav>
 </header>
+
+
+
+<jsp:include page="locationPicker.jsp"/>
+<jsp:include page="login.jsp"/>
+<jsp:include page="registration.jsp"/>
+<jsp:include page="filter.jsp"/>
+
+<div class="container">
+    <div class="card mt-3 mb-3">
+        <div class="row">
+            <div class="col-lg-5">
+                <img src="img/error/multiflexTeam.jpg" class="card-img" alt="It´s a triple">
+            </div>
+            <div class="col-lg-7">
+                <div class="card-body">
+                    <h5 class="card-title">Error 500</h5>
+                    <p class="card-text"><small class="text-muted">Oh Baby! It´s a 500</small></p>
+                    <p class="card-text mrb-justify">Hier ist etwas schief gelaufen! Dein Multiflex-Team kümmert sich um das Problem.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<jsp:include page="elements/footer.jsp"/>
+</body>
+</html>

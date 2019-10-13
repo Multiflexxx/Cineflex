@@ -3,25 +3,24 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-import handler.RegistrationHandler;
-import handler.SingleMovieHandler_ALT;
+import factory.LoginFactory;
 import helper.DateFormatter;
+import helper.ExceptionHandler;
+import helper.SupportMethods;
 import oo.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import static db_connector.Connector.executeQuery;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,49 +28,16 @@ import java.util.Locale;
 
 public class Test {
 
-    // Create Mock Data for HttpServlets
-    @Mock
-    HttpServletRequest request1;
-
-    @Mock
-    HttpServletResponse response1;
-
-    @Mock
-    HttpServletRequest request2;
-
-    @Mock
-    HttpServletResponse response2;
-
-    @Mock
-    HttpServletRequest request3;
-
-    @Mock
-    HttpServletResponse response3;
-
-    @Mock
-    HttpServletRequest request4;
-
-    @Mock
-    HttpServletResponse response4;
-
-    @Mock
-    HttpServletRequest request5;
-
-    @Mock
-    HttpServletResponse response5;
-
-    @Mock
-    HttpServletRequest request6;
-
-    @Mock
-    HttpServletResponse response6;
-
     @InjectMocks
     Connector connector;
     @Mock
     Connection mockConnection;
     @Mock
     Statement mockStatement;
+    @Mock
+    private ResultSet resultSetMock1;
+    @Mock
+    private ResultSet resultSetMock2;
 
     @Before
     public void setUp() throws Exception
@@ -472,24 +438,6 @@ public class Test {
     }
     //----
 
-    // Tests for class DateFormatter
-    @org.junit.Test
-    public void testeDateFormatter()
-    {
-        Date date = new Date();
-
-        SimpleDateFormat frontendDate = new SimpleDateFormat("EEE, dd. MMM", new Locale("de", "DE"));
-        SimpleDateFormat frontendTime = new SimpleDateFormat("HH:mm", new Locale("de", "DE"));
-        SimpleDateFormat sqlDate = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sqlTime = new SimpleDateFormat("HH:mm:ss");
-
-        Assert.assertEquals(frontendDate.format(date), DateFormatter.getFrontendDate(date));
-        Assert.assertEquals(frontendTime.format(date), DateFormatter.getFrontendTime(date));
-        Assert.assertEquals(sqlDate.format(date), DateFormatter.getSQLDate(date));
-        Assert.assertEquals(sqlTime.format(date), DateFormatter.getSQLTime(date));
-    }
-    //----
-
     // Tests for class Film
     @org.junit.Test
     public void testeFilm()
@@ -549,6 +497,14 @@ public class Test {
         Assert.assertNotEquals(null, film3);
         Assert.assertEquals("Neuer Film", film3.getTitel());
         Assert.assertEquals(4, film3.getFilmID());
+
+        //
+        String[] sprachen3 = {"deutsch", "englisch", "türkisch"};
+        String[] genre3 = {"Action", "Komödie"};
+        Film film4 = new Film("König der Löwen 2", "Hier kommt die Beschreibung", "/img/1.jpg", "https://youtube.com/", 161, 12, 12, false, genre3, sprachen3);
+
+        Assert.assertEquals("deutsch, englisch, türkisch", film4.getSpracheString());
+        Assert.assertEquals("Action, Komödie", film4.getGenreString());
     }
     //----
 
@@ -663,12 +619,12 @@ public class Test {
     @org.junit.Test
     public void testeLogin()
     {
-        Login login = new Login();
+        LoginFactory login = new LoginFactory();
 
         Assert.assertNotEquals(null, login);
 
         try{
-            login = new Login("max.muster@mann.de", "e10adc3949ba59abbe56e057f20f883e");
+            login = new LoginFactory("max.muster@mann.de", "e10adc3949ba59abbe56e057f20f883e");
         }
 
         catch (Exception e){
@@ -732,56 +688,6 @@ public class Test {
     }
     //----
 
-    // TESTS FOR CONNECTOR
-    @org.junit.Test
-    public void testeConnector() throws Exception
-    {
-        /* @InjectMocks
-        Connector connector;
-        @Mock
-        Connection mockConnection;
-        @Mock
-        Statement mockStatement;
-        */
-
-        //Mockito.when(mockConnection.createStatement());
-
-
-
-
-
-
-
-
-
-
-
-        //Assert.assertEquals(ClassNotFoundException, Connector.getConnection());
-
-        ///???????????? WAS MACHE ICH HIER EIG??????????
-        /*ResultSet resultSet = mock(ResultSet.class);
-        PreparedStatement statement = mock(PreparedStatement.class);
-
-        when(statement.getResultSet()).thenReturn(resultSet);
-
-        when(resultSet.getString(eq("plz"))).thenReturn("85055");
-
-        Mockito.when(mockConnection.createStatement()).thenReturn(mockStatement);
-
-
-
-        when(statement.execute()).thenReturn(true);
-*/
-
-       /* Connection connection = Connector.getConnection();
-
-        Assert.assertEquals(null, connection);
-
-        Connector.closeConnection(connection);
-
-        Assert.assertEquals(null, connection);*/
-    }
-
     @org.junit.Test
     public void testeQueryBuilder() {
 
@@ -830,19 +736,15 @@ public class Test {
         Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE (`Titel` LIKE '%Der Herr der Ringe%' OR `Beschreibung` LIKE '%Der Herr der Ringe%') AND `Datum` >= '2019-08-07'AND `Uhrzeit` >= '19:30:00'AND `FSK` <= 12 ;",QueryBuilder.showSearchResults("Der Herr der Ringe", "2019-08-07", "19:30:00", 12));
         Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Datum` >= '2019-08-07'AND `Uhrzeit` >= '19:30:00'AND `FSK` <= 12 ;", QueryBuilder.showSearchResults("","2019-08-07","19:30:00", 12));
 
-        //defaultSearchQuery
-        //TODO Muss später angepasst werden
-        //Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE (`Titel` LIKE '%Der Herr der Ringe%' OR `Beschreibung` LIKE '%Der Herr der Ringe%') AND `Datum` >= '2019-08-07' AND `Uhrzeit`>= '19:30:00' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Der Herr der Ringe", "2019-08-07", "19:30:00", 18));
-        //Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Datum` >= '2019-08-07' AND `Uhrzeit`>= '19:30:00' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-07", "19:30:00", 18));
+        //TODO: Change concat with Date and Time
+
+        // defaultSearchQuery with Search Text
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') AND `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Toy", "2019-08-08", "20:00:00", 18, "68165"));
+        // defaultSearchQuery without Search Text
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-08", "20:00:00", 18, "68165"));
 
         //showMovieById
-        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung Join Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE Film.FilmID = '1' AND `Datum` >= '2019-08-07' AND `Uhrzeit` >= '19:30:00' AND Gebäude.PLZ = '68159' ORDER BY `Datum` ASC LIMIT 6; ", QueryBuilder.showMovieById("1","2019-08-07", "19:30:00", "68159"));
-
-        //getGenreNamesById
-        Assert.assertEquals("Select Genrebezeichnung FROM FilmGenre JOIN Genre ON FilmGenre.GenreID = Genre.GenreID Where FilmID = 1 ;", QueryBuilder.getGenreNamesById(1));
-
-        //getSpracheById
-       Assert.assertEquals("Select `Sprachenname` FROM Filmsprache JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID Where `FilmID` = 1 ;", QueryBuilder.getSpracheById(1));
+        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE Film.FilmID = '1' AND concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-07 19:30:00' AND Gebäude.PLZ = '68159' ORDER BY `Datum` ASC LIMIT 6;", QueryBuilder.showMovieById("1","2019-08-07", "19:30:00", "68159"));
 
         //getSaalById
         Assert.assertEquals("Select * From Kinosaal Where SaalID = 1 ;", QueryBuilder.getSaalById(1));
@@ -852,74 +754,99 @@ public class Test {
 
         //getKinosByName
         Assert.assertEquals("SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = 'Berlin' ;",QueryBuilder.getKinosByName("Berlin"));
+
+        //getGenreNamesById(int id)
+        Assert.assertEquals("Select Genrebezeichnung FROM FilmGenre JOIN Genre ON FilmGenre.GenreID = Genre.GenreID Where FilmID = 2;", QueryBuilder.getGenreNamesById(2));
+
+        //getSpracheById(int id)
+        Assert.assertEquals("Select `Sprachenname` FROM Filmsprache JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID Where `FilmID` = 5;", QueryBuilder.getSpracheById(5));
+
+        //getKinosByName(String stadt)
+        Assert.assertEquals("SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = 'Mannheim' ;", QueryBuilder.getKinosByName("Mannheim"));
+
+        //getSaalById(int id)
+        Assert.assertEquals("Select * From Kinosaal Where SaalID = 10 ;", QueryBuilder.getSaalById(10));
+
+        //getSitzplanBySaalID(int id)
+        Assert.assertEquals("SELECT Kinosaal.SaalID as SaalID, GebäudeID, Saalbezeichnung, Sitzplan.SitzplanID as SitzplanID, SitzplatzID, Reihe, Nummer, Sitzklasse FROM Cineflex.Kinosaal JOIN Cineflex.Sitzplan ON Sitzplan.SaalID = Kinosaal.SaalID JOIN Cineflex.Sitz ON Sitzplan.SitzplanID = Sitz.SitzplanID WHERE Kinosaal.SaalID = 5;", QueryBuilder.getSitzplanBySaalID(5));
+
+        //showTitelPageFilmsbyPLZ
+        Date date4 = new Date();
+        String dateSQL4 = DateFormatter.getSQLDate(date4);
+        Assert.assertEquals("SELECT DISTINCT Film.FilmID, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `BildLink`, `TrailerLink`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE `Datum` >= '" + dateSQL4 + "' AND Gebäude.PLZ = '68165' LIMIT 3;", QueryBuilder.showTitelPageFilmsbyPLZ("68165"));
+
+        //getVorstellungByID(int id)
+        Assert.assertEquals("SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, GebäudeID, Saalbezeichnung FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID WHERE VorstellungsID = 5 ;", QueryBuilder.getVorstellungByID(5));
     }
 
-    // TESTS FOR HANDLER
+    // TESTS FOR HELPERS
 
+    // Tests for class DateFormatter
     @org.junit.Test
-    public void testeLoginHandler()
+    public void testeDateFormatter()
     {
+        Date date = new Date();
 
+        SimpleDateFormat frontendDate = new SimpleDateFormat("EEE, dd. MMM", new Locale("de", "DE"));
+        SimpleDateFormat frontendTime = new SimpleDateFormat("HH:mm", new Locale("de", "DE"));
+        SimpleDateFormat sqlDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sqlTime = new SimpleDateFormat("HH:mm:ss");
+
+        Assert.assertEquals(frontendDate.format(date), DateFormatter.getFrontendDate(date));
+        Assert.assertEquals(frontendTime.format(date), DateFormatter.getFrontendTime(date));
+        Assert.assertEquals(sqlDate.format(date), DateFormatter.getSQLDate(date));
+        Assert.assertEquals(sqlTime.format(date), DateFormatter.getSQLTime(date));
     }
 
+    // Tests for class SupportMethods
     @org.junit.Test
-    public void testeRegistrationHandler() throws Exception
+    public void testeSupportMethods() throws Exception
     {
-        when(request4.getParameter("inputVorname")).thenReturn("Dietmar");
-        when(request4.getParameter("inputNachname")).thenReturn("Hopp");
-        when(request4.getParameter("inputGeb")).thenReturn("1979-05-05");
-        when(request4.getParameter("inputEmailReg")).thenReturn("dietmar.hopp@mail.com");
-        when(request4.getParameter("inputPasswordReg")).thenReturn("sicher123456");
-        when(request4.getParameter("inputPasswordRegWdh")).thenReturn("sicher123456");
+        // Create Resultset
+        resultSetMock2 = Mockito.mock(ResultSet.class);
 
-        when(mockConnection.createStatement()).thenReturn(mockStatement);
+        //Example Resultset Query:
+        //SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = '"+ stadt +"' ;";
 
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
+        Mockito.when(resultSetMock2.getString("Straße")).thenReturn("Lange Straße");
+        Mockito.when(resultSetMock2.getString("Hausnummer")).thenReturn("1");
+        Mockito.when(resultSetMock2.getString("PLZ")).thenReturn("68165");
+        Mockito.when(resultSetMock2.getString("Ortsname")).thenReturn("Mannheim");
 
-        when(response4.getWriter()).thenReturn(printWriter);
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock2.next()).thenReturn(true).thenReturn(false);
 
-        RegistrationHandler registrationHandler = new RegistrationHandler();
-        registrationHandler.doPost(request4, response4);
+        // Create Support Methods Object
 
-        String result = stringWriter.getBuffer().toString();
+        SupportMethods supportMethods = new SupportMethods();
 
-        System.out.println(result);
+        // call get ResultSetSize()
+        int size = supportMethods.getResultSetSize(resultSetMock2);
 
-        Assert.assertEquals("Geht nicht!", result);
+        Assert.assertEquals(1, size);
     }
 
+    // Tests for class Exception Handler
     @org.junit.Test
-    public void testeSearchHandler()
+    public void testeExeptionHandler()
     {
+        IllegalArgumentException exception = new IllegalArgumentException("Argument 'divisor' is 0");
 
+        // Exception Object Exists
+        Assert.assertNotNull(exception);
+
+        // Assert that String length is > 0, so String is build
+        Assert.assertTrue(ExceptionHandler.exceptionStackTraceToString(exception).length() > 0);
     }
 
+
+    //TODO: ÄNDERN
+
+    // TESTS FOR CONNECTOR
     @org.junit.Test
-    public void testeSingleMovieHandler() throws Exception
+    public void testeConnector() throws Exception
     {
-        Cookie[] cookies = new Cookie[1];
-        cookies[0] = new Cookie("plz", "86165");
 
-        // Add mock parameters
-        when(request6.getParameter("id")).thenReturn("1");
-        when(request6.getParameter("date")).thenReturn("2019-01-01");
-        when(request6.getParameter("time")).thenReturn("20:30:31");
-
-        // Add mock cookies
-        when(request6.getCookies()).thenReturn(cookies);
-
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-
-        when(response6.getWriter()).thenReturn(printWriter);
-
-        SingleMovieHandler_ALT singleMovieHandler = new SingleMovieHandler_ALT();
-        singleMovieHandler.doGet(request6, response6);
-
-        String result = stringWriter.getBuffer().toString();
-
-        System.out.println(result);
     }
 
     // TESTS FOR FACTORIES
@@ -937,12 +864,6 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeSupportMethods()
-    {
-
-    }
-
-    @org.junit.Test
     public void testeVorstellungsFactory()
     {
 
@@ -950,6 +871,12 @@ public class Test {
 
     @org.junit.Test
     public void testeGebaeudeFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeAnfahrtseiteFactory()
     {
 
     }
