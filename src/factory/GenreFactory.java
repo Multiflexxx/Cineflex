@@ -49,9 +49,9 @@ public class GenreFactory {
         try{
           int counter = 0;
           while (rs.next()) {
-            genres[counter] = new Genre(rs.getInt("GenreId"),
+            genres[counter] = new Genre(rs.getInt("GenreID"),
                 rs.getString("Genrebezeichnung"),
-                rs.getString("Genrebeschreibung"));
+                rs.getString("Deskriptor"));
 
             counter ++;
           }
