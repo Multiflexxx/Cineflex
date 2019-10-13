@@ -63,22 +63,22 @@
                 out.write("<p align=\"center\">Leinwand</p>");
                 out.write("<hr width=\"40%\" height=\"3em\" color=\"grey\">");
                 out.write("<div class=\"d-flex p-2 justify-content-center\">");
-                out.write("<table cellpadding=\"1\" class=\"align-self-center\">");
+                out.write("<table class=\"align-self-center\">");
                 int arrayLength = vorstellung.getSaal().getSitzplan().length;
                 int counter = 0;
                 out.write("<tr>");
                 while (counter < arrayLength) {
-                    out.write("<td width=\"1em\">");
-                    out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"chooseSeat(" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + ")\">" + vorstellung.getSaal().getSitzplan()[counter].getNummer() + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</button>");
+                    out.write("<td>");
+                    out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"chooseSeat(" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + ")\">"+ vorstellung.getSaal().getSitzplan()[counter].getNummer() + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</button>");
                     out.write("</td>");
                     if (counter >= arrayLength - 1) {
-                        out.write("<td width=\"1em\">");
-                        out.write("<p>" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</p>");
+                        out.write("<td>");
+                        out.write("<p> &nbsp;" +vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</p>");
                         out.write("</td>");
                         out.write("</tr>");
                     } else if (vorstellung.getSaal().getSitzplan()[counter].getReihe() != vorstellung.getSaal().getSitzplan()[counter + 1].getReihe()) {
-                        out.write("<td width=\"1em\">");
-                        out.write("<p>" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</p>");
+                        out.write("<td>");
+                        out.write("<p> &nbsp;" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</p>");
                         out.write("</td>");
                         out.write("</tr>");
                         out.write("<tr>");
@@ -116,13 +116,13 @@
                         <table class="table table-dark text-center">
                             <tbody>
                             <tr>
-                                <td>Schüler / Student</td>
-                                <td>10 €</td>
+                                <td>Normal</td>
+                                <td>12 €</td>
                             </tr>
 
                             <tr>
-                                <td>Normal</td>
-                                <td>12 €</td>
+                                <td>Schüler / Student</td>
+                                <td>10 €</td>
                             </tr>
 
                             <tr>

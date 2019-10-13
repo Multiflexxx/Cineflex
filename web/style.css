@@ -70,11 +70,11 @@ h6{
 
 /*Ab hier für Sitzplan*/
 .seat {
-    width: 3em;
-    height: 3em;
+    width: 2em;
+    height: 2em;
     background: #4a9be8;
     border: #4e555b;
-    margin: 1em;
+    margin: 2px;
 }
 
 .seat:hover {
