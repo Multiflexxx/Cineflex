@@ -4,9 +4,9 @@ import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 import factory.LoginFactory;
-import handler.RegistrationHandler;
-import handler.SingleMovieHandler_ALT;
 import helper.DateFormatter;
+import helper.ExceptionHandler;
+import helper.SupportMethods;
 import oo.*;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,17 +15,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static db_connector.Connector.executeQuery;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +33,8 @@ public class Test {
     Connection mockConnection;
     @Mock
     Statement mockStatement;
+    @Mock
+    private ResultSet resultSetMock;
 
     @Before
     public void setUp() throws Exception
@@ -439,24 +435,6 @@ public class Test {
     }
     //----
 
-    // Tests for class DateFormatter
-    @org.junit.Test
-    public void testeDateFormatter()
-    {
-        Date date = new Date();
-
-        SimpleDateFormat frontendDate = new SimpleDateFormat("EEE, dd. MMM", new Locale("de", "DE"));
-        SimpleDateFormat frontendTime = new SimpleDateFormat("HH:mm", new Locale("de", "DE"));
-        SimpleDateFormat sqlDate = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sqlTime = new SimpleDateFormat("HH:mm:ss");
-
-        Assert.assertEquals(frontendDate.format(date), DateFormatter.getFrontendDate(date));
-        Assert.assertEquals(frontendTime.format(date), DateFormatter.getFrontendTime(date));
-        Assert.assertEquals(sqlDate.format(date), DateFormatter.getSQLDate(date));
-        Assert.assertEquals(sqlTime.format(date), DateFormatter.getSQLTime(date));
-    }
-    //----
-
     // Tests for class Film
     @org.junit.Test
     public void testeFilm()
@@ -785,32 +763,6 @@ public class Test {
         Assert.assertEquals("SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = 'Berlin' ;",QueryBuilder.getKinosByName("Berlin"));
     }
 
-    // TESTS FOR HANDLER
-
-    @org.junit.Test
-    public void testeLoginHandler()
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeRegistrationHandler() throws Exception
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeSearchHandler()
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeSingleMovieHandler() throws Exception
-    {
-
-    }
-
     // TESTS FOR FACTORIES
 
     @org.junit.Test
@@ -826,12 +778,6 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeSupportMethods()
-    {
-
-    }
-
-    @org.junit.Test
     public void testeVorstellungsFactory()
     {
 
@@ -841,6 +787,62 @@ public class Test {
     public void testeGebaeudeFactory()
     {
 
+    }
+
+    // TESTS FOR HELPERS
+
+    // Tests for class DateFormatter
+    @org.junit.Test
+    public void testeDateFormatter()
+    {
+        Date date = new Date();
+
+        SimpleDateFormat frontendDate = new SimpleDateFormat("EEE, dd. MMM", new Locale("de", "DE"));
+        SimpleDateFormat frontendTime = new SimpleDateFormat("HH:mm", new Locale("de", "DE"));
+        SimpleDateFormat sqlDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sqlTime = new SimpleDateFormat("HH:mm:ss");
+
+        Assert.assertEquals(frontendDate.format(date), DateFormatter.getFrontendDate(date));
+        Assert.assertEquals(frontendTime.format(date), DateFormatter.getFrontendTime(date));
+        Assert.assertEquals(sqlDate.format(date), DateFormatter.getSQLDate(date));
+        Assert.assertEquals(sqlTime.format(date), DateFormatter.getSQLTime(date));
+    }
+
+    // Tests for class SupportMethods
+    @org.junit.Test
+    public void testeSupportMethods() throws Exception
+    {
+        // Create Resultset
+        resultSetMock = Mockito.mock(ResultSet.class);
+
+        //Example Resultset Query:
+        //SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = '"+ stadt +"' ;";
+
+        Mockito.when(resultSetMock.getString("Straße")).thenReturn("Lange Straße");
+        Mockito.when(resultSetMock.getString("Hausnummer")).thenReturn("1");
+        Mockito.when(resultSetMock.getString("PLZ")).thenReturn("68165");
+        Mockito.when(resultSetMock.getString("Ortsname")).thenReturn("Mannheim");
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock.next()).thenReturn(true).thenReturn(false);
+
+        // Create Support Methods Object
+
+        SupportMethods supportMethods = new SupportMethods();
+
+        // call get ResultSetSize()
+        int size = supportMethods.getResultSetSize(resultSetMock);
+
+        Assert.assertEquals(1, size);
+    }
+
+    // Tests for class Exception Handler
+    @org.junit.Test
+    public void testeExeptionHandler()
+    {
+        IllegalArgumentException exception = new IllegalArgumentException("Argument 'divisor' is 0");
+
+        System.out.println(ExceptionHandler.exceptionStackTraceToString(exception));
     }
 
 }
