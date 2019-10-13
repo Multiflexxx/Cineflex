@@ -677,6 +677,9 @@ public class Test {
     }
     //----
 
+
+    //TODO: ÄNDERN
+
     // TESTS FOR CONNECTOR
     @org.junit.Test
     public void testeConnector() throws Exception
@@ -745,13 +748,7 @@ public class Test {
         //Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Datum` >= '2019-08-07' AND `Uhrzeit`>= '19:30:00' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-07", "19:30:00", 18));
 
         //showMovieById
-        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung Join Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE Film.FilmID = '1' AND `Datum` >= '2019-08-07' AND `Uhrzeit` >= '19:30:00' AND Gebäude.PLZ = '68159' ORDER BY `Datum` ASC LIMIT 6; ", QueryBuilder.showMovieById("1","2019-08-07", "19:30:00", "68159"));
-
-        //getGenreNamesById
-        Assert.assertEquals("Select Genrebezeichnung FROM FilmGenre JOIN Genre ON FilmGenre.GenreID = Genre.GenreID Where FilmID = 1 ;", QueryBuilder.getGenreNamesById(1));
-
-        //getSpracheById
-       Assert.assertEquals("Select `Sprachenname` FROM Filmsprache JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID Where `FilmID` = 1 ;", QueryBuilder.getSpracheById(1));
+        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE Film.FilmID = '1' AND concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-07 19:30:00' AND Gebäude.PLZ = '68159' ORDER BY `Datum` ASC LIMIT 6;", QueryBuilder.showMovieById("1","2019-08-07", "19:30:00", "68159"));
 
         //getSaalById
         Assert.assertEquals("Select * From Kinosaal Where SaalID = 1 ;", QueryBuilder.getSaalById(1));
@@ -761,6 +758,29 @@ public class Test {
 
         //getKinosByName
         Assert.assertEquals("SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = 'Berlin' ;",QueryBuilder.getKinosByName("Berlin"));
+
+        //getGenreNamesById(int id)
+        Assert.assertEquals("Select Genrebezeichnung FROM FilmGenre JOIN Genre ON FilmGenre.GenreID = Genre.GenreID Where FilmID = 2;", QueryBuilder.getGenreNamesById(2));
+
+        //getSpracheById(int id)
+        Assert.assertEquals("Select `Sprachenname` FROM Filmsprache JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID Where `FilmID` = 5;", QueryBuilder.getSpracheById(5));
+
+        //getKinosByName(String stadt)
+        Assert.assertEquals("SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = 'Mannheim' ;", QueryBuilder.getKinosByName("Mannheim"));
+
+        //getSaalById(int id)
+        Assert.assertEquals("Select * From Kinosaal Where SaalID = 10 ;", QueryBuilder.getSaalById(10));
+
+        //getSitzplanBySaalID(int id)
+        Assert.assertEquals("SELECT Kinosaal.SaalID as SaalID, GebäudeID, Saalbezeichnung, Sitzplan.SitzplanID as SitzplanID, SitzplatzID, Reihe, Nummer, Sitzklasse FROM Cineflex.Kinosaal JOIN Cineflex.Sitzplan ON Sitzplan.SaalID = Kinosaal.SaalID JOIN Cineflex.Sitz ON Sitzplan.SitzplanID = Sitz.SitzplanID WHERE Kinosaal.SaalID = 5;", QueryBuilder.getSitzplanBySaalID(5));
+
+        //showTitelPageFilmsbyPLZ
+        Date date4 = new Date();
+        String dateSQL4 = DateFormatter.getSQLDate(date4);
+        Assert.assertEquals("SELECT DISTINCT Film.FilmID, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `BildLink`, `TrailerLink`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE `Datum` >= '" + dateSQL4 + "' AND Gebäude.PLZ = '68165' LIMIT 3;", QueryBuilder.showTitelPageFilmsbyPLZ("68165"));
+
+        //getVorstellungByID(int id)
+        Assert.assertEquals("SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, GebäudeID, Saalbezeichnung FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID WHERE VorstellungsID = 5 ;", QueryBuilder.getVorstellungByID(5));
     }
 
     // TESTS FOR FACTORIES
