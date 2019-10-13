@@ -41,7 +41,7 @@
     <div class="container-fluid">
         <div class="media">
             <img src="<%=vorstellung.getFilm().getBildLink()%>" class="align-self-start mr-3 img-thumbnail" alt="Bild"
-                 width="9em">
+                 width="170em">
             <div class="media-body">
                 <h1><%=vorstellung.getFilm().getTitel()%></h1>
                 <h2><%=formatDatum%> um <%=formatUhrzeit%></h2>
@@ -68,9 +68,12 @@
                 out.write("<tr>");
                 while (counter < arrayLength) {
                     out.write("<td width=\"1em\">");
-                    out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\">" + vorstellung.getSaal().getSitzplan()[counter].getNummer() + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</button>");
+                    out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"chooseSeat()\">" + vorstellung.getSaal().getSitzplan()[counter].getNummer() + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</button>");
                     out.write("</td>");
                     if (counter >= arrayLength - 1) {
+                        out.write("<td width=\"1em\">");
+                        out.write("<p>" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</p>");
+                        out.write("</td>");
                         out.write("</tr>");
                     } else if (vorstellung.getSaal().getSitzplan()[counter].getReihe() != vorstellung.getSaal().getSitzplan()[counter + 1].getReihe()) {
                         out.write("<td width=\"1em\">");

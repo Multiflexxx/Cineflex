@@ -76,3 +76,7 @@ h6{
     border: #4e555b;
     margin: 1em;
 }
+
+.seat:hover {
+    background: #1c7430;
+}
