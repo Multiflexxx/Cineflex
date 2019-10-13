@@ -27,10 +27,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="programm.jsp">Standort</a>
+                    <a class="nav-link" href="#">Standort</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="programm.jsp">Programm</a>
+                    <a class="nav-link" href="#">Programm</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Specials</a>
