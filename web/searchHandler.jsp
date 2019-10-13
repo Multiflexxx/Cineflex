@@ -1,5 +1,16 @@
 <%@ page import="oo.Film" %>
-<%@ page import="factory.FilmFactory" %><%
+<%@ page import="factory.FilmFactory" %>
+<html>
+<jsp:include page="elements/head.jsp"/>
+<body class="d-flex flex-column h-100">
+
+<jsp:include page="elements/header.jsp"/>
+<jsp:include page="locationPicker.jsp"/>
+<jsp:include page="login.jsp"/>
+<jsp:include page="registration.jsp"/>
+<jsp:include page="filter.jsp"/>
+
+<%
     String date = request.getParameter("inputDate");
     String time = request.getParameter("inputTime");
     String fsk = request.getParameter("inputFSK");
@@ -25,14 +36,7 @@
 
     try {
         if(filme != null) {
-            response.setContentType("text/html;charset=UTF-8");
-            out.write("<html>");
-            request.getRequestDispatcher("elements/head.jsp").include(request, response);
-            out.write("<body class=\"d-flex flex-column h-100\">");
-            request.getRequestDispatcher("elements/header.jsp").include(request, response);
-            request.getRequestDispatcher("login.jsp").include(request, response);
-            request.getRequestDispatcher("registration.jsp").include(request, response);
-            request.getRequestDispatcher("filter.jsp").include(request, response);
+
             out.write("<div class=\"container\">");
             for (Film f : filme) {
                 String hrefURL = "singleMovie.jsp?";
@@ -56,9 +60,6 @@
                 out.write("</div>");
             }
             out.write("</div>");
-            request.getRequestDispatcher("elements/footer.jsp").include(request, response);
-            out.write("</body>");
-            out.write("</html>");
         } else {
             out.println("sql");
         }
@@ -66,3 +67,6 @@
         e.printStackTrace();
     }
 %>
+
+<jsp:include page="elements/footer.jsp"/>
+</body>
