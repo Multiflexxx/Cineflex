@@ -69,14 +69,33 @@ h6{
 }
 
 /*Ab hier für Sitzplan*/
+.sitzplan{
+    margin: 0 auto;
+}
+
 .seat {
     width: 2em;
     height: 2em;
     background: #4a9be8;
     border: #4e555b;
     margin: 2px;
+    border-radius: 13px 13px 0 0;
 }
 
 .seat:hover {
     background: green;
+}
+
+@media (max-width: 992px) {
+    .seat {
+        width: 1.5em;
+        height: 1.5em;
+    }
+}
+
+@media (max-width: 576px) {
+    .seat {
+        width: 1em;
+        height: 1em;
+    }
 }
