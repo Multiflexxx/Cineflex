@@ -35,8 +35,7 @@
     }
     out.write("<div class=\"container\">");
     try {
-
-        if(filme != null) {
+        if(filme[0] != null) {
             for (Film f : filme) {
                 String hrefURL = "singleMovie.jsp?";
                 hrefURL += "id=" + f.getFilmID();  //getString("FilmID");
@@ -59,7 +58,7 @@
                 out.write("</div>");
             }
         } else {
-            out.println("sql");
+            out.println("Deine Suche hat keine Ergebnisse..");
         }
 
     } catch(Exception e) {
