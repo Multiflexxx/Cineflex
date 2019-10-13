@@ -47,7 +47,7 @@
                 <h2><%=formatDatum%> um <%=formatUhrzeit%></h2>
                 <span class="badge badge-pill badge-info"><%=vorstellung.getSprache()%></span>
                 <span class="badge badge-pill badge-secondary"><%=vorstellung.getSaal().getBezeichnung()%></span>
-                <button onclick="chooseSeat()">Test</button>
+                <button id="test" onclick="chooseSeat('test')">Test</button>
             </div>
         </div>
         <%
