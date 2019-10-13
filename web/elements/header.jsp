@@ -47,7 +47,7 @@
                                 out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
                             }
                         } else {
-                            out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('')\">Scheiße</a>");
+                            response.sendRedirect("error/error500.jsp");
                         }
 
                     %>
