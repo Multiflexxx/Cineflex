@@ -105,9 +105,9 @@
         </div>
         <div class="row text-center">
             <div class="col">
-                    <button onclick="" class="btn btn-secondary">Reservieren</button>
-                    <button onclick="" class="btn btn-secondary">Buchen</button>
-                    <button onclick="" class="btn btn-secondary">Zurück</button>
+                    <button onclick="onClickReservieren()" class="btn btn-secondary">Reservieren</button>
+                    <button onclick="onClickBuchen()" class="btn btn-secondary">Buchen</button>
+                    <button onclick="onClickZurueck()" class="btn btn-secondary">Zurück</button>
                 </div>
         </div>
     </div>
