@@ -71,7 +71,8 @@ h6{
 /*Ab hier für Sitzplan*/
 .seat {
     width: 3em;
+    height: 3em;
     background: #4a9be8;
     border: #4e555b;
-    margin: 2em;
+    margin: 1em;
 }

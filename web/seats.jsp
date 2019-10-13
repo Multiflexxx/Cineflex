@@ -40,7 +40,8 @@
         ;%>
     <div class="container-fluid">
         <div class="media">
-            <img src="<%=vorstellung.getFilm().getBildLink()%>" class="align-self-start mr-3 img-thumbnail" alt="Bild" width="15%">
+            <img src="<%=vorstellung.getFilm().getBildLink()%>" class="align-self-start mr-3 img-thumbnail" alt="Bild"
+                 width="9em">
             <div class="media-body">
                 <h1><%=vorstellung.getFilm().getTitel()%></h1>
                 <h2><%=formatDatum%> um <%=formatUhrzeit%></h2>
@@ -72,6 +73,9 @@
                     if (counter >= arrayLength - 1) {
                         out.write("</tr>");
                     } else if (vorstellung.getSaal().getSitzplan()[counter].getReihe() != vorstellung.getSaal().getSitzplan()[counter + 1].getReihe()) {
+                        out.write("<td width=\"1em\">");
+                        out.write("<p>" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</p>");
+                        out.write("</td>");
                         out.write("</tr>");
                         out.write("<tr>");
                     }
