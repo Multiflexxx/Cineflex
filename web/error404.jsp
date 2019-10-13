@@ -7,14 +7,14 @@
 <%@ page import="java.util.Date" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<jsp:include page="../elements/head.jsp"/>
+<jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
 
-<jsp:include page="../elements/header.jsp"/>
-<jsp:include page="../locationPicker.jsp"/>
-<jsp:include page="../login.jsp"/>
-<jsp:include page="../registration.jsp"/>
-<jsp:include page="../filter.jsp"/>
+<jsp:include page="elements/header.jsp"/>
+<jsp:include page="locationPicker.jsp"/>
+<jsp:include page="login.jsp"/>
+<jsp:include page="registration.jsp"/>
+<jsp:include page="filter.jsp"/>
 
 <div class="container">
     <div class="card mt-3 mb-3">
@@ -34,6 +34,6 @@
     </div>
 </div>
 
-<jsp:include page="../elements/footer.jsp"/>
+<jsp:include page="elements/footer.jsp"/>
 </body>
 </html>
