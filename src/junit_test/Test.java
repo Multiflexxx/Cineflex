@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import static db_connector.Connector.executeQuery;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 
@@ -34,7 +35,9 @@ public class Test {
     @Mock
     Statement mockStatement;
     @Mock
-    private ResultSet resultSetMock;
+    private ResultSet resultSetMock1;
+    @Mock
+    private ResultSet resultSetMock2;
 
     @Before
     public void setUp() throws Exception
@@ -685,23 +688,6 @@ public class Test {
     }
     //----
 
-
-    //TODO: ÄNDERN
-
-    // TESTS FOR CONNECTOR
-    @org.junit.Test
-    public void testeConnector() throws Exception
-    {
-       // Test ExecuteQuery
-
-        Mockito.when(mockConnection.createStatement()).thenReturn(mockStatement);
-        Mockito.when(mockConnection.createStatement().executeUpdate(Mockito.any())).thenReturn(1);
-
-        connector.executeQuery(mockConnection, "");
-        //Assert.assertEquals(value, 1);
-        Mockito.verify(mockConnection.createStatement(), Mockito.times(1));
-    }
-
     @org.junit.Test
     public void testeQueryBuilder() {
 
@@ -750,10 +736,12 @@ public class Test {
         Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE (`Titel` LIKE '%Der Herr der Ringe%' OR `Beschreibung` LIKE '%Der Herr der Ringe%') AND `Datum` >= '2019-08-07'AND `Uhrzeit` >= '19:30:00'AND `FSK` <= 12 ;",QueryBuilder.showSearchResults("Der Herr der Ringe", "2019-08-07", "19:30:00", 12));
         Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Datum` >= '2019-08-07'AND `Uhrzeit` >= '19:30:00'AND `FSK` <= 12 ;", QueryBuilder.showSearchResults("","2019-08-07","19:30:00", 12));
 
-        //defaultSearchQuery
-        //TODO Muss später angepasst werden
-        //Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE (`Titel` LIKE '%Der Herr der Ringe%' OR `Beschreibung` LIKE '%Der Herr der Ringe%') AND `Datum` >= '2019-08-07' AND `Uhrzeit`>= '19:30:00' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Der Herr der Ringe", "2019-08-07", "19:30:00", 18));
-        //Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Datum` >= '2019-08-07' AND `Uhrzeit`>= '19:30:00' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-07", "19:30:00", 18));
+        //TODO: Change concat with Date and Time
+
+        // defaultSearchQuery with Search Text
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') AND `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Toy", "2019-08-08", "20:00:00", 18, "68165"));
+        // defaultSearchQuery without Search Text
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-08", "20:00:00", 18, "68165"));
 
         //showMovieById
         Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE Film.FilmID = '1' AND concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-07 19:30:00' AND Gebäude.PLZ = '68159' ORDER BY `Datum` ASC LIMIT 6;", QueryBuilder.showMovieById("1","2019-08-07", "19:30:00", "68159"));
@@ -791,6 +779,76 @@ public class Test {
         Assert.assertEquals("SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, GebäudeID, Saalbezeichnung FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID WHERE VorstellungsID = 5 ;", QueryBuilder.getVorstellungByID(5));
     }
 
+    // TESTS FOR HELPERS
+
+    // Tests for class DateFormatter
+    @org.junit.Test
+    public void testeDateFormatter()
+    {
+        Date date = new Date();
+
+        SimpleDateFormat frontendDate = new SimpleDateFormat("EEE, dd. MMM", new Locale("de", "DE"));
+        SimpleDateFormat frontendTime = new SimpleDateFormat("HH:mm", new Locale("de", "DE"));
+        SimpleDateFormat sqlDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sqlTime = new SimpleDateFormat("HH:mm:ss");
+
+        Assert.assertEquals(frontendDate.format(date), DateFormatter.getFrontendDate(date));
+        Assert.assertEquals(frontendTime.format(date), DateFormatter.getFrontendTime(date));
+        Assert.assertEquals(sqlDate.format(date), DateFormatter.getSQLDate(date));
+        Assert.assertEquals(sqlTime.format(date), DateFormatter.getSQLTime(date));
+    }
+
+    // Tests for class SupportMethods
+    @org.junit.Test
+    public void testeSupportMethods() throws Exception
+    {
+        // Create Resultset
+        resultSetMock2 = Mockito.mock(ResultSet.class);
+
+        //Example Resultset Query:
+        //SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = '"+ stadt +"' ;";
+
+        Mockito.when(resultSetMock2.getString("Straße")).thenReturn("Lange Straße");
+        Mockito.when(resultSetMock2.getString("Hausnummer")).thenReturn("1");
+        Mockito.when(resultSetMock2.getString("PLZ")).thenReturn("68165");
+        Mockito.when(resultSetMock2.getString("Ortsname")).thenReturn("Mannheim");
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock2.next()).thenReturn(true).thenReturn(false);
+
+        // Create Support Methods Object
+
+        SupportMethods supportMethods = new SupportMethods();
+
+        // call get ResultSetSize()
+        int size = supportMethods.getResultSetSize(resultSetMock2);
+
+        Assert.assertEquals(1, size);
+    }
+
+    // Tests for class Exception Handler
+    @org.junit.Test
+    public void testeExeptionHandler()
+    {
+        IllegalArgumentException exception = new IllegalArgumentException("Argument 'divisor' is 0");
+
+        // Exception Object Exists
+        Assert.assertNotNull(exception);
+
+        // Assert that String length is > 0, so String is build
+        Assert.assertTrue(ExceptionHandler.exceptionStackTraceToString(exception).length() > 0);
+    }
+
+
+    //TODO: ÄNDERN
+
+    // TESTS FOR CONNECTOR
+    @org.junit.Test
+    public void testeConnector() throws Exception
+    {
+
+    }
+
     // TESTS FOR FACTORIES
 
     @org.junit.Test
@@ -818,70 +876,9 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeAnfahrtseite()
+    public void testeAnfahrtseiteFactory()
     {
 
-    }
-
-    // TESTS FOR HELPERS
-
-    // Tests for class DateFormatter
-    @org.junit.Test
-    public void testeDateFormatter()
-    {
-        Date date = new Date();
-
-        SimpleDateFormat frontendDate = new SimpleDateFormat("EEE, dd. MMM", new Locale("de", "DE"));
-        SimpleDateFormat frontendTime = new SimpleDateFormat("HH:mm", new Locale("de", "DE"));
-        SimpleDateFormat sqlDate = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sqlTime = new SimpleDateFormat("HH:mm:ss");
-
-        Assert.assertEquals(frontendDate.format(date), DateFormatter.getFrontendDate(date));
-        Assert.assertEquals(frontendTime.format(date), DateFormatter.getFrontendTime(date));
-        Assert.assertEquals(sqlDate.format(date), DateFormatter.getSQLDate(date));
-        Assert.assertEquals(sqlTime.format(date), DateFormatter.getSQLTime(date));
-    }
-
-    // Tests for class SupportMethods
-    @org.junit.Test
-    public void testeSupportMethods() throws Exception
-    {
-        // Create Resultset
-        resultSetMock = Mockito.mock(ResultSet.class);
-
-        //Example Resultset Query:
-        //SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = '"+ stadt +"' ;";
-
-        Mockito.when(resultSetMock.getString("Straße")).thenReturn("Lange Straße");
-        Mockito.when(resultSetMock.getString("Hausnummer")).thenReturn("1");
-        Mockito.when(resultSetMock.getString("PLZ")).thenReturn("68165");
-        Mockito.when(resultSetMock.getString("Ortsname")).thenReturn("Mannheim");
-
-        // Add next() to ResultSet
-        Mockito.when(resultSetMock.next()).thenReturn(true).thenReturn(false);
-
-        // Create Support Methods Object
-
-        SupportMethods supportMethods = new SupportMethods();
-
-        // call get ResultSetSize()
-        int size = supportMethods.getResultSetSize(resultSetMock);
-
-        Assert.assertEquals(1, size);
-    }
-
-    // Tests for class Exception Handler
-    @org.junit.Test
-    public void testeExeptionHandler()
-    {
-        IllegalArgumentException exception = new IllegalArgumentException("Argument 'divisor' is 0");
-
-        // Exception Object Exists
-        Assert.assertNotNull(exception);
-
-        // Assert that String length is > 0, so String is build
-        Assert.assertTrue(ExceptionHandler.exceptionStackTraceToString(exception).length() > 0);
     }
 
 }
-
