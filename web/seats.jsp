@@ -109,54 +109,52 @@
                 <div class="table-responsive" id="tickets">
 
                     <script>
-                        var preistypNor = {
-                            'beschreibung' : "Normalpreis",
-                            'preis': 10,
-                        };
-
-                        var preistypJun = {
-                            'beschreibung' : "Studenten / Schülerpreis",
-                            'preis': 7,
-                        };
-
-                        var preistypSen = {
-                            'beschreibung' : "Seniorenpreis",
-                            'preis': 8,
-                        };
-
-                        var preistyp = [preistypNor, preistypJun, preistypSen];
-
-
                         function createTable(preistyp) {
                             var body = document.getElementById("tickets");
                             var table = document.createElement("TABLE");
-                            table.setAttribute("class", "table");
+                            table.setAttribute("class", "table table-dark");
                             table.createTBody();
-                            for (var i=0; i<3; i++) {
+                            for (var i=0; i<4; i++) {
                                 var tr = table.insertRow();
-                                tr.setAttribute("id", "ticket" +i)
+                                tr.setAttribute("id", "ticketcat" +i)
                                 for (j=0; j<4; j++) {
                                     var td = tr.insertCell();
-                                    if (j == 0) {
-                                        td.setAttribute("class", "pay_info")
-                                    } else if (j == 1) {
-                                        var h4 = document.createElement("H4");
-                                        h4.innerHTML=preistyp[i].beschreibung;
-                                        td.appendChild(h4);
-                                    } else if (j == 2) {
-                                        var btn1 = document.createElement("BUTTON");
-                                        btn1.innerHTML="-";
-                                        var span = document.createElement("SPAN");
-                                        span.innerHTML="0";
-                                        var btn2 = document.createElement("BUTTON");
-                                        btn2.innerHTML="+";
-                                        td.appendChild(btn1);
-                                        td.appendChild(span);
-                                        td.appendChild(btn2);
+                                    if (i == 0) {
+                                        if (j == 0) {
+                                            td.setAttribute("class", "pay_info")
+                                        } else if (j == 1) {
+                                            var h4 = document.createElement("H4");
+                                            h4.innerHTML="Nicht zugewiesen";
+                                            td.appendChild(h4);
+                                        } else if (j == 2) {
+                                            var span = document.createElement("SPAN");
+                                            span.innerHTML="0";
+                                            td.appendChild(span);
+                                        }
                                     } else {
-                                        var h4 = document.createElement("H4");
-                                        h4.innerHTML=preistyp[i].preis + " €";
-                                        td.appendChild(h4);
+                                        if (j == 0) {
+                                            td.setAttribute("class", "pay_info")
+                                        } else if (j == 1) {
+                                            var h4 = document.createElement("H4");
+                                            h4.innerHTML=preistyp[i-1].beschreibung;
+                                            td.appendChild(h4);
+                                        } else if (j == 2) {
+                                            var btn1 = document.createElement("BUTTON");
+                                            btn1.setAttribute("class", "btn btn-secondary btn-sm");
+                                            btn1.innerHTML="-";
+                                            var span = document.createElement("SPAN");
+                                            span.innerHTML="0";
+                                            var btn2 = document.createElement("BUTTON");
+                                            btn2.setAttribute("class", "btn btn-secondary btn-sm");
+                                            btn2.innerHTML="+";
+                                            td.appendChild(btn1);
+                                            td.appendChild(span);
+                                            td.appendChild(btn2);
+                                        } else {
+                                            var h4 = document.createElement("H4");
+                                            h4.innerHTML=preistyp[i-1].preis + " €";
+                                            td.appendChild(h4);
+                                        }
                                     }
                                 }
                             }
@@ -170,12 +168,12 @@
                             };
 
                             var preistypJun = {
-                                'beschreibung' : "Normalpreis",
+                                'beschreibung' : "Studenten / Schülerpreis",
                                 'preis': 7,
                             };
 
                             var preistypSen = {
-                                'beschreibung' : "Normalpreis",
+                                'beschreibung' : "Seniorenpreis",
                                 'preis': 8,
                             };
 
@@ -183,21 +181,6 @@
                             createTable(preistyp);
                         }
                     </script>
-
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td class="pay_info"></td>
-                                <td><h4>Nicht zugewiesen</h4></td>
-                                <td>
-                                    <button class="btn btn-secondary btn-sm">-</button>
-                                    <span></span>
-                                    <button class="btn btn-secondary btn-sm">+</button>
-                                </td>
-                                <td><h4>Preis</h4></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
             <div class="col-lg-2">
@@ -284,34 +267,35 @@
 <%--            </div>--%>
 <%--        </div>--%>
 
-<div class="col align-self-center">
-    <div class="cardtext-white bg-dark" style="max-width: 21rem; min-width: 15rem; margin: 0 auto;">
-        <div class="card-header">
-            <h5>Ticket Preise</h5>
-        </div>
-        <div class="card-body">
-            <table class="table table-dark text-center">
-                <tbody>
-                <tr>
-                    <td>Normal</td>
-                    <td>12 €</td>
-                </tr>
+<%--<div class="col align-self-center">--%>
+<%--    <div class="cardtext-white bg-dark" style="max-width: 21rem; min-width: 15rem; margin: 0 auto;">--%>
+<%--        <div class="card-header">--%>
+<%--            <h5>Ticket Preise</h5>--%>
+<%--        </div>--%>
+<%--        <div class="card-body">--%>
+<%--            <table class="table table-dark text-center">--%>
+<%--                <tbody>--%>
+<%--                <tr>--%>
+<%--                    <td>Normal</td>--%>
+<%--                    <td>12 €</td>--%>
+<%--                </tr>--%>
 
-                <tr>
-                    <td>Schüler / Student</td>
-                    <td>10 €</td>
-                </tr>
+<%--                <tr>--%>
+<%--                    <td>Schüler / Student</td>--%>
+<%--                    <td>10 €</td>--%>
+<%--                </tr>--%>
 
-                <tr>
-                    <td>Senior</td>
-                    <td>10 €</td>
-                </tr>
-                </tbody>
-            </table>
-            <p style="text-align: right; font-size: 11px;">* Loge 2 € Aufpreis; Reihen G, H & I</p>
-        </div>
-    </div>
-</div>
+<%--                <tr>--%>
+<%--                    <td>Senior</td>--%>
+<%--                    <td>10 €</td>--%>
+<%--                </tr>--%>
+<%--                </tbody>--%>
+<%--            </table>--%>
+<%--            <p style="text-align: right; font-size: 11px;">* Loge 2 € Aufpreis; Reihen G, H & I</p>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
 </div>
 </div>
 <jsp:include page="elements/footer.jsp"/>
