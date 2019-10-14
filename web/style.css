@@ -99,3 +99,39 @@ h6{
         height: 1em;
     }
 }
+
+
+/*Snacks*/
+
+.content {
+     position: absolute; /* Position the background text */
+     background: rgb(0, 0, 0); /* Fallback color */
+     background: rgba(0, 0, 0, 0); /* Black background with 0.5 opacity */
+     color: #1b1e21; /* Grey text */
+     width: 35%; /* Full width */
+     padding: 10px 20px 10px 20px;
+     bottom: 230px;
+     right: 40px;
+ }
+
+.content2 {
+    position: absolute; /* Position the background text */
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+    width: 35%; /* Full width */
+    padding: 10px 20px 10px 20px;
+    bottom: 150px;
+    right: 680px;
+}
+
+.content3 {
+    position: absolute; /* Position the background text */
+    background: rgb(0, 0, 0); /* Fallback color */
+    background: rgba(0, 0, 0, 0.3); /* Black background with 0.5 opacity */
+    color: #f1f1f1; /* Grey text */
+    width: 35%; /* Full width */
+    padding: 10px 20px 10px 20px;
+    bottom: 230px;
+    right: 40px;
+}

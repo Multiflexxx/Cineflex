@@ -58,10 +58,10 @@
                     <a class="nav-link" href="programm.jsp">Programm <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Specials</a>
+                    <a class="nav-link" href="specials.jsp">Specials</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Snacks</a>
+                    <a class="nav-link" href="snacks.jsp">Snacks</a>
                 </li>
                 <li class="nav-item dropdown">
                     <%
