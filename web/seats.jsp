@@ -114,37 +114,37 @@
                             var table = document.createElement("TABLE");
                             table.setAttribute("class", "table table-dark");
                             table.createTBody();
-                            for (var i=0; i<4; i++) {
+                            for (var i = 0; i < 4; i++) {
                                 var tr = table.insertRow();
-                                tr.setAttribute("id", "ticketcat" +i)
-                                for (j=0; j<4; j++) {
+                                tr.setAttribute("id", "ticketcat" + i)
+                                for (j = 0; j < 4; j++) {
                                     var td = tr.insertCell();
                                     if (i == 0) {
                                         if (j == 0) {
                                             td.setAttribute("class", "pay_info");
                                         } else if (j == 1) {
                                             var h4 = document.createElement("H4");
-                                            h4.innerHTML="Nicht zugewiesen";
+                                            h4.innerHTML = "Nicht zugewiesen";
                                             td.appendChild(h4);
                                         } else if (j == 2) {
                                             var span = document.createElement("SPAN");
-                                            span.innerHTML="0";
+                                            span.innerHTML = "0";
                                             td.appendChild(span);
                                         }
                                     } else {
                                         if (j == 0) {
                                             td.setAttribute("class", "pay_info");
-                                            if (i == 3-1) {
+                                            if (i == 3 - 1) {
                                                 var btnInfo = document.createElement("BUTTON");
                                                 btnInfo.setAttribute("type", "button");
                                                 btnInfo.setAttribute("class", "btn btn-outline-info");
                                                 btnInfo.setAttribute("data-toggle", "tooltip");
                                                 btnInfo.setAttribute("data-html", "true");
                                                 btnInfo.setAttribute("title", "Bist du noch in deiner Blütezeit? Dann zeige deinen <b>Schwanz</b> oder <b>Titten</b> an der Kasse und spare damit wertvolles Geld!!!");
-                                                btnInfo.innerHTML="?";
+                                                btnInfo.innerHTML = "?";
                                                 td.appendChild(btnInfo);
                                             }
-                                            if (i == 4-1) {
+                                            if (i == 4 - 1) {
                                                 var btnInfo = document.createElement("BUTTON");
                                                 btnInfo.setAttribute("type", "button");
                                                 btnInfo.setAttribute("class", "btn btn-outline-info");
@@ -152,52 +152,52 @@
                                                 btnInfo.setAttribute("data-placement", "right");
                                                 btnInfo.setAttribute("data-html", "true");
                                                 btnInfo.setAttribute("title", "Bist du <b>69</b> oder älter? Dann kannst du hier sparen!");
-                                                btnInfo.innerHTML="?";
+                                                btnInfo.innerHTML = "?";
                                                 td.appendChild(btnInfo);
                                             }
                                         } else if (j == 1) {
                                             var h4 = document.createElement("H4");
-                                            h4.innerHTML=preistyp[i-1].beschreibung;
+                                            h4.innerHTML = preistyp[i - 1].beschreibung;
                                             td.appendChild(h4);
                                         } else if (j == 2) {
                                             var btn1 = document.createElement("BUTTON");
                                             btn1.setAttribute("class", "btn btn-outline-light btn-sm btn-plus-minus text-center");
-                                            btn1.innerHTML="-";
+                                            btn1.innerHTML = "-";
                                             var span = document.createElement("SPAN");
-                                            span.innerHTML="0";
+                                            span.innerHTML = "0";
                                             var btn2 = document.createElement("BUTTON");
                                             btn2.setAttribute("class", "btn btn-outline-secondary btn-sm btn-plus-minus");
-                                            btn2.innerHTML="+";
+                                            btn2.innerHTML = "+";
                                             td.appendChild(btn1);
                                             td.appendChild(span);
                                             td.appendChild(btn2);
                                         } else {
                                             var h4 = document.createElement("H4");
-                                            h4.innerHTML=preistyp[i-1].preis + " €";
+                                            h4.innerHTML = preistyp[i - 1].preis + " €";
                                             td.appendChild(h4);
                                         }
                                     }
                                 }
                             }
                             body.appendChild(table);
-                            $(document).ready(function(){
+                            $(document).ready(function () {
                                 $('[data-toggle="tooltip"]').tooltip();
                             });
                         }
 
                         window.onload = function () {
                             var preistypNor = {
-                                'beschreibung' : "Normalpreis",
+                                'beschreibung': "Normalpreis",
                                 'preis': 10,
                             };
 
                             var preistypJun = {
-                                'beschreibung' : "Studenten / Schülerpreis",
+                                'beschreibung': "Studenten / Schülerpreis",
                                 'preis': 7,
                             };
 
                             var preistypSen = {
-                                'beschreibung' : "Seniorenpreis",
+                                'beschreibung': "Seniorenpreis",
                                 'preis': 8,
                             };
 
@@ -207,9 +207,9 @@
                     </script>
                 </div>
             </div>
-            <div class="col-lg-2">
-                <button onclick="onClickReservieren()" class="btn btn-secondary">Reservieren</button>
-                <button onclick="onClickBuchen()" class="btn btn-secondary">Buchen</button>
+            <div class="col-lg-2 pay-to-win">
+                <button onclick="onClickReservieren()" class="btn btn-secondary mb-2">Reservieren</button>
+                <button onclick="onClickBuchen()" class="btn btn-secondary mb-2">Buchen</button>
                 <button onclick="onClickZurueck()" class="btn btn-secondary">Zurück</button>
             </div>
             <div class="col"></div>
