@@ -115,12 +115,12 @@
                         };
 
                         var preistypJun = {
-                            'beschreibung' : "Normalpreis",
+                            'beschreibung' : "Studenten / Schülerpreis",
                             'preis': 7,
                         };
 
                         var preistypSen = {
-                            'beschreibung' : "Normalpreis",
+                            'beschreibung' : "Seniorenpreis",
                             'preis': 8,
                         };
 
@@ -132,7 +132,7 @@
                             var table = document.createElement("TABLE");
                             table.setAttribute("class", "table");
                             table.createTBody();
-                            for (var i=0; i<4; i++) {
+                            for (var i=0; i<3; i++) {
                                 var tr = table.insertRow();
                                 tr.setAttribute("id", "ticket" +i)
                                 for (j=0; j<4; j++) {
@@ -164,6 +164,22 @@
                         }
 
                         window.onload = function () {
+                            var preistypNor = {
+                                'beschreibung' : "Normalpreis",
+                                'preis': 10,
+                            };
+
+                            var preistypJun = {
+                                'beschreibung' : "Normalpreis",
+                                'preis': 7,
+                            };
+
+                            var preistypSen = {
+                                'beschreibung' : "Normalpreis",
+                                'preis': 8,
+                            };
+
+                            var preistyp = [preistypNor, preistypJun, preistypSen];
                             createTable(preistyp);
                         }
                     </script>
