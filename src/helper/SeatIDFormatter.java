@@ -1,13 +1,5 @@
 package helper;
 
-/**
- * CineflexV1;
- * <p>
- * Copyright by @author Marcel Mertens
- * Website: https://mertens-web.ddns.net
- * <p>
- * Date: 14.10.2019
- */
 public class SeatIDFormatter
 {
     public static int[] seatsStringToIntArray(String seatIDString)
