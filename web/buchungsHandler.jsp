@@ -20,7 +20,7 @@
     // If no seat is selected -> redirect to errorPage
     if(seatIDs == null)
     {
-        response.sendRedirect("error/error500.jsp");
+        response.sendRedirect("error500.jsp");
     }
 
     // TEST

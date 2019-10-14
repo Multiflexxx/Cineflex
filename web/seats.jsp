@@ -161,12 +161,12 @@
                                             td.appendChild(h4);
                                         } else if (j == 2) {
                                             var btn1 = document.createElement("BUTTON");
-                                            btn1.setAttribute("class", "btn btn-secondary btn-sm");
+                                            btn1.setAttribute("class", "btn btn-outline-light btn-sm btn-plus-minus text-center");
                                             btn1.innerHTML="-";
                                             var span = document.createElement("SPAN");
                                             span.innerHTML="0";
                                             var btn2 = document.createElement("BUTTON");
-                                            btn2.setAttribute("class", "btn btn-secondary btn-sm");
+                                            btn2.setAttribute("class", "btn btn-outline-secondary btn-sm btn-plus-minus");
                                             btn2.innerHTML="+";
                                             td.appendChild(btn1);
                                             td.appendChild(span);
