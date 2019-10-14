@@ -121,7 +121,7 @@
                                     var td = tr.insertCell();
                                     if (i == 0) {
                                         if (j == 0) {
-                                            td.setAttribute("class", "pay_info")
+                                            td.setAttribute("class", "pay_info");
                                         } else if (j == 1) {
                                             var h4 = document.createElement("H4");
                                             h4.innerHTML="Nicht zugewiesen";
@@ -133,7 +133,28 @@
                                         }
                                     } else {
                                         if (j == 0) {
-                                            td.setAttribute("class", "pay_info")
+                                            td.setAttribute("class", "pay_info");
+                                            if (i == 3-1) {
+                                                var btnInfo = document.createElement("BUTTON");
+                                                btnInfo.setAttribute("type", "button");
+                                                btnInfo.setAttribute("class", "btn btn-secondary");
+                                                btnInfo.setAttribute("data-toggle", "tooltip");
+                                                btnInfo.setAttribute("data-html", "true");
+                                                btnInfo.setAttribute("title", "Bist du noch in deiner Blütezeit? Dann zeige deinen <b>Schwanz</b> oder <b>Titten<b> an der Kasse und spare damit wertvolles Geld!!!");
+                                                btnInfo.innerHTML="?";
+                                                td.appendChild(btnInfo);
+                                            }
+                                            if (i == 4-1) {
+                                                var btnInfo = document.createElement("BUTTON");
+                                                btnInfo.setAttribute("type", "button");
+                                                btnInfo.setAttribute("class", "btn btn-secondary");
+                                                btnInfo.setAttribute("data-toggle", "tooltip");
+                                                btnInfo.setAttribute("data-placement", "right");
+                                                btnInfo.setAttribute("data-html", "true");
+                                                btnInfo.setAttribute("title", "Bist du <b>69<b> oder älter? Dann kannst du hier sparen!");
+                                                btnInfo.innerHTML="?";
+                                                td.appendChild(btnInfo);
+                                            }
                                         } else if (j == 1) {
                                             var h4 = document.createElement("H4");
                                             h4.innerHTML=preistyp[i-1].beschreibung;
@@ -159,6 +180,9 @@
                                 }
                             }
                             body.appendChild(table);
+                            $(document).ready(function(){
+                                $('[data-toggle="tooltip"]').tooltip();
+                            });
                         }
 
                         window.onload = function () {
