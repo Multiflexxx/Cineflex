@@ -1,16 +1,16 @@
-<%@ page import="helper.SeatIDFormatter" %><%--
-  Created by IntelliJ IDEA.
-  User: marcel
-  Date: 13.10.19
-  Time: 23:45
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="helper.SeatIDFormatter" %>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<jsp:include page="elements/head.jsp"/>
+
+<body class="d-flex flex-column h-100">
+
+<jsp:include page="elements/header.jsp"/>
+<jsp:include page="locationPicker.jsp"/>
+<jsp:include page="login.jsp"/>
+<jsp:include page="registration.jsp"/>
+<jsp:include page="filter.jsp"/>
 
 <%
     String seatsData = request.getParameter("seats_data");
@@ -29,7 +29,8 @@
         out.println(seatIDs[i]);
     }
 
-%>>
+%>
 
+<jsp:include page="elements/footer.jsp"/>
 </body>
 </html>
