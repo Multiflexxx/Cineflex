@@ -58,7 +58,13 @@
                 out.write("</div>");
             }
         } else {
-            out.println("Deine Suche hat keine Ergebnisse..");
+            out.write("<br><br>");
+            out.write("<div class=\"card\">");
+            out.write("<div class=\"card-body text-center\">");
+            out.write("<h5 class=\"card-title\">Deine Suche ergab keine Ergebnisse. Das tut uns sehr Leid.</h5>");
+            out.write("<p class=\"card-text\"><small class=\"text-muted\">Bitte Versuch es nocheinmal.</small></p>");
+            out.write("</div>");
+            out.write("</div>");
         }
 
     } catch(Exception e) {

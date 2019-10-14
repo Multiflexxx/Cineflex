@@ -6,6 +6,7 @@ import db_connector.QueryBuilder;
 import factory.LoginFactory;
 import helper.DateFormatter;
 import helper.ExceptionHandler;
+import helper.SeatIDFormatter;
 import helper.SupportMethods;
 import oo.*;
 import org.junit.Assert;
@@ -837,6 +838,20 @@ public class Test {
 
         // Assert that String length is > 0, so String is build
         Assert.assertTrue(ExceptionHandler.exceptionStackTraceToString(exception).length() > 0);
+    }
+
+    // Tests for class SeatIDFormatter
+    @org.junit.Test
+    public void testeSeatIDFormatter()
+    {
+        String array = "-1|2|-1|4|-1|-1|-1|8";
+
+        int[] checkArray = {2,4,8};
+        int[] intArray = SeatIDFormatter.seatsStringToIntArray(array);
+
+        Assert.assertEquals(checkArray[0], intArray[0]);
+        Assert.assertEquals(checkArray[1], intArray[1]);
+        Assert.assertEquals(checkArray[2], intArray[2]);
     }
 
 
