@@ -1,4 +1,7 @@
-function chooseSeat(id) {
+var countChoosenSeats = 0;
+
+function chooseSeat(id)
+{
 
     if(document.getElementById(id).style.backgroundColor == "#ff0000")
     {
@@ -9,8 +12,14 @@ function chooseSeat(id) {
 
     if (document.getElementById(id).style.backgroundColor == "green") {
         document.getElementById(id).style.backgroundColor = '#4a9be8';
+        countChoosenSeats++;
     } else {
         document.getElementById(id).style.backgroundColor = "green";
+        countChoosenSeats--;
+        if(countChoosenSeats <= 0)
+        {
+            countChoosenSeats = 0;
+        }
     }
 }
 

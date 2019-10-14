@@ -6,6 +6,7 @@ import helper.SupportMethods;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * CineflexV1;
@@ -17,11 +18,94 @@ import java.sql.ResultSet;
  */
 public class PreisFactory
 {
+    int resultLength = 0;
+    Connection connection;
+    ResultSet resultSet;
+    String sql;
+
+    float grundPreis = 0;
+
     public PreisFactory()
     {
+        connection = Connector.getConnection();
+        sql = QueryBuilder.getPreiseLaenge();
+        resultSet = Connector.getQueryResult(connection, sql);
 
+        SupportMethods supportMethods = new SupportMethods();
+
+        resultLength = supportMethods.getResultSetSize(resultSet);
+
+        Connector.closeConnection(connection);
+        resultSet = null;
     }
 
+    public String getPreisJSON()
+    {
+        if(resultLength > 0) {
+
+            try
+            {
+                while (resultSet.next())
+                {
+
+                    resultSet.getString("PreisänderunggsID");
+                    resultSet.getString("Änderungswert");
+                    resultSet.getString("Änderungsbeschreibung");
+                }
+
+            }
+
+            catch (Exception e)
+            {
+
+            }
+
+        }
+
+        return "";
+    }
+
+    private float returnGrundpreis()
+    {
+        int lHelp = 0;
+
+        connection = Connector.getConnection();
+        sql = QueryBuilder.getGrundPreis();
+        resultSet = Connector.getQueryResult(connection, sql);
+
+        SupportMethods supportMethods = new SupportMethods();
+
+        lHelp = supportMethods.getResultSetSize(resultSet);
+
+        if(lHelp > 0)
+        {
+            try
+            {
+                while (resultSet.next())
+                {
+                    return Float.parseFloat(resultSet.getString("Änderungswert"));
+                }
+            }
+
+            catch (Exception e)
+            {
+                Connector.closeConnection(connection);
+                resultSet = null;
+                return -1;
+            }
+
+            Connector.closeConnection(connection);
+            resultSet = null;
+            return grundPreis;
+        }
+
+        else
+        {
+            Connector.closeConnection(connection);
+            resultSet = null;
+            return  -1;
+        }
+    }
 
 
     /*int resultLength = 0;
