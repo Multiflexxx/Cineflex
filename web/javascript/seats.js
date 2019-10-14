@@ -50,7 +50,7 @@ function onClickBuchen()
 
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
-    hiddenField.setAttribute("name", "data");
+    hiddenField.setAttribute("name", "seats_data");
     hiddenField.setAttribute("value", data_inputs);
     form.appendChild(hiddenField);
 

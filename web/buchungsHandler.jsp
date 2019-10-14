@@ -12,5 +12,12 @@
 </head>
 <body>
 
+<%
+    String seatsData = request.getParameter("seats_data");
+
+    out.println(seatsData);
+
+%>>
+
 </body>
 </html>
