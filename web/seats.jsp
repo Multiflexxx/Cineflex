@@ -129,7 +129,7 @@
 
                         function createTable(preistyp) {
                             var body = document.getElementById("tickets");
-                            var table = document.createElement("table");
+                            var table = document.createElement("TABLE");
                             table.setAttribute("class", "table");
                             table.createTBody();
                             for (var i=0; i<4; i++) {
@@ -140,17 +140,22 @@
                                     if (j == 0) {
                                         td.setAttribute("class", "pay_info")
                                     } else if (j == 1) {
-                                        var h4 = document.createElement("h4").innerHTML=preistyp[i].beschreibung;
+                                        var h4 = document.createElement("H4");
+                                        h4.innerHTML=preistyp[i].beschreibung;
                                         td.appendChild(h4);
                                     } else if (j == 2) {
-                                        var btn1 = document.createElement("button").innerHTML="-";
-                                        var span = document.createElement("span").innerHTML="0";
-                                        var btn2 = document.createElement("button").innerHTML="+";
+                                        var btn1 = document.createElement("BUTTON");
+                                        btn1.innerHTML="-";
+                                        var span = document.createElement("SPAN");
+                                        span.innerHTML="0";
+                                        var btn2 = document.createElement("BUTTON");
+                                        btn2.innerHTML="+";
                                         td.appendChild(btn1);
                                         td.appendChild(span);
                                         td.appendChild(btn2);
                                     } else {
-                                        var h4 = document.createElement("h4").innerHTML=preistyp[i].preis + " €";
+                                        var h4 = document.createElement("H4");
+                                        h4.innerHTML=preistyp[i].preis + " €";
                                         td.appendChild(h4);
                                     }
                                 }
