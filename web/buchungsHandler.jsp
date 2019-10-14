@@ -1,4 +1,4 @@
-<%--
+<%@ page import="helper.SeatIDFormatter" %><%--
   Created by IntelliJ IDEA.
   User: marcel
   Date: 13.10.19
@@ -15,7 +15,19 @@
 <%
     String seatsData = request.getParameter("seats_data");
 
-    out.println(seatsData);
+    int[] seatIDs = SeatIDFormatter.seatsStringToIntArray(seatsData);
+
+    // If no seat is selected -> redirect to errorPage
+    if(seatIDs == null)
+    {
+        response.sendRedirect("error/error500.jsp");
+    }
+
+    // TEST
+    for(int i = 0; i < seatIDs.length; i++)
+    {
+        out.println(seatIDs[i]);
+    }
 
 %>>
 
