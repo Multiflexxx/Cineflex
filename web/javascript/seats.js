@@ -21,6 +21,15 @@ function chooseSeat(id)
             countChoosenSeats = 0;
         }
     }
+    setCounterUI()
+}
+
+function setCounterUI() {
+    if (countChoosenSeats != 0) {
+        document.getElementById("ticket_checkout").style.visibility="visible";
+    } else {
+        document.getElementById("ticket_checkout").style.visibility="hidden";
+    }
 }
 
 function onClickZurueck()

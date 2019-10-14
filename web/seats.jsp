@@ -103,7 +103,7 @@
                 %>
             </div>
         </div>
-        <div class="row text-center">
+        <div class="row text-center" id="ticket_checkout">
             <div class="col"></div>
             <div class="col-lg-7">
                 <div class="table-responsive" id="tickets">
@@ -208,9 +208,9 @@
                 </div>
             </div>
             <div class="col-lg-2 pay-to-win">
-                <button onclick="onClickReservieren()" class="btn btn-secondary mb-2">Reservieren</button>
-                <button onclick="onClickBuchen()" class="btn btn-secondary mb-2">Buchen</button>
-                <button onclick="onClickZurueck()" class="btn btn-secondary">Zurück</button>
+                <button onclick="onClickReservieren()" class="btn btn-outline-primary mb-2">Reservieren</button>
+                <button onclick="onClickBuchen()" class="btn btn-outline-primary mb-2">Buchen</button>
+                <button onclick="onClickZurueck()" class="btn btn-outline-primary mb-2">Zurück</button>
             </div>
             <div class="col"></div>
         </div>
