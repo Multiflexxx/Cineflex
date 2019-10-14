@@ -188,6 +188,11 @@ public class QueryBuilder {
         return "SELECT COUNT(*) as laenge FROM Preisänderung;";
     }
 
+    public static String getPreiseInfos()
+    {
+        return "SELECT * FROM Preisänderung;";
+    }
+
     // NOT USED
     /*
     public static String getSeatInfo(int vorstellungsID)

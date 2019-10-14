@@ -8,102 +8,90 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * CineflexV1;
- * <p>
- * Copyright by @author Marcel Mertens
- * Website: https://mertens-web.ddns.net
- * <p>
- * Date: 14.10.2019
- */
 public class PreisFactory
 {
-    int resultLength = 0;
-    Connection connection;
-    ResultSet resultSet;
-    String sql;
-
-    float grundPreis = 0;
-
     public PreisFactory()
     {
-        connection = Connector.getConnection();
-        sql = QueryBuilder.getPreiseLaenge();
-        resultSet = Connector.getQueryResult(connection, sql);
 
-        SupportMethods supportMethods = new SupportMethods();
-
-        resultLength = supportMethods.getResultSetSize(resultSet);
-
-        Connector.closeConnection(connection);
-        resultSet = null;
     }
 
-    public String getPreisJSON()
+    public String[] getPreisJSONArray()
     {
-        connection = Connector.getConnection();
-        sql = QueryBuilder.getPreiseLaenge();
-        resultSet = Connector.getQueryResult(connection, sql);
+        Connection connection = Connector.getConnection();
+        String sql = QueryBuilder.getPreiseInfos();
+        ResultSet resultSet = Connector.getQueryResult(connection, sql);
 
         SupportMethods supportMethods = new SupportMethods();
 
         int lResultLength = supportMethods.getResultSetSize(resultSet);
 
-        //var preistypNor = {
-        //                                'beschreibung': "Normalpreis",
-        //                                'preis': 10,
-        //                            };
-        //
-        //                            var preistypJun = {
-        //                                'beschreibung': "Studenten / Schülerpreis",
-        //                                'preis': 7,
-        //                            };
-        //
-        //                            var preistypSen = {
-        //                                'beschreibung': "Seniorenpreis",
-        //                                'preis': 8,
-        //                            };
-        //
-        //                            var preistyp = [preistypNor, preistypJun, preistypSen];
+        String[] lJSONDataArray = null;
 
-
-        String dataJSONString = "[";
-        dataJSONString += "{'beschreibung': 'Normalpreis', 'preis': " + returnGrundpreis() + "}";
+        float grundPreis = returnGrundpreis();
 
         if(lResultLength > 0) {
+
+            lJSONDataArray = new String[lResultLength];
+            lJSONDataArray[0] = "{'beschreibung': 'Normalpreis', 'preis': " + grundPreis + "}";
+
+            int counter = 1;
 
             try
             {
                 while (resultSet.next())
                 {
-                    dataJSONString += "{'beschreibung': '";
-                    dataJSONString += resultSet.getString("Änderungsbeschreibung");
-                    dataJSONString += "', 'preis': ";
-                    dataJSONString += grundPreis + Float.parseFloat(resultSet.getString("Änderungswert"));
-                    dataJSONString += "}";
-                }
+                    if(!resultSet.getString("Änderungsbeschreibung").equals("Grundpreis"))
+                    {
+                        String lHelperString = "{'beschreibung': '";
+                        lHelperString += resultSet.getString("Änderungsbeschreibung");
+                        lHelperString += "', 'preis': ";
+                        lHelperString += (grundPreis + resultSet.getFloat("Änderungswert"));
+                        lHelperString += "}";
 
+                        lJSONDataArray[counter] = lHelperString;
+
+                        counter++;
+                    }
+                }
             }
 
             catch (Exception e)
             {
-
+                return null;
             }
-
         }
 
-        dataJSONString += "]";
+        return lJSONDataArray;
+    }
 
-        return dataJSONString;
+    public int getPreiskategorienLaenge()
+    {
+        int resultLength = -1;
+
+        Connection connection = Connector.getConnection();
+        String sql = QueryBuilder.getPreiseInfos();
+        ResultSet resultSet = Connector.getQueryResult(connection, sql);
+
+        SupportMethods supportMethods = new SupportMethods();
+
+        resultLength = supportMethods.getResultSetSize(resultSet);
+
+        if(resultLength > 0)
+        {
+            Connector.closeConnection(connection);
+            return resultLength;
+        }
+
+        return -2;
     }
 
     private float returnGrundpreis()
     {
         int lHelp = 0;
 
-        connection = Connector.getConnection();
-        sql = QueryBuilder.getGrundPreis();
-        resultSet = Connector.getQueryResult(connection, sql);
+        Connection connection = Connector.getConnection();
+        String sql = QueryBuilder.getGrundPreis();
+        ResultSet resultSet = Connector.getQueryResult(connection, sql);
 
         SupportMethods supportMethods = new SupportMethods();
 
@@ -115,7 +103,9 @@ public class PreisFactory
             {
                 while (resultSet.next())
                 {
-                    return Float.parseFloat(resultSet.getString("Änderungswert"));
+                    Connector.closeConnection(connection);
+                    resultSet = null;
+                    return resultSet.getFloat("Änderungswert");
                 }
             }
 
@@ -125,18 +115,16 @@ public class PreisFactory
                 resultSet = null;
                 return -1;
             }
-
-            Connector.closeConnection(connection);
-            resultSet = null;
-            return grundPreis;
         }
 
         else
         {
             Connector.closeConnection(connection);
             resultSet = null;
-            return  -1;
+            return  -2;
         }
+
+        return -3;
     }
 
 

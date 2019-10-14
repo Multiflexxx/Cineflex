@@ -12,10 +12,10 @@ function chooseSeat(id)
 
     if (document.getElementById(id).style.backgroundColor == "green") {
         document.getElementById(id).style.backgroundColor = '#4a9be8';
-        countChoosenSeats++;
+        countChoosenSeats--;
     } else {
         document.getElementById(id).style.backgroundColor = "green";
-        countChoosenSeats--;
+        countChoosenSeats++;
         if(countChoosenSeats <= 0)
         {
             countChoosenSeats = 0;
@@ -27,8 +27,9 @@ function chooseSeat(id)
 function setCounterUI() {
     if (countChoosenSeats != 0) {
         document.getElementById("ticket_checkout").style.visibility="visible";
+        document.getElementById("span0").innerHTML=countChoosenSeats;
     } else {
-        document.getElementById("ticket_checkout").style.visibility="hidden";
+        document.getElementById("ticket_checkout").style.visibility="collapse";
     }
 }
 

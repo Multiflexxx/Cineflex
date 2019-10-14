@@ -3,6 +3,7 @@
 <%@ page import="oo.Vorstellung" %>
 <%@ page import="helper.DateFormatter" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="factory.PreisFactory" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -11,8 +12,7 @@
 <jsp:include page="login.jsp"/>
 <jsp:include page="registration.jsp"/>
 <jsp:include page="filter.jsp"/>
-<html>
-<body>
+
 <%
     String id = request.getParameter("id");
     Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
@@ -109,12 +109,12 @@
                 <div class="table-responsive" id="tickets">
 
                     <script>
-                        function createTable(preistyp) {
+                        function createTable(preistyp, tableLength) {
                             var body = document.getElementById("tickets");
                             var table = document.createElement("TABLE");
                             table.setAttribute("class", "table table-dark");
                             table.createTBody();
-                            for (var i = 0; i < 4; i++) {
+                            for (var i = 0; i < tableLength; i++) {
                                 var tr = table.insertRow();
                                 tr.setAttribute("id", "ticketcat" + i)
                                 for (j = 0; j < 4; j++) {
@@ -129,6 +129,7 @@
                                         } else if (j == 2) {
                                             var span = document.createElement("SPAN");
                                             span.innerHTML = "0";
+                                            span.setAttribute("id", "span"+i);
                                             td.appendChild(span);
                                         }
                                     } else {
@@ -186,6 +187,7 @@
                         }
 
                         window.onload = function () {
+                            /*
                             var preistypNor = {
                                 'beschreibung': "Normalpreis",
                                 'preis': 10,
@@ -202,7 +204,25 @@
                             };
 
                             var preistyp = [preistypNor, preistypJun, preistypSen];
-                            createTable(preistyp);
+                            */
+
+                            var preistyp = [];
+
+                            //var preistyp;
+
+                            <%
+                                PreisFactory preisFactory = new PreisFactory();
+
+                                String[] preistypArray = preisFactory.getPreisJSONArray();
+
+                                for(int i = 0; i < preistypArray.length; i++)
+                                {
+                                    out.write("preistyp[" + i +"] = " + preistypArray[i] + ";\n");
+                                }
+                            %>
+
+                            createTable(preistyp , <%=preisFactory.getPreiskategorienLaenge()%> );
+                            //createTable(preistyp);
                         }
                     </script>
                 </div>
