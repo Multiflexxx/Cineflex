@@ -83,12 +83,12 @@
                             out.write("</td>");
                             if (counter >= arrayLength - 1) {
                                 out.write("<td>");
-                                out.write("<p> &nbsp;" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</p>");
+                                out.write(" &nbsp;" + vorstellung.getSaal().getSitzplan()[counter].getReihe());
                                 out.write("</td>");
                                 out.write("</tr>");
                             } else if (vorstellung.getSaal().getSitzplan()[counter].getReihe() != vorstellung.getSaal().getSitzplan()[counter + 1].getReihe()) {
                                 out.write("<td>");
-                                out.write("<p> &nbsp;" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + "</p>");
+                                out.write("&nbsp;" + vorstellung.getSaal().getSitzplan()[counter].getReihe());
                                 out.write("</td>");
                                 out.write("</tr>");
                                 out.write("<tr>");
@@ -104,11 +104,87 @@
             </div>
         </div>
         <div class="row text-center">
-            <div class="col">
-                    <button onclick="onClickReservieren()" class="btn btn-secondary">Reservieren</button>
-                    <button onclick="onClickBuchen()" class="btn btn-secondary">Buchen</button>
-                    <button onclick="onClickZurueck()" class="btn btn-secondary">Zurück</button>
+            <div class="col"></div>
+            <div class="col-lg-7">
+                <div class="table-responsive" id="tickets">
+
+                    <script>
+                        var preistypNor = {
+                            'beschreibung' : "Normalpreis",
+                            'preis': 10,
+                        };
+
+                        var preistypJun = {
+                            'beschreibung' : "Normalpreis",
+                            'preis': 7,
+                        };
+
+                        var preistypSen = {
+                            'beschreibung' : "Normalpreis",
+                            'preis': 8,
+                        };
+
+                        var preistyp = [preistypNor, preistypJun, preistypSen];
+
+
+                        function createTable(preistyp) {
+                            var body = document.getElementById("tickets");
+                            var table = document.createElement("table");
+                            table.setAttribute("class", "table");
+                            table.createTBody();
+                            for (var i=0; i<4; i++) {
+                                var tr = table.insertRow();
+                                tr.setAttribute("id", "ticket" +i)
+                                for (j=0; j<4; j++) {
+                                    var td = tr.insertCell();
+                                    if (j == 0) {
+                                        td.setAttribute("class", "pay_info")
+                                    } else if (j == 1) {
+                                        var h4 = document.createElement("h4").innerHTML=preistyp[i].beschreibung;
+                                        td.appendChild(h4);
+                                    } else if (j == 2) {
+                                        var btn1 = document.createElement("button").innerHTML="-";
+                                        var span = document.createElement("span").innerHTML="0";
+                                        var btn2 = document.createElement("button").innerHTML="+";
+                                        td.appendChild(btn1);
+                                        td.appendChild(span);
+                                        td.appendChild(btn2);
+                                    } else {
+                                        var h4 = document.createElement("h4").innerHTML=preistyp[i].preis + " €";
+                                        td.appendChild(h4);
+                                    }
+                                }
+                            }
+                            body.appendChild(table);
+                        }
+
+                        window.onload = function () {
+                            createTable(preistyp);
+                        }
+                    </script>
+
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td class="pay_info"></td>
+                                <td><h4>Nicht zugewiesen</h4></td>
+                                <td>
+                                    <button class="btn btn-secondary btn-sm">-</button>
+                                    <span></span>
+                                    <button class="btn btn-secondary btn-sm">+</button>
+                                </td>
+                                <td><h4>Preis</h4></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
+            <div class="col-lg-2">
+                <button onclick="onClickReservieren()" class="btn btn-secondary">Reservieren</button>
+                <button onclick="onClickBuchen()" class="btn btn-secondary">Buchen</button>
+                <button onclick="onClickZurueck()" class="btn btn-secondary">Zurück</button>
+            </div>
+            <div class="col"></div>
         </div>
     </div>
 </div>
@@ -187,35 +263,35 @@
 <%--            </div>--%>
 <%--        </div>--%>
 
-        <div class="col align-self-center">
-            <div class="cardtext-white bg-dark" style="max-width: 21rem; min-width: 15rem; margin: 0 auto;">
-                <div class="card-header">
-                    <h5>Ticket Preise</h5>
-                </div>
-                <div class="card-body">
-                    <table class="table table-dark text-center">
-                        <tbody>
-                        <tr>
-                            <td>Normal</td>
-                            <td>12 €</td>
-                        </tr>
+<div class="col align-self-center">
+    <div class="cardtext-white bg-dark" style="max-width: 21rem; min-width: 15rem; margin: 0 auto;">
+        <div class="card-header">
+            <h5>Ticket Preise</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-dark text-center">
+                <tbody>
+                <tr>
+                    <td>Normal</td>
+                    <td>12 €</td>
+                </tr>
 
-                        <tr>
-                            <td>Schüler / Student</td>
-                            <td>10 €</td>
-                        </tr>
+                <tr>
+                    <td>Schüler / Student</td>
+                    <td>10 €</td>
+                </tr>
 
-                        <tr>
-                            <td>Senior</td>
-                            <td>10 €</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <p style="text-align: right; font-size: 11px;">* Loge 2 € Aufpreis; Reihen G, H & I</p>
-                </div>
-            </div>
+                <tr>
+                    <td>Senior</td>
+                    <td>10 €</td>
+                </tr>
+                </tbody>
+            </table>
+            <p style="text-align: right; font-size: 11px;">* Loge 2 € Aufpreis; Reihen G, H & I</p>
         </div>
     </div>
+</div>
+</div>
 </div>
 <jsp:include page="elements/footer.jsp"/>
 <script src="javascript/seats.js" crossorigin="anonymous" type="text/javascript"></script>
