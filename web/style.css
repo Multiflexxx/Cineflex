@@ -87,7 +87,8 @@ h6{
 }
 
 #ticket_checkout {
-    visibility: collapse;
+    /*visibility: collapse;*/
+    display: none;
 }
 
 #tickets span {

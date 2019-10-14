@@ -26,10 +26,12 @@ function chooseSeat(id)
 
 function setCounterUI() {
     if (countChoosenSeats != 0) {
-        document.getElementById("ticket_checkout").style.visibility="visible";
+        document.getElementById("ticket_checkout").style.display="inherit";
+        //document.getElementById("ticket_checkout").style.visibility="visible";
         document.getElementById("span0").innerHTML=countChoosenSeats;
     } else {
-        document.getElementById("ticket_checkout").style.visibility="collapse";
+        //document.getElementById("ticket_checkout").style.visibility="collapse";
+        document.getElementById("ticket_checkout").style.display="none";
     }
 }
 
