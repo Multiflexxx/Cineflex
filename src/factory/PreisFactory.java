@@ -41,16 +41,46 @@ public class PreisFactory
 
     public String getPreisJSON()
     {
-        if(resultLength > 0) {
+        connection = Connector.getConnection();
+        sql = QueryBuilder.getPreiseLaenge();
+        resultSet = Connector.getQueryResult(connection, sql);
+
+        SupportMethods supportMethods = new SupportMethods();
+
+        int lResultLength = supportMethods.getResultSetSize(resultSet);
+
+        //var preistypNor = {
+        //                                'beschreibung': "Normalpreis",
+        //                                'preis': 10,
+        //                            };
+        //
+        //                            var preistypJun = {
+        //                                'beschreibung': "Studenten / Schülerpreis",
+        //                                'preis': 7,
+        //                            };
+        //
+        //                            var preistypSen = {
+        //                                'beschreibung': "Seniorenpreis",
+        //                                'preis': 8,
+        //                            };
+        //
+        //                            var preistyp = [preistypNor, preistypJun, preistypSen];
+
+
+        String dataJSONString = "[";
+        dataJSONString += "{'beschreibung': 'Normalpreis', 'preis': " + returnGrundpreis() + "}";
+
+        if(lResultLength > 0) {
 
             try
             {
                 while (resultSet.next())
                 {
-
-                    resultSet.getString("PreisänderunggsID");
-                    resultSet.getString("Änderungswert");
-                    resultSet.getString("Änderungsbeschreibung");
+                    dataJSONString += "{'beschreibung': '";
+                    dataJSONString += resultSet.getString("Änderungsbeschreibung");
+                    dataJSONString += "', 'preis': ";
+                    dataJSONString += grundPreis + Float.parseFloat(resultSet.getString("Änderungswert"));
+                    dataJSONString += "}";
                 }
 
             }
@@ -62,7 +92,9 @@ public class PreisFactory
 
         }
 
-        return "";
+        dataJSONString += "]";
+
+        return dataJSONString;
     }
 
     private float returnGrundpreis()
