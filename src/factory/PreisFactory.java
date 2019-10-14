@@ -103,9 +103,9 @@ public class PreisFactory
             {
                 while (resultSet.next())
                 {
+                    float gp = resultSet.getFloat("Änderungswert");
                     Connector.closeConnection(connection);
-                    resultSet = null;
-                    return resultSet.getFloat("Änderungswert");
+                    return gp;
                 }
             }
 

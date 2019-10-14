@@ -122,12 +122,14 @@
                                     if (i == 0) {
                                         if (j == 0) {
                                             td.setAttribute("class", "pay_info");
+
                                         } else if (j == 1) {
                                             var h4 = document.createElement("H4");
                                             h4.innerHTML = "Nicht zugewiesen";
                                             td.appendChild(h4);
                                         } else if (j == 2) {
                                             var span = document.createElement("SPAN");
+                                            span.setAttribute("id", "span"+i);
                                             span.innerHTML = "0";
                                             span.setAttribute("id", "span"+i);
                                             td.appendChild(span);
