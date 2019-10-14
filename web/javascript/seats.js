@@ -34,22 +34,24 @@ function onClickBuchen()
     form.setAttribute("method", "post");
     form.setAttribute("action", "buchungsHandler.jsp");
 
-    var laden = document.getElementById("ladenInput").value;
-    var datum = document.getElementById("dateInput").value;
-    var zeit = document.getElementById("timeInput").value;
-
-    var fields = laden + "|" + datum + "|" + zeit + "|";
-
-    var inputs = document.getElementsByClassName( "inputfieldclass" ),
+    var inputs = document.getElementsByClassName( "seat" ),
         data_inputs  = [].map.call(inputs, function( input )
         {
-            return input.value;
+            var idVal = -1;
+
+            if(input.style.backgroundColor == "green")
+            {
+                idVal = input.id;
+            }
+
+            return idVal;
+
         }).join( "|" );
 
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
-    hiddenField.setAttribute("name", "daten");
-    hiddenField.setAttribute("value", fields + data_inputs);
+    hiddenField.setAttribute("name", "data");
+    hiddenField.setAttribute("value", data_inputs);
     form.appendChild(hiddenField);
 
     document.body.appendChild(form);
