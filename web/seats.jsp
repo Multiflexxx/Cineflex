@@ -50,6 +50,7 @@
         <div class="row mb-5">
             <div class="col-lg-12">
                 <%
+                    String behindert = "B";
                     if (vorstellung.getSaal().getSitzplan() == null) {
                         out.write("<div class=\"jumbotron jumbotron-fluid footer\">\n" +
                                 "    <div class=\"container\">\n" +
@@ -79,8 +80,12 @@
                         int ctrRowlength = 0;
                         out.write("<tr>");
                         while (counter < arrayLength) {
+                            String B = "";
+                            if (vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getSitzklasse() == behindert.charAt(0)) {
+                                B = "B";
+                            }
                             out.write("<td>");
-                            out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "\" class=\"seat\" onclick=\"chooseSeat('" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "'," + vorstellung.getSaal().getRowLength(vorstellung.getSaal().getSitzplan()[counter].getReihe()) + ")\"></button>");
+                            out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "\" class=\"seat\" onclick=\"chooseSeat('" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "'," + vorstellung.getSaal().getRowLength(vorstellung.getSaal().getSitzplan()[counter].getReihe()) + ")\">" + B + "</button>");
                             out.write("</td>");
                             if (counter >= arrayLength - 1) {
                                 out.write("<td>");
