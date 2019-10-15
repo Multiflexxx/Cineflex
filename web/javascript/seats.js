@@ -1,52 +1,49 @@
 var countChoosenSeats = 0;
+var choosenReihe = null;
 
-function chooseSeat(id)
-{
-
-    if(document.getElementById(id).style.backgroundColor == "#ff0000")
-    {
-        return;
-    }
-
-    console.log(document.getElementById(id).style.backgroundColor);
-
-    if (document.getElementById(id).style.backgroundColor == "green") {
-        document.getElementById(id).style.backgroundColor = '#4a9be8';
-        countChoosenSeats--;
-    } else {
-        document.getElementById(id).style.backgroundColor = "green";
-        countChoosenSeats++;
-        if(countChoosenSeats <= 0)
-        {
-            countChoosenSeats = 0;
+function chooseSeat(id) {
+    if ((choosenReihe == null || choosenReihe == id.charAt(0)) && countChoosenSeats < 8) {
+        if (document.getElementById(id).style.backgroundColor == "#ff0000") {
+            return;
         }
+
+        console.log(document.getElementById(id).style.backgroundColor);
+
+        if (document.getElementById(id).style.backgroundColor == "green") {
+            document.getElementById(id).style.backgroundColor = '#4a9be8';
+            countChoosenSeats--;
+            if (countChoosenSeats == 0) {
+                choosenReihe = null;
+            }
+        } else {
+            document.getElementById(id).style.backgroundColor = "green";
+            choossenReihe = id.charAt(0);
+            countChoosenSeats++;
+        }
+        setCounterUI()
     }
-    setCounterUI()
 }
 
 function setCounterUI() {
     if (countChoosenSeats != 0) {
-        document.getElementById("ticket_checkout").style.display="inherit";
+        document.getElementById("ticket_checkout").style.display = "inherit";
         //document.getElementById("ticket_checkout").style.visibility="visible";
-        document.getElementById("span0").innerHTML=countChoosenSeats;
+        document.getElementById("span0").innerHTML = countChoosenSeats;
     } else {
         //document.getElementById("ticket_checkout").style.visibility="collapse";
-        document.getElementById("ticket_checkout").style.display="none";
+        document.getElementById("ticket_checkout").style.display = "none";
     }
 }
 
-function onClickZurueck()
-{
+function onClickZurueck() {
 
 }
 
-function onClickReservieren()
-{
+function onClickReservieren() {
 
 }
 
-function onClickBuchen()
-{
+function onClickBuchen() {
     // TODO: CHANGE LOOK AT MARCEL KASSENZETTEL TOOL
 
     // LOOP OVER SEATS
@@ -55,19 +52,17 @@ function onClickBuchen()
     form.setAttribute("method", "post");
     form.setAttribute("action", "buchungsHandler.jsp");
 
-    var inputs = document.getElementsByClassName( "seat" ),
-        data_inputs  = [].map.call(inputs, function( input )
-        {
+    var inputs = document.getElementsByClassName("seat"),
+        data_inputs = [].map.call(inputs, function (input) {
             var idVal = -1;
 
-            if(input.style.backgroundColor == "green")
-            {
+            if (input.style.backgroundColor == "green") {
                 idVal = input.id;
             }
 
             return idVal;
 
-        }).join( "|" );
+        }).join("|");
 
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");

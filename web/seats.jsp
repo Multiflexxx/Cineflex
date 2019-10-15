@@ -79,7 +79,7 @@
                         out.write("<tr>");
                         while (counter < arrayLength) {
                             out.write("<td>");
-                            out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"chooseSeat(" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + ")\"></button>");
+                            out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"chooseSeat('" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "')\"></button>");
                             out.write("</td>");
                             if (counter >= arrayLength - 1) {
                                 out.write("<td>");
