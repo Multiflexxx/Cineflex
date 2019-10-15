@@ -8,15 +8,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PreisFactory
-{
-    public PreisFactory()
-    {
+public class PreisFactory {
+    public PreisFactory() {
 
     }
 
-    public String[] getPreisJSONArray()
-    {
+    public String[] getPreisJSONArray() {
         Connection connection = Connector.getConnection();
         String sql = QueryBuilder.getPreiseInfos();
         ResultSet resultSet = Connector.getQueryResult(connection, sql);
@@ -29,19 +26,16 @@ public class PreisFactory
 
         float grundPreis = returnGrundpreis();
 
-        if(lResultLength > 0) {
+        if (lResultLength > 0) {
 
             lJSONDataArray = new String[lResultLength];
             lJSONDataArray[0] = "{'tooltip': 'null', 'beschreibung': 'Normalpreis', 'preis': " + grundPreis + "}";
 
             int counter = 1;
 
-            try
-            {
-                while (resultSet.next())
-                {
-                    if(!resultSet.getString("Änderungsbeschreibung").equals("Grundpreis"))
-                    {
+            try {
+                while (resultSet.next()) {
+                    if (!resultSet.getString("Änderungsbeschreibung").equals("Grundpreis")) {
                         String lHelperString = "{'tooltip': '";
                         lHelperString += resultSet.getString("TooltipDeskriptor");
                         lHelperString += "', 'beschreibung': '";
@@ -55,10 +49,7 @@ public class PreisFactory
                         counter++;
                     }
                 }
-            }
-
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 return null;
             }
         }
@@ -66,8 +57,7 @@ public class PreisFactory
         return lJSONDataArray;
     }
 
-    public int getPreiskategorienLaenge()
-    {
+    public int getPreiskategorienLaenge() {
         int resultLength = -1;
 
         Connection connection = Connector.getConnection();
@@ -78,17 +68,15 @@ public class PreisFactory
 
         resultLength = supportMethods.getResultSetSize(resultSet);
 
-        if(resultLength > 0)
-        {
+        if (resultLength > 0) {
             Connector.closeConnection(connection);
-            return resultLength;
+            return resultLength+1;
         }
 
         return -2;
     }
 
-    private float returnGrundpreis()
-    {
+    private float returnGrundpreis() {
         int lHelp = 0;
 
         Connection connection = Connector.getConnection();
@@ -99,31 +87,22 @@ public class PreisFactory
 
         lHelp = supportMethods.getResultSetSize(resultSet);
 
-        if(lHelp > 0)
-        {
-            try
-            {
-                while (resultSet.next())
-                {
+        if (lHelp > 0) {
+            try {
+                while (resultSet.next()) {
                     float gp = resultSet.getFloat("Änderungswert");
                     Connector.closeConnection(connection);
                     return gp;
                 }
-            }
-
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Connector.closeConnection(connection);
                 resultSet = null;
                 return -1;
             }
-        }
-
-        else
-        {
+        } else {
             Connector.closeConnection(connection);
             resultSet = null;
-            return  -2;
+            return -2;
         }
 
         return -3;

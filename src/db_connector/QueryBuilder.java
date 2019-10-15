@@ -190,7 +190,7 @@ public class QueryBuilder {
 
     public static String getPreiseInfos()
     {
-        return "SELECT * FROM Preisänderung;";
+        return "SELECT * FROM Preisänderung WHERE Änderungsbeschreibung != 'Logenaufpreis' AND Änderungsbeschreibung != '3D-Aufschlag' AND Änderungsbeschreibung != 'Überlängenaufschlag';";
     }
 
     public static String getVorstellungByIdPLZ(int id) {
