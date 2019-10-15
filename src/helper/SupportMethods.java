@@ -24,4 +24,9 @@ public class SupportMethods {
             return -2;
         }
     }
+
+    public static String removeHTMLCode(String input)
+    {
+        return input.replaceAll("[<(.|\\n)+?>%\\\\#]", "");
+    }
 }
