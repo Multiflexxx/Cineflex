@@ -34,4 +34,19 @@ public class Kinosaal {
   public void setSitzplan(Sitz[] sitzplan) {
     this.sitzplan = sitzplan;
   }
+
+  public int getRowLength(char row)
+  {
+    int rowCounter = -1;
+
+    for (int i = 0; i < sitzplan.length; i++)
+    {
+      if(sitzplan[i].getReihe() == row)
+      {
+        rowCounter++;
+      }
+    }
+
+    return rowCounter;
+  }
 }
