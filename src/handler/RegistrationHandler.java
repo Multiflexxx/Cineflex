@@ -3,6 +3,7 @@ package handler;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import helper.SupportMethods;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,17 +21,17 @@ import java.util.Date;
 @WebServlet(name = "RegistrationForm")
 public class RegistrationHandler extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String firstname = request.getParameter("inputVorname");
-        String lastname = request.getParameter("inputNachname");
-        String date = request.getParameter("inputGeb");
-        String email = request.getParameter("inputEmailReg");
+        String firstname = SupportMethods.removeHTMLCode(request.getParameter("inputVorname"));
+        String lastname = SupportMethods.removeHTMLCode(request.getParameter("inputNachname"));
+        String date = SupportMethods.removeHTMLCode(request.getParameter("inputGeb"));
+        String email = SupportMethods.removeHTMLCode(request.getParameter("inputEmailReg"));
         String pass = request.getParameter("inputPasswordReg");
         String passWdh = request.getParameter("inputPasswordRegWdh");
-        String wohnort = request.getParameter("inputOrt");
-        String postleitzahl = request.getParameter("inputPLZ");
-        String straße = request.getParameter("inputStr");
-        String hausnummer = request.getParameter("inputHNr");
-        String adresszusatz = request.getParameter("inputAdz");
+        String wohnort = SupportMethods.removeHTMLCode(request.getParameter("inputOrt"));
+        String postleitzahl = SupportMethods.removeHTMLCode(request.getParameter("inputPLZ"));
+        String straße = SupportMethods.removeHTMLCode(request.getParameter("inputStr"));
+        String hausnummer = SupportMethods.removeHTMLCode(request.getParameter("inputHNr"));
+        String adresszusatz = SupportMethods.removeHTMLCode(request.getParameter("inputAdz"));
 
         if(!pass.equals(passWdh))
         {

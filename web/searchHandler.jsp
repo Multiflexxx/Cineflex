@@ -1,5 +1,6 @@
 <%@ page import="oo.Film" %>
 <%@ page import="factory.FilmFactory" %>
+<%@ page import="helper.SupportMethods" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -11,11 +12,11 @@
 <jsp:include page="filter.jsp"/>
 
 <%
-    String date = request.getParameter("inputDate");
-    String time = request.getParameter("inputTime");
-    String fsk = request.getParameter("inputFSK");
-    String searchText = request.getParameter("inputSearchText");
-    int genreID = Integer.parseInt(request.getParameter("inputGenre"));
+    String date = SupportMethods.removeHTMLCode(request.getParameter("inputDate"));
+    String time = SupportMethods.removeHTMLCode(request.getParameter("inputTime"));
+    String fsk = SupportMethods.removeHTMLCode(request.getParameter("inputFSK"));
+    String searchText = SupportMethods.removeHTMLCode(request.getParameter("inputSearchText"));
+    int genreID = Integer.parseInt(SupportMethods.removeHTMLCode(request.getParameter("inputGenre")));
     time += ":00";
 
     String plz = "00000";
