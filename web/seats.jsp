@@ -117,7 +117,6 @@
                     <script>
                         var preisMultiplikator = [];
 
-
                         function createTable(preistyp, tableLength) {
                             var body = document.getElementById("tickets");
                             var table = document.createElement("TABLE");
@@ -139,7 +138,7 @@
                                             var span = document.createElement("SPAN");
                                             span.setAttribute("id", "span" + i);
                                             span.innerHTML = "0";
-                                            span.setAttribute("id", "span" + i);
+                                            // span.setAttribute("id", "span" + i);
                                             td.appendChild(span);
                                         }
                                     } else {
@@ -192,18 +191,27 @@
 
 
                         function ticket_plus(i,  preis) {
-                            preisMultiplikator[i] += 1;
-                            console.log(preisMultiplikator[i]);
-                            document.getElementById("h4"+i).innerHTML=preisMultiplikator[i] * preis + " €";
-                            document.getElementById("span"+i).innerHTML=preisMultiplikator[i];
+                            if (countChoosenSeats > 0) {
+                                preisMultiplikator[i] += 1;
+                                countChoosenSeats -= 1;
+                                console.log(preisMultiplikator[i]);
+                                document.getElementById("h4"+i).innerHTML=preisMultiplikator[i] * preis + " €";
+                                document.getElementById("span"+i).innerHTML=preisMultiplikator[i];
+                                document.getElementById("span0").innerHTML = countChoosenSeats;
+                            }
+
 
                         }
 
                         function ticket_minus(i,  preis) {
-                            preisMultiplikator[i] -= 1;
-                            console.log(preisMultiplikator[i]);
-                            document.getElementById("h4"+i).innerHTML=preisMultiplikator[i] * preis + " €";
-                            document.getElementById("span"+i).innerHTML=preisMultiplikator[i];
+                            if (preisMultiplikator[i] > 0) {
+                                preisMultiplikator[i] -= 1;
+                                countChoosenSeats += 1;
+                                console.log(preisMultiplikator[i]);
+                                document.getElementById("h4" + i).innerHTML = preisMultiplikator[i] * preis + " €";
+                                document.getElementById("span" + i).innerHTML = preisMultiplikator[i];
+                                document.getElementById("span0").innerHTML = countChoosenSeats;
+                            }
                         }
 
                         window.onload = function () {
