@@ -37,7 +37,7 @@ public class Kinosaal {
 
   public int getRowLength(char row)
   {
-    int rowCounter = -1;
+    int rowCounter = 0;
 
     for (int i = 0; i < sitzplan.length; i++)
     {

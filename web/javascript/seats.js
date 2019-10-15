@@ -1,7 +1,7 @@
 var countChoosenSeats = 0;
 var choosenReihe = null;
 
-function chooseSeat(id) {
+function chooseSeat(id, row_length) {
     if (choosenReihe == null || choosenReihe == id.charAt(0)) {
         if (document.getElementById(id).style.backgroundColor == "#ff0000") {
             return;
@@ -16,8 +16,7 @@ function chooseSeat(id) {
                 choosenReihe = null;
             }
         } else {
-            var boolean = isChoosen(id);
-            if (countChoosenSeats < 8 && (choosenReihe == null || boolean)) {
+            if (countChoosenSeats < 8 && (choosenReihe == null || isChoosen(id, row_length))) {
                 document.getElementById(id).style.backgroundColor = "green";
                 choosenReihe = id.charAt(0);
                 console.log(choosenReihe);
@@ -28,16 +27,27 @@ function chooseSeat(id) {
     }
 }
 
-function isChoosen(id) {
+function isChoosen(id, row_length) {
+    var rv= false;
     var leftId = id.charAt(0) + (parseInt(id.slice(1)) - 1);
     var rightId = id.charAt(0) + (parseInt(id.slice(1)) + 1);
-    var rv= false;
-    if (document.getElementById(leftId.toString()).style.backgroundColor == "green") {
-        rv = true;
-    }
+    console.log(id.slice(1));
+    if (parseInt(id.slice(1)) == 1) {
+        if (document.getElementById(rightId.toString()).style.backgroundColor == "green") {
+            rv = true;
+        }
+    } else if (parseInt(id.slice(1)) == row_length) {
+        if (document.getElementById(leftId.toString()).style.backgroundColor == "green") {
+            rv = true;
+        }
+    } else {
+        if (document.getElementById(leftId.toString()).style.backgroundColor == "green") {
+            rv = true;
+        }
 
-    if (document.getElementById(rightId).style.backgroundColor == "green") {
-        rv = true;
+        if (document.getElementById(rightId).style.backgroundColor == "green") {
+            rv = true;
+        }
     }
     return rv;
 }

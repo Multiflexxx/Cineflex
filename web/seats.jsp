@@ -76,10 +76,12 @@
                         out.write("<table class=\"sitzplan\">");
                         out.write("<tbody>");
                         counter = 0;
+                        int ctrRowlength = 0;
                         out.write("<tr>");
                         while (counter < arrayLength) {
                             out.write("<td>");
-                            out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"chooseSeat('" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "')\"></button>");
+                            ctrRowlength = vorstellung.getSaal().getRowLength(vorstellung.getSaal().getSitzplan()[counter].getReihe());
+                            out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "\" class=\"seat\" onclick=\"chooseSeat('" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "', '6')\"></button>");
                             out.write("</td>");
                             if (counter >= arrayLength - 1) {
                                 out.write("<td>");
