@@ -85,7 +85,7 @@ function onClickBuchen() {
             var idVal = -1;
 
             if (input.style.backgroundColor == "green") {
-                idVal = input.id;
+                idVal = input.getAttribute("uniqueID");
             }
 
             return idVal;
