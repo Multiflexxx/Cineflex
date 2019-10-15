@@ -115,6 +115,9 @@
                 <div class="table-responsive" id="tickets">
 
                     <script>
+                        var preisMultiplikator = [];
+
+
                         function createTable(preistyp, tableLength) {
                             var body = document.getElementById("tickets");
                             var table = document.createElement("TABLE");
@@ -122,34 +125,34 @@
                             table.createTBody();
                             for (var i = 0; i < tableLength; i++) {
                                 var tr = table.insertRow();
-                                tr.setAttribute("id", "ticketcat" + i)
+                                tr.setAttribute("id", "ticketcat" + i);
                                 for (j = 0; j < 4; j++) {
                                     var td = tr.insertCell();
                                     if (i == 0) {
                                         if (j == 0) {
                                             td.setAttribute("class", "pay_info");
-
                                         } else if (j == 1) {
                                             var h4 = document.createElement("H4");
                                             h4.innerHTML = "Nicht zugewiesen";
                                             td.appendChild(h4);
                                         } else if (j == 2) {
                                             var span = document.createElement("SPAN");
-                                            span.setAttribute("id", "span"+i);
+                                            span.setAttribute("id", "span" + i);
                                             span.innerHTML = "0";
-                                            span.setAttribute("id", "span"+i);
+                                            span.setAttribute("id", "span" + i);
                                             td.appendChild(span);
                                         }
                                     } else {
+                                        preisMultiplikator[i] =  0;
                                         if (j == 0) {
                                             td.setAttribute("class", "pay_info");
-                                            if (preistyp[i-1].tooltip != "null") {
+                                            if (preistyp[i - 1].tooltip != "null") {
                                                 var btnInfo = document.createElement("BUTTON");
                                                 btnInfo.setAttribute("type", "button");
                                                 btnInfo.setAttribute("class", "btn btn-outline-info");
                                                 btnInfo.setAttribute("data-toggle", "tooltip");
                                                 btnInfo.setAttribute("data-html", "true");
-                                                btnInfo.setAttribute("title", preistyp[i-1].tooltip);
+                                                btnInfo.setAttribute("title", preistyp[i - 1].tooltip);
                                                 btnInfo.innerHTML = "?";
                                                 td.appendChild(btnInfo);
                                             }
@@ -160,10 +163,13 @@
                                         } else if (j == 2) {
                                             var btn1 = document.createElement("BUTTON");
                                             btn1.setAttribute("class", "btn btn-outline-light btn-sm btn-plus-minus text-center");
+                                            btn1.setAttribute("onclick", "ticket_minus(" + i + ", " +  preistyp[i-1].preis +")");
                                             btn1.innerHTML = "-";
                                             var span = document.createElement("SPAN");
+                                            span.setAttribute("id", "span"+i);
                                             span.innerHTML = "0";
                                             var btn2 = document.createElement("BUTTON");
+                                            btn2.setAttribute("onclick", "ticket_plus(" + i + ", " +  preistyp[i-1].preis +")");
                                             btn2.setAttribute("class", "btn btn-outline-secondary btn-sm btn-plus-minus");
                                             btn2.innerHTML = "+";
                                             td.appendChild(btn1);
@@ -171,7 +177,8 @@
                                             td.appendChild(btn2);
                                         } else {
                                             var h4 = document.createElement("H4");
-                                            h4.innerHTML = preistyp[i - 1].preis + " €";
+                                            h4.setAttribute("id", "h4" + i);
+                                            h4.innerHTML = preisMultiplikator[i] * preistyp[i - 1].preis + " €";
                                             td.appendChild(h4);
                                         }
                                     }
@@ -181,6 +188,22 @@
                             $(document).ready(function () {
                                 $('[data-toggle="tooltip"]').tooltip();
                             });
+                        }
+
+
+                        function ticket_plus(i,  preis) {
+                            preisMultiplikator[i] += 1;
+                            console.log(preisMultiplikator[i]);
+                            document.getElementById("h4"+i).innerHTML=preisMultiplikator[i] * preis + " €";
+                            document.getElementById("span"+i).innerHTML=preisMultiplikator[i];
+
+                        }
+
+                        function ticket_minus(i,  preis) {
+                            preisMultiplikator[i] -= 1;
+                            console.log(preisMultiplikator[i]);
+                            document.getElementById("h4"+i).innerHTML=preisMultiplikator[i] * preis + " €";
+                            document.getElementById("span"+i).innerHTML=preisMultiplikator[i];
                         }
 
                         window.onload = function () {
@@ -197,7 +220,7 @@
                                 }
                             %>
 
-                            createTable(preistyp , <%=preisFactory.getPreiskategorienLaenge()%> );
+                            createTable(preistyp, <%=preisFactory.getPreiskategorienLaenge()%>);
                         }
                     </script>
                 </div>
