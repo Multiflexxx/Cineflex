@@ -26,6 +26,11 @@ public class RegistrationHandler extends HttpServlet {
         String email = request.getParameter("inputEmailReg");
         String pass = request.getParameter("inputPasswordReg");
         String passWdh = request.getParameter("inputPasswordRegWdh");
+        String wohnort = request.getParameter("inputOrt");
+        String postleitzahl = request.getParameter("inputPLZ");
+        String straße = request.getParameter("inputStr");
+        String hausnummer = request.getParameter("inputHNr");
+        String adresszusatz = request.getParameter("inputAdz");
 
         if(!pass.equals(passWdh))
         {
@@ -39,7 +44,7 @@ public class RegistrationHandler extends HttpServlet {
             return;
         }
 
-        if(firstname.equals("") || lastname.equals("") || date.equals("") || email.equals("") || pass.equals("") || passWdh.equals(""))
+        if(firstname.equals("") || lastname.equals("") || date.equals("") || email.equals("") || pass.equals("") || passWdh.equals("") || wohnort.equals("") || postleitzahl.equals("") || straße.equals("") || hausnummer.equals(""))
         {
             response.getOutputStream().println("Bitte alle Pflichtfelder ausfüllen!");
             return;
@@ -56,7 +61,7 @@ public class RegistrationHandler extends HttpServlet {
         c = Connector.getConnection();
         if (c == null)
             response.getOutputStream().print("Geht nicht!");
-        String sql = QueryBuilder.createUser(firstname, lastname, date, email, pass);
+        String sql = QueryBuilder.createUser(firstname, lastname, date, email, pass,hausnummer, straße, adresszusatz);
         Connector.executeQuery(c, sql);
 
         try {
