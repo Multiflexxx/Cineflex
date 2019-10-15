@@ -24,7 +24,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Fallstudie/mysql-connector-java-8.0.17/mysql-connector-java-8.0.17.jar!/" />
+          <root url="jar://E:/Fallstudie/mysql-connector-java-8.0.17/mysql-connector-java-8.0.17.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -33,11 +33,11 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Fallstudie/mockito/mockito-all-1.9.5.jar!/" />
+          <root url="jar://E:/Fallstudie/mockito/mockito-all-1.9.5.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../Fallstudie/mockito/mockito-all-1.9.5.jar!/" />
+          <root url="jar://E:/Fallstudie/mockito/mockito-all-1.9.5.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -51,5 +51,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="mockito-all-1.9.5" level="project" />
   </component>
 </module>
