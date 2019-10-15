@@ -44,7 +44,7 @@
 
                         if (gebäude != null) {
                             for(int i=0; i<gebäude.length; i++) {
-                                out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
+                                out.println(" <a class=\"dropdown-item\" href=\"index.jsp\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
                             }
                         } else {
                             response.sendRedirect("error/error500.jsp");
