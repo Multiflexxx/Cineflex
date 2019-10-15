@@ -179,3 +179,7 @@ INSERT INTO Vorstellung (`Datum`, `Uhrzeit`, `FilmID`, `SaalID`, `SprachID`) VAL
 ('2019-10-05', '16:00:00', 6, 5, 1),
 ('2019-10-06', '17:10:00', 6, 2, 1), ('2019-10-06', '20:15:00', 6, 1, 1),
 ('2019-10-07', '15:30:00', 6, 7, 1);
+
+ALTER TABLE Preisänderung ADD TooltipDeskriptor TEXT;
+UPDATE Preisänderung SET `TooltipDeskriptor` = 'Bist du <b>69</b> oder älter? Dann kannst du hier sparen!' WHERE `PreisänderungsID` = 1;
+UPDATE Preisänderung SET `TooltipDeskriptor` = 'Bist du noch in deiner Blütezeit? Dann zeige deinen <b>Schwanz</b> oder <b>Titten</b> an der Kasse und spare damit wertvolles Geld!!!' WHERE `PreisänderungsID` = 2;

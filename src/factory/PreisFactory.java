@@ -32,7 +32,7 @@ public class PreisFactory
         if(lResultLength > 0) {
 
             lJSONDataArray = new String[lResultLength];
-            lJSONDataArray[0] = "{'beschreibung': 'Normalpreis', 'preis': " + grundPreis + "}";
+            lJSONDataArray[0] = "{'tooltip': 'null', 'beschreibung': 'Normalpreis', 'preis': " + grundPreis + "}";
 
             int counter = 1;
 
@@ -42,7 +42,9 @@ public class PreisFactory
                 {
                     if(!resultSet.getString("Änderungsbeschreibung").equals("Grundpreis"))
                     {
-                        String lHelperString = "{'beschreibung': '";
+                        String lHelperString = "{'tooltip': '";
+                        lHelperString += resultSet.getString("TooltipDeskriptor");
+                        lHelperString += "', 'beschreibung': '";
                         lHelperString += resultSet.getString("Änderungsbeschreibung");
                         lHelperString += "', 'preis': ";
                         lHelperString += (grundPreis + resultSet.getFloat("Änderungswert"));

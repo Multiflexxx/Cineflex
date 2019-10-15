@@ -665,6 +665,29 @@ public class Test {
     }
     //----
 
+    // Tests for class Login
+    @org.junit.Test
+    public void testeGenre()
+    {
+        Genre genre = new Genre(5, "Action", "Action Film");
+
+        Assert.assertNotNull(genre);
+
+        Assert.assertEquals(5, genre.getGenreID());
+        Assert.assertEquals("Action", genre.getGenrebezeichnung());
+        Assert.assertEquals("Action Film", genre.getDeskriptor());
+
+        genre.setGenreID(15);
+        Assert.assertEquals(15, genre.getGenreID());
+
+        genre.setGenrebezeichnung("Horror");
+        Assert.assertEquals("Horror", genre.getGenrebezeichnung());
+
+        genre.setDeskriptor("Horror Film");
+        Assert.assertEquals("Horror Film", genre.getDeskriptor());
+    }
+    //----
+
     // TESTS FOR PASSWORD
     // Test for class PassMD5
     @org.junit.Test

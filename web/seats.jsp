@@ -50,6 +50,7 @@
         <div class="row mb-5">
             <div class="col-lg-12">
                 <%
+                    String behindert = "B";
                     if (vorstellung.getSaal().getSitzplan() == null) {
                         out.write("<div class=\"jumbotron jumbotron-fluid footer\">\n" +
                                 "    <div class=\"container\">\n" +
@@ -76,10 +77,15 @@
                         out.write("<table class=\"sitzplan\">");
                         out.write("<tbody>");
                         counter = 0;
+                        int ctrRowlength = 0;
                         out.write("<tr>");
                         while (counter < arrayLength) {
+                            String B = "";
+                            if (vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getSitzklasse() == behindert.charAt(0)) {
+                                B = "B";
+                            }
                             out.write("<td>");
-                            out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "\" class=\"seat\" onclick=\"chooseSeat('" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "')\"></button>");
+                            out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "\" class=\"seat\" onclick=\"chooseSeat('" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "'," + vorstellung.getSaal().getRowLength(vorstellung.getSaal().getSitzplan()[counter].getReihe()) + ")\">" + B + "</button>");
                             out.write("</td>");
                             if (counter >= arrayLength - 1) {
                                 out.write("<td>");
@@ -137,24 +143,13 @@
                                     } else {
                                         if (j == 0) {
                                             td.setAttribute("class", "pay_info");
-                                            if (i == 3 - 1) {
+                                            if (preistyp[i-1].tooltip != "null") {
                                                 var btnInfo = document.createElement("BUTTON");
                                                 btnInfo.setAttribute("type", "button");
                                                 btnInfo.setAttribute("class", "btn btn-outline-info");
                                                 btnInfo.setAttribute("data-toggle", "tooltip");
                                                 btnInfo.setAttribute("data-html", "true");
-                                                btnInfo.setAttribute("title", "Bist du noch in deiner Blütezeit? Dann zeige deinen <b>Schwanz</b> oder <b>Titten</b> an der Kasse und spare damit wertvolles Geld!!!");
-                                                btnInfo.innerHTML = "?";
-                                                td.appendChild(btnInfo);
-                                            }
-                                            if (i == 4 - 1) {
-                                                var btnInfo = document.createElement("BUTTON");
-                                                btnInfo.setAttribute("type", "button");
-                                                btnInfo.setAttribute("class", "btn btn-outline-info");
-                                                btnInfo.setAttribute("data-toggle", "tooltip");
-                                                btnInfo.setAttribute("data-placement", "right");
-                                                btnInfo.setAttribute("data-html", "true");
-                                                btnInfo.setAttribute("title", "Bist du <b>69</b> oder älter? Dann kannst du hier sparen!");
+                                                btnInfo.setAttribute("title", preistyp[i-1].tooltip);
                                                 btnInfo.innerHTML = "?";
                                                 td.appendChild(btnInfo);
                                             }
