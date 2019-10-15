@@ -2,7 +2,7 @@ var countChoosenSeats = 0;
 var choosenReihe = null;
 
 function chooseSeat(id) {
-    if ((choosenReihe == null || choosenReihe == id.charAt(0)) && countChoosenSeats < 8) {
+    if (choosenReihe == null || choosenReihe == id.charAt(0)) {
         if (document.getElementById(id).style.backgroundColor == "#ff0000") {
             return;
         }
@@ -16,12 +16,30 @@ function chooseSeat(id) {
                 choosenReihe = null;
             }
         } else {
-            document.getElementById(id).style.backgroundColor = "green";
-            choossenReihe = id.charAt(0);
-            countChoosenSeats++;
+            var boolean = isChoosen(id);
+            if (countChoosenSeats < 8 && (choosenReihe == null || boolean)) {
+                document.getElementById(id).style.backgroundColor = "green";
+                choosenReihe = id.charAt(0);
+                console.log(choosenReihe);
+                countChoosenSeats++;
+            }
         }
         setCounterUI()
     }
+}
+
+function isChoosen(id) {
+    var leftId = id.charAt(0) + (parseInt(id.slice(1)) - 1);
+    var rightId = id.charAt(0) + (parseInt(id.slice(1)) + 1);
+    var rv= false;
+    if (document.getElementById(leftId.toString()).style.backgroundColor == "green") {
+        rv = true;
+    }
+
+    if (document.getElementById(rightId).style.backgroundColor == "green") {
+        rv = true;
+    }
+    return rv;
 }
 
 function setCounterUI() {
