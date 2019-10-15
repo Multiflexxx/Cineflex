@@ -178,9 +178,14 @@ public class QueryBuilder {
        return "SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, GebäudeID, Saalbezeichnung FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID WHERE VorstellungsID = " + id + " ;";
     }
 
-    public static String getGrundPreis()
+    public static String getGrundPreis(int id)
     {
-        return "SELECT * FROM Preisänderung WHERE `Änderungsbeschreibung` = 'Grundpreis' ;";
+        return "SELECT `Grundpreis`, `Dauer`, `3D`FROM Film WHERE `FilmId` =" + id + ";";
+    }
+
+    public static String getPreisveränderungen()
+    {
+        return "SELECT * FROM Preisänderung WHERE `PreisänderungsID` = 4 OR `PreisänderungsID` = 5;";
     }
 
     public static String getPreiseLaenge()

@@ -189,7 +189,7 @@
                             <%
                                 PreisFactory preisFactory = new PreisFactory();
 
-                                String[] preistypArray = preisFactory.getPreisJSONArray();
+                                String[] preistypArray = preisFactory.getPreisJSONArray(vorstellung.getFilm().getFilmID());
 
                                 for(int i = 0; i < preistypArray.length; i++)
                                 {

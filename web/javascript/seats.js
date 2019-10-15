@@ -7,8 +7,6 @@ function chooseSeat(id, row_length) {
             return;
         }
 
-        console.log(document.getElementById(id).style.backgroundColor);
-
         if (document.getElementById(id).style.backgroundColor == "green") {
             document.getElementById(id).style.backgroundColor = '#4a9be8';
             countChoosenSeats--;
@@ -19,7 +17,6 @@ function chooseSeat(id, row_length) {
             if (countChoosenSeats < 8 && (choosenReihe == null || isChoosen(id, row_length))) {
                 document.getElementById(id).style.backgroundColor = "green";
                 choosenReihe = id.charAt(0);
-                console.log(choosenReihe);
                 countChoosenSeats++;
             }
         }
@@ -31,7 +28,6 @@ function isChoosen(id, row_length) {
     var rv= false;
     var leftId = id.charAt(0) + (parseInt(id.slice(1)) - 1);
     var rightId = id.charAt(0) + (parseInt(id.slice(1)) + 1);
-    console.log(id.slice(1));
     if (parseInt(id.slice(1)) == 1) {
         if (document.getElementById(rightId.toString()).style.backgroundColor == "green") {
             rv = true;
