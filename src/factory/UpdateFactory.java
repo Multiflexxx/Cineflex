@@ -19,6 +19,8 @@ public class UpdateFactory {
             try {
                 if(rs.next()) {
                     if(rs.getInt("PLZ") == plz) {
+                        Connector.closeResultSet(rs);
+                        Connector.closeConnection(c);
                         return true;
                     }
                 }
@@ -26,7 +28,8 @@ public class UpdateFactory {
                 e.printStackTrace();
             }
         }
-
+        Connector.closeResultSet(rs);
+        Connector.closeConnection(c);
         return false;
     }
 }

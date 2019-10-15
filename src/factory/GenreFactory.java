@@ -30,6 +30,7 @@ public class GenreFactory {
       }
 
     }
+    Connector.closeResultSet(rs);
     Connector.closeConnection(c);
     return genre;
   }
@@ -58,15 +59,18 @@ public class GenreFactory {
         }catch(SQLException e){
           e.printStackTrace();
         }
+        Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return genres;
       } else {
         genres = new Genre[1];
         genres[0] = null;
+        Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return genres;
       }
     }
+    Connector.closeResultSet(rs);
     Connector.closeConnection(c);
     return null;
   }

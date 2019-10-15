@@ -2,35 +2,39 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import helper.SupportMethods;
+import oo.UserLogin;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginFactory {
 
-    private String email, passwordHash;
-    Connection connection = null;
+    public static UserLogin getUserLogin(String email, String passwordHash) {
+        UserLogin userLogin = null;
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.createLoginQuery(email, passwordHash);
+        ResultSet rs = Connector.getQueryResult(c, sql);
 
-    public LoginFactory(){
-
-    }
-
-    public LoginFactory(String email, String passwordHash)
-    {
-        this.email = email;
-        this.passwordHash = passwordHash;
-        connection = Connector.getConnection();
-    }
-
-    public ResultSet getLoginResult()
-    {
-        if (connection == null)
-        {
-            return null;
+        if(rs != null) {
+            try {
+                rs.next();
+                userLogin = new UserLogin(
+                        rs.getString("E-Mail"),
+                        rs.getString("Vorname"),
+                        rs.getString("Nachname"),
+                        rs.getInt("PID"),
+                        rs.getInt("KID")
+                );
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
-        String sql = QueryBuilder.createLoginQuery(email, passwordHash);
+        Connector.closeConnection(c);
+        Connector.closeResultSet(rs);
 
-        return Connector.getQueryResult(connection, sql);
+        return userLogin;
     }
 }

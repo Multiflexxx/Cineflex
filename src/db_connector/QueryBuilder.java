@@ -6,7 +6,7 @@ import java.text.*;
 public class QueryBuilder {
     public static String createLoginQuery(String email, String passwordHash)
     {
-        return "SELECT * FROM Person WHERE `E-Mail` = '" + email + "' AND `Passwort` = '" + passwordHash + "' ;";
+        return "Select person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From person Join kunde k on person.PID = k.PID Where `E-Mail` = '"  + email + "' AND Passwort = '" + passwordHash + "';";
     }
 
     public static String createUser(String name, String lastname, String gebDate, String email, String passwordHash)

@@ -75,7 +75,8 @@ public class VorstellungsFactory {
                         }
 
                         if(date_Datum == null || time_Uhrzeit == null) {
-                          Connector.closeConnection(c);
+                            Connector.closeResultSet(rs);
+                            Connector.closeConnection(c);
                             return null;
                         }
 
@@ -93,13 +94,16 @@ public class VorstellungsFactory {
             } else {
                 vorstellungen = new Vorstellung[1];
                 vorstellungen[0] = null;
-              Connector.closeConnection(c);
+                Connector.closeResultSet(rs);
+                Connector.closeConnection(c);
                 return vorstellungen;
             }
-          Connector.closeConnection(c);
+            Connector.closeResultSet(rs);
+            Connector.closeConnection(c);
             return vorstellungen;
         }
-      Connector.closeConnection(c);
+        Connector.closeResultSet(rs);
+        Connector.closeConnection(c);
         return null;
     }
 
@@ -144,10 +148,12 @@ public class VorstellungsFactory {
                 }catch(SQLException e) {
                     e.printStackTrace();
                 }
+                Connector.closeResultSet(rs);
                 Connector.closeConnection(c);
             return vorstellung;
         }
-      Connector.closeConnection(c);
+        Connector.closeResultSet(rs);
+        Connector.closeConnection(c);
 
       return vorstellung;
     }

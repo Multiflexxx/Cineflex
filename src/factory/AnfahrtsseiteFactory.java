@@ -18,6 +18,7 @@ public class AnfahrtsseiteFactory {
         rs.next();
         String variableString = rs.getString("Straße") + " " + rs.getString("Hausnummer") + " " + rs.getString("PLZ");
         variableString = URLEncoder.encode(variableString, "UTF-8");
+        Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return ("<iframe src=\"" + baseStringGoogle + variableString + "\" width=\"1000\" height=\"1000\"></iframe>");
     }

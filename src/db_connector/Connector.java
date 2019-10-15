@@ -43,4 +43,14 @@ public class Connector {
             }
         }
     }
+
+    public static void closeResultSet(ResultSet rs) {
+        if(rs != null) {
+            try {
+                rs.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

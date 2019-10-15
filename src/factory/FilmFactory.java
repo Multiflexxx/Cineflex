@@ -189,6 +189,7 @@ public class FilmFactory {
             setSprachen(film);
             setGenres(film);
         }
+        Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return film;
     }
@@ -214,6 +215,7 @@ public class FilmFactory {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        Connector.closeResultSet(rs);
         Connector.closeConnection(c);
     }
 
@@ -238,6 +240,7 @@ public class FilmFactory {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+        Connector.closeResultSet(rs);
         Connector.closeConnection(c);
     }
 }

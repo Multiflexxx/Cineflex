@@ -52,6 +52,7 @@ public class KinosaalFactory {
             }
         }
 
+        Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return kinosaal;
     }

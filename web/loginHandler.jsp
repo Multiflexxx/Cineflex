@@ -1,6 +1,7 @@
 <%@ page import="Password.PassMD5" %>
 <%@ page import="factory.LoginFactory" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="oo.UserLogin" %>
 
 <%
     String email = request.getParameter("inputEmailLog");
@@ -15,30 +16,28 @@
         return;
     }
 
-    LoginFactory login = new LoginFactory(email, pw);
-    ResultSet rs = login.getLoginResult();
+    UserLogin userLogin = LoginFactory.getUserLogin(email, pw);
 
-    try {
-        if (rs.next() == false ) {
+
+        if (userLogin == null) {
             response.sendRedirect("index.jsp");
 
         } else {
-            do {
-                //HttpSession session = request.getSession(true);
 
                 session.setAttribute("email", email);
-                session.setAttribute("name", rs.getString("Vorname"));
+                session.setAttribute("vorname", userLogin.getFirstname());
+                session.setAttribute("nachname", userLogin.getLastname());
+                session.setAttribute("PID", userLogin.getPID());
+                session.setAttribute("KID", userLogin.getKID());
 
-                String lastaccessed = request.getParameter("lastaccessed");
-                String time = request.getParameter("time");
-                if (lastaccessed != null && time != null) {
-                    session.setAttribute(lastaccessed, time);
-                }
+//                String lastaccessed = request.getParameter("lastaccessed");
+//                String time = request.getParameter("time");
+//                if (lastaccessed != null && time != null) {
+//                    session.setAttribute(lastaccessed, time);
+//                }
                 session.setMaxInactiveInterval(600);
                 response.sendRedirect("index.jsp");
-            } while (rs.next());
+
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+
 %>

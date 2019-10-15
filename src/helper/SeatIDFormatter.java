@@ -1,5 +1,7 @@
 package helper;
 
+import oo.Sitz;
+
 public class SeatIDFormatter
 {
     public static int[] seatsStringToIntArray(String seatIDString)
@@ -38,4 +40,5 @@ public class SeatIDFormatter
             return null;
         }
     }
+
 }
