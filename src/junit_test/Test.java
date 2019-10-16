@@ -785,7 +785,7 @@ public class Test {
         Assert.assertEquals("Insert INTO Buchungsbeleg (BNR, KID, VorstellungsID, Preis, Zeitstempel) VALUES (NULL, 15, 20, 25.25, '2019-08-08 12:30:33');", QueryBuilder.createBuchungsBeleg(15, 20, 25.25f, "2019-08-08 12:30:33"));
 
         //createBuchungsposition
-        Assert.assertEquals("Insert INTO buchungsposition (PositionsID, BNR, SitzID) VALUES ( 5, 15, 12);", QueryBuilder.createBuchungsposition(5, 15, 12));
+        Assert.assertEquals("Insert INTO Buchungsposition (PositionsID, BNR, SitzID) VALUES ( 5, 15, 12);", QueryBuilder.createBuchungsposition(5, 15, 12));
 
         //createPreisänderungBuchung
         Assert.assertEquals("Insert Into PreisänderungBuchung (PositionsID, BNR, PreisänderungsID) Values ( 4, 8, 3) ;", QueryBuilder.createPreisänderungBuchung(4, 8, 3));
