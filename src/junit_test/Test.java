@@ -3,11 +3,7 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-import factory.LoginFactory;
-import helper.DateFormatter;
-import helper.ExceptionHandler;
-import helper.SeatIDFormatter;
-import helper.SupportMethods;
+import helper.*;
 import oo.*;
 import org.junit.Assert;
 import org.junit.Before;
@@ -57,8 +53,6 @@ public class Test {
         Assert.assertEquals(5, sitz.getNummer());
         Assert.assertEquals('A', sitz.getReihe());
         Assert.assertEquals('B', sitz.getSitzklasse());
-//        Assert.assertEquals("Mein Test Sitz", sitz.getBeschreibung());
-//        Assert.assertEquals(5.99f, sitz.getGrundpreis(), 0); // delta needed for floating point numbers
 
         sitz.setSitzID(5);
         Assert.assertEquals(5, sitz.getSitzID());
@@ -68,10 +62,6 @@ public class Test {
         Assert.assertEquals('F', sitz.getReihe());
         sitz.setSitzklasse('P');
         Assert.assertEquals('P', sitz.getSitzklasse());
-//        sitz.setBeschreibung("TEST");
-//        Assert.assertEquals("TEST", sitz.getBeschreibung());
-//        sitz.setGrundpreis(3.99f);
-//        Assert.assertEquals(3.99f, sitz.getGrundpreis(), 0);
     }
     //----
 
@@ -188,7 +178,6 @@ public class Test {
 
         // Check if seat was added to array and contains same values
         Assert.assertEquals(sitzplan[0], sitz1);
-//        Assert.assertEquals(sitzplan[0].getGrundpreis(), sitz1.getGrundpreis(), 0);
 
         Kinosaal kinosaal = new Kinosaal(2, "Saal 1", sitzplan);
 
@@ -238,22 +227,6 @@ public class Test {
         Assert.assertEquals(15, kunde.getKundenID());
         Assert.assertEquals(0, kunde.getTreuepunkte());
 
-        Sitz[] sitzauswahl = {kinosaal.getSitzplan()[0], kinosaal.getSitzplan()[1]};
-
-        // Check if marked seats are set correctly
-        Assert.assertEquals(sitz1, sitzauswahl[0]);
-        Assert.assertEquals(sitz2, sitzauswahl[1]);
-
-//        float preis = 0;
-//
-//        for(int i = 0; i < sitzauswahl.length; i++)
-//        {
-//            preis += sitzauswahl[i].getGrundpreis();
-//        }
-//
-//        // Check if price is calculated correctly
-//        Assert.assertEquals(11.98f, preis, 0);
-
         // Format time using the DateFormatter class
         String buchungsZeit = DateFormatter.getSQLTime(vorstellung.getUhrzeit());
 
@@ -261,48 +234,39 @@ public class Test {
         Assert.assertEquals("19:30:00", buchungsZeit);
 
         // Create new object (main reason for this test)
-//        Buchungsbeleg buchungsbeleg = new Buchungsbeleg(1, preis, vorstellung, kunde, sitzauswahl, buchungsZeit);
+        Buchungsbeleg buchungsbeleg = new Buchungsbeleg(5, 16.51f, vorstellung, kunde, buchungsZeit);
 
         // Check if class Buchungsbeleg works as expected
-//        Assert.assertEquals(1, buchungsbeleg.getBelegID());
-//        Assert.assertEquals(11.98f, buchungsbeleg.getPreis(),0);
-//        Assert.assertEquals(vorstellung, buchungsbeleg.getVorstellung());
-//        Assert.assertEquals(DateFormatter.getSQLTime(vorstellung.getUhrzeit()), buchungsbeleg.getUhrzeit());
+        Assert.assertEquals(5, buchungsbeleg.getBelegID());
+        Assert.assertEquals(16.51f, buchungsbeleg.getPreis(),0);
+        Assert.assertEquals(vorstellung, buchungsbeleg.getVorstellung());
+        Assert.assertEquals(DateFormatter.getSQLTime(vorstellung.getUhrzeit()), buchungsbeleg.getUhrzeit());
 
-//        Assert.assertEquals(kunde, buchungsbeleg.getKunde());
-//        Assert.assertEquals(kunde.getTreuepunkte(), buchungsbeleg.getKunde().getTreuepunkte());
-//
-//        // Set points for customer
-//        kunde.setTreuepunkte(25);
-//        buchungsbeleg.setKunde(kunde);
-//        Assert.assertEquals(25, buchungsbeleg.getKunde().getTreuepunkte());
+        Assert.assertEquals(kunde, buchungsbeleg.getKunde());
+        Assert.assertEquals(kunde.getTreuepunkte(), buchungsbeleg.getKunde().getTreuepunkte());
 
-//        Assert.assertEquals(sitzauswahl, buchungsbeleg.getSitzauswahl());
-//        Assert.assertEquals(sitzauswahl[0], buchungsbeleg.getSitzauswahl()[0]);
-//        Assert.assertEquals('C', buchungsbeleg.getSitzauswahl()[0].getReihe());
+        // Set points for customer
+        kunde.setTreuepunkte(25);
+        buchungsbeleg.setKunde(kunde);
+        Assert.assertEquals(25, buchungsbeleg.getKunde().getTreuepunkte());
 
-//        Assert.assertEquals(buchungsZeit, buchungsbeleg.getUhrzeit());
-//
-//        // Test setters
-//        buchungsbeleg.setBelegID(5);
-//        Assert.assertEquals(5, buchungsbeleg.getBelegID());
-//
-//        buchungsbeleg.setPreis(5.69f);
-//        Assert.assertEquals(5.69f, buchungsbeleg.getPreis(),0);
-//
-//        buchungsbeleg.setKunde(null);
-//        Assert.assertEquals(null, buchungsbeleg.getKunde());
+        Assert.assertEquals(buchungsZeit, buchungsbeleg.getUhrzeit());
 
-        Sitz[] sitzauswahl2 = {};
+        // Test setters
+        buchungsbeleg.setBelegID(5);
+        Assert.assertEquals(5, buchungsbeleg.getBelegID());
 
-//        buchungsbeleg.setSitzauswahl(sitzauswahl2);
-//        Assert.assertEquals(sitzauswahl2, buchungsbeleg.getSitzauswahl());
+        buchungsbeleg.setPreis(5.69f);
+        Assert.assertEquals(5.69f, buchungsbeleg.getPreis(),0);
 
-//        buchungsbeleg.setUhrzeit("15:34:32");
-//        Assert.assertEquals("15:34:32", buchungsbeleg.getUhrzeit());
-//
-//        buchungsbeleg.setVorstellung(null);
-//        Assert.assertEquals(null, buchungsbeleg.getVorstellung());
+        buchungsbeleg.setKunde(null);
+        Assert.assertEquals(null, buchungsbeleg.getKunde());
+
+        buchungsbeleg.setUhrzeit("15:34:32");
+        Assert.assertEquals("15:34:32", buchungsbeleg.getUhrzeit());
+
+        buchungsbeleg.setVorstellung(null);
+        Assert.assertEquals(null, buchungsbeleg.getVorstellung());
     }
 
     // Tests for class Reservierungsbeleg
@@ -321,7 +285,6 @@ public class Test {
 
         // Check if seat was added to array and contains same values
         Assert.assertEquals(sitzplan[1], sitz2);
-//        Assert.assertEquals(sitzplan[1].getGrundpreis(), sitz2.getGrundpreis(), 0);
 
         Kinosaal kinosaal = new Kinosaal(3, "Saal 3", sitzplan);
 
@@ -371,22 +334,6 @@ public class Test {
         Assert.assertEquals(16, kunde.getKundenID());
         Assert.assertEquals(0, kunde.getTreuepunkte());
 
-        Sitz[] sitzauswahl = {kinosaal.getSitzplan()[1], kinosaal.getSitzplan()[2]};
-
-        // Check if marked seats are set correctly
-        Assert.assertEquals(sitz2, sitzauswahl[0]);
-        Assert.assertEquals(sitz3, sitzauswahl[1]);
-
-//        float preis = 0;
-//
-//        for(int i = 0; i < sitzauswahl.length; i++)
-//        {
-//            preis += sitzauswahl[i].getGrundpreis();
-//        }
-//
-//        // Check if price is calculated correctly
-//        Assert.assertEquals(10.98f, preis, 0);
-
         // Format time using the DateFormatter class
         String buchungsZeit = DateFormatter.getSQLTime(vorstellung.getUhrzeit());
 
@@ -394,48 +341,39 @@ public class Test {
         Assert.assertEquals("20:30:00", buchungsZeit);
 
         // Create new object (main reason for this test)
-//        Reservierungsbeleg reservierungsbeleg = new Reservierungsbeleg(2, preis, vorstellung, kunde, sitzauswahl, buchungsZeit);
+        Reservierungsbeleg reservierungsbeleg = new Reservierungsbeleg(2, 10.98f, vorstellung, kunde, buchungsZeit);
 
         // Check if class Buchungsbeleg works as expected
-//        Assert.assertEquals(2, reservierungsbeleg.getBelegID());
-//        Assert.assertEquals(10.98f, reservierungsbeleg.getPreis(),0);
-//        Assert.assertEquals(vorstellung, reservierungsbeleg.getVorstellung());
-//        Assert.assertEquals(DateFormatter.getSQLTime(vorstellung.getUhrzeit()), reservierungsbeleg.getUhrzeit());
-//
-//        Assert.assertEquals(kunde, reservierungsbeleg.getKunde());
-//        Assert.assertEquals(kunde.getTreuepunkte(), reservierungsbeleg.getKunde().getTreuepunkte());
-//
-//        // Set points for customer
-//        kunde.setTreuepunkte(30);
-//        reservierungsbeleg.setKunde(kunde);
-//        Assert.assertEquals(30, reservierungsbeleg.getKunde().getTreuepunkte());
-//
-////        Assert.assertEquals(sitzauswahl, reservierungsbeleg.getSitzauswahl());
-////        Assert.assertEquals(sitzauswahl[0], reservierungsbeleg.getSitzauswahl()[0]);
-////        Assert.assertEquals('D', reservierungsbeleg.getSitzauswahl()[0].getReihe());
-//
-//        Assert.assertEquals(buchungsZeit, reservierungsbeleg.getUhrzeit());
-//
-//        // Test setters
-//        reservierungsbeleg.setBelegID(3);
-//        Assert.assertEquals(3, reservierungsbeleg.getBelegID());
-//
-//        reservierungsbeleg.setPreis(7.69f);
-//        Assert.assertEquals(7.69f, reservierungsbeleg.getPreis(),0);
-//
-//        reservierungsbeleg.setKunde(null);
-//        Assert.assertEquals(null, reservierungsbeleg.getKunde());
+        Assert.assertEquals(2, reservierungsbeleg.getBelegID());
+        Assert.assertEquals(10.98f, reservierungsbeleg.getPreis(),0);
+        Assert.assertEquals(vorstellung, reservierungsbeleg.getVorstellung());
+        Assert.assertEquals(DateFormatter.getSQLTime(vorstellung.getUhrzeit()), reservierungsbeleg.getUhrzeit());
 
-        Sitz[] sitzauswahlNeu = {};
+        Assert.assertEquals(kunde, reservierungsbeleg.getKunde());
+        Assert.assertEquals(kunde.getTreuepunkte(), reservierungsbeleg.getKunde().getTreuepunkte());
 
-//        reservierungsbeleg.setSitzauswahl(sitzauswahlNeu);
-//        Assert.assertEquals(sitzauswahlNeu, reservierungsbeleg.getSitzauswahl());
+        // Set points for customer
+        kunde.setTreuepunkte(30);
+        reservierungsbeleg.setKunde(kunde);
+        Assert.assertEquals(30, reservierungsbeleg.getKunde().getTreuepunkte());
 
-//        reservierungsbeleg.setUhrzeit("19:15:23");
-//        Assert.assertEquals("19:15:23", reservierungsbeleg.getUhrzeit());
-//
-//        reservierungsbeleg.setVorstellung(null);
-//        Assert.assertEquals(null, reservierungsbeleg.getVorstellung());
+        Assert.assertEquals(buchungsZeit, reservierungsbeleg.getUhrzeit());
+
+        // Test setters
+        reservierungsbeleg.setBelegID(3);
+        Assert.assertEquals(3, reservierungsbeleg.getBelegID());
+
+        reservierungsbeleg.setPreis(7.69f);
+        Assert.assertEquals(7.69f, reservierungsbeleg.getPreis(),0);
+
+        reservierungsbeleg.setKunde(null);
+        Assert.assertEquals(null, reservierungsbeleg.getKunde());
+
+        reservierungsbeleg.setUhrzeit("19:15:23");
+        Assert.assertEquals("19:15:23", reservierungsbeleg.getUhrzeit());
+
+        reservierungsbeleg.setVorstellung(null);
+        Assert.assertEquals(null, reservierungsbeleg.getVorstellung());
     }
     //----
 
@@ -526,7 +464,6 @@ public class Test {
         Assert.assertEquals(sitzplan, kinosaal.getSitzplan());
         Assert.assertEquals(sitz1, kinosaal.getSitzplan()[0]);
         Assert.assertEquals(sitz2.getReihe(), kinosaal.getSitzplan()[0].getReihe());
-//        Assert.assertEquals(5.99f, kinosaal.getSitzplan()[0].getGrundpreis(),0);
 
         kinosaal.setSaalID(3);
         Assert.assertEquals(3, kinosaal.getSaalID());
@@ -539,7 +476,8 @@ public class Test {
         kinosaal.setSitzplan(sitzplan2);
 
         Assert.assertEquals(sitzplan2, kinosaal.getSitzplan());
-//        Assert.assertEquals(sitzplan2[1].getGrundpreis(), kinosaal.getSitzplan()[1].getGrundpreis(), 0);
+
+        Assert.assertEquals(1, kinosaal.getRowLength('C'));
     }
     //----
 
@@ -616,27 +554,7 @@ public class Test {
     }
     //----
 
-    // Tests for class Login
-    @org.junit.Test
-    public void testeLogin()
-    {
-//        LoginFactory login = new LoginFactory();
-//
-//        Assert.assertNotEquals(null, login);
-//
-//        try{
-//            login = new LoginFactory("max.muster@mann.de", "e10adc3949ba59abbe56e057f20f883e");
-//        }
-//
-//        catch (Exception e){
-//            Assert.assertEquals(1,0);
-//        }
-//
-//        Assert.assertEquals(null, login.getLoginResult());
-    }
-    //----
-
-    // Tests for class Login
+    // Tests for class Gebaeude
     @org.junit.Test
     public void testeGebaeude()
     {
@@ -665,7 +583,7 @@ public class Test {
     }
     //----
 
-    // Tests for class Login
+    // Tests for class Genre
     @org.junit.Test
     public void testeGenre()
     {
@@ -686,6 +604,43 @@ public class Test {
         genre.setDeskriptor("Horror Film");
         Assert.assertEquals("Horror Film", genre.getDeskriptor());
     }
+    //----
+
+    // Tests for class UserLogin
+    @org.junit.Test
+    public void testeUserLogin()
+    {
+        String email = "mail@mail.com";
+        String firstname = "Hans";
+        String lastname = "Müller";
+        int pid = 3;
+        int kid = 15;
+
+        // create new Object
+        UserLogin userLogin = new UserLogin(email, firstname, lastname, pid, kid);
+
+        Assert.assertNotNull(userLogin);
+
+        // Test Getters
+        Assert.assertEquals(email, userLogin.getEmail());
+        Assert.assertEquals(firstname, userLogin.getFirstname());
+        Assert.assertEquals(lastname, userLogin.getLastname());
+        Assert.assertEquals(pid, userLogin.getPID());
+        Assert.assertEquals(kid, userLogin.getKID());
+
+        // Test Setters
+        userLogin.setEmail("hans@mail.com");
+        Assert.assertEquals("hans@mail.com", userLogin.getEmail());
+        userLogin.setFirstname("Franz");
+        Assert.assertEquals("Franz", userLogin.getFirstname());
+        userLogin.setLastname("Meier");
+        Assert.assertEquals("Meier", userLogin.getLastname());
+        userLogin.setPID(78);
+        Assert.assertEquals(78, userLogin.getPID());
+        userLogin.setKID(12);
+        Assert.assertEquals(12, userLogin.getKID());
+    }
+
     //----
 
     // TESTS FOR PASSWORD
@@ -717,7 +672,7 @@ public class Test {
 
         //createLoginQuery
         Assert.assertEquals(
-            "SELECT * FROM Person WHERE `E-Mail` = 'dieter@mail.com' AND `Passwort` = 'sicheresPasswort123' ;",
+            "Select person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From person Join kunde k on person.PID = k.PID Where `E-Mail` = 'dieter@mail.com' AND Passwort = 'sicheresPasswort123';",
             QueryBuilder.createLoginQuery("dieter@mail.com", "sicheresPasswort123"));
 
         //createUser
@@ -763,9 +718,9 @@ public class Test {
         //TODO: Change concat with Date and Time
 
         // defaultSearchQuery with Search Text
-        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') AND `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Toy", "2019-08-08", "20:00:00", 18, "68165"));
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') AND `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Toy", "2019-08-08", "20:00:00", 18, "68165"));
         // defaultSearchQuery without Search Text
-        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `FSK`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-08", "20:00:00", 18, "68165"));
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-08", "20:00:00", 18, "68165"));
 
         //showMovieById
         Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE Film.FilmID = '1' AND concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-07 19:30:00' AND Gebäude.PLZ = '68159' ORDER BY `Datum` ASC LIMIT 6;", QueryBuilder.showMovieById("1","2019-08-07", "19:30:00", "68159"));
@@ -780,7 +735,7 @@ public class Test {
         Assert.assertEquals("SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = 'Berlin' ;",QueryBuilder.getKinosByName("Berlin"));
 
         //getGenreNamesById(int id)
-        Assert.assertEquals("Select Genrebezeichnung FROM FilmGenre JOIN Genre ON FilmGenre.GenreID = Genre.GenreID Where FilmID = 2;", QueryBuilder.getGenreNamesById(2));
+        Assert.assertEquals("Select `Genrebezeichnung` FROM FilmGenre JOIN Genre ON FilmGenre.GenreID = Genre.GenreID Where FilmID = 2;", QueryBuilder.getGenreNamesById(2));
 
         //getSpracheById(int id)
         Assert.assertEquals("Select `Sprachenname` FROM Filmsprache JOIN Sprache ON Sprache.SprachID = Filmsprache.SprachID Where `FilmID` = 5;", QueryBuilder.getSpracheById(5));
@@ -801,6 +756,43 @@ public class Test {
 
         //getVorstellungByID(int id)
         Assert.assertEquals("SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, GebäudeID, Saalbezeichnung FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID WHERE VorstellungsID = 5 ;", QueryBuilder.getVorstellungByID(5));
+
+        //getGenreByID
+        Assert.assertEquals("Select `Genrebezeichnung` FROM FilmGenre JOIN Genre ON Genre.GenreID = Filmgenre.GenreID Where `GenreID` = 15 ;", QueryBuilder.getGenreByID(15));
+
+        //createUser
+        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`) VALUES ('Hans', 'Meier', '01.01.1970', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', ''); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '01.01.1970' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", "01.01.1970", "mail@mail.com", "hashCode", "15","Langer Weg", ""));
+
+        //getGenres
+        Assert.assertEquals("SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;", QueryBuilder.getGenres());
+
+        //getGrundPreis
+        Assert.assertEquals("SELECT `Grundpreis`, `Dauer`, `3D`FROM Film WHERE `FilmId` =20;", QueryBuilder.getGrundPreis(20));
+
+        //getPreisveränderungen
+        Assert.assertEquals("SELECT * FROM Preisänderung WHERE `PreisänderungsID` = 4 OR `PreisänderungsID` = 5;", QueryBuilder.getPreisveränderungen());
+
+        //getPreiseInfos
+        Assert.assertEquals("SELECT * FROM Preisänderung WHERE Änderungsbeschreibung != 'Logenaufpreis' AND Änderungsbeschreibung != '3D-Aufschlag' AND Änderungsbeschreibung != 'Überlängenaufschlag';", QueryBuilder.getPreiseInfos());
+
+        //getVorstellungByIdPLZ()
+        Assert.assertEquals("SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, Kinosaal.GebäudeID, Saalbezeichnung, PLZ FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID Join Cineflex.Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE VorstellungsID = 68165;", QueryBuilder.getVorstellungByIdPLZ(68165));
+
+        //getSitzById()
+        Assert.assertEquals("Select * From sitz Where SitzplatzID = 20;", QueryBuilder.getSitzById(20));
+
+        //createBuchungsBeleg()
+        Assert.assertEquals("Insert INTO buchungsbeleg (BNR, KID, VorstellungsID, Preis) VALUEs (NULL, 15, 20, 25.25); SELECT LAST_INSERT_ID();", QueryBuilder.createBuchungsBeleg(15, 20, 25.25f));
+
+        //createBuchungsposition
+        Assert.assertEquals("Insert INTO buchungsposition (PositionsID, BNR, SitzID) VALUES ( 5, 15, 12);", QueryBuilder.createBuchungsposition(5, 15, 12));
+
+        //createPreisänderungBuchung
+        Assert.assertEquals("Insert Into PreisänderunBuchung (PositionsID, PreisänderungsID) Values ( 4, 8) ;", QueryBuilder.createPreisänderungBuchung(4, 8));
+
+        //genreSearchQuery()
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') AND `Datum` >= '2019-08-08' AND `Uhrzeit`>= '16:30:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 16 AND Genre.GenreID = 5 ;", QueryBuilder.genreSearchQuery("Toy", "2019-08-08", "16:30:00", 16, "68165", 5));
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE `Datum` >= '2019-08-08' AND `Uhrzeit`>= '16:30:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 16 AND Genre.GenreID = 5 ;", QueryBuilder.genreSearchQuery("", "2019-08-08", "16:30:00", 16, "68165", 5));
     }
 
     // TESTS FOR HELPERS
@@ -848,6 +840,17 @@ public class Test {
         int size = supportMethods.getResultSetSize(resultSetMock2);
 
         Assert.assertEquals(1, size);
+
+        int size2 = supportMethods.getResultSetSize(null);
+
+        Assert.assertEquals(-1, size2);
+
+        // Remove HTML Tags from String
+
+        String html = "<html>Test</html>#123+?Test.|A BC";
+        String checkString = "htmlTest/html123TestA BC";
+
+        Assert.assertEquals(checkString, SupportMethods.removeHTMLCode(html));
     }
 
     // Tests for class Exception Handler
@@ -875,6 +878,25 @@ public class Test {
         Assert.assertEquals(checkArray[0], intArray[0]);
         Assert.assertEquals(checkArray[1], intArray[1]);
         Assert.assertEquals(checkArray[2], intArray[2]);
+
+        Assert.assertEquals(null, SeatIDFormatter.seatsStringToIntArray("-1|-1"));
+    }
+
+    @org.junit.Test
+    public void testeArrayBuilder()
+    {
+        String inputString = "5, 8, 9";
+        int[] checkArray = {5, 8, 9};
+        int[] array = {6, 7, 8};
+
+        Assert.assertEquals(checkArray[0], ArrayBuilder.stringToIntArray(inputString, ", ")[0]);
+        Assert.assertEquals(checkArray[1], ArrayBuilder.stringToIntArray(inputString, ", ")[1]);
+        Assert.assertEquals(checkArray[2], ArrayBuilder.stringToIntArray(inputString, ", ")[2]);
+
+
+        Assert.assertEquals("6, 7, 8", ArrayBuilder.intArrayToString(array));
+
+        Assert.assertEquals("6< 7< 8", ArrayBuilder.intArrayToString(array, "< "));
     }
 
 

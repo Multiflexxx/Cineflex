@@ -61,7 +61,7 @@
                     <a class="nav-link" href="specials.jsp">Specials</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Snacks</a>
+                    <a class="nav-link" href="snacks.jsp">Snacks</a>
                 </li>
                 <li class="nav-item dropdown">
                     <%

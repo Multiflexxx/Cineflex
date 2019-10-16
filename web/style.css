@@ -139,3 +139,18 @@ h6{
         height: 1em;
     }
 }
+
+
+/*Snacks*/
+
+.tableSnacks {
+  margin: 15px;
+  width: 25em;
+}
+
+.tableSnacks td {
+  width: 450em;
+}
+
+
+

@@ -11,13 +11,6 @@ function chooseSeat(id, row_length) {
 
         if (document.getElementById(id).style.backgroundColor == "green") {
             document.getElementById(id).style.backgroundColor = '#4a9be8';
-            if (countChoosenSeats > 0) {
-                countChoosenSeats--;
-            }
-
-            if (countChoosenSeats == 0) {
-                choosenReihe = null;
-            }
 
             for (var g = 0; g < preisMultiplikator.length; g++) {
                 countChoosenSeats += preisMultiplikator[g];
@@ -25,7 +18,13 @@ function chooseSeat(id, row_length) {
                 document.getElementById("h4" + (g + 1)).innerHTML = "0 €";
                 document.getElementById("span" + (g + 1)).innerHTML = 0;
             }
-            countChoosenSeats--;
+            if (countChoosenSeats > 0) {
+                countChoosenSeats--;
+            }
+
+            if (countChoosenSeats == 0) {
+                choosenReihe = null;
+            }
             document.getElementById("span" + (0)).innerHTML = countChoosenSeats;
         } else {
             if (countChoosenSeats < 8 && (choosenReihe == null || isChoosen(id, row_length))) {
@@ -34,6 +33,7 @@ function chooseSeat(id, row_length) {
                 countChoosenSeats++;
             }
         }
+        btndclickable(countChoosenSeats);
         setCounterUI()
     }
 }
@@ -122,7 +122,9 @@ function createTable(preistyp, tableLength) {
                     btn1.setAttribute("onclick", "ticket_minus(" + i + ", " + preistyp[i - 1].preis + ")");
                     btn1.innerHTML = "-";
                     var span = document.createElement("SPAN");
+                    span.setAttribute("class", "span_price_select")
                     span.setAttribute("id", "span" + i);
+                    span.setAttribute("idPreis", preistyp[i - 1].id);
                     span.innerHTML = "0";
                     var btn2 = document.createElement("BUTTON");
                     btn2.setAttribute("onclick", "ticket_plus(" + i + ", " + preistyp[i - 1].preis + ")");
@@ -155,6 +157,7 @@ function ticket_plus(i, preis) {
         document.getElementById("span" + i).innerHTML = preisMultiplikator[i - 1];
         document.getElementById("span0").innerHTML = countChoosenSeats;
     }
+    btndclickable(countChoosenSeats);
 
 
 }
@@ -167,19 +170,47 @@ function ticket_minus(i, preis) {
         document.getElementById("span" + i).innerHTML = preisMultiplikator[i - 1];
         document.getElementById("span0").innerHTML = countChoosenSeats;
     }
+    btndclickable(countChoosenSeats);
 }
 
-function onClickZurueck() {
 
+function btndclickable(countChoosenSeats) {
+    var btn_res = document.getElementById("btn_res");
+    var btn_buc =  document.getElementById("btn_buc");
+    if (countChoosenSeats == 0) {
+        btn_res.disabled = false;
+        btn_res.classList.add("btn-outline-primary");
+        btn_res.classList.remove("btn-outline-secondary");
+        btn_buc.disabled = false;
+        btn_buc.classList.add("btn-outline-primary");
+        btn_buc.classList.remove("btn-outline-secondary");
+    } else {
+        btn_res.disabled = true;
+        btn_res.classList.remove("btn-outline-primary");
+        btn_res.classList.add("btn-outline-secondary");
+        btn_buc.disabled = true;
+        btn_buc.classList.remove("btn-outline-primary");
+        btn_buc.classList.add("btn-outline-secondary");
+    }
 }
 
 function onClickReservieren() {
+    var preisString = "";
+    for (var i=0; i<preisMultiplikator.length; i++) {
+        var ctr = preisMultiplikator[i];
+        var id = preistyp[i].id;
+        for (var j=0; j<ctr; j++) {
+            preisString += id;
+            if (j < ctr-1) {
+                preisString += ",";
+            }
+        }
+    }
 
+    console.log(preisString);
 }
 
 function onClickBuchen() {
-    // TODO: CHANGE LOOK AT MARCEL KASSENZETTEL TOOL
-
     // LOOP OVER SEATS
     // CREATE JSON FILE
     var form = document.createElement("form");

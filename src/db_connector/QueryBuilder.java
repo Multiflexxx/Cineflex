@@ -112,7 +112,7 @@ public class QueryBuilder {
   }
 
     public static String getGenres(){
-       return  "SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre";
+       return  "SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;";
     }
 
     public static String showMovieById(String id, String date, String time, String plz) {
