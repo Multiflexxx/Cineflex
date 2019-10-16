@@ -7,7 +7,7 @@ public class Connector {
         Connection c = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3307/cineflex?allowMultiQueries=true", "multiflex", "multiflexxx123");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/Cineflex?allowMultiQueries=true", "multiflex", "multiflexxx123");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,6 +38,16 @@ public class Connector {
         if(c != null) {
             try {
                 c.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void closeResultSet(ResultSet rs) {
+        if(rs != null) {
+            try {
+                rs.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }

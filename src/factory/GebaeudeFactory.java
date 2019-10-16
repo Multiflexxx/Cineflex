@@ -42,9 +42,11 @@ public class GebaeudeFactory {
                     e.printStackTrace();
                 }
             }
+            Connector.closeResultSet(rs);
             Connector.closeConnection(c);
             return gebäude;
         } else {
+            Connector.closeResultSet(rs);
             Connector.closeConnection(c);
             return gebäude;
         }

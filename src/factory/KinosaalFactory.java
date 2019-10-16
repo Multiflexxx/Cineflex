@@ -25,14 +25,14 @@ public class KinosaalFactory {
             for(int i =0; i<rsSize;i++) {
                 try {
                     rs.next();
-                    Sitzplan[i]=new Sitz(rs.getInt("SitzplatzID"),rs.getInt("Nummer"),rs.getString("Reihe").charAt(0),rs.getString("Sitzklasse").charAt(0),"", 0.0f); //TODO beschreibung und grundpreis verbinden.
+                    Sitzplan[i]=new Sitz(rs.getInt("SitzplatzID"),rs.getInt("Nummer"),rs.getString("Reihe").charAt(0),rs.getString("Sitzklasse").charAt(0)); //TODO beschreibung und grundpreis verbinden.
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
         }else{
             Sitzplan = new Sitz[1];
-            Sitzplan[0] = new Sitz(1,2,'A','B',"test", 1.6f);
+            Sitzplan[0] = new Sitz(1,2,'A','B');
         }
 
         Kinosaal kinosaal = null;
@@ -52,6 +52,7 @@ public class KinosaalFactory {
             }
         }
 
+        Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return kinosaal;
     }

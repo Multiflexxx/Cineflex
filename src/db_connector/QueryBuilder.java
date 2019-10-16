@@ -6,12 +6,12 @@ import java.text.*;
 public class QueryBuilder {
     public static String createLoginQuery(String email, String passwordHash)
     {
-        return "SELECT * FROM Person WHERE `E-Mail` = '" + email + "' AND `Passwort` = '" + passwordHash + "' ;";
+        return "Select person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From person Join kunde k on person.PID = k.PID Where `E-Mail` = '"  + email + "' AND Passwort = '" + passwordHash + "';";
     }
 
-    public static String createUser(String name, String lastname, String gebDate, String email, String passwordHash)
+    public static String createUser(String name, String lastname, String gebDate, String email, String passwordHash, String hausnummer, String straße, String adresszusatz)
     {
-        return "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`) VALUES ('"+name+"', '"+lastname+"', '"+gebDate+"', '"+email+"', '"+passwordHash+"'); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = '"+name+"' AND `Nachname` = '"+lastname+"' AND `GebDatum` = '"+gebDate+"' AND `E-Mail` = '"+email+"' AND `Passwort` = '"+passwordHash+"'), 0);";
+        return "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`) VALUES ('"+name+"', '"+lastname+"', '"+gebDate+"', '"+email+"', '"+passwordHash+"', '"+hausnummer+"', '"+straße+"', '"+adresszusatz+"'); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = '"+name+"' AND `Nachname` = '"+lastname+"' AND `GebDatum` = '"+gebDate+"' AND `E-Mail` = '"+email+"' AND `Passwort` = '"+passwordHash+"'), 0);";
     }
 
     public static String showAllCinemas()
@@ -178,10 +178,53 @@ public class QueryBuilder {
        return "SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, GebäudeID, Saalbezeichnung FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID WHERE VorstellungsID = " + id + " ;";
     }
 
+    public static String getGrundPreis(int id)
+    {
+        return "SELECT `Grundpreis`, `Dauer`, `3D`FROM Film WHERE `FilmId` =" + id + ";";
+    }
+
+    public static String getPreisveränderungen()
+    {
+        return "SELECT * FROM Preisänderung WHERE `PreisänderungsID` = 4 OR `PreisänderungsID` = 5;";
+    }
+
+    public static String getPreiseLaenge()
+    {
+        return "SELECT COUNT(*) as laenge FROM Preisänderung;";
+    }
+
+    public static String getPreiseInfos()
+    {
+        return "SELECT * FROM Preisänderung WHERE Änderungsbeschreibung != 'Logenaufpreis' AND Änderungsbeschreibung != '3D-Aufschlag' AND Änderungsbeschreibung != 'Überlängenaufschlag';";
+    }
+
+    public static String getVorstellungByIdPLZ(int id) {
+        return "SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, Kinosaal.GebäudeID, Saalbezeichnung, PLZ FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID Join Cineflex.Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE VorstellungsID = " + id + ";";
+    }
+
+    public static String getSitzById(int id) {
+        return "Select * From sitz Where SitzplanID = " + id + ";";
+    }
+
+    public static String createBuchungsBeleg(int KID, int vorstellungsID, float preis) {
+        return "Insert INTO buchungsbeleg (BNR, KID, VorstellungsID, Preis) VALUEs (NULL, " + KID + ", " + vorstellungsID + ", " + preis + "); " + "SELECT LAST_INSERT_ID();";
+    }
+
+    public static String createBuchungsposition(int posID, int BNR, int sitzID) {
+        return "Insert INTO buchungsposition (PositionsID, BNR, SitzID) VALUES ( " + posID + ", " + BNR + ", " + sitzID + ");";
+    }
+
+    public static String createPreisänderungBuchung(int posID, int preisVerID) {
+        return "Insert Into PreisänderunBuchung (PositionsID, PreisänderungsID) Values ( " + posID + ", " + preisVerID + ") ;";
+    }
+
+    // NOT USED
+    /*
     public static String getSeatInfo(int vorstellungsID)
     {
         return "SELECT Sitz.SitzplatzID, Sitz.SitzplanID, `Reihe`, `Nummer`, `Sitzklasse`, Sitzplan.SaalID, Vorstellung.VorstellungsID FROM Sitz JOIN Sitzplan On Sitz.SitzplanID = Sitzplan.SitzplanID JOIN Vorstellung ON Vorstellung.SaalID = Sitzplan.SaalID WHERE Vorstellung.VorstellungsID = "+ vorstellungsID +";";
-    }
+    }*/
+
 
     private static String getDateAsString()
     {

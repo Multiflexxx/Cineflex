@@ -12,17 +12,15 @@ public class Sitz {
 
     private int sitzID, nummer;
     private char reihe, sitzklasse;
-    private float grundpreis;
-    private String beschreibung;
 
-    public Sitz(int sitzID, int nummer, char reihe, char sitzklasse, String beschreibung, float grundpreis)
+
+    public Sitz(int sitzID, int nummer, char reihe, char sitzklasse)
     {
         this.sitzID = sitzID;
         this.nummer = nummer;
         this.reihe = reihe;
         this.sitzklasse = sitzklasse;
-        this.beschreibung = beschreibung;
-        this.grundpreis = grundpreis;
+
     }
 
     public int getSitzID() {
@@ -57,19 +55,5 @@ public class Sitz {
         this.sitzklasse = sitzklasse;
     }
 
-    public float getGrundpreis() {
-        return grundpreis;
-    }
 
-    public void setGrundpreis(float grundpreis) {
-        this.grundpreis = grundpreis;
-    }
-
-    public String getBeschreibung() {
-        return beschreibung;
-    }
-
-    public void setBeschreibung(String beschreibung) {
-        this.beschreibung = beschreibung;
-    }
 }

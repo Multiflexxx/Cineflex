@@ -44,7 +44,7 @@
 
                         if (gebäude != null) {
                             for(int i=0; i<gebäude.length; i++) {
-                                out.println(" <a class=\"dropdown-item\" href=\"javascript:void(0)\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
+                                out.println(" <a class=\"dropdown-item\" href=\"index.jsp\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
                             }
                         } else {
                             response.sendRedirect("error/error500.jsp");
@@ -70,7 +70,7 @@
                                     "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Account</a>");
                         } else {
                             out.println("<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownAccount\" role=\"button\"\n" +
-                                    "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + session.getAttribute("name") + "</a>");
+                                    "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" + session.getAttribute("vorname") + "</a>");
                         }
                     %>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
