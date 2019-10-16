@@ -3,7 +3,6 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-import factory.LoginFactory;
 import helper.*;
 import oo.*;
 import org.junit.Assert;
@@ -54,8 +53,6 @@ public class Test {
         Assert.assertEquals(5, sitz.getNummer());
         Assert.assertEquals('A', sitz.getReihe());
         Assert.assertEquals('B', sitz.getSitzklasse());
-//        Assert.assertEquals("Mein Test Sitz", sitz.getBeschreibung());
-//        Assert.assertEquals(5.99f, sitz.getGrundpreis(), 0); // delta needed for floating point numbers
 
         sitz.setSitzID(5);
         Assert.assertEquals(5, sitz.getSitzID());
@@ -65,10 +62,6 @@ public class Test {
         Assert.assertEquals('F', sitz.getReihe());
         sitz.setSitzklasse('P');
         Assert.assertEquals('P', sitz.getSitzklasse());
-//        sitz.setBeschreibung("TEST");
-//        Assert.assertEquals("TEST", sitz.getBeschreibung());
-//        sitz.setGrundpreis(3.99f);
-//        Assert.assertEquals(3.99f, sitz.getGrundpreis(), 0);
     }
     //----
 
@@ -561,26 +554,6 @@ public class Test {
     }
     //----
 
-    // Tests for class Login
-    @org.junit.Test
-    public void testeLogin()
-    {
-//        LoginFactory login = new LoginFactory();
-//
-//        Assert.assertNotEquals(null, login);
-//
-//        try{
-//            login = new LoginFactory("max.muster@mann.de", "e10adc3949ba59abbe56e057f20f883e");
-//        }
-//
-//        catch (Exception e){
-//            Assert.assertEquals(1,0);
-//        }
-//
-//        Assert.assertEquals(null, login.getLoginResult());
-    }
-    //----
-
     // Tests for class Gebaeude
     @org.junit.Test
     public void testeGebaeude()
@@ -816,6 +789,10 @@ public class Test {
 
         //createPreisänderungBuchung
         Assert.assertEquals("Insert Into PreisänderunBuchung (PositionsID, PreisänderungsID) Values ( 4, 8) ;", QueryBuilder.createPreisänderungBuchung(4, 8));
+
+        //genreSearchQuery()
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') AND `Datum` >= '2019-08-08' AND `Uhrzeit`>= '16:30:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 16 AND Genre.GenreID = 5 ;", QueryBuilder.genreSearchQuery("Toy", "2019-08-08", "16:30:00", 16, "68165", 5));
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE `Datum` >= '2019-08-08' AND `Uhrzeit`>= '16:30:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 16 AND Genre.GenreID = 5 ;", QueryBuilder.genreSearchQuery("", "2019-08-08", "16:30:00", 16, "68165", 5));
     }
 
     // TESTS FOR HELPERS
@@ -864,6 +841,10 @@ public class Test {
 
         Assert.assertEquals(1, size);
 
+        int size2 = supportMethods.getResultSetSize(null);
+
+        Assert.assertEquals(-1, size2);
+
         // Remove HTML Tags from String
 
         String html = "<html>Test</html>#123+?Test.|A BC";
@@ -897,6 +878,8 @@ public class Test {
         Assert.assertEquals(checkArray[0], intArray[0]);
         Assert.assertEquals(checkArray[1], intArray[1]);
         Assert.assertEquals(checkArray[2], intArray[2]);
+
+        Assert.assertEquals(null, SeatIDFormatter.seatsStringToIntArray("-1|-1"));
     }
 
     @org.junit.Test
