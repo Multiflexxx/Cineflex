@@ -206,16 +206,20 @@ public class QueryBuilder {
         return "Select * From sitz Where SitzplatzID = " + id + ";";
     }
 
-    public static String createBuchungsBeleg(int KID, int vorstellungsID, float preis) {
-        return "Insert INTO buchungsbeleg (BNR, KID, VorstellungsID, Preis) VALUEs (NULL, " + KID + ", " + vorstellungsID + ", " + preis + "); " + "SELECT LAST_INSERT_ID();";
+    public static String createBuchungsBeleg(int KID, int vorstellungsID, float preis, String timestamp) {
+        return "Insert INTO Buchungsbeleg (BNR, KID, VorstellungsID, Preis, Zeitstempel) VALUES (NULL, " + KID + ", " + vorstellungsID + ", " + preis + ", '" + timestamp + "');";
     }
 
     public static String createBuchungsposition(int posID, int BNR, int sitzID) {
-        return "Insert INTO buchungsposition (PositionsID, BNR, SitzID) VALUES ( " + posID + ", " + BNR + ", " + sitzID + ");";
+        return "Insert INTO Buchungsposition (PositionsID, BNR, SitzID) VALUES ( " + posID + ", " + BNR + ", " + sitzID + ");";
     }
 
-    public static String createPreisänderungBuchung(int posID, int preisVerID) {
-        return "Insert Into PreisänderunBuchung (PositionsID, PreisänderungsID) Values ( " + posID + ", " + preisVerID + ") ;";
+    public static String createPreisänderungBuchung(int posID, int BNR, int preisVerID) {
+        return "Insert Into PreisänderungBuchung (PositionsID, BNR, PreisänderungsID) Values ( " + posID + ", " + BNR + ", " + preisVerID + ") ;";
+    }
+
+    public static String getBuchungsbelegByKIDandTimestamp(int KID, String timestamp) {
+        return "Select * From Buchungsbeleg Where `KID` = " + KID + " AND `Zeitstempel` = '" + timestamp + "';";
     }
 
     // NOT USED
