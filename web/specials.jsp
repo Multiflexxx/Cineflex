@@ -22,39 +22,36 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm">
+    <div class="card-deck mb-3" style="max-width: 1400px;">
             <div class="card lootbox" style="width: 15rem; margin-top:2rem; margin-bottom: 1rem; align-self: center;">
                 <img src="img/specials/g_g.png" class="card-img-top" alt="Gewöhnliche Lootbox">
                 <div class="card-body">
                     <h5 class="card-title">Gewöhnliche Lootbox</h5>
                     <p class="card-text">5 Gewinne, mit einer geringen Chance auf seltene Gewinne.</p>
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#gModalCenter">1,99€</a>
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#gModalCenter">1,99€ oder<br>100
+                        Treuepunkte</a>
                 </div>
             </div>
-        </div>
-        <div class="col-sm">
             <div class="card lootbox" style="width: 15rem;  margin-top:2rem; margin-bottom: 1rem;">
                 <img src="img/specials/s_g.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Seltene Lootbox</h5>
                     <p class="card-text">Mindestens 3 seltene Gewinne, mit geringer Chance auf epische Gewinne.*</p>
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#sModalCenter">4,99€</a>
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#sModalCenter">4,99€ oder<br>400
+                        Treuepunkte</a>
                 </div>
             </div>
-        </div>
-        <div class="col-sm">
             <div class="card lootbox" style="width: 15rem;  margin-top:2rem; margin-bottom: 1rem;">
                 <img src="img/specials/e_g.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Epische Lootbox</h5>
                     <p class="card-text">Mindestens 3 epische Gewinne, mit Chance auf einen Supergewinn.*</p>
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#eModalCenter">49,99€</a>
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#eModalCenter">49,99€ oder<br>5000
+                        Treuepunkte</a>
                 </div>
             </div>
-        </div>
     </div>
-    <div class="card text-center">
+    <div class="card text-center" style="margin-bottom: 3rem">
         <div class="card-header">
             Nur für kurze Zeit!
         </div>
@@ -62,14 +59,13 @@
             <h5 class="card-title">Spezialangebot</h5>
             <p class="card-text">5 x Epische Lootbox und zusätzlich 300 Diamanten + 5€ Gutschein für einen beliebigen
                 Film**</p>
-            <a href="#" class="btn btn-primary">229,99€</a>
+            <a href="#" class="btn btn-primary">229,99€ oder<br>20000 Treuepunkte</a>
         </div>
         <div class="card-footer text-muted">
             *Keine Garantie auf Gewinne. Glückspiel kann süchtig machen. <br>
             **Ausgeschlossen 3D oder Überlänge. Nicht kombinierbar mit anderen Rabatten. Rechtsweg ausgeschlossen.
         </div>
     </div>
-
 </div>
 
 <!-- Modal gewöhnlich-->

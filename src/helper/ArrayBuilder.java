@@ -17,11 +17,11 @@ public class ArrayBuilder {
 
     public static String intArrayToString(int[] arr, String del) {
         String output = "";
-        for(int i = 0; i< arr.length; i++) {
+        for(int i = 0; i < arr.length; i++) {
             if(i != arr.length - 1) {
-                output += i + ", ";
+                output += arr[i] + del;
             } else {
-                output += i;
+                output += arr[i];
             }
         }
         return output;
