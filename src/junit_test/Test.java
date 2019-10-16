@@ -782,13 +782,13 @@ public class Test {
         Assert.assertEquals("Select * From sitz Where SitzplatzID = 20;", QueryBuilder.getSitzById(20));
 
         //createBuchungsBeleg()
-        Assert.assertEquals("Insert INTO buchungsbeleg (BNR, KID, VorstellungsID, Preis) VALUEs (NULL, 15, 20, 25.25); SELECT LAST_INSERT_ID();", QueryBuilder.createBuchungsBeleg(15, 20, 25.25f));
+        Assert.assertEquals("Insert INTO Buchungsbeleg (BNR, KID, VorstellungsID, Preis, Zeitstempel) VALUES (NULL, 15, 20, 25.25, '2019-08-08 12:30:33');", QueryBuilder.createBuchungsBeleg(15, 20, 25.25f, "2019-08-08 12:30:33"));
 
         //createBuchungsposition
-        Assert.assertEquals("Insert INTO buchungsposition (PositionsID, BNR, SitzID) VALUES ( 5, 15, 12);", QueryBuilder.createBuchungsposition(5, 15, 12));
+        Assert.assertEquals("Insert INTO Buchungsposition (PositionsID, BNR, SitzID) VALUES ( 5, 15, 12);", QueryBuilder.createBuchungsposition(5, 15, 12));
 
         //createPreisänderungBuchung
-        Assert.assertEquals("Insert Into PreisänderunBuchung (PositionsID, PreisänderungsID) Values ( 4, 8) ;", QueryBuilder.createPreisänderungBuchung(4, 8));
+        Assert.assertEquals("Insert Into PreisänderungBuchung (PositionsID, BNR, PreisänderungsID) Values ( 4, 8, 3) ;", QueryBuilder.createPreisänderungBuchung(4, 8, 3));
 
         //genreSearchQuery()
         Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') AND `Datum` >= '2019-08-08' AND `Uhrzeit`>= '16:30:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 16 AND Genre.GenreID = 5 ;", QueryBuilder.genreSearchQuery("Toy", "2019-08-08", "16:30:00", 16, "68165", 5));

@@ -133,7 +133,7 @@
             </div>
             <div class="col-lg-2 pay-to-win">
                 <button id="btn_res" onclick="onClickReservieren()" class="btn btn-outline-secondary mb-2" disabled>Reservieren</button>
-                <button id="btn_buc" onclick="onClickBuchen()" class="btn btn-outline-secondary mb-2 " disabled>Buchen</button>
+                <button id="btn_buc" onclick="onClickBuchen(<%=vorstellung.getVorstellungsID()%>)" class="btn btn-outline-secondary mb-2 " disabled>Buchen</button>
             </div>
             <div class="col"></div>
         </div>
