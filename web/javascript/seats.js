@@ -195,17 +195,16 @@ function btndclickable(countChoosenSeats) {
 }
 
 function onClickReservieren() {
-    var preisString = "";
+    var preis = [];
     for (var i=0; i<preisMultiplikator.length; i++) {
         var ctr = preisMultiplikator[i];
         var id = preistyp[i].id;
         for (var j=0; j<ctr; j++) {
-            preisString += id;
-            if (j < ctr-1) {
-                preisString += ",";
-            }
+            preis.push(id);
         }
     }
+
+    var preisString = preis.join(",");
 
     console.log(preisString);
 }
@@ -229,10 +228,21 @@ function onClickBuchen() {
 
         }).join(",");
 
+    var preis = [];
+    for (var i=0; i<preisMultiplikator.length; i++) {
+        var ctr = preisMultiplikator[i];
+        var id = preistyp[i].id;
+        for (var j=0; j<ctr; j++) {
+            preis.push(id);
+        }
+    }
+    var preisInput = preis.join(",");
+
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "seats_data");
     hiddenField.setAttribute("value", data_inputs);
+    hiddenField.setAttribute("value", preisInput);
     form.appendChild(hiddenField);
 
     document.body.appendChild(form);
