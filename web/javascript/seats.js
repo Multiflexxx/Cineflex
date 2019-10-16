@@ -209,7 +209,7 @@ function onClickReservieren() {
     console.log(preisString);
 }
 
-function onClickBuchen() {
+function onClickBuchen(vID) {
     // LOOP OVER SEATS
     // CREATE JSON FILE
     var form = document.createElement("form");
@@ -238,12 +238,22 @@ function onClickBuchen() {
     }
     var preisInput = preis.join(",");
 
-    var hiddenField = document.createElement("input");
-    hiddenField.setAttribute("type", "hidden");
-    hiddenField.setAttribute("name", "seats_data");
-    hiddenField.setAttribute("value", data_inputs);
-    hiddenField.setAttribute("value", preisInput);
-    form.appendChild(hiddenField);
+ console.log(vID);
+    var hiddenField0 = document.createElement("input");
+    hiddenField0.setAttribute("type", "hidden");
+    hiddenField0.setAttribute("name", "vorstellungsid");
+    hiddenField0.setAttribute("value", vID);
+    var hiddenField1 = document.createElement("input");
+    hiddenField1.setAttribute("type", "hidden");
+    hiddenField1.setAttribute("name", "seats_data");
+    hiddenField1.setAttribute("value", data_inputs);
+    var hiddenField2 = document.createElement("input");
+    hiddenField2.setAttribute("type", "hidden");
+    hiddenField2.setAttribute("name", "tickets_data");
+    hiddenField2.setAttribute("value", preisInput);
+    form.appendChild(hiddenField0);
+    form.appendChild(hiddenField1);
+    form.appendChild(hiddenField2);
 
     document.body.appendChild(form);
     form.submit();
