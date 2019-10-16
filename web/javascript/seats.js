@@ -201,7 +201,7 @@ function onClickReservieren() {
         var id = preistyp[i].id;
         for (var j=0; j<ctr; j++) {
             preisString += id;
-            if (j<ctr-1) {
+            if (j < ctr-1) {
                 preisString += ",";
             }
         }
