@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="helper.SeatIDFormatter" %>
+<%@ page import="helper.ArrayBuilder" %>
+<%@ page import="factory.BuchungsFactory" %>
+<%@ page import="java.lang.reflect.Array" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -13,21 +16,33 @@
 <jsp:include page="filter.jsp"/>
 
 <%
-    String seatsData = request.getParameter("seats_data");
+//    String seatsData = request.getParameter("seats_data");
+//
+//    int[] seatIDs = SeatIDFormatter.seatsStringToIntArray(seatsData);
+//
+//    // If no seat is selected -> redirect to errorPage
+//    if(seatIDs == null)
+//    {
+//        response.sendRedirect("error500.jsp");
+//    }
+//
+//    // TEST
+//    for(int i = 0; i < seatIDs.length; i++)
+//    {
+//        out.println(seatIDs[i]);
+//    }
 
-    int[] seatIDs = SeatIDFormatter.seatsStringToIntArray(seatsData);
+    int vorstellungsID = 124;
+    String seats = "8,9,10";
+    String preisVer = "1,2,3";
 
-    // If no seat is selected -> redirect to errorPage
-    if(seatIDs == null)
-    {
-        response.sendRedirect("error500.jsp");
-    }
+    int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
+    int[] presVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
 
-    // TEST
-    for(int i = 0; i < seatIDs.length; i++)
-    {
-        out.println(seatIDs[i]);
-    }
+    out.write(ArrayBuilder.intArrayToString(seatsInt) + "<br />");
+    out.write(ArrayBuilder.intArrayToString(presVerInt));
+
+    BuchungsFactory.createBuchungBeleg(seatsInt, presVerInt, vorstellungsID, Integer.parseInt(session.getAttribute("KID").toString()));
 
 %>
 

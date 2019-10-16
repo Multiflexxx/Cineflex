@@ -46,13 +46,13 @@ public class BuchungsFactory {
         if(lastBNR > 0) {
             for (int i = 0; i < sitze.length; i++) {
                 sql = QueryBuilder.createBuchungsposition(i + 1, lastBNR, sitze[i].getSitzID());
-                Connector.getQueryResult(c, sql);
+                Connector.executeQuery(c, sql);
 
                 // Create PreisänderungBuchung
                 // PositionsID
                 // PreisänderungsID
                 sql = QueryBuilder.createPreisänderungBuchung(i + 1, preiseVerIDs[i]);
-                Connector.getQueryResult(c, sql);
+                Connector.executeQuery(c, sql);
             }
         }
 
