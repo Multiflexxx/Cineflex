@@ -122,7 +122,9 @@ function createTable(preistyp, tableLength) {
                     btn1.setAttribute("onclick", "ticket_minus(" + i + ", " + preistyp[i - 1].preis + ")");
                     btn1.innerHTML = "-";
                     var span = document.createElement("SPAN");
+                    span.setAttribute("class", "span_price_select")
                     span.setAttribute("id", "span" + i);
+                    span.setAttribute("idPreis", preistyp[i - 1].id);
                     span.innerHTML = "0";
                     var btn2 = document.createElement("BUTTON");
                     btn2.setAttribute("onclick", "ticket_plus(" + i + ", " + preistyp[i - 1].preis + ")");
@@ -193,12 +195,25 @@ function btndclickable(countChoosenSeats) {
 }
 
 function onClickReservieren() {
+    var inputs1 = document.getElementsByClassName("span_price_select"),
+        data_inputs1 = [].map.call(inputs1, function (input1) {
+            var preisString = "";
 
+            if (input1.style.backgroundColor == "green") {
+                preisString = input.getAttribute("preisID");
+            }
+
+            return preisString;
+
+        }).join(",");
+
+
+    // preisString += document.getElementById("span1").getAttribute("idpreis");
+    // preisString += "," +preisMultiplikator[0];
+    console.log(inputs1);
 }
 
 function onClickBuchen() {
-    // TODO: CHANGE LOOK AT MARCEL KASSENZETTEL TOOL
-
     // LOOP OVER SEATS
     // CREATE JSON FILE
     var form = document.createElement("form");

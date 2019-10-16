@@ -21,7 +21,7 @@ public class PreisFactory {
 
         SupportMethods supportMethods = new SupportMethods();
 
-        int lResultLength = supportMethods.getResultSetSize(resultSet)+1;
+        int lResultLength = supportMethods.getResultSetSize(resultSet) + 1;
 
         String[] lJSONDataArray = null;
 
@@ -30,23 +30,25 @@ public class PreisFactory {
         if (lResultLength > 0) {
 
             lJSONDataArray = new String[lResultLength];
-            lJSONDataArray[0] = "{'tooltip': 'null', 'beschreibung': 'Normalpreis', 'preis': " + grundPreis + "}";
+            lJSONDataArray[0] = "{'tooltip': 'null', 'id': 0,'beschreibung': 'Normalpreis', 'preis': " + grundPreis + "}";
 
             int counter = 1;
 
             try {
                 while (resultSet.next()) {
-                        String lHelperString = "{'tooltip': '";
-                        lHelperString += resultSet.getString("TooltipDeskriptor");
-                        lHelperString += "', 'beschreibung': '";
-                        lHelperString += resultSet.getString("Änderungsbeschreibung");
-                        lHelperString += "', 'preis': ";
-                        lHelperString += (grundPreis + resultSet.getFloat("Änderungswert"));
-                        lHelperString += "}";
+                    String lHelperString = "{'tooltip': '";
+                    lHelperString += resultSet.getString("TooltipDeskriptor");
+                    lHelperString += "', 'id': '";
+                    lHelperString += resultSet.getString("PreisänderungsID");
+                    lHelperString += "', 'beschreibung': '";
+                    lHelperString += resultSet.getString("Änderungsbeschreibung");
+                    lHelperString += "', 'preis': ";
+                    lHelperString += (grundPreis + resultSet.getFloat("Änderungswert"));
+                    lHelperString += "}";
 
-                        lJSONDataArray[counter] = lHelperString;
+                    lJSONDataArray[counter] = lHelperString;
 
-                        counter++;
+                    counter++;
                 }
             } catch (Exception e) {
                 return null;
@@ -113,13 +115,13 @@ public class PreisFactory {
             return -2;
         }
 
-        float [] lp = new float[lHelp1];
+        float[] lp = new float[lHelp1];
 
         if (lHelp1 > 0) {
             try {
                 int counter1 = 0;
                 while (resultSet1.next()) {
-                    lp [counter1] = resultSet1.getFloat("Änderungswert");
+                    lp[counter1] = resultSet1.getFloat("Änderungswert");
                     counter1++;
                 }
                 if (dauer - 120 > 0) {
