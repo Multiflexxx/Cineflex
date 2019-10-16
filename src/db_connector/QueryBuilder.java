@@ -225,6 +225,10 @@ public class QueryBuilder {
         return "Insert Into PreisänderungBuchung (PositionsID, BNR, PreisänderungsID) Values ( " + posID + ", " + BNR + ", " + preisVerID + ") ;";
     }
 
+    public static String aendereProfil(String vorname, String nachname, String email, String passwort, String strasse, String hausnummer, int PID) {
+        return "UPDATE Person SET Vorname=\"" + vorname + ", Nachname=\"" + nachname + "\",`E-Mail`=\"" + email + "\",Passwort=\"" + passwort + "\",Straße=\"" + strasse + "\",Hausnummer=\"" + hausnummer + "\"  WHERE PID = " + PID + ";";
+    }
+
     public static String getBuchungsbelegByKIDandTimestamp(int KID, String timestamp) {
         return "Select * From Buchungsbeleg Where `KID` = " + KID + " AND `Zeitstempel` = '" + timestamp + "';";
     }

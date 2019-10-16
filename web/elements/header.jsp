@@ -79,6 +79,7 @@
                                 out.println("<a class=\"dropdown-item\" href=\"#\" data-toggle=\"modal\" data-target=\"#loginDialog\">Login</a>");
                                 out.println("<a class=\"dropdown-item\" href=\"#\" data-toggle=\"modal\" data-target=\"#registerDialog\">Register</a>");
                             } else {
+                                out.println("<a class=\"dropdown-item\" href=\"profil.jsp\">Profil</a>");
                                 out.println("<a class=\"dropdown-item\" href=\"logout.jsp\">Logout</a>");
                             }
                         %>
