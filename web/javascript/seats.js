@@ -13,13 +13,18 @@ function chooseSeat(id, row_length) {
             document.getElementById(id).style.backgroundColor = '#4a9be8';
             if (countChoosenSeats > 0) {
                 countChoosenSeats--;
-                for (var i=0; i<preisMultiplikator.length; i++) {
-                    preisMultiplikator[i] = 0;
-                }
             }
 
             if (countChoosenSeats == 0) {
                 choosenReihe = null;
+            }
+
+            for (var i=0; i<preisMultiplikator.length; i++) {
+                preisMultiplikator[i] = 0;
+                console.log(preisMultiplikator.length);
+                // document.getElementById("h4" + (i+1)).innerHTML ="€";
+                // document.getElementById("span" + (i+1)).innerHTML = preisMultiplikator[i];
+
             }
         } else {
             if (countChoosenSeats < 8 && (choosenReihe == null || isChoosen(id, row_length))) {
@@ -194,7 +199,7 @@ function onClickBuchen() {
 
             return idVal;
 
-        }).join("|");
+        }).join(",");
 
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
