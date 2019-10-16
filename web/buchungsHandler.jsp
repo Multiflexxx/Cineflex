@@ -31,10 +31,9 @@
 //    {
 //        out.println(seatIDs[i]);
 //    }
-
-    int vorstellungsID = 124;
-    String seats = "8,9,10";
-    String preisVer = "1,2,3";
+    int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungsid"));
+    String seats = request.getParameter("seats_data");
+    String preisVer = request.getParameter("tickets_data");
 
     int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
     int[] presVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
