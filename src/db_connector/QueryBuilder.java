@@ -112,7 +112,7 @@ public class QueryBuilder {
   }
 
     public static String getGenres(){
-       return  "SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre";
+       return  "SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;";
     }
 
     public static String showMovieById(String id, String date, String time, String plz) {
@@ -203,7 +203,7 @@ public class QueryBuilder {
     }
 
     public static String getSitzById(int id) {
-        return "Select * From sitz Where SitzplanID = " + id + ";";
+        return "Select * From sitz Where SitzplatzID = " + id + ";";
     }
 
     public static String createBuchungsBeleg(int KID, int vorstellungsID, float preis) {

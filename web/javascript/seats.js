@@ -11,6 +11,13 @@ function chooseSeat(id, row_length) {
 
         if (document.getElementById(id).style.backgroundColor == "green") {
             document.getElementById(id).style.backgroundColor = '#4a9be8';
+
+            for (var g = 0; g < preisMultiplikator.length; g++) {
+                countChoosenSeats += preisMultiplikator[g];
+                preisMultiplikator[g] = 0;
+                document.getElementById("h4" + (g + 1)).innerHTML = "0 €";
+                document.getElementById("span" + (g + 1)).innerHTML = 0;
+            }
             if (countChoosenSeats > 0) {
                 countChoosenSeats--;
             }
@@ -18,14 +25,7 @@ function chooseSeat(id, row_length) {
             if (countChoosenSeats == 0) {
                 choosenReihe = null;
             }
-
-            for (var i=0; i<preisMultiplikator.length; i++) {
-                preisMultiplikator[i] = 0;
-                console.log(preisMultiplikator.length);
-                // document.getElementById("h4" + (i+1)).innerHTML ="€";
-                // document.getElementById("span" + (i+1)).innerHTML = preisMultiplikator[i];
-
-            }
+            document.getElementById("span" + (0)).innerHTML = countChoosenSeats;
         } else {
             if (countChoosenSeats < 8 && (choosenReihe == null || isChoosen(id, row_length))) {
                 document.getElementById(id).style.backgroundColor = "green";
@@ -33,6 +33,7 @@ function chooseSeat(id, row_length) {
                 countChoosenSeats++;
             }
         }
+        btndclickable(countChoosenSeats);
         setCounterUI()
     }
 }
@@ -69,16 +70,17 @@ function setCounterUI() {
     } else {
         document.getElementById("ticket_checkout").style.display = "none";
     }
-    console.log(countChoosenSeats);
 }
 
-
 function createTable(preistyp, tableLength) {
+    for (var h = 0; h < tableLength; h++) {
+        preisMultiplikator[h] = 0;
+    }
     var body = document.getElementById("tickets");
     var table = document.createElement("TABLE");
     table.setAttribute("class", "table table-dark");
     table.createTBody();
-    for (var i = 0; i < tableLength; i++) {
+    for (var i = 0; i <= tableLength; i++) {
         var tr = table.insertRow();
         tr.setAttribute("id", "ticketcat" + i);
         for (j = 0; j < 4; j++) {
@@ -98,7 +100,6 @@ function createTable(preistyp, tableLength) {
                     td.appendChild(span);
                 }
             } else {
-                preisMultiplikator[i] = 0;
                 if (j == 0) {
                     td.setAttribute("class", "pay_info");
                     if (preistyp[i - 1].tooltip != "null") {
@@ -133,7 +134,7 @@ function createTable(preistyp, tableLength) {
                 } else {
                     var h4 = document.createElement("H4");
                     h4.setAttribute("id", "h4" + i);
-                    h4.innerHTML = preisMultiplikator[i] * preistyp[i - 1].preis + " €";
+                    h4.innerHTML = preisMultiplikator[i - 1] * preistyp[i - 1].preis + " €";
                     td.appendChild(h4);
                 }
             }
@@ -148,32 +149,47 @@ function createTable(preistyp, tableLength) {
 
 function ticket_plus(i, preis) {
     if (countChoosenSeats > 0) {
-        preisMultiplikator[i] += 1;
+        preisMultiplikator[i - 1] += 1;
         countChoosenSeats -= 1;
-        console.log(preisMultiplikator[i]);
-        console.log(countChoosenSeats);
-        document.getElementById("h4" + i).innerHTML = preisMultiplikator[i] * preis + " €";
-        document.getElementById("span" + i).innerHTML = preisMultiplikator[i];
+        document.getElementById("h4" + i).innerHTML = preisMultiplikator[i - 1] * preis + " €";
+        document.getElementById("span" + i).innerHTML = preisMultiplikator[i - 1];
         document.getElementById("span0").innerHTML = countChoosenSeats;
     }
+    btndclickable(countChoosenSeats);
 
 
 }
 
 function ticket_minus(i, preis) {
-    if (preisMultiplikator[i] > 0) {
-        preisMultiplikator[i] -= 1;
+    if (preisMultiplikator[i - 1] > 0) {
+        preisMultiplikator[i - 1] -= 1;
         countChoosenSeats += 1;
-        console.log(preisMultiplikator[i]);
-        console.log(countChoosenSeats);
-        document.getElementById("h4" + i).innerHTML = preisMultiplikator[i] * preis + " €";
-        document.getElementById("span" + i).innerHTML = preisMultiplikator[i];
+        document.getElementById("h4" + i).innerHTML = preisMultiplikator[i - 1] * preis + " €";
+        document.getElementById("span" + i).innerHTML = preisMultiplikator[i - 1];
         document.getElementById("span0").innerHTML = countChoosenSeats;
     }
+    btndclickable(countChoosenSeats);
 }
 
-function onClickZurueck() {
 
+function btndclickable(countChoosenSeats) {
+    var btn_res = document.getElementById("btn_res");
+    var btn_buc =  document.getElementById("btn_buc");
+    if (countChoosenSeats == 0) {
+        btn_res.disabled = false;
+        btn_res.classList.add("btn-outline-primary");
+        btn_res.classList.remove("btn-outline-secondary");
+        btn_buc.disabled = false;
+        btn_buc.classList.add("btn-outline-primary");
+        btn_buc.classList.remove("btn-outline-secondary");
+    } else {
+        btn_res.disabled = true;
+        btn_res.classList.remove("btn-outline-primary");
+        btn_res.classList.add("btn-outline-secondary");
+        btn_buc.disabled = true;
+        btn_buc.classList.remove("btn-outline-primary");
+        btn_buc.classList.add("btn-outline-secondary");
+    }
 }
 
 function onClickReservieren() {

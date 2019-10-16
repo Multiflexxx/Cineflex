@@ -132,9 +132,8 @@
                 </div>
             </div>
             <div class="col-lg-2 pay-to-win">
-                <button onclick="onClickReservieren()" class="btn btn-outline-primary mb-2">Reservieren</button>
-                <button onclick="onClickBuchen()" class="btn btn-outline-primary mb-2">Buchen</button>
-                <button onclick="onClickZurueck()" class="btn btn-outline-primary mb-2">Zurück</button>
+                <button id="btn_res" onclick="onClickReservieren()" class="btn btn-outline-secondary mb-2" disabled>Reservieren</button>
+                <button id="btn_buc" onclick="onClickBuchen()" class="btn btn-outline-secondary mb-2 " disabled>Buchen</button>
             </div>
             <div class="col"></div>
         </div>

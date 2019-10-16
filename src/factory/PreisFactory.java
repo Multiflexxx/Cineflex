@@ -69,7 +69,8 @@ public class PreisFactory {
 
         if (resultLength > 0) {
             Connector.closeConnection(connection);
-            return resultLength + 2; //TODO Warum + 2?
+            //resultLength + 1 --> da Normalpreis mit berückscihtigt werden muss
+            return resultLength + 1;
         }
 
         return -2;
@@ -140,42 +141,4 @@ public class PreisFactory {
             return -2;
         }
     }
-
-
-    /*int resultLength = 0;
-    Connection connection;
-    ResultSet resultSet;
-    String sql;
-
-    public PreisFactory(int vorstellungsID)
-    {
-        connection = Connector.getConnection();
-        sql = QueryBuilder.getSeatInfo(vorstellungsID);
-        resultSet = Connector.getQueryResult(connection, sql);
-
-        SupportMethods supportMethods = new SupportMethods();
-
-        resultLength = supportMethods.getResultSetSize(resultSet);
-    }
-
-    public String getPreisJSON()
-    {
-        if(resultLength > 0)
-        {
-
-
-            return ";";
-        }
-
-        else
-        {
-            return "null";
-        }
-
-    }
-
-    public int getPreiskategorienLaenge()
-    {
-        return resultLength;
-    }*/
 }
