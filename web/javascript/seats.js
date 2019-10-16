@@ -176,7 +176,7 @@ function ticket_minus(i, preis) {
 
 function btndclickable(countChoosenSeats) {
     var btn_res = document.getElementById("btn_res");
-    var btn_buc =  document.getElementById("btn_buc");
+    var btn_buc = document.getElementById("btn_buc");
     if (countChoosenSeats == 0) {
         btn_res.disabled = false;
         btn_res.classList.add("btn-outline-primary");
@@ -195,18 +195,16 @@ function btndclickable(countChoosenSeats) {
 }
 
 function onClickReservieren() {
-    var preis = [];
-    for (var i=0; i<preisMultiplikator.length; i++) {
-        var ctr = preisMultiplikator[i];
-        var id = preistyp[i].id;
-        for (var j=0; j<ctr; j++) {
-            preis.push(id);
+    var inputs = document.getElementsByClassName("seat");
+    var seats = [];
+    for (var j = 0; j < inputs.length; j++) {
+        if (inputs[j].style.backgroundColor == "green") {
+            seats.push(inputs[j].getAttribute("uniqueID"));
         }
     }
+    var seatsInput = seats.join(",");
 
-    var preisString = preis.join(",");
-
-    console.log(preisString);
+    console.log(seatsInput);
 }
 
 function onClickBuchen(vID) {
@@ -216,29 +214,24 @@ function onClickBuchen(vID) {
     form.setAttribute("method", "post");
     form.setAttribute("action", "buchungsHandler.jsp");
 
-    var inputs = document.getElementsByClassName("seat"),
-        data_inputs = [].map.call(inputs, function (input) {
-            var idVal = -1;
-
-            if (input.style.backgroundColor == "green") {
-                idVal = input.getAttribute("uniqueID");
-            }
-
-            return idVal;
-
-        }).join(",");
+    var inputs = document.getElementsByClassName("seat");
+    var seats = [];
+    for (var j = 0; j < inputs.length; j++) {
+        if (inputs[j].style.backgroundColor == "green") {
+            seats.push(inputs[j].getAttribute("uniqueID"));
+        }
+    }
+    var seatsInput = seats.join(",");
 
     var preis = [];
-    for (var i=0; i<preisMultiplikator.length; i++) {
+    for (var i = 0; i < preisMultiplikator.length; i++) {
         var ctr = preisMultiplikator[i];
         var id = preistyp[i].id;
-        for (var j=0; j<ctr; j++) {
+        for (var j = 0; j < ctr; j++) {
             preis.push(id);
         }
     }
     var preisInput = preis.join(",");
-
- console.log(vID);
     var hiddenField0 = document.createElement("input");
     hiddenField0.setAttribute("type", "hidden");
     hiddenField0.setAttribute("name", "vorstellungsid");
@@ -246,7 +239,7 @@ function onClickBuchen(vID) {
     var hiddenField1 = document.createElement("input");
     hiddenField1.setAttribute("type", "hidden");
     hiddenField1.setAttribute("name", "seats_data");
-    hiddenField1.setAttribute("value", data_inputs);
+    hiddenField1.setAttribute("value", seatsInput);
     var hiddenField2 = document.createElement("input");
     hiddenField2.setAttribute("type", "hidden");
     hiddenField2.setAttribute("name", "tickets_data");
