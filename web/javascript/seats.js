@@ -195,22 +195,19 @@ function btndclickable(countChoosenSeats) {
 }
 
 function onClickReservieren() {
-    var inputs1 = document.getElementsByClassName("span_price_select"),
-        data_inputs1 = [].map.call(inputs1, function (input1) {
-            var preisString = "";
-
-            if (input1.style.backgroundColor == "green") {
-                preisString = input.getAttribute("preisID");
+    var preisString = "";
+    for (var i=0; i<preisMultiplikator.length; i++) {
+        var ctr = preisMultiplikator[i];
+        var id = preistyp[i].id;
+        for (var j=0; j<ctr; j++) {
+            preisString += id;
+            if (j<ctr-1) {
+                preisString += ",";
             }
+        }
+    }
 
-            return preisString;
-
-        }).join(",");
-
-
-    // preisString += document.getElementById("span1").getAttribute("idpreis");
-    // preisString += "," +preisMultiplikator[0];
-    console.log(inputs1);
+    console.log(preisString);
 }
 
 function onClickBuchen() {
