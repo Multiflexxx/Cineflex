@@ -122,7 +122,9 @@ function createTable(preistyp, tableLength) {
                     btn1.setAttribute("onclick", "ticket_minus(" + i + ", " + preistyp[i - 1].preis + ")");
                     btn1.innerHTML = "-";
                     var span = document.createElement("SPAN");
+                    span.setAttribute("class", "span_price_select")
                     span.setAttribute("id", "span" + i);
+                    span.setAttribute("idPreis", preistyp[i - 1].id);
                     span.innerHTML = "0";
                     var btn2 = document.createElement("BUTTON");
                     btn2.setAttribute("onclick", "ticket_plus(" + i + ", " + preistyp[i - 1].preis + ")");
@@ -193,12 +195,21 @@ function btndclickable(countChoosenSeats) {
 }
 
 function onClickReservieren() {
+    var preis = [];
+    for (var i=0; i<preisMultiplikator.length; i++) {
+        var ctr = preisMultiplikator[i];
+        var id = preistyp[i].id;
+        for (var j=0; j<ctr; j++) {
+            preis.push(id);
+        }
+    }
 
+    var preisString = preis.join(",");
+
+    console.log(preisString);
 }
 
 function onClickBuchen() {
-    // TODO: CHANGE LOOK AT MARCEL KASSENZETTEL TOOL
-
     // LOOP OVER SEATS
     // CREATE JSON FILE
     var form = document.createElement("form");
@@ -217,10 +228,21 @@ function onClickBuchen() {
 
         }).join(",");
 
+    var preis = [];
+    for (var i=0; i<preisMultiplikator.length; i++) {
+        var ctr = preisMultiplikator[i];
+        var id = preistyp[i].id;
+        for (var j=0; j<ctr; j++) {
+            preis.push(id);
+        }
+    }
+    var preisInput = preis.join(",");
+
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
     hiddenField.setAttribute("name", "seats_data");
     hiddenField.setAttribute("value", data_inputs);
+    hiddenField.setAttribute("value", preisInput);
     form.appendChild(hiddenField);
 
     document.body.appendChild(form);
