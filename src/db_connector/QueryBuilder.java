@@ -4,6 +4,13 @@ import java.util.*;
 import java.text.*;
 
 public class QueryBuilder {
+    public static String getKundeByPID(int PID) {
+        return "SELECT Person.PID as PID, KID,Treuepunkte, Vorname, Nachname, GebDatum, `E-Mail`,Passwort, Straße, Hausnummer, Adresszusatz From Kunde JOIN Person ON Person.PID = Kunde.PID WHERE Person.PID = " + PID + ";";
+    }
+
+    public static String getKundeByKID(int KID) {
+        return "SELECT Person.PID as PID, KID,Treuepunkte, Vorname, Nachname, GebDatum, `E-Mail`,Passwort, Straße, Hausnummer, Adresszusatz From Kunde JOIN Person ON Person.PID = Kunde.PID WHERE KID = " + KID + ";";
+    }
     public static String createLoginQuery(String email, String passwordHash)
     {
         return "Select person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From person Join kunde k on person.PID = k.PID Where `E-Mail` = '"  + email + "' AND Passwort = '" + passwordHash + "';";
@@ -216,6 +223,10 @@ public class QueryBuilder {
 
     public static String createPreisänderungBuchung(int posID, int BNR, int preisVerID) {
         return "Insert Into PreisänderungBuchung (PositionsID, BNR, PreisänderungsID) Values ( " + posID + ", " + BNR + ", " + preisVerID + ") ;";
+    }
+
+    public static String aendereProfil(String vorname, String nachname, String email, String passwort, String strasse, String hausnummer, int PID) {
+        return "UPDATE Person SET Vorname=\"" + vorname + ", Nachname=\"" + nachname + "\",`E-Mail`=\"" + email + "\",Passwort=\"" + passwort + "\",Straße=\"" + strasse + "\",Hausnummer=\"" + hausnummer + "\"  WHERE PID = " + PID + ";";
     }
 
     public static String getBuchungsbelegByKIDandTimestamp(int KID, String timestamp) {
