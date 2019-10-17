@@ -10,24 +10,26 @@ function chooseSeat(id, row_length) {
         }
 
         if (document.getElementById(id).style.backgroundColor == "green") {
-            document.getElementById(id).style.backgroundColor = '#4a9be8';
+            if (!areBoothNeighborChoosen(id, row_length)) {
+                document.getElementById(id).style.backgroundColor = '#4a9be8';
 
-            for (var g = 0; g < preisMultiplikator.length; g++) {
-                countChoosenSeats += preisMultiplikator[g];
-                preisMultiplikator[g] = 0;
-                document.getElementById("h4" + (g + 1)).innerHTML = "0 €";
-                document.getElementById("span" + (g + 1)).innerHTML = 0;
-            }
-            if (countChoosenSeats > 0) {
-                countChoosenSeats--;
-            }
+                for (var g = 0; g < preisMultiplikator.length; g++) {
+                    countChoosenSeats += preisMultiplikator[g];
+                    preisMultiplikator[g] = 0;
+                    document.getElementById("h4" + (g + 1)).innerHTML = "0 €";
+                    document.getElementById("span" + (g + 1)).innerHTML = 0;
+                }
+                if (countChoosenSeats > 0) {
+                    countChoosenSeats--;
+                }
 
-            if (countChoosenSeats == 0) {
-                choosenReihe = null;
+                if (countChoosenSeats == 0) {
+                    choosenReihe = null;
+                }
+                document.getElementById("span" + (0)).innerHTML = countChoosenSeats;
             }
-            document.getElementById("span" + (0)).innerHTML = countChoosenSeats;
         } else {
-            if (countChoosenSeats < 8 && (choosenReihe == null || isChoosen(id, row_length))) {
+            if (countChoosenSeats < 8 && (choosenReihe == null || isChoosenNeighbor(id, row_length))) {
                 document.getElementById(id).style.backgroundColor = "green";
                 choosenReihe = id.charAt(0);
                 countChoosenSeats++;
@@ -38,7 +40,7 @@ function chooseSeat(id, row_length) {
     }
 }
 
-function isChoosen(id, row_length) {
+function isChoosenNeighbor(id, row_length) {
     var rv = false;
     var leftId = id.charAt(0) + (parseInt(id.slice(1)) - 1);
     var rightId = id.charAt(0) + (parseInt(id.slice(1)) + 1);
@@ -56,6 +58,20 @@ function isChoosen(id, row_length) {
         }
 
         if (document.getElementById(rightId).style.backgroundColor == "green") {
+            rv = true;
+        }
+    }
+    return rv;
+}
+
+function areBoothNeighborChoosen(id, row_length) {
+    var rv = false;
+    var leftId = id.charAt(0) + (parseInt(id.slice(1)) - 1);
+    var rightId = id.charAt(0) + (parseInt(id.slice(1)) + 1);
+    if (parseInt(id.slice(1)) == 1 || parseInt(id.slice(1)) == row_length) {
+        rv = false;
+    } else {
+        if (document.getElementById(leftId.toString()).style.backgroundColor == "green" && document.getElementById(rightId).style.backgroundColor == "green") {
             rv = true;
         }
     }
@@ -195,19 +211,13 @@ function btndclickable(countChoosenSeats) {
 }
 
 function onClickReservieren() {
-    var inputs = document.getElementsByClassName("seat");
-    var seats = [];
-    for (var j = 0; j < inputs.length; j++) {
-        if (inputs[j].style.backgroundColor == "green") {
-            seats.push(inputs[j].getAttribute("uniqueID"));
-        }
-    }
-    var seatsInput = seats.join(",");
+    var email = sessionStorage.getItem("email");
 
-    console.log(seatsInput);
+    console.log(email);
 }
 
 function onClickBuchen(vID) {
+    sessionStorage.getItem("email");
     // LOOP OVER SEATS
     // CREATE JSON FILE
     var form = document.createElement("form");

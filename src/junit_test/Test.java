@@ -657,7 +657,7 @@ public class Test {
         {
             hash = PassMD5.hash("123456");
         }
-        
+
         catch (Exception e)
         {
             Assert.assertEquals(1,0);
