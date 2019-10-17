@@ -31,18 +31,22 @@
 //    {
 //        out.println(seatIDs[i]);
 //    }
-    int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungsid"));
-    String seats = request.getParameter("seats_data");
-    String preisVer = request.getParameter("tickets_data");
 
-    int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
-    int[] presVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
+    if(session.getAttribute("email") == null) {
+        out.write("Bitte melden Sie sich an <br />");
+    } else {
+        int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungsid"));
+        String seats = request.getParameter("seats_data");
+        String preisVer = request.getParameter("tickets_data");
 
-    out.write(ArrayBuilder.intArrayToString(seatsInt) + "<br />");
-    out.write(ArrayBuilder.intArrayToString(presVerInt));
+        int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
+        int[] presVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
 
-    BuchungsFactory.createBuchungBeleg(seatsInt, presVerInt, vorstellungsID, Integer.parseInt(session.getAttribute("KID").toString()));
+        out.write(ArrayBuilder.intArrayToString(seatsInt) + "<br />");
+        out.write(ArrayBuilder.intArrayToString(presVerInt));
 
+        BuchungsFactory.createBuchungBeleg(seatsInt, presVerInt, vorstellungsID, Integer.parseInt(session.getAttribute("KID").toString()));
+    }
 %>
 
 <jsp:include page="elements/footer.jsp"/>
