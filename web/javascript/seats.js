@@ -191,15 +191,22 @@ function ticket_minus(i, preis) {
 
 
 function btndclickable(countChoosenSeats) {
+    sessionStorage.setItem("email", "asdf");
+    var email = sessionStorage.getItem("email")
+        console.log(email);
     var btn_res = document.getElementById("btn_res");
     var btn_buc = document.getElementById("btn_buc");
     if (countChoosenSeats == 0) {
-        btn_res.disabled = false;
-        btn_res.classList.add("btn-outline-primary");
-        btn_res.classList.remove("btn-outline-secondary");
-        btn_buc.disabled = false;
-        btn_buc.classList.add("btn-outline-primary");
-        btn_buc.classList.remove("btn-outline-secondary");
+        if (email == null) {
+
+        } else {
+            btn_res.disabled = false;
+            btn_res.classList.add("btn-outline-primary");
+            btn_res.classList.remove("btn-outline-secondary");
+            btn_buc.disabled = false;
+            btn_buc.classList.add("btn-outline-primary");
+            btn_buc.classList.remove("btn-outline-secondary");
+        }
     } else {
         btn_res.disabled = true;
         btn_res.classList.remove("btn-outline-primary");
