@@ -257,6 +257,14 @@ public class QueryBuilder {
   public static String getBuchungsbelegeByKID(int KID) {
       return "Select * from Buchungsbeleg Where KID = " + KID + ";";
   }
+
+  public static String createReservierungsbeleg(int KID, int vorstellungsID, float preis, String timestamp) {
+    return "Insert INTO Reservierungsbeleg (RNR, KID, VorstellungsID, Preis, Zeitstempel) VALUES (NULL, " + KID + ", " + vorstellungsID + ", " + preis + ", '" + timestamp + "');";
+  }
+
+  public String createReservierungsposition(int posID, int RNR, int sitzID) {
+      return "Insert Into Reservierungsposition (PositionsID, RNR, SitzID) VALUES ( " + posID + ", " + RNR + ", " + sitzID + ");";
+  }
     // NOT USED
     /*
     public static String getSeatInfo(int vorstellungsID)

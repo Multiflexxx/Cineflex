@@ -1,5 +1,7 @@
 package helper;
 
+import db_connector.Connector;
+import java.sql.Connection;
 import java.sql.ResultSet;
 
 public class SupportMethods {
@@ -28,5 +30,10 @@ public class SupportMethods {
     public static String removeHTMLCode(String input)
     {
         return input.replaceAll("[<(.|\\n)+?>%\\\\#]", "");
+    }
+
+    public static void close(Connection c, ResultSet rs) {
+        Connector.closeResultSet(rs);
+        Connector.closeConnection(c);
     }
 }

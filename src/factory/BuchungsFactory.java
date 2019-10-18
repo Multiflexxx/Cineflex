@@ -3,10 +3,12 @@ package factory;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 //import oo.Buchungsbeleg;
+import exception.UnequalParameterLength;
 import helper.DateFormatter;
 import helper.SupportMethods;
 import java.sql.Timestamp;
 import javax.management.Query;
+import javax.xml.transform.Result;
 import oo.Buchungsbeleg;
 import oo.Kunde;
 import oo.Sitz;
@@ -19,9 +21,11 @@ import java.util.Date;
 
 public class BuchungsFactory {
 
+    // TODO: Change Signature to Buchungsbeleg?
     public static int createBuchungBeleg(int[] sitzeIDs, int[] preiseVerIDs, int vorstellungsID, int KNR) {
         // TODO: sitzeIDs and preise must have the same length -> check
         if(sitzeIDs.length != preiseVerIDs.length) {
+            // throw new UnequalParameterLength();
             return -1;
         }
 
@@ -37,7 +41,6 @@ public class BuchungsFactory {
         // KundenID (KID)
         // VorstellungsID vorstellung.getVorstellungsID()
         // Preis???
-        // TODO: RS ist null, keine aneinandergehängten SQL Statements?
         Connection c = Connector.getConnection();
         Date date = new Date();
         String timestamp = DateFormatter.getSQLDateAndTime(date);
@@ -102,18 +105,55 @@ public class BuchungsFactory {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+                SupportMethods.close(c, rs);
                 return null;
             }
         } else {
+            SupportMethods.close(c, rs);
             return null;
         }
+        SupportMethods.close(c, rs);
         return buchungsbeleg;
     }
 
-    public static Buchungsbeleg[] getBuchungsbelegeByKNR(int KNR) {
+    public static Buchungsbeleg[] getBuchungsbelegeByKID(int KID) {
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.getBuchungsbelegeByKID(KID);
+        ResultSet rs = Connector.getQueryResult(c, sql);
+        Buchungsbeleg[] buchungsbelege = null;
 
+        if(rs != null) {
+            int rsSize = SupportMethods.getResultSetSize(rs);
+            buchungsbelege = new Buchungsbeleg[rsSize];
 
-        return null;
+            try {
+                int counter = 0;
+                while(rs.next()) {
+                    Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(rs.getInt("vorstellungsID"));
+                    Kunde kunde = KundenFactory.getKundeByKID(rs.getInt("KID"));
+                    buchungsbelege[counter] = new Buchungsbeleg(
+                        rs.getInt("BNR"),
+                        rs.getFloat("Preis"),
+                        vorstellung,
+                        kunde,
+                        new Date(rs.getTimestamp("Zeitstempel").getTime())
+                    );
+                    counter++;
+                }
+            }catch(SQLException e) {
+                e.printStackTrace();
+                SupportMethods.close(c, rs);
+                return null;
+            }
+        } else {
+            SupportMethods.close(c, rs);
+            return null;
+        }
+        SupportMethods.close(c, rs);
+        return buchungsbelege;
     }
 
+    public static void createBuchungsPositionen() {
+        //TODO: Auslagern des Erstellens von Buchungsbelegen
+    }
 }
