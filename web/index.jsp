@@ -60,7 +60,7 @@
 </div>
 
 <%
-    Connection c = Connector.getConnection();
+    //Connection c = Connector.getConnection();
 
     SimpleDateFormat st = new SimpleDateFormat("HH:mm");
     Date time = new Date();
