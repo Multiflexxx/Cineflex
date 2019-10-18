@@ -12,11 +12,22 @@ import java.sql.SQLException;
 
 public class KundenFactory {
 
-    public static Kunde getKunde(int PID) {
+    public static Kunde getKunde(int PID, ResultSet mockRs) {
         Kunde kunde = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getKundeByPID(PID);
-        ResultSet rs = Connector.getQueryResult(c, sql);
+
+        ResultSet rs = null;
+
+        if(mockRs == null)
+        {
+            rs = Connector.getQueryResult(c, sql);
+        }
+
+        else
+        {
+            rs = mockRs;
+        }
 
         if (rs != null) {
             try {
@@ -33,11 +44,27 @@ public class KundenFactory {
         return kunde;
     }
 
-    public static Kunde getKundeByKID(int KID) {
+    public static Kunde getKunde(int PID)
+    {
+        return getKunde(PID, null);
+    }
+
+    public static Kunde getKundeByKID(int KID, ResultSet mockRs) {
         Kunde kunde = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getKundeByKID(KID);
-        ResultSet rs = Connector.getQueryResult(c, sql);
+
+        ResultSet rs = null;
+
+        if(mockRs == null)
+        {
+            rs = Connector.getQueryResult(c, sql);
+        }
+
+        else
+        {
+            rs = mockRs;
+        }
 
         if (rs != null) {
             try {
@@ -52,5 +79,10 @@ public class KundenFactory {
         Connector.closeResultSet(rs);
 
         return kunde;
+    }
+
+    public static Kunde getKundeByKID(int KID)
+    {
+        return getKundeByKID(KID, null);
     }
 }

@@ -51,6 +51,10 @@ public class Test {
     private ResultSet resultSetMock9;
     @Mock
     private ResultSet resultSetMock10;
+    @Mock
+    private ResultSet resultSetMock11;
+    @Mock
+    private ResultSet resultSetMock12;
 
     @Before
     public void setUp() throws Exception
@@ -1242,6 +1246,62 @@ public class Test {
         Assert.assertEquals("Saal 1", resultKinosaal.getBezeichnung());
         Assert.assertEquals(6, resultKinosaal.getSitzplan()[1].getSitzID());
         Assert.assertEquals('A', resultKinosaal.getSitzplan()[0].getReihe());
+    }
+
+    @org.junit.Test
+    public void testeKundenFactory() throws Exception
+    {
+        // Create Resultset
+        resultSetMock11 = Mockito.mock(ResultSet.class);
+        resultSetMock12 = Mockito.mock(ResultSet.class);
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock11.getString("E-Mail")).thenReturn("mail@mail.com");
+        Mockito.when(resultSetMock11.getString("Vorname")).thenReturn("Hans");
+        Mockito.when(resultSetMock11.getString("Nachname")).thenReturn("Müller");
+        Mockito.when(resultSetMock11.getString("Passwort")).thenReturn("hash");
+        Mockito.when(resultSetMock11.getString("GebDatum")).thenReturn("1970-01-01");
+        Mockito.when(resultSetMock11.getInt("PID")).thenReturn(4);
+        Mockito.when(resultSetMock11.getString("Straße")).thenReturn("Test Weg");
+        Mockito.when(resultSetMock11.getInt("Hausnummer")).thenReturn(7);
+        Mockito.when(resultSetMock11.getInt("KID")).thenReturn(13);
+        Mockito.when(resultSetMock11.getInt("Treuepunkte")).thenReturn(35);
+
+        Mockito.when(resultSetMock12.getString("E-Mail")).thenReturn("mail@mail.com");
+        Mockito.when(resultSetMock12.getString("Vorname")).thenReturn("Peter");
+        Mockito.when(resultSetMock12.getString("Nachname")).thenReturn("Huber");
+        Mockito.when(resultSetMock12.getString("Passwort")).thenReturn("hash");
+        Mockito.when(resultSetMock12.getString("GebDatum")).thenReturn("1970-01-01");
+        Mockito.when(resultSetMock12.getInt("PID")).thenReturn(4);
+        Mockito.when(resultSetMock12.getString("Straße")).thenReturn("Test Weg");
+        Mockito.when(resultSetMock12.getInt("Hausnummer")).thenReturn(7);
+        Mockito.when(resultSetMock12.getInt("KID")).thenReturn(17);
+        Mockito.when(resultSetMock12.getInt("Treuepunkte")).thenReturn(40);
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock11.next()).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock12.next()).thenReturn(true).thenReturn(false);
+
+        // Create Object via Factory
+        Kunde resultKunde1 = KundenFactory.getKunde(4, resultSetMock11);
+        Kunde resultKunde2 = KundenFactory.getKundeByKID(17, resultSetMock12);
+
+        // Check if Objects are not null
+        Assert.assertNotNull(resultKunde1);
+        Assert.assertNotNull(resultKunde1);
+
+        //
+        Assert.assertEquals("mail@mail.com", resultKunde1.getEmail());
+        Assert.assertEquals("Hans", resultKunde1.getVorname());
+        Assert.assertEquals("Müller", resultKunde1.getNachname());
+        Assert.assertEquals(35, resultKunde1.getTreuepunkte());
+        Assert.assertEquals(13, resultKunde1.getKundenID());
+
+        Assert.assertEquals("mail@mail.com", resultKunde2.getEmail());
+        Assert.assertEquals("Peter", resultKunde2.getVorname());
+        Assert.assertEquals("Huber", resultKunde2.getNachname());
+        Assert.assertEquals(40, resultKunde2.getTreuepunkte());
+        Assert.assertEquals(17, resultKunde2.getKundenID());
     }
 
     @org.junit.Test
