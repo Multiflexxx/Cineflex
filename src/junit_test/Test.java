@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
 import java.sql.Connection;
@@ -1143,7 +1144,7 @@ public class Test {
         Mockito.when(resultSetMock6.getInt("PLZ")).thenReturn(68165).thenReturn(32839);
 
         // Add next() to ResultSet
-        Mockito.when(resultSetMock6.next()).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock6.next()).thenReturn(true).thenReturn(true).thenReturn(false);
 
         // Create Object of class Vorstellung
         Vorstellung vorstellung = new Vorstellung(10, null, null, "deutsch", null, null);
@@ -1153,15 +1154,13 @@ public class Test {
         Assert.assertEquals(true, resultBoolean1);
 
         // Vorstellung is unavailable for PLZ
-        boolean resultBoolean2 = UpdateFactory.checkVorstellungPLZ(vorstellung, 32839, resultSetMock6);
+        boolean resultBoolean2 = UpdateFactory.checkVorstellungPLZ(vorstellung, 12345, resultSetMock6);
         Assert.assertEquals(false, resultBoolean2);
     }
 
     @org.junit.Test
     public void testeGenreFactory() throws Exception
     {
-        //TODO: GENRE OBJECT IS NULL -> FIX
-
         // Create Resultset
         resultSetMock7 = Mockito.mock(ResultSet.class);
 
@@ -1174,7 +1173,7 @@ public class Test {
         Mockito.when(resultSetMock7.next()).thenReturn(true).thenReturn(false);
 
         // Test getGenreById
-        Genre resultGenreId = GenreFactory.getGenreById(5);
+        Genre resultGenreId = GenreFactory.getGenreById(5, resultSetMock7);
 
         // Check if Object is not null
         Assert.assertNotNull(resultGenreId);
@@ -1188,9 +1187,11 @@ public class Test {
 
         // Add values to Resultset
         Mockito.when(resultSetMock8.getInt("GenreID")).thenReturn(5).thenReturn(15).thenReturn(20).thenReturn(30);
-
         Mockito.when(resultSetMock8.getString("Genrebezeichnung")).thenReturn("Action").thenReturn("Drama").thenReturn("Komödie").thenReturn("Horror");
-        Mockito.when(resultSetMock8.getString("Genrebeschreibung")).thenReturn("Action Film").thenReturn("Drama Film").thenReturn("Lustiger Film").thenReturn("Horror Film");
+        Mockito.when(resultSetMock8.getString("Deskriptor")).thenReturn("Action Film").thenReturn("Drama Film").thenReturn("Lustiger Film").thenReturn("Horror Film");
+
+
+        //TODO: rs.next is always false -> Array contains null objects
 
         // Add next() to ResultSet
         Mockito.when(resultSetMock8.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
@@ -1291,13 +1292,14 @@ public class Test {
         Assert.assertNotNull(resultKunde1);
         Assert.assertNotNull(resultKunde1);
 
-        //
+        // Check Customer 1
         Assert.assertEquals("mail@mail.com", resultKunde1.getEmail());
         Assert.assertEquals("Hans", resultKunde1.getVorname());
         Assert.assertEquals("Müller", resultKunde1.getNachname());
         Assert.assertEquals(35, resultKunde1.getTreuepunkte());
         Assert.assertEquals(13, resultKunde1.getKundenID());
 
+        // Check Customer 2
         Assert.assertEquals("mail@mail.com", resultKunde2.getEmail());
         Assert.assertEquals("Peter", resultKunde2.getVorname());
         Assert.assertEquals("Huber", resultKunde2.getNachname());

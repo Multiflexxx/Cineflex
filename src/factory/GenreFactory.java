@@ -71,13 +71,15 @@ public class GenreFactory {
       if(rsSize > 0){
         genres = new Genre[rsSize];
         try{
-          int counter = 0;
-          while (rs.next()) {
-            genres[counter] = new Genre(rs.getInt("GenreID"),
+          //int counter = 0;
+          //while (rs.next()) {
+          for (int i = 0; i < rsSize; i++){
+            rs.next();
+            genres[i] = new Genre(rs.getInt("GenreID"),
                 rs.getString("Genrebezeichnung"),
                 rs.getString("Deskriptor"));
 
-            counter ++;
+            //counter ++;
           }
         }catch(SQLException e){
           e.printStackTrace();

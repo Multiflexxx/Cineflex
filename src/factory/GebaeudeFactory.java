@@ -27,25 +27,28 @@ public class GebaeudeFactory {
 
         if (rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
-            try {
+            /*try {
                 rs.beforeFirst();
             } catch (Exception e) {
                 e.printStackTrace();
-            }
+            }*/
 
             if (rsSize > 0) {
-                int counter = 0;
+                //int counter = 0;
                 gebäude = new Gebaeude[rsSize];
                 try {
-                    while (rs.next()) {
-                        gebäude[counter] = new Gebaeude(
-                                rs.getInt("GebäudeId"),
-                                rs.getString("Straße"),
-                                rs.getInt("Hausnummer"),
-                                rs.getInt("PLZ"),
-                                rs.getString("Ort.Ortsname")
-                        );
-                        counter++;
+                    //while (rs.next()) {
+                    for(int i = 0; i < rsSize; i++){
+                        rs.next();
+                        int gebID = rs.getInt("GebäudeId");
+                        String strasse = rs.getString("Straße");
+                        int hausnummer = rs.getInt("Hausnummer");
+                        int plz = rs.getInt("PLZ");
+                        String ort = rs.getString("Ort.Ortsname");
+
+                        gebäude[i] = new Gebaeude(gebID, strasse, hausnummer, plz, ort);
+
+                        //counter++;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -35,7 +35,7 @@
                         }
                     }
                 }
-            out.write(""+ AnfahrtsseiteFactory.getAnfahrtsseite(outputValue));
+            out.write(""+ AnfahrtsseiteFactory.getAnfahrtseite(outputValue));
             }catch(Exception e){
                 out.write("<iframe src=\"https://www.google.com/maps/d/embed?mid=1iFLu1_eFR5Kvh6D5A1hARlFCm13TXPUb&hl=de\" width=\"1000em\" height=\"800em\"></iframe>");
             }finally {
