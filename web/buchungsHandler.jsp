@@ -3,6 +3,7 @@
 <%@ page import="helper.ArrayBuilder" %>
 <%@ page import="factory.BuchungsFactory" %>
 <%@ page import="java.lang.reflect.Array" %>
+<%@ page import="factory.SitzsperreFactory" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -38,6 +39,7 @@
         int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungsid"));
         String seats = request.getParameter("seats_data");
         String preisVer = request.getParameter("tickets_data");
+        int KID = Integer.parseInt(session.getAttribute("KID").toString());
 
         int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
         int[] presVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
@@ -45,7 +47,8 @@
         out.write(ArrayBuilder.intArrayToString(seatsInt) + "<br />");
         out.write(ArrayBuilder.intArrayToString(presVerInt));
 
-        BuchungsFactory.createBuchungBeleg(seatsInt, presVerInt, vorstellungsID, Integer.parseInt(session.getAttribute("KID").toString()));
+        SitzsperreFactory.lockSeats(seatsInt, vorstellungsID, KID);
+        // BuchungsFactory.createBuchungBeleg(seatsInt, presVerInt, vorstellungsID, KID);
     }
 %>
 

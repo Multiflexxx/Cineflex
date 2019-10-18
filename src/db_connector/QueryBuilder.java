@@ -247,7 +247,7 @@ public class QueryBuilder {
   }
 
   public static String createSitzsperre(int sitzplatzID, int vorstellungsID, int KID, Date date) {
-      return "Insert into sitzsperre(SITZPLATZID, VORSTELLUNGSID, KID, Zeitstempel) VALUES( " + sitzplatzID + ", " + vorstellungsID + ", " + KID + ", " + DateFormatter.getSQLDateAndTime(date) + ");";
+      return "Insert into sitzsperre(SITZPLATZID, VORSTELLUNGSID, KID, Zeitstempel) VALUES( " + sitzplatzID + ", " + vorstellungsID + ", " + KID + ", '" + DateFormatter.getSQLDateAndTime(date) + "');";
   }
     // NOT USED
     /*
