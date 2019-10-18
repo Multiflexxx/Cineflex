@@ -11,11 +11,22 @@ import java.sql.SQLException;
 
 public class LoginFactory {
 
-    public static UserLogin getUserLogin(String email, String passwordHash) {
+    public static UserLogin getUserLogin(String email, String passwordHash, ResultSet mockRs) {
         UserLogin userLogin = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.createLoginQuery(email, passwordHash);
-        ResultSet rs = Connector.getQueryResult(c, sql);
+
+        ResultSet rs = null;
+
+        if(mockRs == null)
+        {
+            rs = Connector.getQueryResult(c, sql);
+        }
+
+        else
+        {
+            rs = mockRs;
+        }
 
         if(rs != null) {
             try {
@@ -36,5 +47,10 @@ public class LoginFactory {
         Connector.closeResultSet(rs);
 
         return userLogin;
+    }
+
+    public static UserLogin getUserLogin(String email, String passwordHash)
+    {
+        return getUserLogin(email, passwordHash, null);
     }
 }

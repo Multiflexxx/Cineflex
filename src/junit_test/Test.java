@@ -5,6 +5,7 @@ import db_connector.Connector;
 import db_connector.QueryBuilder;
 import factory.AnfahrtsseiteFactory;
 import factory.GebaeudeFactory;
+import factory.LoginFactory;
 import factory.SitzFactory;
 import helper.*;
 import oo.*;
@@ -41,6 +42,8 @@ public class Test {
     private ResultSet resultSetMock3;
     @Mock
     private ResultSet resultSetMock4;
+    @Mock
+    private ResultSet resultSetMock5;
 
     @Before
     public void setUp() throws Exception
@@ -1090,8 +1093,6 @@ public class Test {
         // Add next() to ResultSet
         Mockito.when(resultSetMock1.next()).thenReturn(true).thenReturn(false);
 
-        // Create Support Methods Object
-
         // call get ResultSetSize()
         int size = SupportMethods.getResultSetSize(resultSetMock1);
 
@@ -1102,8 +1103,37 @@ public class Test {
 
         //Check return
         Assert.assertEquals(checkString1, AnfahrtsseiteFactory.getAnfahrtsseite("Steinheim", resultSetMock1));
+    }
 
+    @org.junit.Test
+    public void testeLoginFactory() throws Exception
+    {
+        // Create Resultset
+        resultSetMock5 = Mockito.mock(ResultSet.class);
 
+        //Resultset Query used for DB:
+        // Select person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From person Join kunde k on person.PID = k.PID Where `E-Mail` = '"  + email + "' AND Passwort = '" + passwordHash + "';"
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock5.getString("E-Mail")).thenReturn("mail@mail.com");
+        Mockito.when(resultSetMock5.getString("Vorname")).thenReturn("Peter");
+        Mockito.when(resultSetMock5.getString("Nachname")).thenReturn("Meier");
+        Mockito.when(resultSetMock5.getString("Passwort")).thenReturn("hash");
+        Mockito.when(resultSetMock5.getInt("PID")).thenReturn(6);
+        Mockito.when(resultSetMock5.getInt("KID")).thenReturn(8);
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock5.next()).thenReturn(true).thenReturn(false);
+
+        UserLogin resultUserLogin = LoginFactory.getUserLogin("mail@mail.com", "hash", resultSetMock5);
+
+        Assert.assertNotNull(resultUserLogin);
+
+        Assert.assertEquals("mail@mail.com", resultUserLogin.getEmail());
+        Assert.assertEquals("Peter", resultUserLogin.getFirstname());
+        Assert.assertEquals("Meier", resultUserLogin.getLastname());
+        Assert.assertEquals(6, resultUserLogin.getPID());
+        Assert.assertEquals(8, resultUserLogin.getKID());
     }
 
     //Mockito.when(resultSetMock1.getString("Straße")).thenReturn("Kurze Straße").thenReturn("Lange Straße").thenReturn("Test Straße");
