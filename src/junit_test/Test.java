@@ -640,7 +640,35 @@ public class Test {
         userLogin.setKID(12);
         Assert.assertEquals(12, userLogin.getKID());
     }
+    //----
 
+    // Tests for class Sitzsperre
+
+    @org.junit.Test
+    public void testeSitzsperre()
+    {
+        Date date = new Date();
+
+        Sitzsperre sitzsperre = new Sitzsperre(1, 5,7, date);
+
+        Assert.assertEquals(1, sitzsperre.getSitzplatzID());
+        //Assert.assertEquals(5, sitzsperre.getBNR());
+        Assert.assertEquals(7, sitzsperre.getKNR());
+        Assert.assertEquals(date, sitzsperre.getTimestamp());
+
+        sitzsperre.setSitzplatzID(2);
+        //sitzsperre.setBNR(6);
+        sitzsperre.setKNR(8);
+
+        Date date2 = new Date();
+        sitzsperre.setTimestamp(date2);
+
+        Assert.assertEquals(2, sitzsperre.getSitzplatzID());
+        //Assert.assertEquals(6, sitzsperre.getBNR());
+        Assert.assertEquals(8, sitzsperre.getKNR());
+
+        Assert.assertEquals(date2, sitzsperre.getTimestamp());
+    }
     //----
 
     // TESTS FOR PASSWORD
@@ -807,11 +835,14 @@ public class Test {
         SimpleDateFormat frontendTime = new SimpleDateFormat("HH:mm", new Locale("de", "DE"));
         SimpleDateFormat sqlDate = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sqlTime = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sqlDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         Assert.assertEquals(frontendDate.format(date), DateFormatter.getFrontendDate(date));
         Assert.assertEquals(frontendTime.format(date), DateFormatter.getFrontendTime(date));
         Assert.assertEquals(sqlDate.format(date), DateFormatter.getSQLDate(date));
         Assert.assertEquals(sqlTime.format(date), DateFormatter.getSQLTime(date));
+
+        Assert.assertEquals(sqlDateTime.format(date), DateFormatter.getSQLDateAndTime(date));
     }
 
     // Tests for class SupportMethods
@@ -895,6 +926,27 @@ public class Test {
         Assert.assertEquals("6, 7, 8", ArrayBuilder.intArrayToString(array));
 
         Assert.assertEquals("6< 7< 8", ArrayBuilder.intArrayToString(array, "< "));
+    }
+
+    @org.junit.Test
+    public void testePLZFormatter()
+    {
+        int plz1 = 1;
+        int plz2 = 12;
+        int plz3 = 123;
+        int plz4 = 1234;
+        int plz5 = 12345;
+
+        String out = PLZFormatter.addLeadingZeros(plz1);
+        Assert.assertEquals("00001", out);
+        out = PLZFormatter.addLeadingZeros(plz2);
+        Assert.assertEquals("00012", out);
+        out = PLZFormatter.addLeadingZeros(plz3);
+        Assert.assertEquals("00123", out);
+        out = PLZFormatter.addLeadingZeros(plz4);
+        Assert.assertEquals("01234", out);
+        out = PLZFormatter.addLeadingZeros(plz5);
+        Assert.assertEquals("12345", out);
     }
 
 
