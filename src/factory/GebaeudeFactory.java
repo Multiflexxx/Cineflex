@@ -9,11 +9,21 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 public class GebaeudeFactory {
-    public static Gebaeude[] getGebaeude() {
+    public static Gebaeude[] getGebaeude(ResultSet mockRs) {
         Gebaeude[] gebäude = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.showAllCinemas();
-        ResultSet rs = Connector.getQueryResult(c, sql);
+        ResultSet rs = null;
+
+        if(mockRs == null)
+        {
+            rs = Connector.getQueryResult(c, sql);
+        }
+
+        else
+        {
+            rs = mockRs;
+        }
 
         if (rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
@@ -49,5 +59,10 @@ public class GebaeudeFactory {
             Connector.closeConnection(c);
             return gebäude;
         }
+    }
+
+    public static Gebaeude[] getGebaeude()
+    {
+        return getGebaeude(null);
     }
 }

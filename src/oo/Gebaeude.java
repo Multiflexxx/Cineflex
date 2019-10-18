@@ -23,7 +23,7 @@ public class Gebaeude {
         return gebäudeId;
     }
 
-    public String getStrasße() {
+    public String getStrasse() {
         return strasse;
     }
 

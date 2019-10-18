@@ -4,6 +4,7 @@ import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 import factory.AnfahrtsseiteFactory;
+import factory.GebaeudeFactory;
 import factory.SitzFactory;
 import helper.*;
 import oo.*;
@@ -14,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static db_connector.Connector.executeQuery;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 
@@ -39,6 +39,8 @@ public class Test {
     private ResultSet resultSetMock2;
     @Mock
     private ResultSet resultSetMock3;
+    @Mock
+    private ResultSet resultSetMock4;
 
     @Before
     public void setUp() throws Exception
@@ -237,15 +239,17 @@ public class Test {
         // Check if formatting was successfully
         Assert.assertEquals("19:30:00", buchungsZeit);
 
+
+        Date date2 = new Date();
         // Create new object (main reason for this test)
-        // TODO: Change new Date() to valid Input
-        Buchungsbeleg buchungsbeleg = new Buchungsbeleg(5, 16.51f, vorstellung, kunde, new Date());
+
+        Buchungsbeleg buchungsbeleg = new Buchungsbeleg(5, 16.51f, vorstellung, kunde, date2);
 
         // Check if class Buchungsbeleg works as expected
         Assert.assertEquals(5, buchungsbeleg.getBelegID());
         Assert.assertEquals(16.51f, buchungsbeleg.getPreis(),0);
         Assert.assertEquals(vorstellung, buchungsbeleg.getVorstellung());
-        Assert.assertEquals(DateFormatter.getSQLTime(vorstellung.getUhrzeit()), buchungsbeleg.getUhrzeit());
+        Assert.assertEquals(date2, buchungsbeleg.getUhrzeit());
 
         Assert.assertEquals(kunde, buchungsbeleg.getKunde());
         Assert.assertEquals(kunde.getTreuepunkte(), buchungsbeleg.getKunde().getTreuepunkte());
@@ -255,7 +259,7 @@ public class Test {
         buchungsbeleg.setKunde(kunde);
         Assert.assertEquals(25, buchungsbeleg.getKunde().getTreuepunkte());
 
-        Assert.assertEquals(buchungsZeit, buchungsbeleg.getUhrzeit());
+        Assert.assertEquals(date2, buchungsbeleg.getUhrzeit());
 
         // Test setters
         buchungsbeleg.setBelegID(5);
@@ -267,9 +271,10 @@ public class Test {
         buchungsbeleg.setKunde(null);
         Assert.assertEquals(null, buchungsbeleg.getKunde());
 
-        // TODO: Change new Date()
-        buchungsbeleg.setUhrzeit(new Date());
-        Assert.assertEquals("15:34:32", buchungsbeleg.getUhrzeit());
+        Date date3 = new Date();
+
+        buchungsbeleg.setUhrzeit(date3);
+        Assert.assertEquals(date3, buchungsbeleg.getUhrzeit());
 
         buchungsbeleg.setVorstellung(null);
         Assert.assertEquals(null, buchungsbeleg.getVorstellung());
@@ -346,15 +351,16 @@ public class Test {
         // Check if formatting was successfully
         Assert.assertEquals("20:30:00", buchungsZeit);
 
+        Date date2 = new Date();
+
         // Create new object (main reason for this test)
-        // TODO: change new Date()
-        Reservierungsbeleg reservierungsbeleg = new Reservierungsbeleg(2, 10.98f, vorstellung, kunde, new Date());
+        Reservierungsbeleg reservierungsbeleg = new Reservierungsbeleg(2, 10.98f, vorstellung, kunde, date2);
 
         // Check if class Buchungsbeleg works as expected
         Assert.assertEquals(2, reservierungsbeleg.getBelegID());
         Assert.assertEquals(10.98f, reservierungsbeleg.getPreis(),0);
         Assert.assertEquals(vorstellung, reservierungsbeleg.getVorstellung());
-        Assert.assertEquals(DateFormatter.getSQLTime(vorstellung.getUhrzeit()), reservierungsbeleg.getUhrzeit());
+        Assert.assertEquals(date2, reservierungsbeleg.getUhrzeit());
 
         Assert.assertEquals(kunde, reservierungsbeleg.getKunde());
         Assert.assertEquals(kunde.getTreuepunkte(), reservierungsbeleg.getKunde().getTreuepunkte());
@@ -364,7 +370,7 @@ public class Test {
         reservierungsbeleg.setKunde(kunde);
         Assert.assertEquals(30, reservierungsbeleg.getKunde().getTreuepunkte());
 
-        Assert.assertEquals(buchungsZeit, reservierungsbeleg.getUhrzeit());
+        Assert.assertEquals(date2, reservierungsbeleg.getUhrzeit());
 
         // Test setters
         reservierungsbeleg.setBelegID(3);
@@ -376,9 +382,10 @@ public class Test {
         reservierungsbeleg.setKunde(null);
         Assert.assertEquals(null, reservierungsbeleg.getKunde());
 
-        // TODO: Change new Date()
-        reservierungsbeleg.setUhrzeit(new Date());
-        Assert.assertEquals("19:15:23", reservierungsbeleg.getUhrzeit());
+        Date date3 = new Date();
+
+        reservierungsbeleg.setUhrzeit(date3);
+        Assert.assertEquals(date3, reservierungsbeleg.getUhrzeit());
 
         reservierungsbeleg.setVorstellung(null);
         Assert.assertEquals(null, reservierungsbeleg.getVorstellung());
@@ -572,7 +579,7 @@ public class Test {
 
         // Test Getter
         Assert.assertEquals(1, gebäude.getGebäudeId());
-        Assert.assertEquals("Lange Straße", gebäude.getStrasße());
+        Assert.assertEquals("Lange Straße", gebäude.getStrasse());
         Assert.assertEquals(3, gebäude.getHausnummer());
         Assert.assertEquals(68165, gebäude.getPlz());
         Assert.assertEquals("Mannheim", gebäude.getOrtsname());
@@ -581,7 +588,7 @@ public class Test {
         gebäude.setGebäudeId(5);
         Assert.assertEquals(5, gebäude.getGebäudeId());
         gebäude.setStrasse("Neue Straße");
-        Assert.assertEquals("Neue Straße", gebäude.getStrasße());
+        Assert.assertEquals("Neue Straße", gebäude.getStrasse());
         gebäude.setHausnummer(15);
         Assert.assertEquals(15, gebäude.getHausnummer());
         gebäude.setPlz(32839);
@@ -988,9 +995,52 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeGebaeudeFactory()
+    public void testeGebaeudeFactory() throws Exception
     {
+        //TODO: Array has null on all fields
 
+        // Create Resultset
+        resultSetMock4 = Mockito.mock(ResultSet.class);
+
+        // Query used by GebauedeFactory:
+        // SELECT Ort.Ortsname, Ort.PLZ, `GebäudeId`, `Straße`, `Hausnummer` FROM Ort INNER JOIN Gebäude ON Ort.PLZ=Gebäude.PLZ ORDER BY `Ortsname`;
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock4.getInt("GebäudeId")).thenReturn(1).thenReturn(2).thenReturn(3);
+        Mockito.when(resultSetMock4.getString("Straße")).thenReturn("Test Straße").thenReturn("Kurze Test Straße").thenReturn("Lange Test Straße");
+        Mockito.when(resultSetMock4.getInt("Hausnummer")).thenReturn(4).thenReturn(5).thenReturn(6);
+        Mockito.when(resultSetMock4.getInt("PLZ")).thenReturn(32839).thenReturn(68165).thenReturn(69115);
+        Mockito.when(resultSetMock4.getString("Ort.Ortsname")).thenReturn("Steinheim").thenReturn("Mannheim").thenReturn("Heidelberg");
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock4.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
+
+        Gebaeude[] resultGebaeudeArray = GebaeudeFactory.getGebaeude(resultSetMock4);
+
+        // Check if result is not null
+        Assert.assertNotNull(resultGebaeudeArray);
+
+        System.out.println(resultGebaeudeArray[0]);
+
+        Assert.assertEquals("Steinheim", resultGebaeudeArray[0].getOrtsname());
+        Assert.assertEquals("Mannheim", resultGebaeudeArray[1].getOrtsname());
+        Assert.assertEquals("Heidelberg", resultGebaeudeArray[2].getOrtsname());
+
+        Assert.assertEquals(32839, resultGebaeudeArray[0].getPlz());
+        Assert.assertEquals(68165, resultGebaeudeArray[1].getPlz());
+        Assert.assertEquals(69115, resultGebaeudeArray[2].getPlz());
+
+        Assert.assertEquals(1, resultGebaeudeArray[0].getGebäudeId());
+        Assert.assertEquals(2, resultGebaeudeArray[1].getGebäudeId());
+        Assert.assertEquals(3, resultGebaeudeArray[2].getGebäudeId());
+
+        Assert.assertEquals("Test Straße", resultGebaeudeArray[0].getStrasse());
+        Assert.assertEquals("Kurze Test Straße", resultGebaeudeArray[1].getStrasse());
+        Assert.assertEquals("Lange Test Straße", resultGebaeudeArray[2].getStrasse());
+
+        Assert.assertEquals(4, resultGebaeudeArray[0].getHausnummer());
+        Assert.assertEquals(5, resultGebaeudeArray[1].getHausnummer());
+        Assert.assertEquals(6, resultGebaeudeArray[2].getHausnummer());
     }
 
     @org.junit.Test
@@ -1000,7 +1050,7 @@ public class Test {
         resultSetMock3 = Mockito.mock(ResultSet.class);
 
         // Query used for SitzFactory:
-        //Select * From sitz Where SitzplatzID = " + id + ";
+        // Select * From sitz Where SitzplatzID = " + id + ";
 
         // Add values to Resultset
         Mockito.when(resultSetMock3.getInt("SitzplatzID")).thenReturn(10).thenReturn(11);
@@ -1013,7 +1063,7 @@ public class Test {
 
         Sitz resultSeat = SitzFactory.getSitzById(10, resultSetMock3);
 
-        //Test if ResultSeat is not Null
+        // Test if ResultSeat is not Null
         Assert.assertNotNull(resultSeat);
 
         Assert.assertEquals(10, resultSeat.getSitzID());
