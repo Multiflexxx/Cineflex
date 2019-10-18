@@ -3,6 +3,8 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import factory.AnfahrtsseiteFactory;
+import factory.SitzFactory;
 import helper.*;
 import oo.*;
 import org.junit.Assert;
@@ -35,6 +37,8 @@ public class Test {
     private ResultSet resultSetMock1;
     @Mock
     private ResultSet resultSetMock2;
+    @Mock
+    private ResultSet resultSetMock3;
 
     @Before
     public void setUp() throws Exception
@@ -986,9 +990,71 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeAnfahrtseiteFactory()
+    public void testeSitzFactory() throws Exception
     {
+        // Create Resultset
+        resultSetMock3 = Mockito.mock(ResultSet.class);
+
+        // Query used for SitzFactory:
+        //Select * From sitz Where SitzplatzID = " + id + ";
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock3.getInt("SitzplatzID")).thenReturn(10).thenReturn(11);
+        Mockito.when(resultSetMock3.getInt("Nummer")).thenReturn(2).thenReturn(3);
+        Mockito.when(resultSetMock3.getString("Reihe")).thenReturn("B").thenReturn("C");
+        Mockito.when(resultSetMock3.getString("Sitzklasse")).thenReturn("L").thenReturn("P");
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock3.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+
+        Sitz resultSeat = SitzFactory.getSitzById(10, resultSetMock3);
+
+        //Test if ResultSeat is not Null
+        Assert.assertNotNull(resultSeat);
+
+        Assert.assertEquals(10, resultSeat.getSitzID());
+        Assert.assertEquals(2, resultSeat.getNummer());
+        Assert.assertEquals('B', resultSeat.getReihe());
+        Assert.assertEquals('L', resultSeat.getSitzklasse());
+    }
+
+    @org.junit.Test
+    public void testeAnfahrtseiteFactory() throws Exception
+    {
+        // Create Resultset
+        resultSetMock1 = Mockito.mock(ResultSet.class);
+
+        //Resultset Query used for DB:
+        //SELECT `Straße`, `Hausnummer`, Gebäude.PLZ, `Ortsname` FROM Gebäude JOIN Ort ON Gebäude.PLZ = Ort.PLZ WHERE Ortsname = '"+ stadt +"' ;"
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock1.getString("Straße")).thenReturn("Kurze Straße");
+        Mockito.when(resultSetMock1.getString("Hausnummer")).thenReturn("2");
+        Mockito.when(resultSetMock1.getString("PLZ")).thenReturn("32839");
+        Mockito.when(resultSetMock1.getString("Ortsname")).thenReturn("Steinheim");
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock1.next()).thenReturn(true).thenReturn(false);
+
+        // Create Support Methods Object
+
+        // call get ResultSetSize()
+        int size = SupportMethods.getResultSetSize(resultSetMock1);
+
+        // check Size of Mock Resultset
+        Assert.assertEquals(1, size);
+
+        String checkString1 = "<iframe src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyCM1EeAy6KlTOa-jHIsL_rCEhDghnqZ5Y8&q=Kurze+Stra%C3%9Fe+2+32839\" width=\"1000\" height=\"1000\"></iframe>";
+
+        //Check return
+        Assert.assertEquals(checkString1, AnfahrtsseiteFactory.getAnfahrtsseite("Steinheim", resultSetMock1));
+
 
     }
+
+    //Mockito.when(resultSetMock1.getString("Straße")).thenReturn("Kurze Straße").thenReturn("Lange Straße").thenReturn("Test Straße");
+    //        Mockito.when(resultSetMock1.getString("Hausnummer")).thenReturn("2").thenReturn("4").thenReturn("6");
+    //        Mockito.when(resultSetMock1.getString("PLZ")).thenReturn("32839").thenReturn("68165").thenReturn("68163");
+    //        Mockito.when(resultSetMock1.getString("Ortsname")).thenReturn("Steinheim").thenReturn("Mannheim").thenReturn("Mannheim");
 
 }

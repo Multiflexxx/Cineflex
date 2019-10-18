@@ -10,11 +10,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SitzFactory {
-    public static Sitz getSitzById(int id) {
+    public static Sitz getSitzById(int id, ResultSet mockRs) {
         Sitz sitz = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getSitzById(id);
-        ResultSet rs = Connector.getQueryResult(c, sql);
+        ResultSet rs = null;
+
+        if(mockRs == null)
+        {
+            rs = Connector.getQueryResult(c, sql);
+        }
+
+        else
+        {
+            rs = mockRs;
+        }
 
         if(rs != null) {
             try {
@@ -34,5 +44,10 @@ public class SitzFactory {
         Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return sitz;
+    }
+
+    public static Sitz getSitzById(int id)
+    {
+        return getSitzById(id, null);
     }
 }
