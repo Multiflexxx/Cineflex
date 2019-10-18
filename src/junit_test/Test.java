@@ -3,10 +3,7 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-import factory.AnfahrtsseiteFactory;
-import factory.GebaeudeFactory;
-import factory.LoginFactory;
-import factory.SitzFactory;
+import factory.*;
 import helper.*;
 import oo.*;
 import org.junit.Assert;
@@ -44,6 +41,8 @@ public class Test {
     private ResultSet resultSetMock4;
     @Mock
     private ResultSet resultSetMock5;
+    @Mock
+    private ResultSet resultSetMock6;
 
     @Before
     public void setUp() throws Exception
@@ -980,24 +979,6 @@ public class Test {
     // TESTS FOR FACTORIES
 
     @org.junit.Test
-    public void testeFilmFactory()
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeKinosaalFactory()
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeVorstellungsFactory()
-    {
-
-    }
-
-    @org.junit.Test
     public void testeGebaeudeFactory() throws Exception
     {
         //TODO: Array has null on all fields
@@ -1134,6 +1115,51 @@ public class Test {
         Assert.assertEquals("Meier", resultUserLogin.getLastname());
         Assert.assertEquals(6, resultUserLogin.getPID());
         Assert.assertEquals(8, resultUserLogin.getKID());
+    }
+
+    @org.junit.Test
+    public void testeUpdateFactory() throws Exception
+    {
+        // Create Resultset
+        resultSetMock6 = Mockito.mock(ResultSet.class);
+
+        //Resultset Query used for DB:
+        //SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, Kinosaal.GebäudeID, Saalbezeichnung, PLZ FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID Join Cineflex.Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE VorstellungsID = " + id + ";"
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock6.getInt("PLZ")).thenReturn(68165).thenReturn(32839);
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock6.next()).thenReturn(true).thenReturn(false);
+
+        // Create Object of class Vorstellung
+        Vorstellung vorstellung = new Vorstellung(10, null, null, "deutsch", null, null);
+
+        // Vorstellung is available for PLZ
+        boolean resultBoolean1 = UpdateFactory.checkVorstellungPLZ(vorstellung, 68165, resultSetMock6);
+        Assert.assertEquals(true, resultBoolean1);
+
+        // Vorstellung is unavailable for PLZ
+        boolean resultBoolean2 = UpdateFactory.checkVorstellungPLZ(vorstellung, 32839, resultSetMock6);
+        Assert.assertEquals(false, resultBoolean2);
+    }
+
+    @org.junit.Test
+    public void testeFilmFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeKinosaalFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeVorstellungsFactory()
+    {
+
     }
 
     //Mockito.when(resultSetMock1.getString("Straße")).thenReturn("Kurze Straße").thenReturn("Lange Straße").thenReturn("Test Straße");

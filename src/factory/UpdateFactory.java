@@ -9,11 +9,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UpdateFactory {
-    public static boolean checkVorstellungPLZ(Vorstellung v, int plz) {
+    public static boolean checkVorstellungPLZ(Vorstellung v, int plz, ResultSet mockRs) {
         String sql = QueryBuilder.getVorstellungByIdPLZ(v.getVorstellungsID());
         Connection c = null;
         c = Connector.getConnection();
-        ResultSet rs = Connector.getQueryResult(c, sql);
+
+        ResultSet rs = null;
+
+        if(mockRs == null)
+        {
+            rs = Connector.getQueryResult(c, sql);
+        }
+
+        else
+        {
+            rs = mockRs;
+        }
 
         if(rs != null) {
             try {
@@ -31,5 +42,10 @@ public class UpdateFactory {
         Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return false;
+    }
+
+    public static boolean checkVorstellungPLZ(Vorstellung v, int plz)
+    {
+        return checkVorstellungPLZ(v, plz, null);
     }
 }
