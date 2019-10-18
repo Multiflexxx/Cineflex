@@ -1,11 +1,10 @@
 <%@ page import="Password.PassMD5" %>
 <%@ page import="factory.LoginFactory" %>
-<%@ page import="java.sql.ResultSet" %>
 <%@ page import="oo.UserLogin" %>
 
 <%
     String email = request.getParameter("inputEmailLog");
-
+    String url = request.getParameter("inputURL");
     String pw = null;
 
     try {
@@ -59,9 +58,8 @@
 //                if (lastaccessed != null && time != null) {
 //                    session.setAttribute(lastaccessed, time);
 //                }
+        response.sendRedirect(url);
         session.setMaxInactiveInterval(600);
-        response.sendRedirect("index.jsp");
-
     }
 
 %>

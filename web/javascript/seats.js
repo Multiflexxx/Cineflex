@@ -191,13 +191,10 @@ function ticket_minus(i, preis) {
 
 
 function btndclickable(countChoosenSeats) {
-    sessionStorage.setItem("email", "asdf");
-    var email = sessionStorage.getItem("email")
-        console.log(email);
     var btn_res = document.getElementById("btn_res");
     var btn_buc = document.getElementById("btn_buc");
     if (countChoosenSeats == 0) {
-        if (email == null) {
+        if (false) {
 
         } else {
             btn_res.disabled = false;
@@ -218,13 +215,13 @@ function btndclickable(countChoosenSeats) {
 }
 
 function onClickReservieren() {
-    var email = sessionStorage.getItem("email");
+    var a = window.location.pathname;
+    var b = window.location.href;
 
-    console.log(email);
+    console.log(a + ", " + b);
 }
 
 function onClickBuchen(vID) {
-    sessionStorage.getItem("email");
     // LOOP OVER SEATS
     // CREATE JSON FILE
     var form = document.createElement("form");
