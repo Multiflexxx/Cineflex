@@ -49,7 +49,6 @@
         <div class="row mb-5">
             <div class="col-lg-12">
                 <%
-                    String behindert = "B";
                     if (vorstellung.getSaal().getSitzplan() == null) {
                         out.write("<div class=\"jumbotron jumbotron-fluid footer\">\n" +
                                 "    <div class=\"container\">\n" +
@@ -79,21 +78,20 @@
                         int ctrRowlength = 0;
                         out.write("<tr>");
                         while (counter < arrayLength) {
-                            String B = "";
-                            if (vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getSitzklasse() == behindert.charAt(0)) {
-                                B = "B";
-                            }
                             out.write("<td>");
-                            out.write("<button id=\"" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "\" class=\"seat\" onclick=\"chooseSeat('" + vorstellung.getSaal().getSitzplan()[counter].getReihe() + vorstellung.getSaal().getSitzplan()[counter].getNummer() + "'," + vorstellung.getSaal().getRowLength(vorstellung.getSaal().getSitzplan()[counter].getReihe()) + ")\" uniqueID='" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "'>" + B + "</button>");
+                            char row = vorstellung.getSaal().getSitzplan()[counter].getReihe();
+                            int seatNr= vorstellung.getSaal().getSitzplan()[counter].getNummer();
+                            char category = vorstellung.getSaal().getSitzplan()[counter].getSitzklasse();
+                            out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "'>" + category + "</button>");
                             out.write("</td>");
                             if (counter >= arrayLength - 1) {
                                 out.write("<td>");
-                                out.write(" &nbsp;" + vorstellung.getSaal().getSitzplan()[counter].getReihe());
+                                out.write(" &nbsp;" + row);
                                 out.write("</td>");
                                 out.write("</tr>");
-                            } else if (vorstellung.getSaal().getSitzplan()[counter].getReihe() != vorstellung.getSaal().getSitzplan()[counter + 1].getReihe()) {
+                            } else if (row != vorstellung.getSaal().getSitzplan()[counter + 1].getReihe()) {
                                 out.write("<td>");
-                                out.write("&nbsp;" + vorstellung.getSaal().getSitzplan()[counter].getReihe());
+                                out.write("&nbsp;" + row);
                                 out.write("</td>");
                                 out.write("</tr>");
                                 out.write("<tr>");
