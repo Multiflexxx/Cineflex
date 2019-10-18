@@ -18,10 +18,9 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.defaultSearchQuery(search, date, time, fsk, plz);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        SupportMethods sup = new SupportMethods();
 
         if(rs != null) {
-            int rsSize = sup.getResultSetSize(rs);
+            int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
                 filme = new Film[rsSize];
                 try {
@@ -65,10 +64,9 @@ public class FilmFactory {
     Connection c = Connector.getConnection();
     String sql = QueryBuilder.genreSearchQuery(search, date, time, fsk, plz, genreID);
     ResultSet rs = Connector.getQueryResult(c, sql);
-    SupportMethods sup = new SupportMethods();
 
     if(rs != null) {
-      int rsSize = sup.getResultSetSize(rs);
+      int rsSize = SupportMethods.getResultSetSize(rs);
       if(rsSize > 0) {
         filme = new Film[rsSize];
         try {
@@ -118,10 +116,9 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.showTitelPageFilmsbyPLZ(plz);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        SupportMethods sup = new SupportMethods();
 
         if(rs != null) {
-            rsSize = sup.getResultSetSize(rs);
+            rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
                 filme = new Film[rsSize];
                 try {
@@ -164,11 +161,9 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getMovieById(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        // Connector.closeConnection(c);
-        SupportMethods sup = new SupportMethods();
 
         if(rs != null) {
-            int rsSize = sup.getResultSetSize(rs);
+            int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0 && rsSize == 1) {
                 try {
                     while (rs.next()) {
@@ -199,9 +194,8 @@ public class FilmFactory {
         String sql = QueryBuilder.getGenreNamesById(film.getFilmID());
         ResultSet rs = Connector.getQueryResult(c, sql);
         // Connector.closeConnection(c);
-        SupportMethods sup = new SupportMethods();
         try {
-            int rsSize = sup.getResultSetSize(rs);
+            int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
                 int counter = 0;
                 String[] genres = null;
@@ -223,10 +217,9 @@ public class FilmFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getSpracheById(film.getFilmID());
         ResultSet rs = Connector.getQueryResult(c, sql);
-        SupportMethods sup = new SupportMethods();
 
         try {
-            int rsSize = sup.getResultSetSize(rs);
+            int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
                 int counter = 0;
                 String[] sprachen = null;

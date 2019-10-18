@@ -1,5 +1,6 @@
 package db_connector;
 
+import helper.DateFormatter;
 import java.util.*;
 import java.text.*;
 
@@ -233,6 +234,21 @@ public class QueryBuilder {
         return "Select * From Buchungsbeleg Where `KID` = " + KID + " AND `Zeitstempel` = '" + timestamp + "';";
     }
 
+    public static String getTimedOutSitzsperre(int minuteTimeDiff) {
+      Date date = new Date();
+
+      return "Select * From Sitzsperre Where Timestampdiff(Minute, Zeitstempel, '" + DateFormatter.getSQLDateAndTime(date) + "') > " + minuteTimeDiff +";";
+    }
+
+  public static String deleteTimedOutSitzSperre(int minuteTimeDiff) {
+    Date date = new Date();
+
+    return "Delete From Sitzsperre Where Timestampdiff(Minute, Zeitstempel, '" + DateFormatter.getSQLDateAndTime(date) + "') > " + minuteTimeDiff +";";
+  }
+
+  public static String createSitzsperre(int sitzplatzID, int vorstellungsID, int KID) {
+      return "Insert into sitzsperre(SITZPLATZID, VORSTELLUNGSID, KID, Zeitstempel) VALUES( " + sitzplatzID + ", " + vorstellungsID + ", " + KID + ",CURRENT_TIMESTAMP);";
+  }
     // NOT USED
     /*
     public static String getSeatInfo(int vorstellungsID)
