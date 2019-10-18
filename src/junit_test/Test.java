@@ -43,6 +43,14 @@ public class Test {
     private ResultSet resultSetMock5;
     @Mock
     private ResultSet resultSetMock6;
+    @Mock
+    private ResultSet resultSetMock7;
+    @Mock
+    private ResultSet resultSetMock8;
+    @Mock
+    private ResultSet resultSetMock9;
+    @Mock
+    private ResultSet resultSetMock10;
 
     @Before
     public void setUp() throws Exception
@@ -1145,13 +1153,99 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeFilmFactory()
+    public void testeGenreFactory() throws Exception
     {
+        //TODO: GENRE OBJECT IS NULL -> FIX
 
+        // Create Resultset
+        resultSetMock7 = Mockito.mock(ResultSet.class);
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock7.getInt("GenreID")).thenReturn(5);
+        Mockito.when(resultSetMock7.getString("Genrebezeichnung")).thenReturn("Action");
+        Mockito.when(resultSetMock7.getString("Genrebeschreibung")).thenReturn("Action Film");
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock7.next()).thenReturn(true).thenReturn(false);
+
+        // Test getGenreById
+        Genre resultGenreId = GenreFactory.getGenreById(5);
+
+        // Check if Object is not null
+        Assert.assertNotNull(resultGenreId);
+
+        Assert.assertEquals("Action", resultGenreId.getGenrebezeichnung());
+        Assert.assertEquals("Action Film", resultGenreId.getDeskriptor());
+
+
+        // Create Resultset
+        resultSetMock8 = Mockito.mock(ResultSet.class);
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock8.getInt("GenreID")).thenReturn(5).thenReturn(15).thenReturn(20).thenReturn(30);
+
+        Mockito.when(resultSetMock8.getString("Genrebezeichnung")).thenReturn("Action").thenReturn("Drama").thenReturn("Komödie").thenReturn("Horror");
+        Mockito.when(resultSetMock8.getString("Genrebeschreibung")).thenReturn("Action Film").thenReturn("Drama Film").thenReturn("Lustiger Film").thenReturn("Horror Film");
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock8.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
+
+        // Test getGenre
+        Genre[] resultGenres = GenreFactory.getGenre(resultSetMock8);
+
+        // Check if Array is not null
+        Assert.assertNotNull(resultGenres);
+
+        Assert.assertEquals(5, resultGenres[0].getGenreID());
+        Assert.assertEquals(15, resultGenres[1].getGenreID());
+        Assert.assertEquals(20, resultGenres[2].getGenreID());
+        Assert.assertEquals(30, resultGenres[3].getGenreID());
+
+        Assert.assertEquals("Action", resultGenres[0].getGenrebezeichnung());
+        Assert.assertEquals("Drama", resultGenres[1].getGenrebezeichnung());
+        Assert.assertEquals("Komödie", resultGenres[2].getGenrebezeichnung());
+        Assert.assertEquals("Horror", resultGenres[3].getGenrebezeichnung());
+
+        Assert.assertEquals("Action Film", resultGenres[0].getDeskriptor());
+        Assert.assertEquals("Drama Film", resultGenres[1].getDeskriptor());
+        Assert.assertEquals("Lustiger Film", resultGenres[2].getDeskriptor());
+        Assert.assertEquals("Horror Film", resultGenres[3].getDeskriptor());
     }
 
     @org.junit.Test
-    public void testeKinosaalFactory()
+    public void testeKinosaalFactory() throws Exception
+    {
+        // Create Resultset
+        resultSetMock9 = Mockito.mock(ResultSet.class);
+        resultSetMock10 = Mockito.mock(ResultSet.class);
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock9.getInt("SitzplatzID")).thenReturn(5).thenReturn(6).thenReturn(7);
+        Mockito.when(resultSetMock9.getInt("Nummer")).thenReturn(4).thenReturn(5).thenReturn(6);
+        Mockito.when(resultSetMock9.getString("Reihe")).thenReturn("A").thenReturn("B").thenReturn("C");
+        Mockito.when(resultSetMock9.getString("Sitzklasse")).thenReturn("L").thenReturn("P").thenReturn("B");
+
+        Mockito.when(resultSetMock10.getString("Saalbezeichnung")).thenReturn("Saal 1");
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock9.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock10.next()).thenReturn(true).thenReturn(false);
+
+        // Create Kinosaal Object via Factory
+        Kinosaal resultKinosaal = KinosaalFactory.getKinosaal(15, resultSetMock9, resultSetMock10);
+
+        // Check if Object is not null
+        Assert.assertNotNull(resultKinosaal);
+
+        // Test if Sitzplan array is filled correctly
+        Assert.assertEquals(15, resultKinosaal.getSaalID());
+        Assert.assertEquals("Saal 1", resultKinosaal.getBezeichnung());
+        Assert.assertEquals(6, resultKinosaal.getSitzplan()[1].getSitzID());
+        Assert.assertEquals('A', resultKinosaal.getSitzplan()[0].getReihe());
+    }
+
+    @org.junit.Test
+    public void testeFilmFactory()
     {
 
     }

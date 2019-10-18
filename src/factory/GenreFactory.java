@@ -10,12 +10,22 @@ import oo.Genre;
 
 public class GenreFactory {
 
-  public static Genre getGenreById(int id) {
+  public static Genre getGenreById(int id, ResultSet mockRs) {
     Genre genre = null;
 
     Connection c = Connector.getConnection();
     String sql = QueryBuilder.getGenreByID(id);
-    ResultSet rs = Connector.getQueryResult(c, sql);
+    ResultSet rs = null;
+
+    if(mockRs == null)
+    {
+      rs = Connector.getQueryResult(c, sql);
+    }
+
+    else
+    {
+      rs = mockRs;
+    }
 
     if (rs != null) {
 
@@ -35,11 +45,26 @@ public class GenreFactory {
     return genre;
   }
 
-  public static Genre[] getGenre(){
+  public static Genre getGenreById(int id)
+  {
+    return getGenreById(id, null);
+  }
+
+  public static Genre[] getGenre(ResultSet mockRs){
     Genre[] genres;
     Connection c = Connector.getConnection();
     String sql = QueryBuilder.getGenres();
-    ResultSet rs = Connector.getQueryResult(c, sql);
+    ResultSet rs = null;
+
+    if(mockRs == null)
+    {
+      rs = Connector.getQueryResult(c, sql);
+    }
+
+    else
+    {
+      rs = mockRs;
+    }
 
     if(rs!= null) {
       int rsSize = SupportMethods.getResultSetSize(rs);
@@ -71,5 +96,10 @@ public class GenreFactory {
     Connector.closeResultSet(rs);
     Connector.closeConnection(c);
     return null;
+  }
+
+  public static Genre[] getGenre()
+  {
+    return getGenre(null);
   }
 }
