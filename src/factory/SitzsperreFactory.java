@@ -5,13 +5,14 @@ import db_connector.QueryBuilder;
 import helper.SupportMethods;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import oo.Sitz;
 import oo.Sitzsperre;
 import oo.Vorstellung;
 
 public class SitzsperreFactory {
-  int minutesUntilTimeOut = 10;
+  private static int minutesUntilTimeOut = 10;
 
   public static Sitzsperre[] lockSeats(int[] seatIDs, int vorstellungsID, int KID) {
     Connection c = null;
@@ -28,10 +29,49 @@ public class SitzsperreFactory {
   }
 
   public static Sitzsperre[] getLockedSeats(int vorstellungsID) {
-    return null;
+    // Update Sitzsperren, remove Timed out Seats
+    updateLockedSeats();
+
+    Connection c = null;
+    c = Connector.getConnection();
+
+    Sitzsperre[] sitzSperre = null;
+
+    String sql = QueryBuilder.getTimedOutSitzsperre(minutesUntilTimeOut);
+    ResultSet rs = Connector.getQueryResult(c, sql);
+
+    if(rs != null) {
+      int rsSize = SupportMethods.getResultSetSize(rs);
+      sitzSperre = new Sitzsperre[rsSize];
+
+      try {
+        int counter = 0;
+        while (rs.next()) {
+          sitzSperre[counter] = new Sitzsperre(
+                rs.getInt("SitzplatzID"),
+                rs.getInt("VorstellungsID"),
+                rs.getInt("KID"),
+                rs.getTimestamp("Zeitstempel")
+              );
+          counter++;
+        }
+      }catch(SQLException e) {
+        e.printStackTrace();
+        return null;
+      }
+
+    } else {
+      return null;
+    }
+
+    return sitzSperre;
   }
 
   public static Sitzsperre[] updateLockedSeats() {
+    Connection c = Connector.getConnection();
+    String sql = QueryBuilder.deleteTimedOutSitzSperre(minutesUntilTimeOut);
+    Connector.executeQuery(c, sql);
+
     return null;
   }
 
