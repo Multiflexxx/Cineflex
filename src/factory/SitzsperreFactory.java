@@ -75,6 +75,7 @@ public class SitzsperreFactory {
     return null;
   }
 
+  // unnecessary?
   public static Sitzsperre[] getTimedOutSeats() {
     Connection c = null;
     c = Connector.getConnection();

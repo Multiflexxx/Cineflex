@@ -249,6 +249,14 @@ public class QueryBuilder {
   public static String createSitzsperre(int sitzplatzID, int vorstellungsID, int KID, Date date) {
       return "Insert into sitzsperre(SITZPLATZID, VORSTELLUNGSID, KID, Zeitstempel) VALUES( " + sitzplatzID + ", " + vorstellungsID + ", " + KID + ", '" + DateFormatter.getSQLDateAndTime(date) + "');";
   }
+
+  public static String getBuchungsbelegByBNR(int BNR) {
+      return "Select * From Buchungsbeleg Where BNR = " + BNR + ";";
+  }
+
+  public static String getBuchungsbelegeByKID(int KID) {
+      return "Select * from Buchungsbeleg Where KID = " + KID + ";";
+  }
     // NOT USED
     /*
     public static String getSeatInfo(int vorstellungsID)

@@ -1,13 +1,15 @@
 package oo;
 
+import java.util.Date;
+
 public abstract class Beleg {
   int belegID;
   float preis;
   Vorstellung vorstellung;
   Kunde kunde;
-  String uhrzeit;
+  Date uhrzeit;
 
-  public Beleg(int belegID, float preis, Vorstellung vorstellung, Kunde kunde, String uhrzeit) {
+  public Beleg(int belegID, float preis, Vorstellung vorstellung, Kunde kunde, Date uhrzeit) {
     this.belegID = belegID;
     this.preis = preis;
     this.vorstellung = vorstellung;
@@ -33,7 +35,7 @@ public abstract class Beleg {
 
 
 
-  public String getUhrzeit() {
+  public Date getUhrzeit() {
     return uhrzeit;
   }
 
@@ -54,7 +56,7 @@ public abstract class Beleg {
   }
 
 
-  public void setUhrzeit(String uhrzeit) {
+  public void setUhrzeit(Date uhrzeit) {
     this.uhrzeit = uhrzeit;
   }
 }

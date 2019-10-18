@@ -238,7 +238,8 @@ public class Test {
         Assert.assertEquals("19:30:00", buchungsZeit);
 
         // Create new object (main reason for this test)
-        Buchungsbeleg buchungsbeleg = new Buchungsbeleg(5, 16.51f, vorstellung, kunde, buchungsZeit);
+        // TODO: Change new Date() to valid Input
+        Buchungsbeleg buchungsbeleg = new Buchungsbeleg(5, 16.51f, vorstellung, kunde, new Date());
 
         // Check if class Buchungsbeleg works as expected
         Assert.assertEquals(5, buchungsbeleg.getBelegID());
@@ -266,7 +267,8 @@ public class Test {
         buchungsbeleg.setKunde(null);
         Assert.assertEquals(null, buchungsbeleg.getKunde());
 
-        buchungsbeleg.setUhrzeit("15:34:32");
+        // TODO: Change new Date()
+        buchungsbeleg.setUhrzeit(new Date());
         Assert.assertEquals("15:34:32", buchungsbeleg.getUhrzeit());
 
         buchungsbeleg.setVorstellung(null);
@@ -345,7 +347,8 @@ public class Test {
         Assert.assertEquals("20:30:00", buchungsZeit);
 
         // Create new object (main reason for this test)
-        Reservierungsbeleg reservierungsbeleg = new Reservierungsbeleg(2, 10.98f, vorstellung, kunde, buchungsZeit);
+        // TODO: change new Date()
+        Reservierungsbeleg reservierungsbeleg = new Reservierungsbeleg(2, 10.98f, vorstellung, kunde, new Date());
 
         // Check if class Buchungsbeleg works as expected
         Assert.assertEquals(2, reservierungsbeleg.getBelegID());
@@ -373,7 +376,8 @@ public class Test {
         reservierungsbeleg.setKunde(null);
         Assert.assertEquals(null, reservierungsbeleg.getKunde());
 
-        reservierungsbeleg.setUhrzeit("19:15:23");
+        // TODO: Change new Date()
+        reservierungsbeleg.setUhrzeit(new Date());
         Assert.assertEquals("19:15:23", reservierungsbeleg.getUhrzeit());
 
         reservierungsbeleg.setVorstellung(null);

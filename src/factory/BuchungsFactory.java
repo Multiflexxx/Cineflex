@@ -4,6 +4,11 @@ import db_connector.Connector;
 import db_connector.QueryBuilder;
 //import oo.Buchungsbeleg;
 import helper.DateFormatter;
+import helper.SupportMethods;
+import java.sql.Timestamp;
+import javax.management.Query;
+import oo.Buchungsbeleg;
+import oo.Kunde;
 import oo.Sitz;
 import oo.Vorstellung;
 
@@ -13,6 +18,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 public class BuchungsFactory {
+
     public static int createBuchungBeleg(int[] sitzeIDs, int[] preiseVerIDs, int vorstellungsID, int KNR) {
         // TODO: sitzeIDs and preise must have the same length -> check
         if(sitzeIDs.length != preiseVerIDs.length) {
@@ -71,6 +77,43 @@ public class BuchungsFactory {
         Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return 0;
+    }
+
+    public static Buchungsbeleg getBuchungsbelegByBNR(int BNR) {
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.getBuchungsbelegByBNR(BNR);
+        ResultSet rs = Connector.getQueryResult(c, sql);
+        Buchungsbeleg buchungsbeleg = null;
+//        Timestamp t = rs.getTimestamp("");
+
+        if(rs != null) {
+            try {
+                if(rs.next()) {
+                    // Get Vorstellung for Buchungsbeleg
+                    Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(rs.getInt("vorstellungsID"));
+                    Kunde kunde = KundenFactory.getKundeByKID(rs.getInt("KID"));
+                    buchungsbeleg = new Buchungsbeleg(
+                        rs.getInt("BNR"),
+                        rs.getFloat("Preis"),
+                        vorstellung,
+                        kunde,
+                        new Date(rs.getTimestamp("Zeitstempel").getTime())
+                    );
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        } else {
+            return null;
+        }
+        return buchungsbeleg;
+    }
+
+    public static Buchungsbeleg[] getBuchungsbelegeByKNR(int KNR) {
+
+
+        return null;
     }
 
 }
