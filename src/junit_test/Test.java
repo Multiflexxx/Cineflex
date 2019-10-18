@@ -14,10 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -188,7 +184,7 @@ public class Test {
     // Tests for child classes of Beleg
     // Tests for class Buchungsbeleg
     @org.junit.Test
-    public void testeBuchungsbeleg()
+    public void testeBuchungsbeleg() throws Exception
     {
         Sitz sitz1 = new Sitz(8, 7, 'C', 'L');
         Sitz sitz2 = new Sitz(9, 9, 'D', 'B');
@@ -220,14 +216,8 @@ public class Test {
         Date date = null;
         Date time = null;
 
-        try {
-             date = new SimpleDateFormat("yyyy-MM-dd").parse("2019-09-23");
-             time = new SimpleDateFormat("HH:mm:ss").parse("19:30:00");
-        }
-        catch (Exception e)
-        {
-            Assert.assertEquals(1,0);
-        }
+        date = new SimpleDateFormat("yyyy-MM-dd").parse("2019-09-23");
+        time = new SimpleDateFormat("HH:mm:ss").parse("19:30:00");
 
         Vorstellung vorstellung = new Vorstellung(2, date, time, "deutsch", film, kinosaal);
 
@@ -298,7 +288,7 @@ public class Test {
 
     // Tests for class Reservierungsbeleg
     @org.junit.Test
-    public void testeReservierungsBeleg()
+    public void testeReservierungsBeleg() throws Exception
     {
         Sitz sitz1 = new Sitz(1, 7, 'C', 'L');
         Sitz sitz2 = new Sitz(2, 9, 'D', 'B');
@@ -332,14 +322,9 @@ public class Test {
         Date date = null;
         Date time = null;
 
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd").parse("2019-09-24");
-            time = new SimpleDateFormat("HH:mm:ss").parse("20:30:00");
-        }
-        catch (Exception e)
-        {
-            Assert.assertEquals(1,0);
-        }
+        date = new SimpleDateFormat("yyyy-MM-dd").parse("2019-09-24");
+        time = new SimpleDateFormat("HH:mm:ss").parse("20:30:00");
+
 
         Vorstellung vorstellung = new Vorstellung(3, date, time, "englisch", film, kinosaal);
 
@@ -514,24 +499,17 @@ public class Test {
 
     // Tests for class Vorstellung
     @org.junit.Test
-    public void testeVorstellung()
+    public void testeVorstellung() throws Exception
     {
         Date date = null;
         Date time = null;
         Date date2 = null;
         Date time2 = null;
 
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd").parse("2019-09-23");
-            time = new SimpleDateFormat("HH:mm:ss").parse("19:30:00");
-            date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2019-10-06");
-            time2 = new SimpleDateFormat("HH:mm:ss").parse("15:30:00");
-        }
-
-        catch (Exception e)
-        {
-            Assert.assertEquals(1,0);
-        }
+        date = new SimpleDateFormat("yyyy-MM-dd").parse("2019-09-23");
+        time = new SimpleDateFormat("HH:mm:ss").parse("19:30:00");
+        date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2019-10-06");
+        time2 = new SimpleDateFormat("HH:mm:ss").parse("15:30:00");
 
         Sitz sitz1 = new Sitz(2, 5, 'A', 'L');
         Sitz sitz2 = new Sitz(3, 6, 'A', 'L');
@@ -995,8 +973,6 @@ public class Test {
     @org.junit.Test
     public void testeGebaeudeFactory() throws Exception
     {
-        //TODO: Array has null on all fields
-
         // Create Resultset
         resultSetMock4 = Mockito.mock(ResultSet.class);
 
@@ -1190,9 +1166,6 @@ public class Test {
         Mockito.when(resultSetMock8.getString("Genrebezeichnung")).thenReturn("Action").thenReturn("Drama").thenReturn("Komödie").thenReturn("Horror");
         Mockito.when(resultSetMock8.getString("Deskriptor")).thenReturn("Action Film").thenReturn("Drama Film").thenReturn("Lustiger Film").thenReturn("Horror Film");
 
-
-        //TODO: rs.next is always false -> Array contains null objects
-
         // Add next() to ResultSet
         Mockito.when(resultSetMock8.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
 
@@ -1315,6 +1288,36 @@ public class Test {
 
     @org.junit.Test
     public void testeVorstellungsFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeBuchungsFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testePreisFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeProfilFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeReservierungsFactory()
+    {
+
+    }
+
+    @org.junit.Test
+    public void testeSitzSperreFactory()
     {
 
     }
