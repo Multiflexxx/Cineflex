@@ -3,7 +3,7 @@ package helper;
 import java.sql.ResultSet;
 
 public class SupportMethods {
-    public int getResultSetSize(ResultSet rs) {
+    public static int getResultSetSize(ResultSet rs) {
 
         int rowCount = 0;
 

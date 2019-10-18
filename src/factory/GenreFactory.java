@@ -41,10 +41,8 @@ public class GenreFactory {
     String sql = QueryBuilder.getGenres();
     ResultSet rs = Connector.getQueryResult(c, sql);
 
-    SupportMethods sup = new SupportMethods();
-
     if(rs!= null) {
-      int rsSize = sup.getResultSetSize(rs);
+      int rsSize = SupportMethods.getResultSetSize(rs);
       if(rsSize > 0){
         genres = new Genre[rsSize];
         try{

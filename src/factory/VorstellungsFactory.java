@@ -32,11 +32,9 @@ public class VorstellungsFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.showMovieById("" + film.getFilmID(), date, time, plz);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        // Connector.closeConnection(c);
-        SupportMethods sup = new SupportMethods();
 
         if(rs != null) {
-            int rsSize = sup.getResultSetSize(rs);
+            int rsSize = SupportMethods.getResultSetSize(rs);
 
 //            if(rsSize >= 0)
 //            {

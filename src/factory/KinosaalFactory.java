@@ -17,10 +17,9 @@ public class KinosaalFactory {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getSitzplanBySaalID(id);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        SupportMethods sup = new SupportMethods();
 
         if(rs != null) {
-            int rsSize = sup.getResultSetSize(rs);
+            int rsSize = SupportMethods.getResultSetSize(rs);
             Sitzplan = new Sitz[rsSize];
             for(int i =0; i<rsSize;i++) {
                 try {
@@ -38,10 +37,8 @@ public class KinosaalFactory {
         Kinosaal kinosaal = null;
         sql = QueryBuilder.getSaalById(id);
         rs = Connector.getQueryResult(c, sql);
-        sup = null;
-        sup = new SupportMethods();
         if(rs != null) {
-            int rsSize = sup.getResultSetSize(rs);
+            int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
                 try {
                     rs.next();

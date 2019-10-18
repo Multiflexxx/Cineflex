@@ -834,14 +834,12 @@ public class Test {
 
         // Create Support Methods Object
 
-        SupportMethods supportMethods = new SupportMethods();
-
         // call get ResultSetSize()
-        int size = supportMethods.getResultSetSize(resultSetMock2);
+        int size = SupportMethods.getResultSetSize(resultSetMock2);
 
         Assert.assertEquals(1, size);
 
-        int size2 = supportMethods.getResultSetSize(null);
+        int size2 = SupportMethods.getResultSetSize(null);
 
         Assert.assertEquals(-1, size2);
 

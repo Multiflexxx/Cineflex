@@ -19,9 +19,7 @@ public class PreisFactory {
         String sql = QueryBuilder.getPreiseInfos();
         ResultSet resultSet = Connector.getQueryResult(connection, sql);
 
-        SupportMethods supportMethods = new SupportMethods();
-
-        int lResultLength = supportMethods.getResultSetSize(resultSet) + 1;
+        int lResultLength = SupportMethods.getResultSetSize(resultSet) + 1;
 
         String[] lJSONDataArray = null;
 
@@ -65,9 +63,7 @@ public class PreisFactory {
         String sql = QueryBuilder.getPreiseInfos();
         ResultSet resultSet = Connector.getQueryResult(connection, sql);
 
-        SupportMethods supportMethods = new SupportMethods();
-
-        resultLength = supportMethods.getResultSetSize(resultSet);
+        resultLength = SupportMethods.getResultSetSize(resultSet);
 
         if (resultLength > 0) {
             Connector.closeConnection(connection);
@@ -92,10 +88,8 @@ public class PreisFactory {
         String sql1 = QueryBuilder.getPreisveränderungen();
         ResultSet resultSet1 = Connector.getQueryResult(connection, sql1);
 
-        SupportMethods supportMethods = new SupportMethods();
-
-        lHelp0 = supportMethods.getResultSetSize(resultSet0);
-        lHelp1 = supportMethods.getResultSetSize(resultSet1);
+        lHelp0 = SupportMethods.getResultSetSize(resultSet0);
+        lHelp1 = SupportMethods.getResultSetSize(resultSet1);
 
         if (lHelp0 > 0) {
             try {
