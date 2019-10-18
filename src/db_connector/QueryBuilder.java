@@ -246,8 +246,8 @@ public class QueryBuilder {
     return "Delete From Sitzsperre Where Timestampdiff(Minute, Zeitstempel, '" + DateFormatter.getSQLDateAndTime(date) + "') > " + minuteTimeDiff +";";
   }
 
-  public static String createSitzsperre(int sitzplatzID, int vorstellungsID, int KID) {
-      return "Insert into sitzsperre(SITZPLATZID, VORSTELLUNGSID, KID, Zeitstempel) VALUES( " + sitzplatzID + ", " + vorstellungsID + ", " + KID + ",CURRENT_TIMESTAMP);";
+  public static String createSitzsperre(int sitzplatzID, int vorstellungsID, int KID, Date date) {
+      return "Insert into sitzsperre(SITZPLATZID, VORSTELLUNGSID, KID, Zeitstempel) VALUES( " + sitzplatzID + ", " + vorstellungsID + ", " + KID + ", " + DateFormatter.getSQLDateAndTime(date) + ");";
   }
     // NOT USED
     /*

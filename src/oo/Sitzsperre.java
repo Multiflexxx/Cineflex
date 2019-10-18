@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Sitzsperre {
   private int sitzplatzID;
-  private int BNR;
   private int KNR;
+  private int vorstellungsID;
   private Date timestamp;
 
-  public Sitzsperre(int sitzplatzID, int BNR, int KNR, Date timestamp) {
+  public Sitzsperre(int sitzplatzID, int vorstellungsID, int KNR, Date timestamp) {
     this.sitzplatzID = sitzplatzID;
-    this.BNR = BNR;
     this.KNR = KNR;
     this.timestamp = timestamp;
+    this.vorstellungsID = vorstellungsID;
   }
 
   public int getSitzplatzID() {
@@ -21,14 +21,6 @@ public class Sitzsperre {
 
   public void setSitzplatzID(int sitzplatzID) {
     this.sitzplatzID = sitzplatzID;
-  }
-
-  public int getBNR() {
-    return BNR;
-  }
-
-  public void setBNR(int BNR) {
-    this.BNR = BNR;
   }
 
   public int getKNR() {
