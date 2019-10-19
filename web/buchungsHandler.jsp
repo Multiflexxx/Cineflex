@@ -48,7 +48,7 @@
         out.write(ArrayBuilder.intArrayToString(presVerInt));
 
         SitzsperreFactory.lockSeats(seatsInt, vorstellungsID, KID);
-        // BuchungsFactory.createBuchungBeleg(seatsInt, presVerInt, vorstellungsID, KID);
+        //BuchungsFactory.createBuchungBeleg(seatsInt, presVerInt, vorstellungsID, KID);
     }
 %>
 
