@@ -53,6 +53,30 @@ public class Test {
     private ResultSet resultSetMock11;
     @Mock
     private ResultSet resultSetMock12;
+    @Mock
+    private ResultSet resultSetMock13;
+    @Mock
+    private ResultSet resultSetMock14;
+    @Mock
+    private ResultSet resultSetMock15;
+    @Mock
+    private ResultSet resultSetMock16;
+    @Mock
+    private ResultSet resultSetMock17;
+    @Mock
+    private ResultSet resultSetMock18;
+    @Mock
+    private ResultSet resultSetMock19;
+    @Mock
+    private ResultSet resultSetMock20;
+    @Mock
+    private ResultSet resultSetMock21;
+    @Mock
+    private ResultSet resultSetMock22;
+    @Mock
+    private ResultSet resultSetMock23;
+    @Mock
+    private ResultSet resultSetMock24;
 
     @Before
     public void setUp() throws Exception
@@ -994,8 +1018,6 @@ public class Test {
         // Check if result is not null
         Assert.assertNotNull(resultGebaeudeArray);
 
-        System.out.println(resultGebaeudeArray[0]);
-
         Assert.assertEquals("Steinheim", resultGebaeudeArray[0].getOrtsname());
         Assert.assertEquals("Mannheim", resultGebaeudeArray[1].getOrtsname());
         Assert.assertEquals("Heidelberg", resultGebaeudeArray[2].getOrtsname());
@@ -1281,9 +1303,185 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeFilmFactory()
+    public void testeFilmFactory() throws Exception
     {
+        // Create Resultsets
+        resultSetMock13 = Mockito.mock(ResultSet.class);
+        resultSetMock14 = Mockito.mock(ResultSet.class);
+        resultSetMock15 = Mockito.mock(ResultSet.class);
+        resultSetMock16 = Mockito.mock(ResultSet.class);
+        resultSetMock17 = Mockito.mock(ResultSet.class);
+        resultSetMock18 = Mockito.mock(ResultSet.class);
+        resultSetMock19 = Mockito.mock(ResultSet.class);
+        resultSetMock20 = Mockito.mock(ResultSet.class);
+        resultSetMock21 = Mockito.mock(ResultSet.class);
+        resultSetMock22 = Mockito.mock(ResultSet.class);
+        resultSetMock23 = Mockito.mock(ResultSet.class);
+        resultSetMock24 = Mockito.mock(ResultSet.class);
 
+        // Add values to Resultset
+        // Test1
+        Mockito.when(resultSetMock13.getString("Titel")).thenReturn("König der Löwen").thenReturn("Toy Story");
+        Mockito.when(resultSetMock13.getString("Beschreibung")).thenReturn("Guter Film").thenReturn("sehr guter Film");
+        Mockito.when(resultSetMock13.getString("BildLink")).thenReturn("/img/1.jpg").thenReturn("/img/2.jpg");
+        Mockito.when(resultSetMock13.getString("TrailerLink")).thenReturn("youtube.com").thenReturn("vimeo.com");
+        Mockito.when(resultSetMock13.getInt("Dauer")).thenReturn(160).thenReturn(150);
+        Mockito.when(resultSetMock13.getInt("FSK")).thenReturn(0).thenReturn(6);
+        Mockito.when(resultSetMock13.getInt("Vorstellung.FilmID")).thenReturn(12).thenReturn(13);
+        Mockito.when(resultSetMock13.getBoolean("3D")).thenReturn(true).thenReturn(false);
+
+        Mockito.when(resultSetMock14.getString("Genrebezeichnung")).thenReturn("Animation").thenReturn("Komödie");
+
+        Mockito.when(resultSetMock15.getString("Sprachenname")).thenReturn("deutsch").thenReturn("englisch");
+
+        // Test2
+        Mockito.when(resultSetMock16.getString("Titel")).thenReturn("Toy Story").thenReturn("Leberkäs Junge");
+        Mockito.when(resultSetMock16.getString("Beschreibung")).thenReturn("Animations Film").thenReturn("sehr guter Film");
+        Mockito.when(resultSetMock16.getString("BildLink")).thenReturn("/img/4.jpg").thenReturn("/img/5.jpg");
+        Mockito.when(resultSetMock16.getString("TrailerLink")).thenReturn("youtube.com/1").thenReturn("vimeo.com/1");
+        Mockito.when(resultSetMock16.getInt("Dauer")).thenReturn(150).thenReturn(170);
+        Mockito.when(resultSetMock16.getInt("FSK")).thenReturn(6).thenReturn(6);
+        Mockito.when(resultSetMock16.getInt("Vorstellung.FilmID")).thenReturn(15).thenReturn(16);
+        Mockito.when(resultSetMock16.getBoolean("3D")).thenReturn(false).thenReturn(false);
+
+        Mockito.when(resultSetMock17.getString("Genrebezeichnung")).thenReturn("Animation").thenReturn("Komödie");
+
+        Mockito.when(resultSetMock18.getString("Sprachenname")).thenReturn("deutsch").thenReturn("türkisch");
+
+        // Test3
+        Mockito.when(resultSetMock19.getString("Titel")).thenReturn("Once upon a Time").thenReturn("Leberkäs Junge");
+        Mockito.when(resultSetMock19.getString("Beschreibung")).thenReturn("Fantasy").thenReturn("sehr guter Film");
+        Mockito.when(resultSetMock19.getString("BildLink")).thenReturn("/img/6.jpg").thenReturn("/img/5.jpg");
+        Mockito.when(resultSetMock19.getString("TrailerLink")).thenReturn("youtube.com/2").thenReturn("vimeo.com/1");
+        Mockito.when(resultSetMock19.getInt("Dauer")).thenReturn(130).thenReturn(170);
+        Mockito.when(resultSetMock19.getInt("FSK")).thenReturn(16).thenReturn(6);
+        Mockito.when(resultSetMock19.getInt("Film.FilmID")).thenReturn(17).thenReturn(16);
+        Mockito.when(resultSetMock19.getBoolean("3D")).thenReturn(false).thenReturn(true);
+
+        Mockito.when(resultSetMock20.getString("Genrebezeichnung")).thenReturn("Fantasy").thenReturn("Komödie");
+
+        Mockito.when(resultSetMock21.getString("Sprachenname")).thenReturn("englisch").thenReturn("türkisch");
+
+        // Test4
+        Mockito.when(resultSetMock22.getString("Titel")).thenReturn("Once upon a Time");
+        Mockito.when(resultSetMock22.getString("Beschreibung")).thenReturn("Fantasy");
+        Mockito.when(resultSetMock22.getString("BildLink")).thenReturn("/img/6.jpg");
+        Mockito.when(resultSetMock22.getString("TrailerLink")).thenReturn("youtube.com/2");
+        Mockito.when(resultSetMock22.getInt("Dauer")).thenReturn(130);
+        Mockito.when(resultSetMock22.getInt("FSK")).thenReturn(16);
+        Mockito.when(resultSetMock22.getInt("Film.FilmID")).thenReturn(17);
+        Mockito.when(resultSetMock22.getBoolean("3D")).thenReturn(false);
+
+        Mockito.when(resultSetMock23.getString("Genrebezeichnung")).thenReturn("Fantasy");
+
+        Mockito.when(resultSetMock24.getString("Sprachenname")).thenReturn("englisch");
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock13.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock14.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock15.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock16.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock17.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock18.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock19.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock20.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock21.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock22.next()).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock23.next()).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock24.next()).thenReturn(true).thenReturn(false);
+
+        // Mock for Method:
+        //public static Film[] getFilme(String search, String date, String time, int fsk, String plz)
+        Film[] resultFilmeArray1 = FilmFactory.getFilme("r","2019-07-07","19:30:00", 6, "68165", resultSetMock13, resultSetMock14, resultSetMock15);
+
+        Assert.assertNotNull(resultFilmeArray1);
+
+        Assert.assertEquals("König der Löwen", resultFilmeArray1[0].getTitel());
+        Assert.assertEquals("Toy Story", resultFilmeArray1[1].getTitel());
+        Assert.assertEquals("Guter Film", resultFilmeArray1[0].getBeschreibung());
+        Assert.assertEquals("sehr guter Film", resultFilmeArray1[1].getBeschreibung());
+        Assert.assertEquals("/img/1.jpg", resultFilmeArray1[0].getBildLink());
+        Assert.assertEquals("/img/2.jpg", resultFilmeArray1[1].getBildLink());
+        Assert.assertEquals("youtube.com", resultFilmeArray1[0].getTrailerLink());
+        Assert.assertEquals("vimeo.com", resultFilmeArray1[1].getTrailerLink());
+        Assert.assertEquals(160, resultFilmeArray1[0].getDauer());
+        Assert.assertEquals(150, resultFilmeArray1[1].getDauer());
+        Assert.assertEquals(0, resultFilmeArray1[0].getFsk());
+        Assert.assertEquals(6, resultFilmeArray1[1].getFsk());
+        Assert.assertEquals(12, resultFilmeArray1[0].getFilmID());
+        Assert.assertEquals(13, resultFilmeArray1[1].getFilmID());
+
+        // Mock resultset is null
+        Film[] resultFilmeArray2 = FilmFactory.getFilme("r","2019-07-07","19:30:00", 6, "68165", null, resultSetMock14, resultSetMock15);
+
+        Assert.assertNull(resultFilmeArray2);
+
+        // Mock for Method:
+        // public static Film[] getFilme(String search, String date, String time, int fsk, String plz, int genreID)
+        Film[] resultFilmeArray3 = FilmFactory.getFilme("r", "2019-07-07","19:30:00", 6, "68165", 5, resultSetMock16, resultSetMock17, resultSetMock18);
+
+        Assert.assertNotNull(resultFilmeArray3);
+
+        Assert.assertEquals("Toy Story", resultFilmeArray3[0].getTitel());
+        Assert.assertEquals("Leberkäs Junge", resultFilmeArray3[1].getTitel());
+        Assert.assertEquals("Animations Film", resultFilmeArray3[0].getBeschreibung());
+        Assert.assertEquals("sehr guter Film", resultFilmeArray3[1].getBeschreibung());
+        Assert.assertEquals("/img/4.jpg", resultFilmeArray3[0].getBildLink());
+        Assert.assertEquals("/img/5.jpg", resultFilmeArray3[1].getBildLink());
+        Assert.assertEquals("youtube.com/1", resultFilmeArray3[0].getTrailerLink());
+        Assert.assertEquals("vimeo.com/1", resultFilmeArray3[1].getTrailerLink());
+        Assert.assertEquals(150, resultFilmeArray3[0].getDauer());
+        Assert.assertEquals(170, resultFilmeArray3[1].getDauer());
+        Assert.assertEquals(6, resultFilmeArray3[0].getFsk());
+        Assert.assertEquals(6, resultFilmeArray3[1].getFsk());
+        Assert.assertEquals(15, resultFilmeArray3[0].getFilmID());
+        Assert.assertEquals(16, resultFilmeArray3[1].getFilmID());
+
+        // Mock resultset is null
+        Film[] resultFilmeArray4 = FilmFactory.getFilme("r", "2019-07-07","19:30:00", 6, "68165", 5, null, resultSetMock17, resultSetMock18);
+
+        Assert.assertNull(resultFilmeArray4);
+
+        // Mock for Method:
+        //getTitelPageFilme(String plz)
+        Film[] resultFilmeArray5 = FilmFactory.getTitelPageFilme("68165", resultSetMock19, resultSetMock20, resultSetMock21);
+
+        Assert.assertNotNull(resultFilmeArray5);
+
+        Assert.assertEquals("Once upon a Time", resultFilmeArray5[0].getTitel());
+        Assert.assertEquals("Leberkäs Junge", resultFilmeArray5[1].getTitel());
+        Assert.assertEquals("Fantasy", resultFilmeArray5[0].getBeschreibung());
+        Assert.assertEquals("sehr guter Film", resultFilmeArray5[1].getBeschreibung());
+        Assert.assertEquals("/img/6.jpg", resultFilmeArray5[0].getBildLink());
+        Assert.assertEquals("/img/5.jpg", resultFilmeArray5[1].getBildLink());
+        Assert.assertEquals("youtube.com/2", resultFilmeArray5[0].getTrailerLink());
+        Assert.assertEquals("vimeo.com/1", resultFilmeArray5[1].getTrailerLink());
+        Assert.assertEquals(130, resultFilmeArray5[0].getDauer());
+        Assert.assertEquals(170, resultFilmeArray5[1].getDauer());
+        Assert.assertEquals(16, resultFilmeArray5[0].getFsk());
+        Assert.assertEquals(6, resultFilmeArray5[1].getFsk());
+        Assert.assertEquals(17, resultFilmeArray5[0].getFilmID());
+        Assert.assertEquals(16, resultFilmeArray5[1].getFilmID());
+
+        // Mock resultset is null
+        Film[] resultFilmeArray6 = FilmFactory.getTitelPageFilme("68165", null, resultSetMock20, resultSetMock21);
+
+        Assert.assertNull(resultFilmeArray6);
+
+        // Mock for Method:
+        // getFilm(int id)
+        Film resultFilm = FilmFactory.getFilm(17, resultSetMock22, resultSetMock23, resultSetMock24);
+
+        Assert.assertNotNull(resultFilm);
+
+        Assert.assertEquals("Once upon a Time", resultFilm.getTitel());
+
+        Assert.assertEquals("Fantasy", resultFilm.getBeschreibung());
+        Assert.assertEquals("/img/6.jpg", resultFilm.getBildLink());
+        Assert.assertEquals("youtube.com/2", resultFilm.getTrailerLink());
+        Assert.assertEquals(130, resultFilm.getDauer());
+        Assert.assertEquals(16, resultFilm.getFsk());
+        Assert.assertEquals(17, resultFilm.getFilmID());
     }
 
     @org.junit.Test
