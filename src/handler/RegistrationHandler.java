@@ -62,7 +62,21 @@ public class RegistrationHandler extends HttpServlet {
         c = Connector.getConnection();
         if (c == null)
             response.getOutputStream().print("Geht nicht!");
-        String sql = QueryBuilder.createUser(firstname, lastname, date, email, pass,hausnummer, straße, adresszusatz);
+
+        String checkUserSQL = QueryBuilder.getUserForRegistration(firstname, lastname, date, email);
+
+        ResultSet resultSet = Connector.getQueryResult(c, checkUserSQL);
+
+        if(SupportMethods.getResultSetSize(resultSet) > 0)
+        {
+            // User Already Exists in DB!
+            response.sendRedirect("/error500.jsp");
+        }
+
+        // E-mail to lower case
+        email = email.toLowerCase();
+
+        String sql = QueryBuilder.createUser(firstname, lastname, date, email, pass, hausnummer, straße, adresszusatz, postleitzahl);
         Connector.executeQuery(c, sql);
 
         try {

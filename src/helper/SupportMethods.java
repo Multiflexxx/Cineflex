@@ -29,7 +29,7 @@ public class SupportMethods {
 
     public static String removeHTMLCode(String input)
     {
-        return input.replaceAll("[<(.|\\n)+?>%\\\\#]", "");
+        return input.replaceAll("[<(|\\n)+?>%\\\\#]", "");
     }
 
     public static void close(Connection c, ResultSet rs) {

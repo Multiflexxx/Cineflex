@@ -822,7 +822,7 @@ public class Test {
         Assert.assertEquals("Select `Genrebezeichnung` FROM FilmGenre JOIN Genre ON Genre.GenreID = Filmgenre.GenreID Where `GenreID` = 15 ;", QueryBuilder.getGenreByID(15));
 
         //createUser
-        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`) VALUES ('Hans', 'Meier', '01.01.1970', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', ''); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '01.01.1970' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", "01.01.1970", "mail@mail.com", "hashCode", "15","Langer Weg", ""));
+        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('Hans', 'Meier', '01.01.1970', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', '', '68165'); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '01.01.1970' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", "01.01.1970", "mail@mail.com", "hashCode", "15","Langer Weg", "", "68165"));
 
         //getGenres
         Assert.assertEquals("SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;", QueryBuilder.getGenres());
@@ -910,7 +910,7 @@ public class Test {
         // Remove HTML Tags from String
 
         String html = "<html>Test</html>#123+?Test.|A BC";
-        String checkString = "htmlTest/html123TestA BC";
+        String checkString = "htmlTest/html123Test.A BC";
 
         Assert.assertEquals(checkString, SupportMethods.removeHTMLCode(html));
     }

@@ -15,6 +15,9 @@
         return;
     }
 
+    // E-mail to lower case
+    email = email.toLowerCase();
+
     UserLogin userLogin = LoginFactory.getUserLogin(email, pw);
 
 

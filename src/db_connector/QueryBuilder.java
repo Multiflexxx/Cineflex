@@ -17,9 +17,9 @@ public class QueryBuilder {
         return "Select person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From person Join kunde k on person.PID = k.PID Where `E-Mail` = '"  + email + "' AND Passwort = '" + passwordHash + "';";
     }
 
-    public static String createUser(String name, String lastname, String gebDate, String email, String passwordHash, String hausnummer, String straße, String adresszusatz)
+    public static String createUser(String name, String lastname, String gebDate, String email, String passwordHash, String hausnummer, String straße, String adresszusatz, String plz)
     {
-        return "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`) VALUES ('"+name+"', '"+lastname+"', '"+gebDate+"', '"+email+"', '"+passwordHash+"', '"+hausnummer+"', '"+straße+"', '"+adresszusatz+"'); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = '"+name+"' AND `Nachname` = '"+lastname+"' AND `GebDatum` = '"+gebDate+"' AND `E-Mail` = '"+email+"' AND `Passwort` = '"+passwordHash+"'), 0);";
+        return "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('"+name+"', '"+lastname+"', '"+gebDate+"', '"+email+"', '"+passwordHash+"', '"+hausnummer+"', '"+straße+"', '"+adresszusatz+"', '"+plz+"'); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = '"+name+"' AND `Nachname` = '"+lastname+"' AND `GebDatum` = '"+gebDate+"' AND `E-Mail` = '"+email+"' AND `Passwort` = '"+passwordHash+"'), 0);";
     }
 
     public static String showAllCinemas()
@@ -262,8 +262,13 @@ public class QueryBuilder {
     return "Insert INTO Reservierungsbeleg (RNR, KID, VorstellungsID, Preis, Zeitstempel) VALUES (NULL, " + KID + ", " + vorstellungsID + ", " + preis + ", '" + timestamp + "');";
   }
 
-  public String createReservierungsposition(int posID, int RNR, int sitzID) {
+  public static String createReservierungsposition(int posID, int RNR, int sitzID) {
       return "Insert Into Reservierungsposition (PositionsID, RNR, SitzID) VALUES ( " + posID + ", " + RNR + ", " + sitzID + ");";
+  }
+
+  public static String getUserForRegistration(String firstname, String lastname, String gebDate, String email)
+  {
+      return "SELECT * FROM Person WHERE `Vorname` = '" + firstname + "' AND `Nachname` = '" + lastname + "' AND `GebDatum` = '" + gebDate + "' AND `E-Mail` = '" + email + "';";
   }
     // NOT USED
     /*
