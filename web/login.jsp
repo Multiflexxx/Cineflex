@@ -46,7 +46,7 @@
 
 <script>
     function setInputUrl() {
-        document.getElementById("inputURL").value = window.location.pathname;
+        document.getElementById("inputURL").value = window.location.href;
     }
 
     setInputUrl();

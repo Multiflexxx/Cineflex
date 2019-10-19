@@ -234,10 +234,10 @@ public class QueryBuilder {
         return "Select * From Buchungsbeleg Where `KID` = " + KID + " AND `Zeitstempel` = '" + timestamp + "';";
     }
 
-    public static String getTimedOutSitzsperre(int minuteTimeDiff) {
+    public static String getTimedOutSitzsperre(int minuteTimeDiff, int id) {
       Date date = new Date();
 
-      return "Select * From Sitzsperre Where Timestampdiff(Minute, Zeitstempel, '" + DateFormatter.getSQLDateAndTime(date) + "') > " + minuteTimeDiff +";";
+      return "Select * From Sitzsperre Where Timestampdiff(Minute, Zeitstempel, '" + DateFormatter.getSQLDateAndTime(date) + "') < " + minuteTimeDiff +" AND VorstellungsID = " + id + ";";
     }
 
   public static String deleteTimedOutSitzSperre(int minuteTimeDiff) {

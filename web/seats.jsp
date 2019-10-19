@@ -4,6 +4,8 @@
 <%@ page import="helper.DateFormatter" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="factory.PreisFactory" %>
+<%@ page import="oo.Sitzsperre" %>
+<%@ page import="factory.SitzsperreFactory" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -16,6 +18,9 @@
 <%
     String id = request.getParameter("id");
     Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
+
+    Sitzsperre[] sitzsperre = SitzsperreFactory.getLockedSeats(vorstellung.getVorstellungsID());
+
     String formatDatum = DateFormatter.getFrontendDate(vorstellung.getDatum());
     String formatUhrzeit = DateFormatter.getFrontendTime(vorstellung.getUhrzeit());
     if (vorstellung == null) {
@@ -61,13 +66,6 @@
                         out.write("<p align=\"center\">Leinwand</p>");
                         int arrayLength = vorstellung.getSaal().getSitzplan().length;
                         int counter = 0;
-//                        char c = vorstellung.getSaal().getSitzplan()[0].getReihe();
-//                        out.write("<p align=\"center\">Leinwand</p>");
-//                        for (int i=0; i<arrayLength; i++){
-//                            if(c == vorstellung.getSaal().getSitzplan()[i].getReihe()) {
-//                                counter++;
-//                            }
-//                        }
                         out.write("<hr width=\"75%\" height=\"3em\" color=\"grey\">");
 
 
@@ -80,9 +78,25 @@
                         while (counter < arrayLength) {
                             out.write("<td>");
                             char row = vorstellung.getSaal().getSitzplan()[counter].getReihe();
+                            int uniqueID = vorstellung.getSaal().getSitzplan()[counter].getSitzID();
                             int seatNr= vorstellung.getSaal().getSitzplan()[counter].getNummer();
                             char category = vorstellung.getSaal().getSitzplan()[counter].getSitzklasse();
-                            out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + vorstellung.getSaal().getSitzplan()[counter].getSitzID() + "'>" + category + "</button>");
+                            if (sitzsperre[0] != null ) {
+                                boolean ssgesetzt = false;
+                                for (int i=0; i<sitzsperre.length; i++) {
+                                    if (sitzsperre[i].getSitzplatzID() == uniqueID) {
+                                        out.write("<button id=\"" + row + seatNr + "\" class=\"seat seat_occupied\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' disabled>" + category + "</button>");
+                                        ssgesetzt = true;
+                                        break;
+                                    }
+                                }
+                                if (!ssgesetzt) {
+                                    out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "'>" + category + "</button>");
+                                }
+                            } else {
+                                out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "'>" + category + "</button>");
+                            }
+
                             out.write("</td>");
                             if (counter >= arrayLength - 1) {
                                 out.write("<td>");
