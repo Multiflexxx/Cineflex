@@ -831,10 +831,10 @@ public class Test {
         Assert.assertEquals("SELECT `Grundpreis`, `Dauer`, `3D`FROM Film WHERE `FilmId` =20;", QueryBuilder.getGrundPreis(20));
 
         //getPreisveränderungen
-        Assert.assertEquals("SELECT * FROM Preisänderung WHERE `PreisänderungsID` = 4 OR `PreisänderungsID` = 5;", QueryBuilder.getPreisveränderungen());
+        Assert.assertEquals("SELECT * FROM Preisänderung WHERE grundpreis_relevant = 1;", QueryBuilder.getPreisveränderungen());
 
         //getPreiseInfos
-        Assert.assertEquals("SELECT * FROM Preisänderung WHERE Änderungsbeschreibung != 'Logenaufpreis' AND Änderungsbeschreibung != '3D-Aufschlag' AND Änderungsbeschreibung != 'Überlängenaufschlag';", QueryBuilder.getPreiseInfos());
+        Assert.assertEquals("SELECT * FROM Preisänderung WHERE grundpreis_relevant IS NULL;", QueryBuilder.getPreiseInfos());
 
         //getVorstellungByIdPLZ()
         Assert.assertEquals("SELECT VorstellungsID, Datum, Uhrzeit, Film.FilmID as FilmID, Vorstellung.SaalID as SaalID, Sprache.SprachID as SprachID, Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis, Sprachenname, Kinosaal.GebäudeID, Saalbezeichnung, PLZ FROM Cineflex.Vorstellung JOIN Cineflex.Film ON Vorstellung.FilmID = Film.FilmID JOIN Cineflex.Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Cineflex.Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID Join Cineflex.Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE VorstellungsID = 68165;", QueryBuilder.getVorstellungByIdPLZ(68165));

@@ -194,7 +194,7 @@ public class QueryBuilder {
     public static String getPreisveränderungen()
     {
         //return "SELECT * FROM Preisänderung WHERE `PreisänderungsID` = 4 OR `PreisänderungsID` = 5;";
-        return "SELECT * FROM Preisänderung WHERE grundpreis_relevant = 1";
+        return "SELECT * FROM Preisänderung WHERE grundpreis_relevant = 1;";
     }
 
     public static String getPreiseLaenge()
