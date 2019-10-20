@@ -264,8 +264,24 @@ public class QueryBuilder {
     return "Insert INTO Reservierungsbeleg (RNR, KID, VorstellungsID, Preis, Zeitstempel) VALUES (NULL, " + KID + ", " + vorstellungsID + ", " + preis + ", '" + timestamp + "');";
   }
 
+  public static String getReservierungsbelegByKIDandTimestamp(int KID, String timestamp) {
+    return "Select * From Reservierungsbeleg Where `KID` = " + KID + " AND `Zeitstempel` = '" + timestamp + "';";
+  }
+
   public static String createReservierungsposition(int posID, int RNR, int sitzID) {
       return "Insert Into Reservierungsposition (PositionsID, RNR, SitzID) VALUES ( " + posID + ", " + RNR + ", " + sitzID + ");";
+  }
+
+  public static String createPreisänderungReservierung(int posID, int RNR, int preisVerID) {
+    return "Insert Into PreisänderungReservierung (PositionsID, RNR, PreisänderungsID) Values ( " + posID + ", " + RNR + ", " + preisVerID + ") ;";
+  }
+
+  public static String getReservierungsbelegByKID(int KID) {
+      return "Select * From Reservierungsbeleg Where KID = " + KID + ";";
+  }
+
+  public static String getReservierungsbelegByRNR(int RNR) {
+      return "Select * From Reservierungsbeleg Where RNR = " + RNR + ";";
   }
 
   public static String getUserForRegistration(String firstname, String lastname, String gebDate, String email)

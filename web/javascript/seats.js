@@ -246,6 +246,7 @@ function btndclickable(countChoosenSeats) {
     var btn_res = document.getElementById("btn_res");
     var btn_buc = document.getElementById("btn_buc");
     if (countChoosenSeats == 0) {
+        // What
         if (false) {
 
         } else {

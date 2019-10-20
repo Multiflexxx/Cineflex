@@ -64,18 +64,19 @@ public class BuchungsFactory {
             // Create Buchungsposition(en)
             // PositionsID -> 1++
             // SitzID sitze[i]
-        if(lastBNR > 0) {
-            for (int i = 0; i < sitze.length; i++) {
-                sql = QueryBuilder.createBuchungsposition(i + 1, lastBNR, sitze[i].getSitzID());
-                Connector.executeQuery(c, sql);
-
-                // Create PreisänderungBuchung
-                // PositionsID
-                // PreisänderungsID
-                sql = QueryBuilder.createPreisänderungBuchung(i + 1, lastBNR, preiseVerIDs[i]);
-                Connector.executeQuery(c, sql);
-            }
-        }
+//        if(lastBNR > 0) {
+//            for (int i = 0; i < sitze.length; i++) {
+//                sql = QueryBuilder.createBuchungsposition(i + 1, lastBNR, sitze[i].getSitzID());
+//                Connector.executeQuery(c, sql);
+//
+//                // Create PreisänderungBuchung
+//                // PositionsID
+//                // PreisänderungsID
+//                sql = QueryBuilder.createPreisänderungBuchung(i + 1, lastBNR, preiseVerIDs[i]);
+//                Connector.executeQuery(c, sql);
+//            }
+//        }
+        createBuchungsPositionen(c, lastBNR, sitze, preiseVerIDs);
 
         Connector.closeResultSet(rs);
         Connector.closeConnection(c);
@@ -153,7 +154,18 @@ public class BuchungsFactory {
         return buchungsbelege;
     }
 
-    public static void createBuchungsPositionen() {
-        //TODO: Auslagern des Erstellens von Buchungsbelegen
+    public static void createBuchungsPositionen(Connection c, int BNR, Sitz[] sitze, int[] preiseVerIDs) {
+        if(BNR > 0) {
+            for(int i = 0; i < sitze.length; i++) {
+                String sql = QueryBuilder.createBuchungsposition(i + 1, BNR, sitze[i].getSitzID());
+                Connector.executeQuery(c, sql);
+
+                // Create PreisänderungBuchung
+                // PositionsID
+                // PreisänderungsID
+                sql = QueryBuilder.createPreisänderungBuchung(i + 1, BNR, preiseVerIDs[i]);
+                Connector.executeQuery(c, sql);
+            }
+        }
     }
 }
