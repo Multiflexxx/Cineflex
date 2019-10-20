@@ -3,7 +3,7 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-import exception.UnequalParameterLength;
+import exception.UnequalParameterLengthException;
 import factory.*;
 import helper.*;
 import oo.*;
@@ -1523,17 +1523,17 @@ public class Test {
     // TESTS FOR EXCEPTIONS
 
     // Tests for UnequalParameterLength Exception
-    @org.junit.Test(expected = UnequalParameterLength.class)
-    public void testeUnequalParameterLength() throws UnequalParameterLength
+    @org.junit.Test(expected = UnequalParameterLengthException.class)
+    public void testeUnequalParameterLength() throws UnequalParameterLengthException
     {
         // Create Exception Object
-        UnequalParameterLength exception = new UnequalParameterLength();
+        UnequalParameterLengthException exception = new UnequalParameterLengthException();
 
         // Test Message of Object
         Assert.assertEquals("Unequal length of two input Arrays that need to be equal in length", exception.getMessage());
 
         // Throw new Exception to catch
-        throw new UnequalParameterLength();
+        throw new UnequalParameterLengthException();
     }
 
     //Mockito.when(resultSetMock1.getString("Straße")).thenReturn("Kurze Straße").thenReturn("Lange Straße").thenReturn("Test Straße");
