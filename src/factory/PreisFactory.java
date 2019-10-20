@@ -6,8 +6,6 @@ import helper.SupportMethods;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
 
 public class PreisFactory {
     public PreisFactory() {
@@ -23,12 +21,12 @@ public class PreisFactory {
 
         String[] lJSONDataArray = null;
 
-        float grundPreis = returnGrundpreis(id);
+        float[] grundPreis = returnGrundpreis(id);
 
         if (lResultLength > 0) {
 
             lJSONDataArray = new String[lResultLength];
-            lJSONDataArray[0] = "{'tooltip': 'null', 'id': 0,'beschreibung': 'Normalpreis', 'preis': " + grundPreis + "}";
+            lJSONDataArray[0] = "{'tooltip': 'null', 'id': 0, 'beschreibung': 'Normalpreis', 'preis': " + grundPreis[0] + ", 'preisL':  " + grundPreis[1] + "}";
 
             int counter = 1;
 
@@ -41,7 +39,9 @@ public class PreisFactory {
                     lHelperString += "', 'beschreibung': '";
                     lHelperString += resultSet.getString("Änderungsbeschreibung");
                     lHelperString += "', 'preis': ";
-                    lHelperString += (grundPreis + resultSet.getFloat("Änderungswert"));
+                    lHelperString += (grundPreis[0] + resultSet.getFloat("Änderungswert"));
+                    lHelperString += ", 'preisL': ";
+                    lHelperString += (grundPreis[1] + resultSet.getFloat("Änderungswert"));
                     lHelperString += "}";
 
                     lJSONDataArray[counter] = lHelperString;
@@ -67,16 +67,17 @@ public class PreisFactory {
 
         if (resultLength > 0) {
             Connector.closeConnection(connection);
-            //resultLength + 1 --> da Normalpreis mit berückscihtigt werden muss
+            //resultLength + 1 --> Normalpreis B + Normalpreis L
             return resultLength + 1;
         }
 
         return -2;
     }
 
-    private float returnGrundpreis(int id) {
+    private float[] returnGrundpreis(int id) {
         int lHelp0 = 0;
         int lHelp1 = 0;
+        float [] grundpreis = new float[2];
         float gp = 0;
         int dauer = 0;
         int dreid = -1;
@@ -101,40 +102,47 @@ public class PreisFactory {
             } catch (Exception e) {
                 Connector.closeConnection(connection);
                 resultSet0 = null;
-                return -1;
+                grundpreis[0]= -1;
+                return grundpreis;
             }
         } else {
             Connector.closeConnection(connection);
             resultSet0 = null;
-            return -2;
+            grundpreis[0]= -2;
+            return grundpreis;
         }
 
-        float[] lp = new float[lHelp1];
+        float[] ap = new float[lHelp1];
 
         if (lHelp1 > 0) {
             try {
                 int counter1 = 0;
                 while (resultSet1.next()) {
-                    lp[counter1] = resultSet1.getFloat("Änderungswert");
+                    ap[counter1] = resultSet1.getFloat("Änderungswert");
                     counter1++;
                 }
+                if (dreid == 1) {
+                    gp += ap[1];
+                }
                 if (dauer - 120 > 0) {
-                    gp += lp[1];
+                    gp += ap[2];
                 }
 
-                if (dreid == 1) {
-                    gp += lp[0];
-                }
-                return gp;
+                grundpreis[0] = gp;
+                gp += ap[0];
+                grundpreis[1] = gp;
+                return grundpreis;
             } catch (Exception e) {
                 Connector.closeConnection(connection);
                 resultSet1 = null;
-                return -1;
+                grundpreis[0]= -1;
+                return grundpreis;
             }
         } else {
             Connector.closeConnection(connection);
             resultSet1 = null;
-            return -2;
+            grundpreis[0]= -2;
+            return grundpreis;
         }
     }
 }

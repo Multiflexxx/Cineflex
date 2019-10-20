@@ -193,7 +193,8 @@ public class QueryBuilder {
 
     public static String getPreisveränderungen()
     {
-        return "SELECT * FROM Preisänderung WHERE `PreisänderungsID` = 4 OR `PreisänderungsID` = 5;";
+        //return "SELECT * FROM Preisänderung WHERE `PreisänderungsID` = 4 OR `PreisänderungsID` = 5;";
+        return "SELECT * FROM Preisänderung WHERE grundpreis_relevant = 1";
     }
 
     public static String getPreiseLaenge()
@@ -203,7 +204,8 @@ public class QueryBuilder {
 
     public static String getPreiseInfos()
     {
-        return "SELECT * FROM Preisänderung WHERE Änderungsbeschreibung != 'Logenaufpreis' AND Änderungsbeschreibung != '3D-Aufschlag' AND Änderungsbeschreibung != 'Überlängenaufschlag';";
+        //return "SELECT * FROM Preisänderung WHERE Änderungsbeschreibung != 'Logenaufpreis' AND Änderungsbeschreibung != '3D-Aufschlag' AND Änderungsbeschreibung != 'Überlängenaufschlag';";
+        return "SELECT * FROM Preisänderung WHERE grundpreis_relevant IS NULL;";
     }
 
     public static String getVorstellungByIdPLZ(int id) {

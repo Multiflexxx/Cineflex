@@ -80,7 +80,7 @@ public class RegistrationHandler extends HttpServlet {
         Connector.executeQuery(c, sql);
 
         try {
-            response.sendRedirect("success.jsp");
+            response.sendRedirect("index.jsp");
             HttpSession session = request.getSession(true);
  /*                   out.println(session.getId());
                     out.println("<br>");

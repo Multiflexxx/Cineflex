@@ -85,16 +85,16 @@
                                 boolean ssgesetzt = false;
                                 for (int i=0; i<sitzsperre.length; i++) {
                                     if (sitzsperre[i].getSitzplatzID() == uniqueID) {
-                                        out.write("<button id=\"" + row + seatNr + "\" class=\"seat seat_occupied\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' disabled>" + category + "</button>");
+                                        out.write("<button id=\"" + row + seatNr + "\" class=\"seat seat_occupied\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "' disabled>" + category + "</button>");
                                         ssgesetzt = true;
                                         break;
                                     }
                                 }
                                 if (!ssgesetzt) {
-                                    out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "'>" + category + "</button>");
+                                    out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "'>" + category + "</button>");
                                 }
                             } else {
-                                out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "'>" + category + "</button>");
+                                out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "'>" + category + "</button>");
                             }
 
                             out.write("</td>");
