@@ -288,6 +288,10 @@ public class QueryBuilder {
   {
       return "SELECT * FROM Person WHERE `Vorname` = '" + firstname + "' AND `Nachname` = '" + lastname + "' AND `GebDatum` = '" + gebDate + "' AND `E-Mail` = '" + email + "';";
   }
+
+  public static String getPreisänderungByID(int ID) {
+        return "Select * From `Preisänderung` Where `PreisänderungsID` = " + ID + ";";
+  }
     // NOT USED
     /*
     public static String getSeatInfo(int vorstellungsID)

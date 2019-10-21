@@ -2,8 +2,12 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import exception.EmptyResultSetException;
+import exception.RequiredFactoryFailedException;
+import exception.ResultSetIsNullException;
 import helper.ArrayBuilder;
 import helper.SupportMethods;
+import oo.Preisänderung;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -150,7 +154,7 @@ public class PreisFactory {
         }
     }
 
-    public static float getBuchungsPreis(String seats, String preisänderungen, int filmID) {
+    public static float getBuchungsPreis(String seats, String preisänderungen, int filmID) throws RequiredFactoryFailedException{
         float returnValue = 0;
         int[] seatIDs = ArrayBuilder.stringToIntArray(seats, ",");
         int[] preisVerIDs = ArrayBuilder.stringToIntArray(preisänderungen, ",");
@@ -160,10 +164,21 @@ public class PreisFactory {
         Connection c = Connector.getConnection();
 
         for(int i = 0; i < seatIDs.length; i++)  {
-
+            try {
+                returnValue += (SitzFactory.getSitzById(seatIDs[i]).getSitzklasse() == "L".charAt(0) ? filmGrundpreise[1] : filmGrundpreise[0]);
+                if(preisVerIDs[i] != 0) {
+                    Preisänderung p = PreisänderungsFactory.getPreisänderungById(preisVerIDs[i]);
+                    returnValue += p.getÄnderungswert();
+                }
+            } catch (ResultSetIsNullException e) {
+                e.printStackTrace();
+                throw new RequiredFactoryFailedException();
+            } catch (EmptyResultSetException e) {
+                e.printStackTrace();
+                throw new RequiredFactoryFailedException();
+            }
         }
 
-
-        return 0;
+        return returnValue;
     }
 }

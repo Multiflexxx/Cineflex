@@ -128,6 +128,7 @@
                     <script>
                         window.onload = function () {
                             <%
+
                                 // PreisFactory preisFactory = new PreisFactory();
 
                                 String[] preistypArray = PreisFactory.getPreisJSONArray(vorstellung.getFilm().getFilmID());
