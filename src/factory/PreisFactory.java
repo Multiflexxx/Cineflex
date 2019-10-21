@@ -145,4 +145,8 @@ public class PreisFactory {
             return grundpreis;
         }
     }
+
+    public static float getBuchungsPreis(String seats, String preisänderungen, int filmID) {
+        return 0;
+    }
 }
