@@ -18,7 +18,13 @@
 <div class="container">
     <%
         if (session.getAttribute("email") == null) {
-            out.write("Bitte melden Sie sich an <br />");
+            out.write("<div class=\"jumbotron jumbotron-fluid footer\">\n" +
+                    "    <div class=\"container\">\n" +
+                    "        <h1 class=\"display-4\">Bitte melden sie isch zuerst an</h1>\n" +
+                    "        <p class=\"lead\">Erst dann können sie Buchungen abschließen</p>\n" +
+                    "        <a class=\"btn btn-primary btn-lg\" href=\"index.jsp\" role=\"button\">Zurück zur Startseite</a>\n" +
+                    "    </div>\n" +
+                    "</div>");
         } else {
             int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungs_id"));
             int filmID = Integer.parseInt(request.getParameter("film_id"));
