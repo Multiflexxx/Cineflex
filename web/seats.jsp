@@ -16,13 +16,18 @@
 <jsp:include page="filter.jsp"/>
 
 <%
+    //Vorstellung von request parametern holen und über factory bauen
     String id = request.getParameter("id");
     Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
 
+    //sitzsperre für bereits ausgewählte sitze
     Sitzsperre[] sitzsperre = SitzsperreFactory.getLockedSeats(vorstellung.getVorstellungsID());
 
+    //Uhrzeit formatieren
     String formatDatum = DateFormatter.getFrontendDate(vorstellung.getDatum());
     String formatUhrzeit = DateFormatter.getFrontendTime(vorstellung.getUhrzeit());
+
+    //falls vorstellung nicht gebildet werden kann, eine fehlermeldung
     if (vorstellung == null) {
         out.write("<div class=\"jumbotron jumbotron-fluid footer\">\n" +
                 "    <div class=\"container\">\n" +
@@ -54,6 +59,7 @@
         <div class="row mb-5">
             <div class="col-lg-12">
                 <%
+                    //falls die vorstellung keinen sitzplan hat, fehlermeldung
                     if (vorstellung.getSaal().getSitzplan() == null) {
                         out.write("<div class=\"jumbotron jumbotron-fluid footer\">\n" +
                                 "    <div class=\"container\">\n" +
@@ -63,24 +69,28 @@
                                 "    </div>\n" +
                                 "</div>");
                     } else {
+                        //überschrift und drumherum
                         out.write("<p align=\"center\">Leinwand</p>");
                         int arrayLength = vorstellung.getSaal().getSitzplan().length;
                         int counter = 0;
                         out.write("<hr width=\"75%\" height=\"3em\" color=\"grey\">");
 
-
+                        //tabelle mit buttons als sitzplan
                         out.write("<div class=\"table-responsive\">");
                         out.write("<table class=\"sitzplan\">");
                         out.write("<tbody>");
                         counter = 0;
                         int ctrRowlength = 0;
                         out.write("<tr>");
+                        //geht den ganzen sitzplan der als array gespeichert ist durch
                         while (counter < arrayLength) {
                             out.write("<td>");
+                            //daten des sitzen zur übersichtlichkeit bereits vorher aus dem objekt gezogen
                             char row = vorstellung.getSaal().getSitzplan()[counter].getReihe();
                             int uniqueID = vorstellung.getSaal().getSitzplan()[counter].getSitzID();
                             int seatNr = vorstellung.getSaal().getSitzplan()[counter].getNummer();
                             char category = vorstellung.getSaal().getSitzplan()[counter].getSitzklasse();
+                            //erstellung der tabelle mit den sitzen als buttons
                             if (sitzsperre[0] != null) {
                                 boolean ssgesetzt = false;
                                 for (int i = 0; i < sitzsperre.length; i++) {
