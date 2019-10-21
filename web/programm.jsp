@@ -37,7 +37,7 @@
         if (filme != null) {
             for (Film f : filme) {
                 String hrefURL = "singleMovie.jsp?";
-                hrefURL += "id=" + f.getFilmID();  //getString("FilmID");
+                hrefURL += "id=" + f.getFilmID();
                 hrefURL += "&date=" + sd.format(date);
                 ;
                 hrefURL += "&time=" + st.format(time);
@@ -62,7 +62,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <%
                 }

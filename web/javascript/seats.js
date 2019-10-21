@@ -292,7 +292,7 @@ function onClickReservieren() {
     console.log(seatcatInput);
 }
 
-function onClickBuchen(vID) {
+function onClickBuchen(vID , fID) {
     // LOOP OVER SEATS
     // CREATE JSON FILE
     var form = document.createElement("form");
@@ -330,7 +330,7 @@ function onClickBuchen(vID) {
     var seatcatInput = seatcat.join(",");
     var hiddenField0 = document.createElement("input");
     hiddenField0.setAttribute("type", "hidden");
-    hiddenField0.setAttribute("name", "vorstellungsid");
+    hiddenField0.setAttribute("name", "vorstellungs_id");
     hiddenField0.setAttribute("value", vID);
     var hiddenField1 = document.createElement("input");
     hiddenField1.setAttribute("type", "hidden");
@@ -342,8 +342,8 @@ function onClickBuchen(vID) {
     hiddenField2.setAttribute("value", preisInput);
     var hiddenField3 = document.createElement("input");
     hiddenField3.setAttribute("type", "hidden");
-    hiddenField3.setAttribute("name", "seat_cat_data");
-    hiddenField3.setAttribute("value", seatcatInput);
+    hiddenField3.setAttribute("name", "film_id");
+    hiddenField3.setAttribute("value", fID);
     form.appendChild(hiddenField0);
     form.appendChild(hiddenField1);
     form.appendChild(hiddenField2);

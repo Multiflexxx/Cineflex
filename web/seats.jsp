@@ -79,11 +79,11 @@
                             out.write("<td>");
                             char row = vorstellung.getSaal().getSitzplan()[counter].getReihe();
                             int uniqueID = vorstellung.getSaal().getSitzplan()[counter].getSitzID();
-                            int seatNr= vorstellung.getSaal().getSitzplan()[counter].getNummer();
+                            int seatNr = vorstellung.getSaal().getSitzplan()[counter].getNummer();
                             char category = vorstellung.getSaal().getSitzplan()[counter].getSitzklasse();
-                            if (sitzsperre[0] != null ) {
+                            if (sitzsperre[0] != null) {
                                 boolean ssgesetzt = false;
-                                for (int i=0; i<sitzsperre.length; i++) {
+                                for (int i = 0; i < sitzsperre.length; i++) {
                                     if (sitzsperre[i].getSitzplatzID() == uniqueID) {
                                         out.write("<button id=\"" + row + seatNr + "\" class=\"seat seat_occupied\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "' disabled>" + category + "</button>");
                                         ssgesetzt = true;
@@ -145,14 +145,17 @@
                 </div>
             </div>
             <div class="col-lg-2 pay-to-win">
-                <button id="btn_res" onclick="onClickReservieren()" class="btn btn-outline-secondary mb-2" disabled>Reservieren</button>
-                <button id="btn_buc" onclick="onClickBuchen(<%=vorstellung.getVorstellungsID()%>)" class="btn btn-outline-secondary mb-2 " disabled>Buchen</button>
+                <button id="btn_res" onclick="onClickReservieren()" class="btn btn-outline-secondary mb-2" disabled>
+                    Reservieren
+                </button>
+                <button id="btn_buc"
+                        onclick="onClickBuchen(<%=vorstellung.getVorstellungsID() + ", " + vorstellung.getFilm().getFilmID()%>)"
+                        class="btn btn-outline-secondary mb-2 " disabled>Buchen
+                </button>
             </div>
             <div class="col"></div>
         </div>
     </div>
-</div>
-</div>
 </div>
 <jsp:include page="elements/footer.jsp"/>
 </body>
