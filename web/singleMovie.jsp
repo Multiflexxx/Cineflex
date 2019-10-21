@@ -117,10 +117,25 @@
                                             break;
                                     }
                                 }
-
-                                if (counter == 1) {
+                                if (counter >= 6) {
+                                    if (counter % 3 == 0) {
                             %>
+                            <td>
+                                <button class="film-btn" onclick="">mehr</button>
+                            </td>
+                            </tr>
 
+                            <%
+                            } else if (counter % 2 == 0) {
+                            %>
+                            <td></td>
+                            <td>
+                                <button class="film-btn" onclick="">mehr</button>
+                            </td>
+                            </tr>
+                            <%
+                            } else {
+                            %>
                             <tr>
                                 <td></td>
                                 <td></td>
@@ -129,21 +144,7 @@
                                 </td>
                             </tr>
                             <%
-                            } else if (counter == 2) {
-                            %>
-                            <td></td>
-                            <td>
-                                <button class="film-btn" onclick="">mehr</button>
-                            </td>
-                            </tr>
-                            <%
-                            } else if (counter == 3) {
-                            %>
-                            <td>
-                                <button class="film-btn" onclick="">mehr</button>
-                            </td>
-                            </tr>
-                            <%
+                                    }
                                 }
                             %>
                             </tbody>
@@ -167,7 +168,7 @@
             <%
             } else {
             %>
-            <p class="card-text">Vergewissere dich, dass du ein Kino selektiert hast! ANdernfalls ändere bitte deine
+            <p class="card-text">Vergewissere dich, dass du ein Kino selektiert hast! Andernfalls ändere bitte deine
                 Werte bei deiner Suche!</p>
             <%
                 }

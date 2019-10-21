@@ -131,7 +131,7 @@
         <div class="card-body">
     <div class="card-deck">
         <div class="card">
-            <img class="card-img-top" src="img/snacks/popcornCola.jpg" alt="popcorn">
+            <img class="card-img-top" src="img/snacks/popcorn.png" alt="popcorn">
             <div class="card-body">
                 <h5 class="card-title">Popcorn Sparmenü</h5>
                 <p class="card-text">Eine große Portion Popocorn & ein Getränk*</p>
@@ -140,7 +140,7 @@
             </div>
         </div>
         <div class="card">
-            <img class="card-img-top" src="img/snacks/nachos.jpg" alt="Card image cap">
+            <img class="card-img-top" src="img/snacks/nachos.png" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Nachos Sparmenü</h5>
                 <p class="card-text">Eine große Portion Nachos & ein Getränk*</p>
@@ -149,7 +149,7 @@
             </div>
         </div>
         <div class="card">
-            <img class="card-img-top" src="img/snacks/paerchenmenue.jpg" alt="pärchenmenü">
+            <img class="card-img-top" src="img/snacks/paerchenmenue.png" alt="pärchenmenü">
             <div class="card-body">
                 <h5 class="card-title">Pärchenmenü</h5>
                 <p class="card-text">Eine große Portion Nachos (2 Saucen) <i>oder</i> eine große Portion Popcorn & zwei Getränke*  </p>
