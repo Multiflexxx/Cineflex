@@ -46,9 +46,9 @@
             <div class="col-lg-5">
                 <h5>Deine ausgewählten Tickets</h5>
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-light">T6</li>
-                    <li class="list-group-item list-group-item-secondary">T7</li>
-                    <li class="list-group-item list-group-item-dark">T8</li>
+                    <li class="list-group-item list-group-item-light">Reihe M Platz 1</li>
+                    <li class="list-group-item list-group-item-light">Reihe M Platz 2</li>
+                    <li class="list-group-item list-group-item-light">Reihe M Platz 3</li>
                 </ul>
             </div>
             <div class="col-lg-7">
@@ -57,37 +57,42 @@
                     <%=stringPrice%>
                     <p class="card-text"><small class="text-muted">Hier kann Text stehen</small></p>
                     <div id="paypal-button-container"></div>
-                    <script
-                            src="https://www.paypal.com/sdk/js?client-id=AdK-QibhcEoeaSTF4BytwJavRDQ7fnd2Q1H338CFUyRZE2BLPEpbVByY6vpLX1K1u-y2lZKM05NU0yb4">
-                    </script>
+                    <script src="https://www.paypal.com/sdk/js?client-id=AdK-QibhcEoeaSTF4BytwJavRDQ7fnd2Q1H338CFUyRZE2BLPEpbVByY6vpLX1K1u-y2lZKM05NU0yb4&currency=EUR"></script>
                     <script>
+                        // Render the PayPal button into #paypal-button-container
                         paypal.Buttons({
+
+                            style: {
+                                color:  'blue',
+                                shape:  'pill',
+                                label:  'pay',
+                                height: 40
+                            },
+
+                            // Set up the transaction
                             createOrder: function(data, actions) {
                                 return actions.order.create({
                                     purchase_units: [{
                                         amount: {
-                                            value: '0.01'
+                                            value: '36.00'
                                         }
                                     }]
                                 });
                             },
+
+                            // Finalize the transaction
                             onApprove: function(data, actions) {
                                 return actions.order.capture().then(function(details) {
-                                    alert('Transaction completed by ' + details.payer.name.given_name);
-                                    // Call your server to save the transaction
-                                    return fetch('/paypal-transaction-complete', {
-                                        method: 'post',
-                                        headers: {
-                                            'content-type': 'application/json'
-                                        },
-                                        body: JSON.stringify({
-                                            orderID: data.orderID
-                                        })
-                                    });
+                                    // Show a success message to the buyer
+                                    //alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                                    window.location.replace("payment.jsp");
                                 });
                             }
+
+
                         }).render('#paypal-button-container');
                     </script>
+
                 </div>
             </div>
         </div>
