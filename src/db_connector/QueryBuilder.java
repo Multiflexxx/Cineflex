@@ -17,9 +17,10 @@ public class QueryBuilder {
         return "Select person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From person Join kunde k on person.PID = k.PID Where `E-Mail` = '"  + email + "' AND Passwort = '" + passwordHash + "';";
     }
 
-    public static String createUser(String name, String lastname, String gebDate, String email, String passwordHash, String hausnummer, String straße, String adresszusatz, String plz)
+    public static String createUser(String name, String lastname, Date gebDate, String email, String passwordHash, int hausnummer, String straße, String adresszusatz, int plz)
     {
-        return "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('"+name+"', '"+lastname+"', '"+gebDate+"', '"+email+"', '"+passwordHash+"', '"+hausnummer+"', '"+straße+"', '"+adresszusatz+"', '"+plz+"'); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = '"+name+"' AND `Nachname` = '"+lastname+"' AND `GebDatum` = '"+gebDate+"' AND `E-Mail` = '"+email+"' AND `Passwort` = '"+passwordHash+"'), 0);";
+        String sqlDateString = DateFormatter.getSQLDate(gebDate);
+        return "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('"+name+"', '"+lastname+"', '"+sqlDateString+"', '"+email+"', '"+passwordHash+"', '"+hausnummer+"', '"+straße+"', '"+adresszusatz+"', '"+plz+"'); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = '"+name+"' AND `Nachname` = '"+lastname+"' AND `GebDatum` = '"+gebDate+"' AND `E-Mail` = '"+email+"' AND `Passwort` = '"+passwordHash+"'), 0);";
     }
 
     public static String showAllCinemas()
@@ -287,6 +288,10 @@ public class QueryBuilder {
   public static String getUserForRegistration(String firstname, String lastname, String gebDate, String email)
   {
       return "SELECT * FROM Person WHERE `Vorname` = '" + firstname + "' AND `Nachname` = '" + lastname + "' AND `GebDatum` = '" + gebDate + "' AND `E-Mail` = '" + email + "';";
+  }
+
+  public static String getUserByEmail(String email) {
+        return "Select * From Person Where `E-Mail` = " + email + ";";
   }
 
   public static String getPreisänderungByID(int ID) {
