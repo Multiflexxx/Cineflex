@@ -2,8 +2,10 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import helper.ArrayBuilder;
 import helper.SupportMethods;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -12,7 +14,7 @@ public class PreisFactory {
 
     }
 
-    public String[] getPreisJSONArray(int id) {
+    public static String[] getPreisJSONArray(int id) {
         Connection connection = Connector.getConnection();
         String sql = QueryBuilder.getPreiseInfos();
         ResultSet resultSet = Connector.getQueryResult(connection, sql);
@@ -56,7 +58,7 @@ public class PreisFactory {
         return lJSONDataArray;
     }
 
-    public int getPreiskategorienLaenge() {
+    public static int getPreiskategorienLaenge() {
         int resultLength = -1;
 
         Connection connection = Connector.getConnection();
@@ -74,7 +76,9 @@ public class PreisFactory {
         return -2;
     }
 
-    private float[] returnGrundpreis(int id) {
+    // 0 = Parket
+    // 1 = Loge
+    private static float[] returnGrundpreis(int id) {
         int lHelp0 = 0;
         int lHelp1 = 0;
         float [] grundpreis = new float[2];
@@ -147,6 +151,19 @@ public class PreisFactory {
     }
 
     public static float getBuchungsPreis(String seats, String preisänderungen, int filmID) {
+        float returnValue = 0;
+        int[] seatIDs = ArrayBuilder.stringToIntArray(seats, ",");
+        int[] preisVerIDs = ArrayBuilder.stringToIntArray(preisänderungen, ",");
+        // 0: Parket
+        // 1: Loge
+        float[] filmGrundpreise = returnGrundpreis(filmID);
+        Connection c = Connector.getConnection();
+
+        for(int i = 0; i < seatIDs.length; i++)  {
+
+        }
+
+
         return 0;
     }
 }

@@ -128,9 +128,9 @@
                     <script>
                         window.onload = function () {
                             <%
-                                PreisFactory preisFactory = new PreisFactory();
+                                // PreisFactory preisFactory = new PreisFactory();
 
-                                String[] preistypArray = preisFactory.getPreisJSONArray(vorstellung.getFilm().getFilmID());
+                                String[] preistypArray = PreisFactory.getPreisJSONArray(vorstellung.getFilm().getFilmID());
 
                                 for(int i = 0; i < preistypArray.length; i++)
                                 {
@@ -138,7 +138,7 @@
                                 }
                             %>
 
-                            createTable(preistyp, <%=preisFactory.getPreiskategorienLaenge()%>);
+                            createTable(preistyp, <%=PreisFactory.getPreiskategorienLaenge()%>);
                         }
                     </script>
                 </div>
