@@ -16,7 +16,9 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 @WebServlet(name = "RegistrationForm")
 public class RegistrationHandler extends HttpServlet {
@@ -76,7 +78,18 @@ public class RegistrationHandler extends HttpServlet {
         // E-mail to lower case
         email = email.toLowerCase();
 
-        String sql = QueryBuilder.createUser(firstname, lastname, date, email, pass, hausnummer, straße, adresszusatz, postleitzahl);
+        Date gebDateSQL;
+
+        try
+        {
+            gebDateSQL = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        }
+        catch (Exception e)
+        {
+            return;
+        }
+
+        String sql = QueryBuilder.createUser(firstname, lastname, gebDateSQL, email, pass, Integer.parseInt(hausnummer), straße, adresszusatz, Integer.parseInt(postleitzahl));
         Connector.executeQuery(c, sql);
 
         try {
