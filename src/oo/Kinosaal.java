@@ -4,11 +4,13 @@ public class Kinosaal {
   int saalID;
   String bezeichnung;
   Sitz[] sitzplan;
+  Gebaeude gebaeude;
 
-  public Kinosaal(int saalID, String bezeichnung, Sitz[] sitzplan) {
+  public Kinosaal(int saalID, String bezeichnung, Sitz[] sitzplan, Gebaeude gebaeude) {
     this.saalID = saalID;
     this.bezeichnung = bezeichnung;
     this.sitzplan = sitzplan;
+    this.gebaeude = gebaeude;
   }
 
   public int getSaalID() {

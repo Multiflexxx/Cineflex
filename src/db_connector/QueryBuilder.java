@@ -297,6 +297,14 @@ public class QueryBuilder {
   public static String getPreisänderungByID(int ID) {
         return "Select * From `Preisänderung` Where `PreisänderungsID` = " + ID + ";";
   }
+
+  public static String getGebaeudeById(int id) {
+      return "Select * from `Gebäude` Where `GebäudeID` = " + id + ";";
+  }
+
+  public static String getOrtByPLZ(int plz) {
+      return "Select * From Ort Where PLZ = " + plz + ";";
+  }
     // NOT USED
     /*
     public static String getSeatInfo(int vorstellungsID)

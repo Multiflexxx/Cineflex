@@ -221,7 +221,7 @@ public class Test {
         // Check if seat was added to array and contains same values
         Assert.assertEquals(sitzplan[0], sitz1);
 
-        Kinosaal kinosaal = new Kinosaal(2, "Saal 1", sitzplan);
+        Kinosaal kinosaal = new Kinosaal(2, "Saal 1", sitzplan, null);
 
         // Check if object created succesfully
         Assert.assertEquals(2, kinosaal.getSaalID());
@@ -327,7 +327,7 @@ public class Test {
         // Check if seat was added to array and contains same values
         Assert.assertEquals(sitzplan[1], sitz2);
 
-        Kinosaal kinosaal = new Kinosaal(3, "Saal 3", sitzplan);
+        Kinosaal kinosaal = new Kinosaal(3, "Saal 3", sitzplan, null);
 
         // Check if object created succesfully
         Assert.assertEquals(3, kinosaal.getSaalID());
@@ -497,7 +497,7 @@ public class Test {
 
         Sitz[] sitzplan = {sitz1, sitz2, sitz3};
 
-        Kinosaal kinosaal = new Kinosaal(1, "Saal 1", sitzplan);
+        Kinosaal kinosaal = new Kinosaal(1, "Saal 1", sitzplan, null);
 
         Assert.assertEquals(1, kinosaal.getSaalID());
         Assert.assertEquals("Saal 1", kinosaal.getBezeichnung());
@@ -541,7 +541,7 @@ public class Test {
 
         Sitz[] sitzplan = {sitz1, sitz2, sitz3};
 
-        Kinosaal kinosaal = new Kinosaal(1, "Saal 1", sitzplan);
+        Kinosaal kinosaal = new Kinosaal(1, "Saal 1", sitzplan, null);
 
         String[] genre = {"Animation", "Drama"};
         String[] sprachen = {"deutsch", "englisch"};
@@ -569,7 +569,7 @@ public class Test {
 
         Sitz[] sitzplan2 = {sitz4, sitz5, sitz6};
 
-        Kinosaal kinosaal2 = new Kinosaal(1, "Saal 1", sitzplan);
+        Kinosaal kinosaal2 = new Kinosaal(1, "Saal 1", sitzplan, null);
 
         Film film2 = new Film("Once Upon a Time... in Hollywood", "Hier eine andere Beschreibung", "/img/2.jpg", "https://youtube.com/", 161, 16, 2, false, genre, sprachen);
 

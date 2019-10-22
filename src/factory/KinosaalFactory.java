@@ -19,13 +19,9 @@ public class KinosaalFactory {
 
         ResultSet rs = null;
 
-        if(mockRs1 == null)
-        {
+        if(mockRs1 == null) {
             rs = Connector.getQueryResult(c, sql);
-        }
-
-        else
-        {
+        } else {
             rs = mockRs1;
         }
 
@@ -48,13 +44,9 @@ public class KinosaalFactory {
         Kinosaal kinosaal = null;
         sql = QueryBuilder.getSaalById(id);
 
-        if(mockRs2 == null)
-        {
+        if(mockRs2 == null) {
             rs = Connector.getQueryResult(c, sql);
-        }
-
-        else
-        {
+        } else {
             rs = mockRs2;
         }
 
@@ -63,7 +55,12 @@ public class KinosaalFactory {
             if(rsSize > 0) {
                 try {
                     rs.next();
-                    kinosaal = new Kinosaal(id, rs.getString("Saalbezeichnung"), Sitzplan);
+                    kinosaal = new Kinosaal(
+                        id,
+                        rs.getString("Saalbezeichnung"),
+                        Sitzplan,
+                        null
+                    );
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

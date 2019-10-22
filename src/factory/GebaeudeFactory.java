@@ -2,7 +2,11 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import exception.EmptyResultSetException;
+import exception.FailedObjectCreationException;
+import exception.ResultSetIsNullException;
 import helper.SupportMethods;
+import java.sql.SQLException;
 import oo.Gebaeude;
 
 import java.sql.Connection;
@@ -67,5 +71,37 @@ public class GebaeudeFactory {
     public static Gebaeude[] getGebaeude()
     {
         return getGebaeude(null);
+    }
+
+    public static Gebaeude getGebaeudeById(int id)
+        throws ResultSetIsNullException, EmptyResultSetException, FailedObjectCreationException {
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.getGebaeudeById(id);
+        ResultSet rs = Connector.getQueryResult(c, sql);
+        Gebaeude gebaeude = null;
+
+        if(rs == null) {
+            throw new ResultSetIsNullException();
+        }
+
+        if(SupportMethods.getResultSetSize(rs) < 1) {
+            throw new EmptyResultSetException();
+        }
+
+        try {
+            rs.next();
+            gebaeude = new Gebaeude(
+                rs.getInt("GebäudeID"),
+                rs.getString("Straße"),
+                rs.getInt("Hausnummer"),
+                rs.getInt("PLZ"),
+                rs.getString("" + OrtsFactory.getOrtByPLZ(rs.getInt("PLZ")))
+            );
+        }catch(SQLException e) {
+            e.printStackTrace();
+            throw new FailedObjectCreationException();
+        }
+
+        return gebaeude;
     }
 }
