@@ -22,17 +22,17 @@
 
 
 <div class="container">
-    <div class="card-deck mb-3 mt-3">
-            <div class="card lootbox">
-                <img src="img/specials/g_g.png" class="card-img-top" alt="Gewöhnliche Lootbox">
-                <div class="card-body text-center">
+    <div class="card-deck mb-3" style="max-width: 1400px;">
+            <div class="card lootbox" style="width: 15rem; margin-top:2rem; margin-bottom: 1rem; align-self: center;">
+                <img src="img/specials/g_g.svg" class="card-img-top" alt="Gewöhnliche Lootbox">
+                <div class="card-body">
                     <h5 class="card-title">Gewöhnliche Lootbox</h5>
                     <p class="card-text">5 Gewinne, mit einer geringen Chance auf seltene Gewinne.</p>
                     <a class="btn btn-primary" data-toggle="modal" data-target="#gModalCenter">1,99€ oder<br>100
                         Treuepunkte</a>
                 </div>
             </div>
-            <div class="card lootbox">
+            <div class="card lootbox" style="width: 15rem;  margin-top:2rem; margin-bottom: 1rem;">
                 <img src="img/specials/s_g.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Seltene Lootbox</h5>
@@ -41,7 +41,7 @@
                         Treuepunkte</a>
                 </div>
             </div>
-            <div class="card lootbox">
+            <div class="card lootbox" style="width: 15rem;  margin-top:2rem; margin-bottom: 1rem;">
                 <img src="img/specials/e_g.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Epische Lootbox</h5>
