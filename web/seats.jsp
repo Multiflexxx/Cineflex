@@ -130,6 +130,17 @@
                 %>
             </div>
         </div>
+        <div class=" row mb-5">
+            <div class="col"></div>
+            <div class="col-lg-4">
+                <h5>Legende = Tizian</h5>
+                <button class="seat" seat_cat="P"></button><span class="legende">Parkett</span>
+                <button class="seat" seat_cat="P"></button><span>Louge</span>
+                <button class="seat" seat_cat="P"></button><span>Behindert</span>
+                <button class="seat" seat_cat="P"></button><span>Besetzt</span>
+            </div>
+            <div class="col"></div>
+        </div>
         <div class="row text-center" id="ticket_checkout">
             <div class="col"></div>
             <div class="col-lg-7">

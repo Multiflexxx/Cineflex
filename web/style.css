@@ -74,8 +74,8 @@ h6{
 }
 
 .seat {
-    width: 2em;
-    height: 2em;
+    width: 2.25em;
+    height: 2.25em;
     background: #4a9be8;
     border: #4e555b;
     margin: 2px;
@@ -120,6 +120,17 @@ h6{
     margin: 0 1.95em;
 }
 
+.legende {
+    display: inline-block;
+    height: 2.25em;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background: black;
+    vertical-align: middle;
+    line-height: 2.5em;
+}
+
 .btn-plus-minus {
     width: 1.75em;
     height: 1.75em;
@@ -137,15 +148,15 @@ h6{
 
 @media (max-width: 992px) {
     .seat {
-        width: 1.5em;
-        height: 1.5em;
+        width: 1.75em;
+        height: 1.75em;
     }
 }
 
 @media (max-width: 576px) {
     .seat {
-        width: 1em;
-        height: 1em;
+        width: 1.5em;
+        height: 1.5em;
     }
 }
 
