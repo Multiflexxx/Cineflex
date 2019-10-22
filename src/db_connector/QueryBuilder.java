@@ -202,6 +202,10 @@ public class QueryBuilder {
         return "Select * From sitz Where SitzplatzID = " + id + ";";
     }
 
+    public static String createFilm(String titel, String beschreibung, int dauer, int FSK, int DDD, String bildLink, String trailerLink){
+        return "insert into Film (`Titel`,`Beschreibung`,`Dauer`,`FSK`,`3D`,`BildLink`,`TrailerLink`) VALUES ('"+ titel +"','"+ beschreibung +"',"+ dauer +","+ FSK +","+ DDD +",'"+ bildLink +"', '"+ trailerLink +"');";
+    }
+
     public static String createBuchungsBeleg(int KID, int vorstellungsID, float preis, String timestamp) {
         return "Insert INTO Buchungsbeleg (BNR, KID, VorstellungsID, Preis, Zeitstempel) VALUES (NULL, " + KID + ", " + vorstellungsID + ", " + preis + ", '" + timestamp + "');";
     }
