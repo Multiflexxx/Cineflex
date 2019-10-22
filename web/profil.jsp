@@ -105,14 +105,16 @@
                                 onclick="onClickProfilBearbeiten()">
                             Bearbeiten
                         </button>
-                        <button type="submit" class="btn btn-primary" id="submitButton" onclick="onSubmit()"
+                        <nav>
+                            <button type="submit" class="btn btn-primary" id="submitButton" onclick="onSubmit()"
                                 style="display: none">
                             Speichern
-                        </button>
-                        <button type="button" class="btn btn-primary" id="abbrechenButton"
+                            </button>
+                            <button type="button" class="btn btn-primary" id="abbrechenButton"
                                 onclick="onClickProfilAbbrechen()"
                                 style="display: none">Abbrechen
-                        </button>
+                            </button>
+                        </nav>
                     </form>
                 </div>
             </div>
