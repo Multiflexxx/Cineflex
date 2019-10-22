@@ -3,6 +3,7 @@ package factory;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 //import oo.Buchungsbeleg;
+import exception.RequiredFactoryFailedException;
 import helper.DateFormatter;
 import helper.SupportMethods;
 import oo.Buchungsbeleg;
@@ -18,36 +19,40 @@ import java.util.Date;
 public class BuchungsFactory {
 
     // TODO: Change Signature to Buchungsbeleg?
-    public static int createBuchungBeleg(int[] sitzeIDs, int[] preiseVerIDs, int vorstellungsID, int KNR) {
+    public static int createBuchungBeleg(int[] sitzeIDs, int[] preiseVerIDs, String seats, String preisVer, int vorstellungsID, int KNR) {
         // TODO: sitzeIDs and preise must have the same length -> check
-        if(sitzeIDs.length != preiseVerIDs.length) {
+        if (sitzeIDs.length != preiseVerIDs.length) {
             // throw new UnequalParameterLength();
             return -1;
         }
 
         Sitz[] sitze = new Sitz[sitzeIDs.length];
-        for(int i = 0; i < sitze.length; i++) {
+        for (int i = 0; i < sitze.length; i++) {
             sitze[i] = SitzFactory.getSitzById(sitzeIDs[i]);
         }
 
         Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(vorstellungsID);
 
 
-        // Create Buchungsbeleg
-        // KundenID (KID)
-        // VorstellungsID vorstellung.getVorstellungsID()
-        // Preis???
+        float price = 0;
+        try {
+            price = PreisFactory.getBuchungsPreis(seats, preisVer, vorstellung.getFilm().getFilmID());
+        } catch (RequiredFactoryFailedException e) {
+            e.printStackTrace();
+        }
+
+
         Connection c = Connector.getConnection();
         Date date = new Date();
         String timestamp = DateFormatter.getSQLDateAndTime(date);
-        String sql = QueryBuilder.createBuchungsBeleg(KNR, vorstellung.getVorstellungsID(), 0, timestamp);
+        String sql = QueryBuilder.createBuchungsBeleg(KNR, vorstellung.getVorstellungsID(), price, timestamp);
         Connector.executeQuery(c, sql);
         sql = QueryBuilder.getBuchungsbelegByKIDandTimestamp(KNR, timestamp);
         ResultSet rs = Connector.getQueryResult(c, sql);
 
         int lastBNR = -1;
 
-        if(rs != null) {
+        if (rs != null) {
             try {
                 rs.next();
                 lastBNR = rs.getInt("BNR");
@@ -57,9 +62,9 @@ public class BuchungsFactory {
         }
 
         // In one loop
-            // Create Buchungsposition(en)
-            // PositionsID -> 1++
-            // SitzID sitze[i]
+        // Create Buchungsposition(en)
+        // PositionsID -> 1++
+        // SitzID sitze[i]
 //        if(lastBNR > 0) {
 //            for (int i = 0; i < sitze.length; i++) {
 //                sql = QueryBuilder.createBuchungsposition(i + 1, lastBNR, sitze[i].getSitzID());
@@ -86,18 +91,18 @@ public class BuchungsFactory {
         Buchungsbeleg buchungsbeleg = null;
 //        Timestamp t = rs.getTimestamp("");
 
-        if(rs != null) {
+        if (rs != null) {
             try {
-                if(rs.next()) {
+                if (rs.next()) {
                     // Get Vorstellung for Buchungsbeleg
                     Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(rs.getInt("vorstellungsID"));
                     Kunde kunde = KundenFactory.getKundeByKID(rs.getInt("KID"));
                     buchungsbeleg = new Buchungsbeleg(
-                        rs.getInt("BNR"),
-                        rs.getFloat("Preis"),
-                        vorstellung,
-                        kunde,
-                        new Date(rs.getTimestamp("Zeitstempel").getTime())
+                            rs.getInt("BNR"),
+                            rs.getFloat("Preis"),
+                            vorstellung,
+                            kunde,
+                            new Date(rs.getTimestamp("Zeitstempel").getTime())
                     );
                 }
             } catch (SQLException e) {
@@ -119,25 +124,25 @@ public class BuchungsFactory {
         ResultSet rs = Connector.getQueryResult(c, sql);
         Buchungsbeleg[] buchungsbelege = null;
 
-        if(rs != null) {
+        if (rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
             buchungsbelege = new Buchungsbeleg[rsSize];
 
             try {
                 int counter = 0;
-                while(rs.next()) {
+                while (rs.next()) {
                     Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(rs.getInt("vorstellungsID"));
                     Kunde kunde = KundenFactory.getKundeByKID(rs.getInt("KID"));
                     buchungsbelege[counter] = new Buchungsbeleg(
-                        rs.getInt("BNR"),
-                        rs.getFloat("Preis"),
-                        vorstellung,
-                        kunde,
-                        new Date(rs.getTimestamp("Zeitstempel").getTime())
+                            rs.getInt("BNR"),
+                            rs.getFloat("Preis"),
+                            vorstellung,
+                            kunde,
+                            new Date(rs.getTimestamp("Zeitstempel").getTime())
                     );
                     counter++;
                 }
-            }catch(SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
                 SupportMethods.close(c, rs);
                 return null;
@@ -151,8 +156,8 @@ public class BuchungsFactory {
     }
 
     public static void createBuchungsPositionen(Connection c, int BNR, Sitz[] sitze, int[] preiseVerIDs) {
-        if(BNR > 0) {
-            for(int i = 0; i < sitze.length; i++) {
+        if (BNR > 0) {
+            for (int i = 0; i < sitze.length; i++) {
                 String sql = QueryBuilder.createBuchungsposition(i + 1, BNR, sitze[i].getSitzID());
                 Connector.executeQuery(c, sql);
 
