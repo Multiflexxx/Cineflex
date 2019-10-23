@@ -32,7 +32,7 @@
             <h2>Deine Treuepunkte: <%=k.getTreuepunkte()%>
             </h2>
         </div>
-        <div class="card-body">
+        <div class="card-body card-body-beleg">
             <nav>
                 <div class="nav nav-pills nav-justified mb-2" id="nav-pills" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
@@ -51,18 +51,30 @@
                     <div class="card border-primary mt-3 mb-3">
                         <div class="card-header border-primary">Buchung <%=b.getBelegID()%>
                         </div>
-                        <div class="card-body border-primary">
-                            <h3 class="card-title"><%=b.getVorstellung().getFilm().getTitel()%>
-                                am <%=DateFormatter.getFrontendDate(b.getVorstellung().getDatum())%>
-                                um <%=DateFormatter.getFrontendTime(b.getVorstellung().getUhrzeit())%>
-                                Uhr</h3>
-                            <%
-                                Gebaeude g = b.getVorstellung().getSaal().getGebaeude();
-                            %>
-                            <p class="card-text"><%=b.getVorstellung().getSaal().getBezeichnung()%></p>
-                            <p class="card-text">Adresse: <%=g.getStrasse()%> <%=g.getHausnummer()%>, <%=g.getPlz()%> <%=g.getOrtsname()%></p>
-                            <p class="card-text">Tickets: ...</p>
-                            <p class="card-text">Preis: <%=b.getPreis()%> €</p>
+                        <div class="card-body border-primary card-body-beleg">
+                            <div class="row">
+                                <div class="col-lg-3 text-center mb-2">
+                                    <img src="<%=b.getVorstellung().getFilm().getBildLink()%>"
+                                         class="card-img beleg_img" alt="<%= b.getVorstellung().getFilm().getTitel()%>">
+                                </div>
+
+                                <div class="col-lg-9 d-flex flex-column justify-content-center">
+                                    <h3 class="card-title"><%=b.getVorstellung().getFilm().getTitel()%>
+                                        am <%=DateFormatter.getFrontendDate(b.getVorstellung().getDatum())%>
+                                        um <%=DateFormatter.getFrontendTime(b.getVorstellung().getUhrzeit())%>
+                                        Uhr</h3>
+                                    <%
+                                        Gebaeude g = b.getVorstellung().getSaal().getGebaeude();
+                                    %>
+                                    <p class="card-text"><%=b.getVorstellung().getSaal().getBezeichnung()%>
+                                    </p>
+                                    <p class="card-text">Adresse: <%=g.getStrasse()%> <%=g.getHausnummer()%>
+                                        , <%=g.getPlz()%> <%=g.getOrtsname()%>
+                                    </p>
+                                    <p class="card-text">Tickets: ...</p>
+                                    <p class="card-text">Preis: <%=b.getPreis()%> €</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <%
