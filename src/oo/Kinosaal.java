@@ -13,6 +13,14 @@ public class Kinosaal {
     this.gebaeude = gebaeude;
   }
 
+  public Gebaeude getGebaeude() {
+    return gebaeude;
+  }
+
+  public void setGebaeude(Gebaeude gebaeude) {
+    this.gebaeude = gebaeude;
+  }
+
   public int getSaalID() {
     return saalID;
   }

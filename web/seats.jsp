@@ -57,7 +57,8 @@
             <div class="col mb-3"></div>
         </div>
         <div class="row mb-5">
-            <div class="col-lg-12">
+            <div class="col"></div>
+            <div class="col-lg">
                 <%
                     //falls die vorstellung keinen sitzplan hat, fehlermeldung
                     if (vorstellung.getSaal().getSitzplan() == null) {
@@ -129,18 +130,34 @@
                     }
                 %>
             </div>
-        </div>
-        <div class=" row mb-5">
-            <div class="col"></div>
-            <div class="col-lg-4">
+            <div class="col-lg">
                 <h5>Legende = Tizian</h5>
-                <button class="seat" seat_cat="P"></button><span class="legende">Parkett</span>
-                <button class="seat" seat_cat="P"></button><span>Louge</span>
-                <button class="seat" seat_cat="P"></button><span>Behindert</span>
-                <button class="seat" seat_cat="P"></button><span>Besetzt</span>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        Parkett
+                    </li>
+                    <li class="list-group-item">
+                        Louge
+                    </li>
+                    <li class="list-group-item">
+                        Behindert
+                    </li>
+                    <li class="list-group-item">
+                        Besetzt
+                    </li>
+                </ul>
             </div>
             <div class="col"></div>
         </div>
+
+<%--        <div class=" row mb-5">--%>
+<%--            <div class="col"></div>--%>
+<%--            <div class="col-lg-2">--%>
+<%--                --%>
+<%--            </div>--%>
+<%--            <div class="col"></div>--%>
+<%--        </div>--%>
+
         <div class="row text-center" id="ticket_checkout">
             <div class="col"></div>
             <div class="col-lg-7">

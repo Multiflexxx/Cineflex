@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-lg-5 d-flex flex-column justify-content-center">
                 <h5>Dein(e) ausgewählte(s/n) Ticket(s)</h5>
-                <ul class="list-group">
+                <ul class="li st-group">
                     <li class="list-group-item list-group-item-light">Reihe M Platz 1</li>
                     <li class="list-group-item list-group-item-light">Reihe M Platz 2</li>
                     <li class="list-group-item list-group-item-light">Reihe M Platz 3</li>

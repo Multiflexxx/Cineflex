@@ -2,7 +2,8 @@
 <%@ page import="factory.KundenFactory" %>
 <%@ page import="oo.Buchungsbeleg" %>
 <%@ page import="factory.BuchungsFactory" %>
-<%@ page import="helper.DateFormatter" %><%--
+<%@ page import="helper.DateFormatter" %>
+<%@ page import="oo.Gebaeude" %><%--
   Created by IntelliJ IDEA.
   User: Anton
   Date: 16.10.2019
@@ -48,13 +49,18 @@
                             for (Buchungsbeleg b : buchungsbelege) {
                     %>
                     <div class="card border-primary mt-3 mb-3">
-                        <div class="card-header border-primary">Buchung <%=b.getBelegID()%></div>
+                        <div class="card-header border-primary">Buchung <%=b.getBelegID()%>
+                        </div>
                         <div class="card-body border-primary">
                             <h3 class="card-title"><%=b.getVorstellung().getFilm().getTitel()%>
                                 am <%=DateFormatter.getFrontendDate(b.getVorstellung().getDatum())%>
                                 um <%=DateFormatter.getFrontendTime(b.getVorstellung().getUhrzeit())%>
                                 Uhr</h3>
-                            <p class="card-text"><%=b.getVorstellung().getSaal().getBezeichnung()%> Gebäude ..</p>
+                            <%
+                                Gebaeude g = b.getVorstellung().getSaal().getGebaeude();
+                            %>
+                            <p class="card-text"><%=b.getVorstellung().getSaal().getBezeichnung()%></p>
+                            <p class="card-text">Adresse: <%=g.getStrasse()%> <%=g.getHausnummer()%>, <%=g.getPlz()%> <%=g.getOrtsname()%></p>
                             <p class="card-text">Tickets: ...</p>
                             <p class="card-text">Preis: <%=b.getPreis()%> €</p>
                         </div>
@@ -107,12 +113,12 @@
                         </button>
                         <nav>
                             <button type="submit" class="btn btn-primary" id="submitButton" onclick="onSubmit()"
-                                style="display: none">
-                            Speichern
+                                    style="display: none">
+                                Speichern
                             </button>
                             <button type="button" class="btn btn-primary" id="abbrechenButton"
-                                onclick="onClickProfilAbbrechen()"
-                                style="display: none">Abbrechen
+                                    onclick="onClickProfilAbbrechen()"
+                                    style="display: none">Abbrechen
                             </button>
                         </nav>
                     </form>

@@ -95,7 +95,7 @@ public class GebaeudeFactory {
                 rs.getString("Straße"),
                 rs.getInt("Hausnummer"),
                 rs.getInt("PLZ"),
-                rs.getString("" + OrtsFactory.getOrtByPLZ(rs.getInt("PLZ")))
+                OrtsFactory.getOrtByPLZ(rs.getInt("PLZ")).getOrtsName()
             );
         }catch(SQLException e) {
             e.printStackTrace();
