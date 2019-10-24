@@ -6,12 +6,10 @@ import exception.EmptyResultSetException;
 import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
 import exception.registrierung.EmptyInputValueException;
-import exception.registrierung.UnmatchingPassword;
+import exception.registrierung.UnmatchingPasswordException;
 import exception.registrierung.UserAlreadyExistsException;
 import helper.SupportMethods;
 import oo.Registrierung;
-
-import javax.management.Query;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +17,7 @@ import java.util.Date;
 
 public class RegistrierungFactory {
     public static Registrierung createRegistrierung(String vorname, String nachname, Date geburtsdatum, String email, String passwordHash, String passwordHashWdh, String wohnort, int plz, String straße, int hausnummer, String adresszusatz)
-            throws UnmatchingPassword, EmptyInputValueException, ResultSetIsNullException, UserAlreadyExistsException, RequiredFactoryFailedException, EmptyResultSetException {
+            throws UnmatchingPasswordException, EmptyInputValueException, UserAlreadyExistsException, RequiredFactoryFailedException, EmptyResultSetException {
         vorname = SupportMethods.removeHTMLCode(vorname);
         nachname = SupportMethods.removeHTMLCode(nachname);
         email = SupportMethods.removeHTMLCode(email);
@@ -29,7 +27,7 @@ public class RegistrierungFactory {
 
         // Check Password
         if(!passwordHash.equals(passwordHashWdh)) {
-            throw new UnmatchingPassword();
+            throw new UnmatchingPasswordException();
         }
 
         // Check whether all requiered Input Fields are filled
@@ -68,7 +66,7 @@ public class RegistrierungFactory {
             throw new EmptyResultSetException();
         } catch (ResultSetIsNullException e) {
             e.printStackTrace();
-            throw new ResultSetIsNullException();
+            throw new RequiredFactoryFailedException();
         }
 
         return registrierung;

@@ -300,6 +300,10 @@ public class QueryBuilder {
       return "Select * from `Gebäude` Where `GebäudeID` = " + id + ";";
   }
 
+  public static String getBookedSeats(int vorstellungsID) {
+      return "Select Buchungsposition.* from Buchungsposition Join Buchungsbeleg On Buchungsposition.BNR = Buchungsbeleg.BNR Where Buchungsbeleg.VorstellungsID = " + vorstellungsID + " AND Not Exists (Select BNR FROM Buchungsstonierung Where Buchungsstonierung.BNR = Buchungsposition.BNR);";
+  }
+
   public static String getOrtByPLZ(int plz) {
       return "Select * From Ort Where PLZ = " + plz + ";";
   }
