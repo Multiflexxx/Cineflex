@@ -8,6 +8,7 @@
 <%@ page import="factory.SitzsperreFactory" %>
 <%@ page import="oo.Sitz" %>
 <%@ page import="factory.SitzFactory" %>
+<%@ page import="exception.RequiredFactoryFailedException" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -24,7 +25,12 @@
 
     //sitzsperre für bereits ausgewählte sitze
     //Sitzsperre[] sitzsperre = SitzsperreFactory.getLockedSeats(vorstellung.getVorstellungsID());
-    Sitz[] sitzsperre = SitzFactory.getAllLockedSeats(vorstellung.getVorstellungsID());
+    Sitz[] sitzsperre = null;
+    try {
+        sitzsperre = SitzFactory.getAllLockedSeats(vorstellung.getVorstellungsID());
+    } catch (RequiredFactoryFailedException e) {
+        e.printStackTrace();
+    }
 
     //Uhrzeit formatieren
     String formatDatum = DateFormatter.getFrontendDate(vorstellung.getDatum());
