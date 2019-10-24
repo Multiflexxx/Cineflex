@@ -21,7 +21,7 @@
     }
 
     Film film = null;
-    Vorstellung [] vorstellung = null;
+    Vorstellung[] vorstellung = null;
     film = FilmFactory.getFilm(Integer.parseInt(id));
     try {
         vorstellung = VorstellungsFactory.getVorstellungen(film, date, time, plz);
@@ -63,7 +63,7 @@
                 <div class="col-lg-5">
                     <a href="#"><img src="<%=film.getBildLink()%>" class="card-img" alt="<%=film.getTitel()%>"></a>
                     <div class="table-responsive mt-2">
-                        <table class="table text-center">
+                        <table class="table text-center table-single-movie">
                             <tbody>
                             <%
                                 int counter = 1;
@@ -77,10 +77,10 @@
                             <tr>
                                 <td>
                                     <a href="<%=hrefURL%>">
-                                    <button class="film-btn" onclick="">
-                                        <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
-                                        <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
-                                    </button>
+                                        <button class="film-btn" onclick="">
+                                            <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
+                                            <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
+                                        </button>
                                     </a>
                                 </td>
 
@@ -92,10 +92,10 @@
 
                                 <td>
                                     <a href="<%=hrefURL%>">
-                                    <button class="film-btn" onclick="">
-                                        <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
-                                        <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
-                                    </button>
+                                        <button class="film-btn" onclick="">
+                                            <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
+                                            <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
+                                        </button>
                                     </a>
                                 </td>
 
@@ -106,10 +106,10 @@
                                 %>
                                 <td>
                                     <a href="<%=hrefURL%>">
-                                    <button class="film-btn" onclick="">
-                                        <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
-                                        <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
-                                    </button>
+                                        <button class="film-btn" onclick="">
+                                            <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
+                                            <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
+                                        </button>
                                     </a>
                                 </td>
                             </tr>
@@ -145,6 +145,15 @@
                             </tr>
                             <%
                                     }
+                                } else {
+                                    if (counter % 3 == 0) {
+                                        out.write("<td></td>");
+                                        out.write("</tr>");
+                                    } else if (counter % 3 == 2) {
+                                        out.write("<td></td>");
+                                        out.write("<td></td>");
+                                        out.write("</tr>");
+                                    }
                                 }
                             %>
                             </tbody>
@@ -153,24 +162,23 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="card-body">
-                        <h5 class="card-title"><%=film.getTitel()%></h5>
+                        <h5 class="card-title"><%=film.getTitel()%>
+                        </h5>
                         <p class="card-text"><small class="text-muted"><%=film.getDauer()%> Minuten | FSK <%=
                         film.getFsk()%> | Sprache <%=vorstellung[0].getSprache()%>
                         </small></p>
                         <p class="card-text mrb-justify"><%=film.getBeschreibung()%>
                         </p>
-                        <iframe width="560" height="315" src="<%=film.getTrailerLink()%>
-                        " frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;
-                        picture-in-picture" allowfullscreen></iframe>
+                        <div class="trailer-con">
+                            <iframe src="<%=film.getTrailerLink()%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
             <%
-            } else {
-            %>
-            <p class="card-text">Vergewissere dich, dass du ein Kino selektiert hast! Andernfalls ändere bitte deine
-                Werte bei deiner Suche!</p>
-            <%
+                } else {
+                    out.write("<p class=\"card-text\">Vergewissere dich, dass du ein Kino selektiert hast! Andernfalls ändere bitte deine\n" +
+                            "                Werte bei deiner Suche!</p>");
                 }
             %>
         </div>

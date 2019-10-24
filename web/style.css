@@ -6,31 +6,35 @@ body {
 a {
     color: white;
 }
-h6{
+
+h6 {
     color: #a5a5a5;
 }
+
 .header,
 .footer,
 .pagination,
 .page-link,
 .card,
 .modal-body,
-.modal-content{
+.modal-content {
     padding: 1rem 1rem;
     height: auto;
     margin-bottom: 0rem;
     /*color: #ffffff;*/
     background-color: #343a40;
 }
-.pagination{
+
+.pagination {
     position: center;
     padding-left: 40%;
 }
-.carousel-caption{
-    background-color: hsla(0,0%,0%,0.5);
+
+.carousel-caption {
+    background-color: hsla(0, 0%, 0%, 0.5);
 }
 
-.mrb-justify{
+.mrb-justify {
     text-align: justify;
     -ms-hyphens: auto;
     -webkit-hyphens: auto;
@@ -52,14 +56,16 @@ h6{
     color: white;
 }
 
-.icon{
+.icon {
     margin-right: 1rem;
 }
-.media{
+
+.media {
     padding: 1rem 30rem;
     min-width: 50rem;
 }
-.mb-1{
+
+.mb-1 {
     padding-bottom: 0.5rem;
 }
 
@@ -68,8 +74,30 @@ h6{
     width: content-box;
 }
 
-/*Ab hier für Sitzplan*/
-.sitzplan{
+/* SingleMovie */
+.table-single-movie td {
+    width: 33.33%;
+}
+
+.trailer-con {
+    position: relative;
+    padding-bottom: 56.25%; /* Default for 1600x900 videos 16:9 ratio*/
+    padding-top: 0px;
+    height: 0;
+    overflow: hidden;
+}
+
+.trailer-con iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Sitzplan */
+.sitzplan {
     margin: 0 auto;
 }
 
@@ -94,10 +122,7 @@ h6{
     background: #a71d2a;
 }
 
-
-
 #ticket_checkout {
-    /*visibility: collapse;*/
     display: none;
 }
 
@@ -143,6 +168,8 @@ h6{
     width: 8em;
 }
 
+
+/* Responsive */
 @media (max-width: 992px) {
     .seat {
         width: 1.75em;
@@ -159,22 +186,17 @@ h6{
 
 
 /*Snacks*/
-
 .tableSnacks {
-  margin: 15px;
-  width: 430px;
+    margin: 15px;
+    width: 430px;
 }
 
 
-
-
+/* Beleg */
 .card-body-beleg {
-    padding-left:  0;
+    padding-left: 0;
     padding-right: 0;
 }
-
-
-
 
 
 
