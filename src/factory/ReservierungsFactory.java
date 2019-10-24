@@ -117,7 +117,7 @@ public class ReservierungsFactory {
       int[] preiseVerIDs) {
     if (RNR > 0) {
       for (int i = 0; i < sitze.length; i++) {
-        String sql = QueryBuilder.createReservierungsposition(i + 1, RNR, sitze[i].getSitzID());
+        String sql = QueryBuilder.createReservierungsposition(i + 1, RNR, sitze[i].getSitzplatzID());
         Connector.executeQuery(c, sql);
 
         // Create PreisänderungBuchung

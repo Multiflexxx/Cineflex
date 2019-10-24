@@ -114,6 +114,18 @@ h6 {
     background: green;
 }
 
+/*.seat_B {*/
+/*    background: #4a9be8;*/
+/*}*/
+
+/*.seat_P {*/
+/*    background: yellow;*/
+/*}*/
+
+/*.seat_L {*/
+/*    background: orchid;*/
+/*}*/
+
 .seat_occupied {
     background: #a71d2a;
 }

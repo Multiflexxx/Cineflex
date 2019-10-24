@@ -6,6 +6,8 @@
 <%@ page import="factory.PreisFactory" %>
 <%@ page import="oo.Sitzsperre" %>
 <%@ page import="factory.SitzsperreFactory" %>
+<%@ page import="oo.Sitz" %>
+<%@ page import="factory.SitzFactory" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -21,7 +23,8 @@
     Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(Integer.parseInt(id));
 
     //sitzsperre für bereits ausgewählte sitze
-    Sitzsperre[] sitzsperre = SitzsperreFactory.getLockedSeats(vorstellung.getVorstellungsID());
+    //Sitzsperre[] sitzsperre = SitzsperreFactory.getLockedSeats(vorstellung.getVorstellungsID());
+    Sitz[] sitzsperre = SitzFactory.getAllLockedSeats(vorstellung.getVorstellungsID());
 
     //Uhrzeit formatieren
     String formatDatum = DateFormatter.getFrontendDate(vorstellung.getDatum());
@@ -43,8 +46,8 @@
     <div class="card mt-3 mb-3">
         <div class="row align-items-md-center">
             <div class="col mb-3"></div>
-            <div class="col-lg-2 mb-3">
-                <img src="<%=vorstellung.getFilm().getBildLink()%>" class="img-thumbnail" alt="Bild">
+            <div class="col-lg-2 mb-3 ">
+                <img src="<%=vorstellung.getFilm().getBildLink()%>" class="card-img img-thumbnail" alt="Bild">
             </div>
             <div class="col-lg-7 mb-3">
                 <h1><%=vorstellung.getFilm().getTitel()%>
@@ -88,7 +91,7 @@
                             out.write("<td>");
                             //daten des sitzen zur übersichtlichkeit bereits vorher aus dem objekt gezogen
                             char row = vorstellung.getSaal().getSitzplan()[counter].getReihe();
-                            int uniqueID = vorstellung.getSaal().getSitzplan()[counter].getSitzID();
+                            int uniqueID = vorstellung.getSaal().getSitzplan()[counter].getSitzplatzID();
                             int seatNr = vorstellung.getSaal().getSitzplan()[counter].getNummer();
                             char category = vorstellung.getSaal().getSitzplan()[counter].getSitzklasse();
                             //erstellung der tabelle mit den sitzen als buttons
@@ -102,10 +105,10 @@
                                     }
                                 }
                                 if (!ssgesetzt) {
-                                    out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "'>" + category + "</button>");
+                                    out.write("<button id=\"" + row + seatNr + "\" class=\"seat_" + category + "\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "'>" + category + "</button>");
                                 }
                             } else {
-                                out.write("<button id=\"" + row + seatNr + "\" class=\"seat\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "'>" + category + "</button>");
+                                out.write("<button id=\"" + row + seatNr + "\" class=\"seat seat_" + category + "\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "'>" + category + "</button>");
                             }
 
                             out.write("</td>");
@@ -130,33 +133,13 @@
                     }
                 %>
             </div>
-            <div class="col-lg">
-                <h5>Legende = Tizian</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        Parkett
-                    </li>
-                    <li class="list-group-item">
-                        Louge
-                    </li>
-                    <li class="list-group-item">
-                        Behindert
-                    </li>
-                    <li class="list-group-item">
-                        Besetzt
-                    </li>
-                </ul>
+            <div class="col-lg d-flex flex-column justify-content-center text-center">
+                <h6>P: Parkett</h6>
+                <h6>L: Louge</h6>
+                <h6>B: Behindert</h6>
             </div>
             <div class="col"></div>
         </div>
-
-<%--        <div class=" row mb-5">--%>
-<%--            <div class="col"></div>--%>
-<%--            <div class="col-lg-2">--%>
-<%--                --%>
-<%--            </div>--%>
-<%--            <div class="col"></div>--%>
-<%--        </div>--%>
 
         <div class="row text-center" id="ticket_checkout">
             <div class="col"></div>

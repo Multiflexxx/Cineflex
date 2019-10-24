@@ -158,7 +158,7 @@ public class BuchungsFactory {
     public static void createBuchungsPositionen(Connection c, int BNR, Sitz[] sitze, int[] preiseVerIDs) {
         if (BNR > 0) {
             for (int i = 0; i < sitze.length; i++) {
-                String sql = QueryBuilder.createBuchungsposition(i + 1, BNR, sitze[i].getSitzID());
+                String sql = QueryBuilder.createBuchungsposition(i + 1, BNR, sitze[i].getSitzplatzID());
                 Connector.executeQuery(c, sql);
 
                 // Create PreisänderungBuchung

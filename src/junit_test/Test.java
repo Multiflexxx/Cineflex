@@ -91,13 +91,13 @@ public class Test {
     public void testeSitz()
     {
         Sitz sitz = new Sitz(2, 5, 'A', 'B');
-        Assert.assertEquals(2, sitz.getSitzID());
+        Assert.assertEquals(2, sitz.getSitzplatzID());
         Assert.assertEquals(5, sitz.getNummer());
         Assert.assertEquals('A', sitz.getReihe());
         Assert.assertEquals('B', sitz.getSitzklasse());
 
-        sitz.setSitzID(5);
-        Assert.assertEquals(5, sitz.getSitzID());
+        sitz.setSitzplatzID(5);
+        Assert.assertEquals(5, sitz.getSitzplatzID());
         sitz.setNummer(42);
         Assert.assertEquals(42, sitz.getNummer());
         sitz.setReihe('F');
@@ -1062,7 +1062,7 @@ public class Test {
         // Test if ResultSeat is not Null
         Assert.assertNotNull(resultSeat);
 
-        Assert.assertEquals(10, resultSeat.getSitzID());
+        Assert.assertEquals(10, resultSeat.getSitzplatzID());
         Assert.assertEquals(2, resultSeat.getNummer());
         Assert.assertEquals('B', resultSeat.getReihe());
         Assert.assertEquals('L', resultSeat.getSitzklasse());
@@ -1241,7 +1241,7 @@ public class Test {
         // Test if Sitzplan array is filled correctly
         Assert.assertEquals(15, resultKinosaal.getSaalID());
         Assert.assertEquals("Saal 1", resultKinosaal.getBezeichnung());
-        Assert.assertEquals(6, resultKinosaal.getSitzplan()[1].getSitzID());
+        Assert.assertEquals(6, resultKinosaal.getSitzplan()[1].getSitzplatzID());
         Assert.assertEquals('A', resultKinosaal.getSitzplan()[0].getReihe());
     }
 

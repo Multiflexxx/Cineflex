@@ -10,25 +10,25 @@ package oo;
  */
 public class Sitz {
 
-    private int sitzID, nummer;
+    private int sitzplatzID, nummer;
     private char reihe, sitzklasse;
 
 
-    public Sitz(int sitzID, int nummer, char reihe, char sitzklasse)
+    public Sitz(int sitzplatzID, int nummer, char reihe, char sitzklasse)
     {
-        this.sitzID = sitzID;
+        this.sitzplatzID = sitzplatzID;
         this.nummer = nummer;
         this.reihe = reihe;
         this.sitzklasse = sitzklasse;
 
     }
 
-    public int getSitzID() {
-        return sitzID;
+    public int getSitzplatzID() {
+        return sitzplatzID;
     }
 
-    public void setSitzID(int sitzID) {
-        this.sitzID = sitzID;
+    public void setSitzplatzID(int sitzplatzID) {
+        this.sitzplatzID = sitzplatzID;
     }
 
     public int getNummer() {

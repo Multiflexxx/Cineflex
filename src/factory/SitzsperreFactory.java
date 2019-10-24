@@ -6,7 +6,6 @@ import helper.SupportMethods;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
 
 import oo.Sitz;
@@ -104,7 +103,7 @@ public class SitzsperreFactory {
     public static Sitzsperre[] locSeats(Sitz[] seats, Vorstellung v, int KID) {
         int[] seatIDs = new int[seats.length];
         for (int i = 0; i < seats.length; i++) {
-            seatIDs[i] = seats[i].getSitzID();
+            seatIDs[i] = seats[i].getSitzplatzID();
         }
         return lockSeats(seatIDs, v.getVorstellungsID(), KID);
     }
