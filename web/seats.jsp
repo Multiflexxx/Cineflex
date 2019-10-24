@@ -30,6 +30,7 @@
         sitzsperre = SitzFactory.getAllLockedSeats(vorstellung.getVorstellungsID());
     } catch (RequiredFactoryFailedException e) {
         e.printStackTrace();
+        response.sendRedirect("error500.jsp");
     }
 
     //Uhrzeit formatieren
