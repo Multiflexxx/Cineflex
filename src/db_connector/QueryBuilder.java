@@ -94,8 +94,7 @@ public class QueryBuilder {
                     "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
                     "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
                     "WHERE (`Titel` LIKE '%" + search + "%' OR `Beschreibung` LIKE '%" + search + "%') " +
-                    "AND `Datum` >= '" + date + "' " +
-                    "AND `Uhrzeit`>= '" + time + "' " +
+                    "WHERE concat(`Datum`,  ' ', `Uhrzeit`) >= '" + date + " " + time + "' " +
                     "AND Gebäude.PLZ = '"+ plz + "' " +
                     "AND `FSK` <= " + fsk + " ;";
         } else {
@@ -103,8 +102,7 @@ public class QueryBuilder {
                     "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
                     "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
                     "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
-                    "WHERE `Datum` >= '" + date + "' " +
-                    "AND `Uhrzeit`>= '" + time + "' " +
+                    "WHERE concat(`Datum`,  ' ', `Uhrzeit`) >= '" + date + " " + time + "' " +
                     "AND Gebäude.PLZ = '"+ plz + "' " +
                     "AND `FSK` <= " + fsk + " ;";
         }
