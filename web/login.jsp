@@ -14,6 +14,9 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="alert alert-danger" id="login_failed" role="alert" style="display: none">
+                    E-Mail oder Passwort ist falsch!
+                </div>
                 <form name="LoginForm" action="loginHandler.jsp" method="post">
                     <div class="form-group">
                         <label for="inputEmailLog">E-Mail / Benutzername</label>
@@ -43,7 +46,6 @@
     </div>
 </div>
 
-
 <script>
     function setInputUrl() {
         document.getElementById("inputURL").value = window.location.href;
@@ -51,3 +53,20 @@
 
     setInputUrl();
 </script>
+
+<%
+    if (session.getAttribute("loginfailed") == "1") {
+%>
+<script>
+    function loginFailed() {
+        document.getElementById("login_failed").style.display = "inherit";
+        $('#loginDialog').modal('show');
+    }
+    loginFailed();
+</script>
+<%
+        session.setAttribute("loginfailed", "0");
+    } else if (session.getAttribute("loginfailed") == "0") {
+        session.removeAttribute("login");
+    }
+%>
