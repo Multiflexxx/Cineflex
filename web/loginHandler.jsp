@@ -1,6 +1,7 @@
 <%@ page import="Password.PassMD5" %>
 <%@ page import="factory.LoginFactory" %>
 <%@ page import="oo.UserLogin" %>
+<%@ page import="java.sql.Connection" %>
 
 <%
     String email = request.getParameter("inputEmailLog");
@@ -24,7 +25,6 @@
     if (userLogin == null) {
         session.setAttribute("loginfailed", "1");
     } else {
-
         session.setAttribute("email", email);
         session.setAttribute("vorname", userLogin.getFirstname());
         session.setAttribute("nachname", userLogin.getLastname());

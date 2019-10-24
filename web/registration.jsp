@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form name="RegistrationForm" action="RegistrationHandler" method="post">
+                <form name="RegistrationForm" action="registrationHandler.jsp" method="post">
                     <div class="form-group">
                         <label for="inputVorname">Vorname</label>
                         <input type="text" class="form-control" id="inputVorname" name="inputVorname" required="required" pattern="[A-Za-z0-9]{1,}" placeholder="Vorname">
