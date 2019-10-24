@@ -2,6 +2,9 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import exception.EmptyResultSetException;
+import exception.FailedObjectCreationException;
+import exception.ResultSetIsNullException;
 import helper.SupportMethods;
 
 import java.sql.Connection;
@@ -29,7 +32,7 @@ public class SitzsperreFactory {
         return sitzSperre;
     }
 
-    public static Sitzsperre[] getLockedSeats(int vorstellungsID) {
+    public static Sitzsperre[] getLockedSeats(int vorstellungsID) throws EmptyResultSetException, ResultSetIsNullException, FailedObjectCreationException {
         // Update Sitzsperren, remove Timed out Seats
         updateLockedSeats();
 
@@ -59,14 +62,14 @@ public class SitzsperreFactory {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    throw new FailedObjectCreationException();
                 }
             } else {
 
-                sitzSperre = new Sitzsperre[1];
-                sitzSperre[0] = null;
+                throw new EmptyResultSetException();
             }
         } else {
-            return null;
+            throw new ResultSetIsNullException();
         }
         return sitzSperre;
     }
@@ -109,6 +112,16 @@ public class SitzsperreFactory {
     }
 
     public static Sitzsperre[] getLockedSeats(Vorstellung v) {
-        return getLockedSeats(v.getVorstellungsID());
+        try {
+            return getLockedSeats(v.getVorstellungsID());
+        } catch (EmptyResultSetException e) {
+            e.printStackTrace();
+        } catch (ResultSetIsNullException e) {
+            e.printStackTrace();
+        } catch (FailedObjectCreationException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

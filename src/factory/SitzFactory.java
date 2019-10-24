@@ -9,6 +9,7 @@ import exception.ResultSetIsNullException;
 import helper.SupportMethods;
 import oo.Sitz;
 import oo.Sitzsperre;
+import org.junit.internal.runners.statements.Fail;
 
 import javax.management.Query;
 import java.sql.Connection;
@@ -82,6 +83,12 @@ public class SitzFactory {
         return bookedSeats;
     }
 
+    /**
+     * Returns a Sitz[] Array of all locked for a given Vorstellung
+     * @param vorstellungsID ID of Vortsellung
+     * @return Return @code{null} when there is no seat locked Seat in any way, otherwise Sitz[]
+     * @throws RequiredFactoryFailedException
+     */
     public static Sitz[] getAllLockedSeats(int vorstellungsID) throws RequiredFactoryFailedException {
         Sitz[] bookedSeats = null;
         try {
@@ -94,7 +101,19 @@ public class SitzFactory {
         } catch (EmptyResultSetException e) {
            // Empty resultSet -> no booked Seats
         }
-        Sitzsperre[] lockedSeats = SitzsperreFactory.getLockedSeats(vorstellungsID);
+
+        Sitzsperre[] lockedSeats = null;
+        try {
+            lockedSeats = SitzsperreFactory.getLockedSeats(vorstellungsID);
+        } catch (FailedObjectCreationException e) {
+            e.printStackTrace();
+            throw new RequiredFactoryFailedException();
+        } catch (ResultSetIsNullException e) {
+            e.printStackTrace();
+            throw new RequiredFactoryFailedException();
+        } catch (EmptyResultSetException e) {
+            // Empty ResultSet -> no locked Seats
+        }
 
         int length1 = 0;
         if(bookedSeats != null) {
@@ -106,16 +125,20 @@ public class SitzFactory {
             length2 = lockedSeats.length;
         }
 
-        Sitz[] allLockedSeats = new Sitz[length1 + length2];
+        Sitz[] allLockedSeats = null;
+        if(length1 + length2 > 0) {
+            allLockedSeats = new Sitz[length1 + length2];
+        }
+
         int i = 0;
         if(bookedSeats != null) {
-            for(i = 0; i < bookedSeats.length; i++) {
+            for(i = 0; i < length1; i++) {
                 allLockedSeats[i] = bookedSeats[i];
             }
         }
         if(lockedSeats != null) {
-            for(int j = 0; j < lockedSeats.length; j++) {
-                allLockedSeats[i + j + 1] = getSitzById(lockedSeats[j].getSitzplatzID());
+            for(int j = 0; j < length2; j++) {
+                allLockedSeats[length1 + j] = getSitzById(lockedSeats[j].getSitzplatzID());
             }
         }
 
