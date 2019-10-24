@@ -101,7 +101,7 @@
                             int seatNr = vorstellung.getSaal().getSitzplan()[counter].getNummer();
                             char category = vorstellung.getSaal().getSitzplan()[counter].getSitzklasse();
                             //erstellung der tabelle mit den sitzen als buttons
-                            if (sitzsperre[0] != null) {
+                            if (sitzsperre != null) {
                                 boolean ssgesetzt = false;
                                 for (int i = 0; i < sitzsperre.length; i++) {
                                     if (sitzsperre[i].getSitzplatzID() == uniqueID) {
