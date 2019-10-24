@@ -111,7 +111,7 @@
                                     }
                                 }
                                 if (!ssgesetzt) {
-                                    out.write("<button id=\"" + row + seatNr + "\" class=\"seat_" + category + "\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "'>" + category + "</button>");
+                                    out.write("<button id=\"" + row + seatNr + "\" class=\"seat seat_" + category + "\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "'>" + category + "</button>");
                                 }
                             } else {
                                 out.write("<button id=\"" + row + seatNr + "\" class=\"seat seat_" + category + "\" onclick=\"chooseSeat('" + row + seatNr + "'," + vorstellung.getSaal().getRowLength(row) + ")\" uniqueID='" + uniqueID + "' seat_cat='" + category + "'>" + category + "</button>");

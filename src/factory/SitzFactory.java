@@ -72,7 +72,7 @@ public class SitzFactory {
             bookedSeats = new Sitz[rsSize];
             int counter = 0;
             while(rs.next()) {
-                bookedSeats[counter] = getSitzById(rs.getInt("SitzplatzID"));
+                bookedSeats[counter] = getSitzById(rs.getInt("SitzID"));
                 counter++;
             }
 
