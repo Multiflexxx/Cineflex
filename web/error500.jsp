@@ -65,7 +65,7 @@
 <jsp:include page="locationPicker.jsp"/>
 <jsp:include page="login.jsp"/>
 <jsp:include page="registration.jsp"/>
-<jsp:include page="filter.jsp"/>
+<jsp:include page="search.jsp"/>
 
 <div class="container">
     <div class="card mt-3 mb-3">

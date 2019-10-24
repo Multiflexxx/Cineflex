@@ -18,9 +18,14 @@
                         <label for="inputNachname">Nachname</label>
                         <input type="text" class="form-control" id="inputNachname" name="inputNachname" required="required" pattern="[A-Za-z0-9]{1,}" placeholder="Nachname">
                     </div>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="inputGeb">Geburtsdatum</label>--%>
+<%--                        <input type="text" class="form-control" id="inputGeb" name="inputGeb" required="required" placeholder="YYYY-MM-DD">--%>
+<%--                    </div>--%>
                     <div class="form-group">
                         <label for="inputGeb">Geburtsdatum</label>
-                        <input type="text" class="form-control" id="inputGeb" name="inputGeb" required="required" placeholder="YYYY-MM-DD">
+                        <input type="date" class="form-control" id="inputGeb" name="inputGeb" value="0000-00-00"
+                               min="0000-00-00" max="9999-12-31">
                     </div>
                     <div class="form-group">
                         <label for="inputOrt">Wohnort</label>

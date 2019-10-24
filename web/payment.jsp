@@ -7,7 +7,7 @@
 <jsp:include page="elements/header.jsp"/>
 <jsp:include page="login.jsp"/>
 <jsp:include page="registration.jsp"/>
-<jsp:include page="filter.jsp"/>
+<jsp:include page="search.jsp"/>
 
 
 <%
