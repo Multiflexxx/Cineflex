@@ -4,6 +4,7 @@ import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 import helper.SupportMethods;
+import send_mail.Email_Sender;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -91,6 +92,9 @@ public class RegistrationHandler extends HttpServlet {
 
         String sql = QueryBuilder.createUser(firstname, lastname, gebDateSQL, email, pass, Integer.parseInt(hausnummer), straße, adresszusatz, Integer.parseInt(postleitzahl));
         Connector.executeQuery(c, sql);
+
+        Email_Sender.sendMail(email, "Wilkommen bei Cineflexxx", "Hallo "+firstname+", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
+
 
         try {
             response.sendRedirect("index.jsp");
