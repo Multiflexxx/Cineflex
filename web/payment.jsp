@@ -33,6 +33,8 @@
     </div>
 </div>
 
+
+
 <jsp:include page="elements/footer.jsp"/>
 </body>
 </html>

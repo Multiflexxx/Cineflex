@@ -5,6 +5,10 @@
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.Currency" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="helper.TempBuchungHandler" %>
+<%@ page import="oo.Sitz" %>
+<%@ page import="exception.InvalidInputValueException" %>
+<%@ page import="exception.RequiredFactoryFailedException" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -34,6 +38,15 @@
             int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
             SitzsperreFactory.lockSeats(seatsInt, vorstellungsID, KID);
 
+            try {
+                TempBuchungHandler.addTempBuchungToSession(session, seats, preisVer);
+            } catch (InvalidInputValueException e) {
+                e.printStackTrace();
+            } catch (RequiredFactoryFailedException e) {
+                e.printStackTrace();
+            }
+            Sitz[] sitz = (Sitz[]) session.getAttribute("temp_sitze");
+            sitz[0].getReihe();
 
             float preis = PreisFactory.getBuchungsPreis(seats, preisVer, filmID);
             float mwst = (float) (preis * 0.07);

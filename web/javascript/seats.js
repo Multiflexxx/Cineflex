@@ -295,6 +295,7 @@ function onClickReservieren() {
 function onClickBuchen(vID , fID) {
     // LOOP OVER SEATS
     // CREATE JSON FILE
+
     var form = document.createElement("form");
     form.setAttribute("method", "post");
     form.setAttribute("action", "buchungsHandler.jsp");
