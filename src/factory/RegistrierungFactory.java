@@ -10,7 +10,7 @@ import exception.registrierung.UnmatchingPasswordException;
 import exception.registrierung.UserAlreadyExistsException;
 import helper.SupportMethods;
 import oo.Registrierung;
-
+import send_mail.Email_Sender;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -70,6 +70,8 @@ public class RegistrierungFactory {
             throw new RequiredFactoryFailedException();
         }
 
+        Email_Sender.sendMail(registrierung.getEmail(), "Wilkommen bei Cineflexxx", "Hallo"+registrierung.getVorname()+", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
+
         return registrierung;
     }
 
@@ -105,6 +107,8 @@ public class RegistrierungFactory {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        Email_Sender.sendMail(registrierung.getEmail(), "Wilkommen bei Cineflexxx", "Hallo"+registrierung.getVorname()+", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
 
         return registrierung;
     }
