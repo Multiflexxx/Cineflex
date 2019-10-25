@@ -17,6 +17,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SitzFactory {
+    /**
+     *
+     * @param id
+     * @param mockRs
+     * @return sitz
+     */
     public static Sitz getSitzById(int id, ResultSet mockRs) {
         Sitz sitz = null;
         Connection c = Connector.getConnection();
@@ -53,6 +59,14 @@ public class SitzFactory {
         return sitz;
     }
 
+    /**
+     *
+     * @param vorstellungsID
+     * @return bookedSeats
+     * @throws FailedObjectCreationException
+     * @throws EmptyResultSetException
+     * @throws ResultSetIsNullException
+     */
     public static Sitz[] getBookedSeats(int vorstellungsID) throws FailedObjectCreationException, EmptyResultSetException, ResultSetIsNullException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getBookedSeats(vorstellungsID);
@@ -85,7 +99,7 @@ public class SitzFactory {
 
     /**
      * Returns a Sitz[] Array of all locked for a given Vorstellung
-     * @param vorstellungsID ID of Vortsellung
+     * @param vorstellungsID ID of Vorstellung
      * @return Return @code{null} when there is no seat locked Seat in any way, otherwise Sitz[]
      * @throws RequiredFactoryFailedException
      */
@@ -145,6 +159,11 @@ public class SitzFactory {
         return allLockedSeats;
     }
 
+    /**
+     *
+     * @param id
+     * @return Sitz
+     */
     public static Sitz getSitzById(int id)
     {
         return getSitzById(id, null);

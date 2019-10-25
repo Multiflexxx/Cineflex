@@ -21,6 +21,14 @@ public class VorstellungsFactory {
     private static String stime = "";
     private static String splz = "";
 
+    /**
+     *
+     * @param film
+     * @param date
+     * @param time
+     * @param plz
+     * @return vorstellungen
+     */
     public static Vorstellung[] getVorstellungen(Film film, String date, String time, String plz) {
 
         sfilm = film;
@@ -105,9 +113,12 @@ public class VorstellungsFactory {
         return null;
     }
 
+    /**
+     *
+     * @param id
+     * @return vorstellung
+     */
     public static Vorstellung getVorstellungById(int id) {
-
-
         Vorstellung vorstellung = null;
 
         Connection c = Connector.getConnection();
@@ -156,6 +167,10 @@ public class VorstellungsFactory {
       return vorstellung;
     }
 
+    /**
+     *
+     * @return String
+     */
     public static String getLastSQLQuery() {
         return QueryBuilder.showMovieById("" + sfilm.getFilmID(), sdate, stime, splz);
     }

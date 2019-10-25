@@ -14,6 +14,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class KinosaalFactory {
+    /**
+     *
+     * @param id
+     * @param mockRs1
+     * @param mockRs2
+     * @return Sitzplan
+     */
     public static Kinosaal getKinosaal(int id, ResultSet mockRs1, ResultSet mockRs2) {
 
         Sitz[] Sitzplan;
@@ -75,6 +82,11 @@ public class KinosaalFactory {
         return kinosaal;
     }
 
+    /**
+     *
+     * @param id
+     * @return Kinosaal
+     */
     public static Kinosaal getKinosaal(int id) {
         return getKinosaal(id, null, null);
     }

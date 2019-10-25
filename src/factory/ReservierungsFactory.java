@@ -15,6 +15,14 @@ import oo.Vorstellung;
 
 public class ReservierungsFactory {
 
+  /**
+   *
+   * @param sitzeIDs
+   * @param preiseVerIDs
+   * @param vorstellungsID
+   * @param KNR
+   * @return
+   */
   public static int createReservierungsBelege(int[] sitzeIDs, int[] preiseVerIDs,
       int vorstellungsID, int KNR) {
     if (sitzeIDs.length != preiseVerIDs.length) {
@@ -55,6 +63,11 @@ public class ReservierungsFactory {
     return 0;
   }
 
+  /**
+   *
+   * @param RNR
+   * @return reservierungsbeleg
+   */
   public static Reservierungsbeleg getReservierungsbelegByRNR(int RNR) {
     Connection c = Connector.getConnection();
     String sql = QueryBuilder.getReservierungsbelegByRNR(RNR);
@@ -80,6 +93,11 @@ public class ReservierungsFactory {
     return reservierungsbeleg;
   }
 
+  /**
+   *
+   * @param KID
+   * @return reservierungsbelege
+   */
   public static Reservierungsbeleg[] getReservierungsbelegByKID(int KID) {
     Connection c = Connector.getConnection();
     String sql = QueryBuilder.getReservierungsbelegByKID(KID);
@@ -113,6 +131,13 @@ public class ReservierungsFactory {
 
   }
 
+  /**
+   *
+   * @param c
+   * @param RNR
+   * @param sitze
+   * @param preiseVerIDs
+   */
   public static void createReservierungsPositionen(Connection c, int RNR, Sitz[] sitze,
       int[] preiseVerIDs) {
     if (RNR > 0) {

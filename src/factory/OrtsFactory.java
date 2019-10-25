@@ -11,6 +11,13 @@ import java.sql.SQLException;
 import oo.Ort;
 
 public class OrtsFactory {
+  /**
+   *
+   * @param plz
+   * @return ort
+   * @throws ResultSetIsNullException
+   * @throws EmptyResultSetException
+   */
   public static Ort getOrtByPLZ(int plz) throws ResultSetIsNullException, EmptyResultSetException {
     Connection c = Connector.getConnection();
     String sql = QueryBuilder.getOrtByPLZ(plz);

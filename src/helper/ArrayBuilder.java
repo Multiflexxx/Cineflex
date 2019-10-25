@@ -1,6 +1,12 @@
 package helper;
 
 public class ArrayBuilder {
+    /**
+     *
+     * @param string
+     * @param del
+     * @return arr
+     */
     public static int[] stringToIntArray(String string, String del) {
         String[] splitString = string.split(del);
         int[] arr = new int[splitString.length];
@@ -11,12 +17,21 @@ public class ArrayBuilder {
         return arr;
     }
 
+    /**
+     *
+     * @param string
+     * @return stringToIntArray(string)
+     */
     public static int[] stringToIntArray(String string) {
         return stringToIntArray(string, ",");
     }
 
-
-
+    /**
+     *
+     * @param arr
+     * @param del
+     * @return output
+     */
     public static String intArrayToString(int[] arr, String del) {
         String output = "";
         for(int i = 0; i < arr.length; i++) {
@@ -29,6 +44,11 @@ public class ArrayBuilder {
         return output;
     }
 
+    /**
+     *
+     * @param arr
+     * @return intArrayToString
+     */
     public static String intArrayToString(int[] arr) {
     return intArrayToString(arr, ", ");
 }

@@ -11,6 +11,13 @@ import java.sql.SQLException;
 
 public class LoginFactory {
 
+    /**
+     *
+     * @param email
+     * @param passwordHash
+     * @param mockRs
+     * @return userLogin
+     */
     public static UserLogin getUserLogin(String email, String passwordHash, ResultSet mockRs) {
         UserLogin userLogin = null;
         Connection c = Connector.getConnection();
@@ -49,6 +56,12 @@ public class LoginFactory {
         return userLogin;
     }
 
+    /**
+     *
+     * @param email
+     * @param passwordHash
+     * @return UserLogin
+     */
     public static UserLogin getUserLogin(String email, String passwordHash)
     {
         return getUserLogin(email, passwordHash, null);

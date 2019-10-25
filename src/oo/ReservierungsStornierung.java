@@ -1,27 +1,48 @@
 package oo;
 
 public class ReservierungsStornierung {
-		private int RNR;
-		private int StrnNr;
+    private int RNR;
+    private int StrnNr;
 
-		public ReservierungsStornierung(int RNR, int strnNr) {
-				this.RNR = RNR;
-				StrnNr = strnNr;
-		}
+    /**
+     *
+     * @param RNR
+     * @param strnNr
+     */
+    public ReservierungsStornierung(int RNR, int strnNr) {
+        this.RNR = RNR;
+        StrnNr = strnNr;
+    }
 
-		public int getRNR() {
-				return RNR;
-		}
+    /**
+     *
+     * @return RNR
+     */
+    public int getRNR() {
+        return RNR;
+    }
 
-		public void setRNR(int RNR) {
-				this.RNR = RNR;
-		}
+    /**
+     *
+     * @param RNR
+     */
+    public void setRNR(int RNR) {
+        this.RNR = RNR;
+    }
 
-		public int getStrnNr() {
-				return StrnNr;
-		}
+    /**
+     *
+     * @return
+     */
+    public int getStrnNr() {
+        return StrnNr;
+    }
 
-		public void setStrnNr(int strnNr) {
-				StrnNr = strnNr;
-		}
+    /**
+     *
+     * @param strnNr
+     */
+    public void setStrnNr(int strnNr) {
+        StrnNr = strnNr;
+    }
 }

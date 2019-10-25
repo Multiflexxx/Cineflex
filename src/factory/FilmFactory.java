@@ -13,6 +13,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FilmFactory {
+    /**
+     * Used also for Mocks
+     * @param search
+     * @param date
+     * @param time
+     * @param fsk
+     * @param plz
+     * @param mockRs1
+     * @param mockRs2
+     * @param mockRs3
+     * @return
+     */
     public static Film[] getFilme(String search, String date, String time, int fsk, String plz, ResultSet mockRs1, ResultSet mockRs2, ResultSet mockRs3) {
         Film[] filme;
         Connection c = Connector.getConnection();
@@ -72,10 +84,32 @@ public class FilmFactory {
         return null;
     }
 
+    /**
+     *
+     * @param search
+     * @param date
+     * @param time
+     * @param fsk
+     * @param plz
+     * @return Film[]
+     */
     public static Film[] getFilme(String search, String date, String time, int fsk, String plz) {
         return getFilme(search, date, time, fsk, plz, null, null, null);
     }
 
+    /**
+     *
+     * @param search
+     * @param date
+     * @param time
+     * @param fsk
+     * @param plz
+     * @param genreID
+     * @param mockRs1
+     * @param mockRs2
+     * @param mockRs3
+     * @return Film[]
+     */
     public static Film[] getFilme(String search, String date, String time, int fsk, String plz, int genreID, ResultSet mockRs1, ResultSet mockRs2, ResultSet mockRs3) {
         Film[] filme;
         Connection c = Connector.getConnection();
@@ -135,15 +169,38 @@ public class FilmFactory {
     return null;
   }
 
+    /**
+     *
+     * @param plz
+     * @return Film[]
+     */
   public static Film[] getFilme(String plz) {
       return getFilme("", DateFormatter.getSQLDate(new Date()), "08:00:00", 18, plz);
   }
 
+    /**
+     *
+     * @param search
+     * @param date
+     * @param time
+     * @param fsk
+     * @param plz
+     * @param genreID
+     * @return Film[]
+     */
   public static Film[] getFilme(String search, String date, String time, int fsk, String plz, int genreID) {
       return getFilme(search, date, time, fsk, plz, genreID, null, null, null);
   }
 
-    public static Film[] getTitelPageFilme(String plz, ResultSet mockRs1, ResultSet mockRs2, ResultSet mockRs3) {
+    /**
+     *
+     * @param plz
+     * @param mockRs1
+     * @param mockRs2
+     * @param mockRs3
+     * @return Film[]
+     */
+  public static Film[] getTitelPageFilme(String plz, ResultSet mockRs1, ResultSet mockRs2, ResultSet mockRs3) {
         Film[] filme;
         int rsSize;
 
@@ -201,12 +258,24 @@ public class FilmFactory {
         return null;
     }
 
+    /**
+     *
+     * @param plz
+     * @return Film[]
+     */
     public static Film[] getTitelPageFilme(String plz)
     {
         return getTitelPageFilme(plz, null, null, null);
     }
 
-
+    /**
+     *
+     * @param id
+     * @param mockRs1
+     * @param mockRs2
+     * @param mockRs3
+     * @return Film
+     */
     public static Film getFilm(int id, ResultSet mockRs1, ResultSet mockRs2, ResultSet mockRs3) {
         Film film = null;
         Connection c = Connector.getConnection();
@@ -252,10 +321,20 @@ public class FilmFactory {
         return film;
     }
 
+    /**
+     *
+     * @param id
+     * @return Film
+     */
     public static Film getFilm(int id) {
         return getFilm(id, null, null, null);
     }
 
+    /**
+     *
+     * @param film
+     * @param mockRs
+     */
     private static void setSprachen(Film film, ResultSet mockRs) {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getGenreNamesById(film.getFilmID());
@@ -293,6 +372,11 @@ public class FilmFactory {
         Connector.closeConnection(c);
     }
 
+    /**
+     *
+     * @param film
+     * @param mockRs
+     */
     private static void setGenres(Film film, ResultSet mockRs) {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getSpracheById(film.getFilmID());

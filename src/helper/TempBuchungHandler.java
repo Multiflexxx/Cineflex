@@ -13,6 +13,15 @@ import oo.Sitz;
 import oo.Vorstellung;
 
 public class TempBuchungHandler {
+	/**
+	 *
+	 * @param session
+	 * @param sitzIDs
+	 * @param preisVerIDs
+	 * @param vorstellungsID
+	 * @throws InvalidInputValueException
+	 * @throws RequiredFactoryFailedException
+	 */
     public static void addTempBuchungToSession(HttpSession session, String sitzIDs, String preisVerIDs, int vorstellungsID)
 				throws InvalidInputValueException, RequiredFactoryFailedException {
 

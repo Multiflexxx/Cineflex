@@ -18,6 +18,13 @@ import oo.Vorstellung;
 public class SitzsperreFactory {
     private static int minutesUntilTimeOut = 10;
 
+    /**
+     *
+     * @param seatIDs
+     * @param vorstellungsID
+     * @param KID
+     * @return sitzSperre
+     */
     public static Sitzsperre[] lockSeats(int[] seatIDs, int vorstellungsID, int KID) {
         Connection c = null;
         c = Connector.getConnection();
@@ -33,6 +40,14 @@ public class SitzsperreFactory {
         return sitzSperre;
     }
 
+    /**
+     *
+     * @param vorstellungsID
+     * @return sitzSperre
+     * @throws EmptyResultSetException
+     * @throws ResultSetIsNullException
+     * @throws FailedObjectCreationException
+     */
     public static Sitzsperre[] getLockedSeats(int vorstellungsID) throws EmptyResultSetException, ResultSetIsNullException, FailedObjectCreationException {
         // Update Sitzsperren, remove Timed out Seats
         updateLockedSeats();
@@ -75,6 +90,10 @@ public class SitzsperreFactory {
         return sitzSperre;
     }
 
+    /**
+     *
+     * @return null
+     */
     public static Sitzsperre[] updateLockedSeats() {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.deleteTimedOutSitzSperre(minutesUntilTimeOut);
@@ -98,6 +117,11 @@ public class SitzsperreFactory {
         return null;
     }
 
+    /**
+     *
+     * @param s
+     * @return null
+     */
     public static Sitzsperre[] deleteTimedOutSeats(Sitzsperre[] s) {
         return null;
     }
@@ -112,6 +136,11 @@ public class SitzsperreFactory {
         return lockSeats(seatIDs, v.getVorstellungsID(), KID);
     }
 
+    /**
+     *
+     * @param v
+     * @return null
+     */
     public static Sitzsperre[] getLockedSeats(Vorstellung v) {
         try {
             return getLockedSeats(v.getVorstellungsID());

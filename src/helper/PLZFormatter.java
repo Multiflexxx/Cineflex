@@ -1,6 +1,11 @@
 package helper;
 
 public class PLZFormatter {
+    /**
+     *
+     * @param plz
+     * @return output
+     */
     public static String addLeadingZeros(int plz) {
         String output = "";
         if(plz <= 9) {

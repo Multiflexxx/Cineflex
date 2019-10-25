@@ -13,6 +13,14 @@ import javax.mail.PasswordAuthentication;
 
 public class Email_Sender
 {
+    /**
+     *
+     * @param session
+     * @param senderMail
+     * @param receiverEmail
+     * @param subject
+     * @param body
+     */
     private static void transferMail(Session session, String senderMail, String receiverEmail, String subject, String body)
     {
         try
@@ -45,6 +53,12 @@ public class Email_Sender
         }
     }
 
+    /**
+     *
+     * @param recMail
+     * @param subject
+     * @param emailBody
+     */
     public static void sendMail(String recMail, String subject, String emailBody)
     {
         Properties prop = new Properties();

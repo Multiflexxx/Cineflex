@@ -3,22 +3,25 @@ package sql_generator;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-/**
- * CreateSeatsSQL
- * <p>
- * Copyright by @author Marcel Mertens
- * Website: https://mertens-web.ddns.net
- * <p>
- * Date: 21.10.2019
- */
 public class Main
 {
     static String fileName = "SQL.txt";
 
+    /**
+     * Genreate a random number
+     * @param min
+     * @param max
+     * @return int
+     */
     public static int getRandomIntegerBetweenRange(int min, int max) {
         return (int) (Math.random() * ((max - min) + 1)) + min;
     }
 
+    /**
+     * MAIN to create SQL Query to create new seats for DB
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         for (int i = 3; i <= 112; i++) {
             int reihe = getRandomIntegerBetweenRange(6, 15);
@@ -27,9 +30,17 @@ public class Main
         }
     }
 
+    /**
+     * Seats generator method
+     * @param saal
+     * @param reihen
+     * @param spalten
+     * @throws Exception
+     */
     public static void generiereSitze(int saal, int reihen, int spalten) throws Exception {
         String sql1 = "INSERT INTO Sitz(`SitzplanID`, `Reihe`, `Nummer`, `Sitzklasse`) VALUES";
 
+        // Open BufferedWriter
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
 
         writer.append(sql1);
@@ -42,6 +53,7 @@ public class Main
         char sitzklasse = 'P';
         int counter = 0;
 
+        // Create rows and columns
         for(int i = 0; i < generiereReihen+1; i++) {
             counter = 0;
             for (int j = 1; j < generiereSpalten+1; j++) {
@@ -90,6 +102,7 @@ public class Main
                         break;
                 }
 
+                // set seatclass
                 if ((j == 1 || j == (generiereSpalten)) && i == 0) {
                     sitzklasse = 'B';
                 } else if (reihe == 'H' || reihe == 'I' || reihe == 'J' || reihe == 'K' || reihe == 'L' || reihe == 'M' || reihe == 'N' || reihe == 'O' || reihe == 'P') {
@@ -97,49 +110,19 @@ public class Main
                 } else {
                     sitzklasse = 'P';
                 }
+                // increase counter
                 counter++;
 
+                // append SQL to String
                 if (j == generiereSpalten && i == generiereReihen) {
                     writer.append("(" + saalID + ", '" + reihe + "'," + counter + " , '" + sitzklasse + "');");
                 } else {
                     writer.append("(" + saalID + ", '" + reihe + "'," + counter + " , '" + sitzklasse + "'), \n");
                 }
             }
-
         }
 
-
+        // Save File
         writer.close();
     }
-
-    /*
-    public static void main(String[] args) throws  Exception{
-        String sql1 = "INSERT INTO Sitzplan(`SitzplanID`, `SaalID`) VALUES";
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-
-        writer.append(sql1);
-
-        int generiereReihen = 112;
-
-        int saalID = 3;
-
-        for(int i = saalID; i < generiereReihen+1; i++)
-        {
-            if(i < (generiereReihen))
-                {
-                    writer.append("("+i+", "+i +"), \n");
-                }
-
-                else
-                {
-                    writer.append("("+i+", "+i +");");
-                }
-
-
-        }
-
-        writer.close();
-    }
-    */
 }

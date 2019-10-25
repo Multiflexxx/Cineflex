@@ -12,22 +12,47 @@ public class DateFormatter {
     private static SimpleDateFormat sqlDateAndTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     // private static SimpleDateFormat timestamp = new SimpleDateFormat("dd MMM yyyy, HH:mm:ss", new Locale("de", "DE"));
 
+    /**
+     *
+     * @param date
+     * @return
+     */
     public static String getFrontendDate(Date date) {
         return frontendDate.format(date);
     }
 
+    /**
+     *
+     * @param date
+     * @return
+     */
     public static String getFrontendTime(Date date) {
         return frontendTime.format(date);
     }
 
+    /**
+     *
+     * @param date
+     * @return
+     */
     public static String getSQLDate(Date date) {
         return sqlDate.format(date);
     }
 
+    /**
+     *
+     * @param date
+     * @return
+     */
     public static String getSQLTime(Date date) {
         return sqlTime.format(date);
     }
 
+    /**
+     *
+     * @param date
+     * @return
+     */
     public static String getSQLDateAndTime(Date date) {
         return sqlDateAndTime.format(date);
     }

@@ -10,6 +10,12 @@ import oo.Genre;
 
 public class GenreFactory {
 
+  /**
+   *
+   * @param id
+   * @param mockRs
+   * @return genre
+   */
   public static Genre getGenreById(int id, ResultSet mockRs) {
     Genre genre = null;
 
@@ -45,11 +51,21 @@ public class GenreFactory {
     return genre;
   }
 
+  /**
+   *
+   * @param id
+   * @return Genre
+   */
   public static Genre getGenreById(int id)
   {
     return getGenreById(id, null);
   }
 
+  /**
+   *
+   * @param mockRs
+   * @return genres
+   */
   public static Genre[] getGenre(ResultSet mockRs){
     Genre[] genres;
     Connection c = Connector.getConnection();
@@ -100,6 +116,10 @@ public class GenreFactory {
     return null;
   }
 
+  /**
+   *
+   * @return Genre[]
+   */
   public static Genre[] getGenre()
   {
     return getGenre(null);

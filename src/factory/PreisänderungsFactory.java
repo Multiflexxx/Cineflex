@@ -12,6 +12,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PreisänderungsFactory {
+    /**
+     *
+     * @param preisänderungsID
+     * @return preisänderung
+     * @throws ResultSetIsNullException
+     * @throws EmptyResultSetException
+     */
     public static Preisänderung getPreisänderungById(int preisänderungsID) throws ResultSetIsNullException, EmptyResultSetException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getPreisänderungByID(preisänderungsID);

@@ -3,6 +3,10 @@ package db_connector;
 import java.sql.*;
 
 public class Connector {
+    /**
+     *
+     * @return c
+     */
     public static Connection getConnection() {
         Connection c = null;
         try {
@@ -14,6 +18,11 @@ public class Connector {
         return c;
     }
 
+    /**
+     *
+     * @param c
+     * @param sql
+     */
     public static void executeQuery(Connection c, String sql) {
         try {
             PreparedStatement ps = c.prepareStatement(sql);
@@ -23,6 +32,12 @@ public class Connector {
         }
     }
 
+    /**
+     *
+     * @param c
+     * @param sql
+     * @return rs
+     */
     public static ResultSet getQueryResult(Connection c, String sql) {
         ResultSet rs = null;
         try {
@@ -34,6 +49,10 @@ public class Connector {
         return  rs;
     }
 
+    /**
+     *
+     * @param c
+     */
     public static void closeConnection(Connection c) {
         if(c != null) {
             try {
@@ -44,6 +63,10 @@ public class Connector {
         }
     }
 
+    /**
+     *
+     * @param rs
+     */
     public static void closeResultSet(ResultSet rs) {
         if(rs != null) {
             try {

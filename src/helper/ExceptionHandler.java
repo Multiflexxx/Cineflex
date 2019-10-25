@@ -1,6 +1,11 @@
 package helper;
 
 public class ExceptionHandler {
+    /**
+     *
+     * @param e
+     * @return output
+     */
     public static String exceptionStackTraceToString(Exception e) {
         String output = "Exception has occured: ";
         output += e.toString() + "<br />";

@@ -11,6 +11,14 @@ import java.sql.SQLException;
 
 public class AnfahrtsseiteFactory {
 
+    /**
+     * Used also for Mocks
+     * @param ort
+     * @param mockRs
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws SQLException
+     */
     public static String getAnfahrtsseite(String ort, ResultSet mockRs) throws UnsupportedEncodingException, SQLException {
 
         String baseStringGoogle = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCM1EeAy6KlTOa-jHIsL_rCEhDghnqZ5Y8&q=";
@@ -36,6 +44,13 @@ public class AnfahrtsseiteFactory {
         return ("<iframe src=\"" + baseStringGoogle + variableString + "\" width=\"1000\" height=\"1000\"></iframe>");
     }
 
+    /**
+     *
+     * @param ort
+     * @return
+     * @throws UnsupportedEncodingException
+     * @throws SQLException
+     */
     public static String getAnfahrtseite(String ort) throws UnsupportedEncodingException, SQLException
     {
         return getAnfahrtsseite(ort, null);

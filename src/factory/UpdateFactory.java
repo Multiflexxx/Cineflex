@@ -9,6 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UpdateFactory {
+    /**
+     *
+     * @param v
+     * @param plz
+     * @param mockRs
+     * @return Boolean
+     */
     public static boolean checkVorstellungPLZ(Vorstellung v, int plz, ResultSet mockRs) {
         String sql = QueryBuilder.getVorstellungByIdPLZ(v.getVorstellungsID());
         Connection c = null;
@@ -44,6 +51,12 @@ public class UpdateFactory {
         return false;
     }
 
+    /**
+     *
+     * @param v
+     * @param plz
+     * @return boolean
+     */
     public static boolean checkVorstellungPLZ(Vorstellung v, int plz)
     {
         return checkVorstellungPLZ(v, plz, null);

@@ -14,10 +14,18 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 public class PreisFactory {
+    /**
+     * Empty Constructor
+     */
     public PreisFactory() {
 
     }
 
+    /**
+     *
+     * @param id
+     * @return lJSONDataArray
+     */
     public static String[] getPreisJSONArray(int id) {
         Connection connection = Connector.getConnection();
         String sql = QueryBuilder.getPreiseInfos();
@@ -62,6 +70,10 @@ public class PreisFactory {
         return lJSONDataArray;
     }
 
+    /**
+     *
+     * @return resultLength
+     */
     public static int getPreiskategorienLaenge() {
         int resultLength = -1;
 
@@ -79,8 +91,12 @@ public class PreisFactory {
         return -2;
     }
 
-    // 0 = Parket
-    // 1 = Loge
+    /**
+     * 0 = Parket
+     * 1 = Loge
+     * @param id
+     * @return grundpreis
+     */
     private static float[] returnGrundpreis(int id) {
         int lHelp0 = 0;
         int lHelp1 = 0;
@@ -153,6 +169,14 @@ public class PreisFactory {
         }
     }
 
+    /**
+     *
+     * @param seats
+     * @param preisänderungen
+     * @param filmID
+     * @return returnValue
+     * @throws RequiredFactoryFailedException
+     */
     public static float getBuchungsPreis(String seats, String preisänderungen, int filmID) throws RequiredFactoryFailedException{
         float returnValue = 0;
         int[] seatIDs = ArrayBuilder.stringToIntArray(seats, ",");

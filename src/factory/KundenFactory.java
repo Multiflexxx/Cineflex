@@ -12,6 +12,12 @@ import java.sql.SQLException;
 
 public class KundenFactory {
 
+    /**
+     *
+     * @param PID
+     * @param mockRs
+     * @return kunde
+     */
     public static Kunde getKunde(int PID, ResultSet mockRs) {
         Kunde kunde = null;
         Connection c = Connector.getConnection();
@@ -44,11 +50,22 @@ public class KundenFactory {
         return kunde;
     }
 
+    /**
+     *
+     * @param PID
+     * @return Kunde
+     */
     public static Kunde getKunde(int PID)
     {
         return getKunde(PID, null);
     }
 
+    /**
+     *
+     * @param KID
+     * @param mockRs
+     * @return kunde
+     */
     public static Kunde getKundeByKID(int KID, ResultSet mockRs) {
         Kunde kunde = null;
         Connection c = Connector.getConnection();
@@ -81,6 +98,11 @@ public class KundenFactory {
         return kunde;
     }
 
+    /**
+     *
+     * @param KID
+     * @return Kunde
+     */
     public static Kunde getKundeByKID(int KID)
     {
         return getKundeByKID(KID, null);

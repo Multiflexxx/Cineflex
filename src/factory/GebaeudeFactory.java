@@ -13,6 +13,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 public class GebaeudeFactory {
+    /**
+     *
+     * @param mockRs
+     * @return Gebaeude[]
+     */
     public static Gebaeude[] getGebaeude(ResultSet mockRs) {
         Gebaeude[] gebäude = null;
         Connection c = Connector.getConnection();
@@ -68,11 +73,23 @@ public class GebaeudeFactory {
         }
     }
 
+    /**
+     *
+     * @return Gebaeude[]
+     */
     public static Gebaeude[] getGebaeude()
     {
         return getGebaeude(null);
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws ResultSetIsNullException
+     * @throws EmptyResultSetException
+     * @throws FailedObjectCreationException
+     */
     public static Gebaeude getGebaeudeById(int id)
         throws ResultSetIsNullException, EmptyResultSetException, FailedObjectCreationException {
         Connection c = Connector.getConnection();

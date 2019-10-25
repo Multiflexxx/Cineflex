@@ -4,6 +4,11 @@ import oo.Sitz;
 
 public class SeatIDFormatter
 {
+    /**
+     *
+     * @param seatIDString
+     * @return seatIDs
+     */
     public static int[] seatsStringToIntArray(String seatIDString)
     {
         String[] values = seatIDString.split("\\|");
@@ -40,5 +45,4 @@ public class SeatIDFormatter
             return null;
         }
     }
-
 }
