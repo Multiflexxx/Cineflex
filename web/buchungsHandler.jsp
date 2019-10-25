@@ -39,7 +39,7 @@
             SitzsperreFactory.lockSeats(seatsInt, vorstellungsID, KID);
 
             try {
-                TempBuchungHandler.addTempBuchungToSession(session, seats, preisVer);
+                TempBuchungHandler.addTempBuchungToSession(session, seats, preisVer, vorstellungsID);
             } catch (InvalidInputValueException e) {
                 e.printStackTrace();
             } catch (RequiredFactoryFailedException e) {
@@ -58,13 +58,23 @@
     %>
     <div class="card mt-3 mb-3">
         <div class="row">
-            <div class="col-lg-5 d-flex flex-column justify-content-center">
-                <h5>Dein(e) ausgewählte(s/n) Ticket(s)</h5>
-                <ul class="li st-group">
-                    <li class="list-group-item list-group-item-light">Reihe M Platz 1</li>
-                    <li class="list-group-item list-group-item-light">Reihe M Platz 2</li>
-                    <li class="list-group-item list-group-item-light">Reihe M Platz 3</li>
-                </ul>
+            <div class="col-lg-5">
+                <div class="card-body">
+                    <%
+                        if (sitz.length > 1) {
+                            out.write("<h5 class=\"card-title\">Deine ausgewählten Tickets</h5>");
+                        } else {
+                            out.write("<h5 class=\"card-title\">Dein ausgewähltes Ticket</h5>");
+                        }
+                    %>
+                    <ul class="li st-group">
+                        <%
+                            for (int i = 0; i < sitz.length; i++) {
+                                out.write("<li class=\"list-group-item list-group-item-light\">Reihe " + sitz[i].getReihe() + " Platz " + sitz[i].getNummer() + "</li>");
+                            }
+                        %>
+                    </ul>
+                </div>
             </div>
             <div class="col-lg-7">
                 <div class="card-body">
