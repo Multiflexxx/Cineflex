@@ -23,7 +23,7 @@ public class PreisFactory {
         String sql = QueryBuilder.getPreiseInfos();
         ResultSet resultSet = Connector.getQueryResult(connection, sql);
 
-        int lResultLength = SupportMethods.getResultSetSize(resultSet) + 1;
+        int lResultLength = SupportMethods.getResultSetSize(resultSet);
 
         String[] lJSONDataArray = null;
 
@@ -32,9 +32,9 @@ public class PreisFactory {
         if (lResultLength > 0) {
 
             lJSONDataArray = new String[lResultLength];
-            lJSONDataArray[0] = "{'tooltip': 'null', 'id': 0, 'beschreibung': 'Normalpreis', 'preis': " + grundPreis[0] + ", 'preisL':  " + grundPreis[1] + "}";
+            //lJSONDataArray[0] = "{'tooltip': 'null', 'id': 0, 'beschreibung': 'Normalpreis', 'preis': " + grundPreis[0] + ", 'preisL':  " + grundPreis[1] + "}";
 
-            int counter = 1;
+            int counter = 0;
 
             try {
                 while (resultSet.next()) {
@@ -73,8 +73,7 @@ public class PreisFactory {
 
         if (resultLength > 0) {
             Connector.closeConnection(connection);
-            //resultLength + 1 --> Normalpreis B + Normalpreis L
-            return resultLength + 1;
+            return resultLength;
         }
 
         return -2;

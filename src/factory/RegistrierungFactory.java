@@ -10,6 +10,7 @@ import exception.registrierung.UnmatchingPasswordException;
 import exception.registrierung.UserAlreadyExistsException;
 import helper.SupportMethods;
 import oo.Registrierung;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,12 +27,12 @@ public class RegistrierungFactory {
         adresszusatz = SupportMethods.removeHTMLCode(adresszusatz);
 
         // Check Password
-        if(!passwordHash.equals(passwordHashWdh)) {
+        if (!passwordHash.equals(passwordHashWdh)) {
             throw new UnmatchingPasswordException();
         }
 
         // Check whether all requiered Input Fields are filled
-        if(vorname.equals("")
+        if (vorname.equals("")
                 || nachname.equals("")
                 || geburtsdatum.equals("")
                 || email.equals("")
@@ -79,18 +80,18 @@ public class RegistrierungFactory {
         ResultSet rs = Connector.getQueryResult(c, sql);
         Registrierung registrierung = null;
 
-        if(rs == null) {
+        if (rs == null) {
             throw new ResultSetIsNullException();
         }
 
-        if(SupportMethods.getResultSetSize(rs) < 1) {
+        if (SupportMethods.getResultSetSize(rs) < 1) {
             throw new EmptyResultSetException();
         }
 
         try {
             rs.next();
             registrierung = new Registrierung(
-              rs.getInt("PID"),
+                    rs.getInt("PID"),
                     rs.getString("Vorname"),
                     rs.getString("Nachname"),
                     rs.getDate("GebDatum"),
@@ -101,7 +102,7 @@ public class RegistrierungFactory {
                     rs.getInt("Hausnummer"),
                     rs.getString("Adresszusatz")
             );
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

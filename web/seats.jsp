@@ -152,7 +152,6 @@
             <div class="col"></div>
             <div class="col-lg-7">
                 <div class="table-responsive" id="tickets">
-
                     <script>
                         window.onload = function () {
                             <%
@@ -168,6 +167,11 @@
                             %>
 
                             createTable(preistyp, <%=PreisFactory.getPreiskategorienLaenge()%>);
+
+                            function setInputUrl() {
+                                url = window.location.href;
+                            }
+                            setInputUrl();
                         }
                     </script>
                 </div>
@@ -176,9 +180,8 @@
                 <button id="btn_res" onclick="onClickReservieren()" class="btn btn-outline-secondary mb-2" disabled>
                     Reservieren
                 </button>
-                <button id="btn_buc"
-                        onclick="onClickBuchen(<%=vorstellung.getVorstellungsID() + ", " + vorstellung.getFilm().getFilmID()%>)"
-                        class="btn btn-outline-secondary mb-2 " disabled>Buchen
+                <button id="btn_buc" onclick="onClickBuchen(<%=vorstellung.getVorstellungsID() + ", " + vorstellung.getFilm().getFilmID()%>)" class="btn btn-outline-secondary mb-2 " disabled>
+                    Buchen
                 </button>
             </div>
             <div class="col"></div>

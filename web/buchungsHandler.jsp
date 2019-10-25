@@ -1,3 +1,4 @@
+<%@ page buffer="none" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="helper.ArrayBuilder" %>
 <%@ page import="factory.SitzsperreFactory" %>
@@ -9,6 +10,34 @@
 <%@ page import="oo.Sitz" %>
 <%@ page import="exception.InvalidInputValueException" %>
 <%@ page import="exception.RequiredFactoryFailedException" %>
+<%
+    if (session.getAttribute("email") != null) {
+        int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungs_id"));
+        int filmID = Integer.parseInt(request.getParameter("film_id"));
+        String seats = request.getParameter("seats_data");
+        String preisVer = request.getParameter("tickets_data");
+        int KID = Integer.parseInt(session.getAttribute("KID").toString());
+        int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
+        SitzsperreFactory.lockSeats(seatsInt, vorstellungsID, KID);
+
+        try {
+            TempBuchungHandler.addTempBuchungToSession(session, seats, preisVer, vorstellungsID);
+        } catch (InvalidInputValueException e) {
+            e.printStackTrace();
+        } catch (RequiredFactoryFailedException e) {
+            e.printStackTrace();
+        }
+        Sitz[] sitz = (Sitz[]) session.getAttribute("temp_sitze");
+        sitz[0].getReihe();
+
+        float preis = PreisFactory.getBuchungsPreis(seats, preisVer, filmID);
+        float mwst = (float) (preis * 0.07);
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("de", "DE"));
+        numberFormat.setCurrency(Currency.getInstance("EUR"));
+
+        String stringPrice = numberFormat.format(preis);
+        String stringMwSt = numberFormat.format(mwst);
+%>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
@@ -20,42 +49,6 @@
 
 
 <div class="container">
-    <%
-        if (session.getAttribute("email") == null) {
-            out.write("<div class=\"jumbotron jumbotron-fluid footer\">\n" +
-                    "    <div class=\"container\">\n" +
-                    "        <h1 class=\"display-4\">Bitte melden sie isch zuerst an</h1>\n" +
-                    "        <p class=\"lead\">Erst dann können sie Buchungen abschließen</p>\n" +
-                    "        <a class=\"btn btn-primary btn-lg\" href=\"index.jsp\" role=\"button\">Zurück zur Startseite</a>\n" +
-                    "    </div>\n" +
-                    "</div>");
-        } else {
-            int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungs_id"));
-            int filmID = Integer.parseInt(request.getParameter("film_id"));
-            String seats = request.getParameter("seats_data");
-            String preisVer = request.getParameter("tickets_data");
-            int KID = Integer.parseInt(session.getAttribute("KID").toString());
-            int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
-            SitzsperreFactory.lockSeats(seatsInt, vorstellungsID, KID);
-
-            try {
-                TempBuchungHandler.addTempBuchungToSession(session, seats, preisVer, vorstellungsID);
-            } catch (InvalidInputValueException e) {
-                e.printStackTrace();
-            } catch (RequiredFactoryFailedException e) {
-                e.printStackTrace();
-            }
-            Sitz[] sitz = (Sitz[]) session.getAttribute("temp_sitze");
-            sitz[0].getReihe();
-
-            float preis = PreisFactory.getBuchungsPreis(seats, preisVer, filmID);
-            float mwst = (float) (preis * 0.07);
-            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("de", "DE"));
-            numberFormat.setCurrency(Currency.getInstance("EUR"));
-
-            String stringPrice = numberFormat.format(preis);
-            String stringMwSt = numberFormat.format(mwst);
-    %>
     <div class="card mt-3 mb-3">
         <div class="row">
             <div class="col-lg-5">
@@ -114,7 +107,6 @@
                                     }]
                                 });
                             },
-
                             // Finalize the transaction
                             onApprove: function (data, actions) {
                                 return actions.order.capture().then(function (details) {
@@ -139,12 +131,8 @@
 
                                     document.body.appendChild(form);
                                     form.submit();
-
-                                    //window.location.replace("payment.jsp");
                                 });
                             }
-
-
                         }).render('#paypal-button-container');
                     </script>
 
@@ -152,11 +140,14 @@
             </div>
         </div>
     </div>
-    <%
-        }
-    %>
 </div>
-
 <jsp:include page="elements/footer.jsp"/>
 </body>
 </html>
+
+<%
+    } else {
+        String url = request.getParameter("url");
+        response.sendRedirect(url);
+    }
+%>

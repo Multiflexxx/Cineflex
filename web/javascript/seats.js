@@ -5,6 +5,7 @@ choosenSeatsMap.set("L", 0);
 var choosenReihe = null;
 var preistyp = [];
 var preisMultiplikator = [];
+var url = "Penis";
 
 function chooseSeat(id, row_length) {
     var seat = document.getElementById(id);
@@ -292,10 +293,8 @@ function onClickReservieren() {
     console.log(seatcatInput);
 }
 
-function onClickBuchen(vID , fID) {
-    // LOOP OVER SEATS
-    // CREATE JSON FILE
 
+function onClickBuchen(vID , fID) {
     var form = document.createElement("form");
     form.setAttribute("method", "post");
     form.setAttribute("action", "buchungsHandler.jsp");
@@ -310,7 +309,7 @@ function onClickBuchen(vID , fID) {
     var seatsInput = seats.join(",");
 
     var preiscat = [];
-    var seatcat = [];
+    // var seatcat = [];
     for (let i = 0; i < preisMultiplikator.length; i++) {
         for (let j = 0; j<2; j++) {
             var ctr = preisMultiplikator[i][j];
@@ -323,12 +322,12 @@ function onClickBuchen(vID , fID) {
             }
             for (let k = 0; k < ctr; k++) {
                 preiscat.push(id);
-                seatcat.push(cat);
+                // seatcat.push(cat);
             }
         }
     }
     var preisInput = preiscat.join(",");
-    var seatcatInput = seatcat.join(",");
+    // var seatcatInput = seatcat.join(",");
     var hiddenField0 = document.createElement("input");
     hiddenField0.setAttribute("type", "hidden");
     hiddenField0.setAttribute("name", "vorstellungs_id");
@@ -345,10 +344,15 @@ function onClickBuchen(vID , fID) {
     hiddenField3.setAttribute("type", "hidden");
     hiddenField3.setAttribute("name", "film_id");
     hiddenField3.setAttribute("value", fID);
+    var hiddenField4 = document.createElement("input");
+    hiddenField4.setAttribute("type", "hidden");
+    hiddenField4.setAttribute("name", "url");
+    hiddenField4.setAttribute("value", url);
     form.appendChild(hiddenField0);
     form.appendChild(hiddenField1);
     form.appendChild(hiddenField2);
     form.appendChild(hiddenField3);
+    form.appendChild(hiddenField4);
 
     document.body.appendChild(form);
     form.submit();
