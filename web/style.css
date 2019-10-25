@@ -199,9 +199,8 @@ h6 {
 
 /*Snacks*/
 .tableSnacks {
-    margin: 15px;
-    width: 430px;
-}
+     width: 100%;
+ }
 
 
 /* Beleg */
