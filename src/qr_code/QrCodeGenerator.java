@@ -14,18 +14,18 @@ import java.nio.file.Path;
 public class QrCodeGenerator {
     private static final String QR_CODE_IMAGE_PATH = "web/img/qrcode/MyQRCode.png";
 
-    private static void generateQRCodeImage(String text, int width, int height, String filePath)
+    public static void generateQRCodeImage(String text, String filepath)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 300, 300);
 
-        Path path = FileSystems.getDefault().getPath(filePath);
+        Path path = FileSystems.getDefault().getPath(filepath);
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
     }
 
     public static void main(String[] args) {
         try {
-            generateQRCodeImage("KID: 69, Bestellung: 420", 480, 480, QR_CODE_IMAGE_PATH);
+            generateQRCodeImage("KID: 69", QR_CODE_IMAGE_PATH);
         } catch (WriterException e) {
             System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
         } catch (IOException e) {
