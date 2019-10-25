@@ -6,13 +6,22 @@ import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
 import factory.PreisänderungsFactory;
 import factory.SitzFactory;
+import factory.VorstellungsFactory;
 import javax.servlet.http.HttpSession;
 import oo.Preisänderung;
 import oo.Sitz;
+import oo.Vorstellung;
 
 public class TempBuchungHandler {
-    public static void addTempBuchungToSession(HttpSession session, String sitzIDs, String preisVerIDs)
+    public static void addTempBuchungToSession(HttpSession session, String sitzIDs, String preisVerIDs, int vorstellungsID)
 				throws InvalidInputValueException, RequiredFactoryFailedException {
+
+    		Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(vorstellungsID);
+
+    		if(vorstellung == null) {
+    				throw new RequiredFactoryFailedException();
+				}
+
     		if(sitzIDs == "" | preisVerIDs == "") {
     				throw new InvalidInputValueException();
 				}
@@ -47,5 +56,6 @@ public class TempBuchungHandler {
 
     		session.setAttribute("temp_sitze", sitze);
     		session.setAttribute("temp_preisänderungen", preisänderungen);
+    		session.setAttribute("temp_vorstellung", vorstellung);
     }
 }

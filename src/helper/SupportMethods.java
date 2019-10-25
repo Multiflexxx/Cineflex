@@ -37,6 +37,14 @@ public class SupportMethods {
         Connector.closeConnection(c);
     }
 
+    public static void close(Connection c) {
+        Connector.closeConnection(c);
+    }
+
+    public static void close(ResultSet rs) {
+        Connector.closeResultSet(rs);
+    }
+
     public static String removeSQLInjections(String input) {
         return input.replaceAll("[*#'\\-\\/(),\\[\\]\\^(--)]", " ");
     }

@@ -29,6 +29,7 @@ public class SitzsperreFactory {
             String sql = QueryBuilder.createSitzsperre(sitzSperre[i].getSitzplatzID(), vorstellungsID, sitzSperre[i].getKNR(), sitzSperre[i].getTimestamp());
             Connector.executeQuery(c, sql);
         }
+        Connector.closeConnection(c);
         return sitzSperre;
     }
 
