@@ -148,6 +148,7 @@
 <%
     } else {
         String url = request.getParameter("url");
+        session.setAttribute("buchen_denied", "1");
         response.sendRedirect(url);
     }
 %>

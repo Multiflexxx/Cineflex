@@ -50,6 +50,12 @@
 %>
 
 <div class="container">
+    <div class="alert alert-danger alert-dismissible fade show mt-3" id="booking_denied" role="alert">
+        Melde dich für das Buchen oder Reservieren zuerst an!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="card mt-3 mb-3">
         <div class="row align-items-md-center">
             <div class="col mb-3"></div>
@@ -191,3 +197,20 @@
 <jsp:include page="elements/footer.jsp"/>
 </body>
 </html>
+
+
+<%
+    if (session.getAttribute("buchen_denied") == "1") {
+%>
+<script>
+    function buchenDenied() {
+        document.getElementById("booking_denied").style.display = "inherit";
+    }
+    buchenDenied();
+</script>
+<%
+        session.setAttribute("buchen_denied", "0");
+    } else if (session.getAttribute("buchen_denied") == "0") {
+        session.removeAttribute("buchen_denied");
+    }
+%>
