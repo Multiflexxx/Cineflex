@@ -704,6 +704,56 @@ public class Test {
     }
     //----
 
+    // Tests for class Ort
+    @org.junit.Test
+    public void testeOrt()
+    {
+        // create Ort object
+        Ort ort = new Ort("Mannheim", 68165);
+
+        // tests for getters
+        Assert.assertEquals("Mannheim", ort.getOrtsName());
+        Assert.assertEquals(68165, ort.getPlz());
+
+        // tests for setters
+        ort.setOrtsName("Heidelberg");
+        Assert.assertEquals("Heidelberg", ort.getOrtsName());
+        ort.setPlz(12345);
+        Assert.assertEquals(12345, ort.getPlz());
+    }
+
+    //----
+
+    // Tests for class Ort
+    @org.junit.Test
+    public void testePreisaenderung()
+    {
+        // create object
+        Preisänderung preisänderung = new Preisänderung(12, 5.55, "kleine Änderung", "Tooltip", false);
+
+        // tests for getters
+        Assert.assertEquals(12, preisänderung.getPreisänderungsID());
+        Assert.assertEquals(5.55, preisänderung.getÄnderungswert(), 0);
+        Assert.assertEquals("kleine Änderung", preisänderung.getÄnderungsBeschreibung());
+        Assert.assertEquals("Tooltip", preisänderung.getTooltipDeskriptor());
+        Assert.assertEquals(false, preisänderung.isGrundpreis_relevant());
+
+        // tests for setters
+
+        preisänderung.setPreisänderungsID(13);
+        preisänderung.setÄnderungswert(6.66);
+        preisänderung.setÄnderungsBeschreibung("Beschreibung");
+        preisänderung.setTooltipDeskriptor("neuer Tooltip");
+        preisänderung.setGrundpreis_relevant(true);
+
+        Assert.assertEquals(13, preisänderung.getPreisänderungsID());
+        Assert.assertEquals(6.66, preisänderung.getÄnderungswert(), 0);
+        Assert.assertEquals("Beschreibung", preisänderung.getÄnderungsBeschreibung());
+        Assert.assertEquals("neuer Tooltip", preisänderung.getTooltipDeskriptor());
+        Assert.assertEquals(true, preisänderung.isGrundpreis_relevant());
+    }
+    //----
+
     // TESTS FOR PASSWORD
     // Test for class PassMD5
     @org.junit.Test
@@ -779,9 +829,9 @@ public class Test {
         //TODO: Change concat with Date and Time
 
         // defaultSearchQuery with Search Text
-        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') AND `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Toy", "2019-08-08", "20:00:00", 18, "68165"));
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') WHERE concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-08 20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Toy", "2019-08-08", "20:00:00", 18, "68165"));
         // defaultSearchQuery without Search Text
-        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE `Datum` >= '2019-08-08' AND `Uhrzeit`>= '20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-08", "20:00:00", 18, "68165"));
+        Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-08 20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("", "2019-08-08", "20:00:00", 18, "68165"));
 
         //showMovieById
         Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE Film.FilmID = '1' AND concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-07 19:30:00' AND Gebäude.PLZ = '68159' ORDER BY `Datum` ASC LIMIT 6;", QueryBuilder.showMovieById("1","2019-08-07", "19:30:00", "68159"));
@@ -822,7 +872,7 @@ public class Test {
         Assert.assertEquals("Select `Genrebezeichnung` FROM FilmGenre JOIN Genre ON Genre.GenreID = Filmgenre.GenreID Where `GenreID` = 15 ;", QueryBuilder.getGenreByID(15));
 
         //createUser
-        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('Hans', 'Meier', '"+date4+"', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', '', '68165'); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '01.01.1970' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
+        Assert.assertEquals("INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '01.01.1970' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);\n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '"+date4+"' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
 
         //getGenres
         Assert.assertEquals("SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;", QueryBuilder.getGenres());
@@ -908,9 +958,8 @@ public class Test {
         Assert.assertEquals(-1, size2);
 
         // Remove HTML Tags from String
-
         String html = "<html>Test</html>#123+?Test.|A BC";
-        String checkString = "htmlTest/html123Test.A BC";
+        String checkString = " html Test /html  123  Test. A BC";
 
         Assert.assertEquals(checkString, SupportMethods.removeHTMLCode(html));
     }
@@ -1227,6 +1276,7 @@ public class Test {
         Mockito.when(resultSetMock9.getString("Sitzklasse")).thenReturn("L").thenReturn("P").thenReturn("B");
 
         Mockito.when(resultSetMock10.getString("Saalbezeichnung")).thenReturn("Saal 1");
+        Mockito.when(resultSetMock10.getString("GebäudeID")).thenReturn("12");
 
         // Add next() to ResultSet
         Mockito.when(resultSetMock9.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
