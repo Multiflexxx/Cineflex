@@ -26,14 +26,14 @@ public class TempBuchungHandler {
     				throw new InvalidInputValueException();
 				}
 
-    		if(!(sitzIDs.matches(".*\\d.*") & !sitzIDs.matches(".*\\d.*"))) {
+    		if(!(sitzIDs.matches(".*\\d.*") & sitzIDs.matches(".*\\d.*"))) {
     				throw new InvalidInputValueException();
 				}
 
         int[] intSeatIDs = ArrayBuilder.stringToIntArray(sitzIDs);
     		int[] intPreisVerIDs = ArrayBuilder.stringToIntArray(preisVerIDs);
 
-    		if((intSeatIDs.length < 1 | intPreisVerIDs.length < 1) || intSeatIDs.length == intPreisVerIDs.length) {
+    		if((intSeatIDs.length < 1 | intPreisVerIDs.length < 1) || intSeatIDs.length != intPreisVerIDs.length) {
     				throw new InvalidInputValueException();
 				}
 				Sitz[] sitze = new Sitz[intSeatIDs.length];
