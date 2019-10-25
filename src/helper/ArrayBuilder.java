@@ -11,9 +11,11 @@ public class ArrayBuilder {
         return arr;
     }
 
-    public static String intArrayToString(int[] arr) {
-        return intArrayToString(arr, ", ");
+    public static int[] stringToIntArray(String string) {
+        return stringToIntArray(string, ",");
     }
+
+
 
     public static String intArrayToString(int[] arr, String del) {
         String output = "";
@@ -26,4 +28,8 @@ public class ArrayBuilder {
         }
         return output;
     }
+
+    public static String intArrayToString(int[] arr) {
+    return intArrayToString(arr, ", ");
+}
 }
