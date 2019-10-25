@@ -50,7 +50,7 @@
 %>
 
 <div class="container">
-    <div class="alert alert-danger alert-dismissible fade show mt-3" id="booking_denied" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show mt-3" id="booking_denied" role="alert" style="display: none">
         Melde dich für das Buchen oder Reservieren zuerst an!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -200,7 +200,7 @@
 
 
 <%
-    if (session.getAttribute("buchen_denied") == "1") {
+    if (session.getAttribute("email") == null) {
 %>
 <script>
     function buchenDenied() {
@@ -209,8 +209,5 @@
     buchenDenied();
 </script>
 <%
-        session.setAttribute("buchen_denied", "0");
-    } else if (session.getAttribute("buchen_denied") == "0") {
-        session.removeAttribute("buchen_denied");
     }
 %>
