@@ -6,8 +6,11 @@
 
 <h1>SendMail Test</h1>
 <%
-    out.println("Try sending");
+    out.println("Try sending Text Mail");
     Email_Sender.sendMail("sendmailtest123456@puppetmail.de", "Test", "TestString");
+
+    out.println("Try sending File Attachement");
+    Email_Sender.sendMultipartMail("sendmailtest123456@puppetmail.de", "Test", "TestString", "web/img/1.jpg");
 %>
 
 </body>
