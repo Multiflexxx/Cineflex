@@ -1,6 +1,8 @@
 package db_connector;
 
+import java.io.FileInputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class Connector {
     /**
@@ -8,9 +10,33 @@ public class Connector {
      * @return c
      */
     public static Connection getConnection() {
+        // TODO: DO NOT REMOVE
+        // Create new properties
+        /*Properties prop = new Properties();
+
+        try
+        {
+            // read login data from file
+            prop.load(new FileInputStream("/usr/local/tomcat/conf/databaseLoginData.properties"));
+        }
+
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        // set login data
+        String username = prop.getProperty("username");
+        String password = prop.getProperty("password");
+        String port = prop.getProperty("port");
+        String database = prop.getProperty("database");
+        String host = prop.getProperty("host");
+        */
+
         Connection c = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
+            //c = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+database+"?allowMultiQueries=true", username, password);
             c = DriverManager.getConnection("jdbc:mysql://localhost:3306/Cineflex?allowMultiQueries=true", "multiflex", "multiflexxx123");
         } catch (Exception e) {
             e.printStackTrace();
