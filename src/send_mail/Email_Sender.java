@@ -128,52 +128,13 @@ public class Email_Sender
     public static void sendMail(String recMail, String subject, String emailBody)
     {
         // Get Session
-        //Session session = getSession(recMail);
+        Session session = getSession(recMail);
 
-        // Create new properties
-        Properties prop = new Properties();
-
-        try
-        {
-            // read login data from file
-            prop.load(new FileInputStream("/usr/local/tomcat/conf/emailLoginData.properties"));
-        }
-
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        // set login data
-        String senderMail = prop.getProperty("username");
-        String password = prop.getProperty("password");
-
-        // set host and port for mail transfer
-        String smtpHost = "smtp.strato.de";
-        String smtpPort = "587";
-
-        // set receiver mail address
-        String receiverMail = recMail;
-
-        Properties properties = new Properties();
-
-        properties.put("mail.smtp.host", smtpHost);
-        properties.put("mail.smtp.port", smtpPort);
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-
-        Authenticator authenticator = new Authenticator() {
-            //override the getPasswordAuthentication method
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderMail, password);
-            }
-        };
-
-        // Create new Session
-        Session session = Session.getInstance(properties, authenticator);
+        // Get SenderMail from Properties
+        String  senderMail = session.getProperties().getProperty("senderMail");
 
         // Call transferMail method with args
-        transferMail(session, session.getProperty("username"), recMail, subject, emailBody);
+        transferMail(session, senderMail, recMail, subject, emailBody);
     }
 
     /**
@@ -186,52 +147,13 @@ public class Email_Sender
     public static void sendMultipartMail(String recMail, String subject, String emailBody, String filePath)
     {
         // Get Session
-        //Session session = getSession(recMail);
+        Session session = getSession(recMail);
 
-        // Create new properties
-        Properties prop = new Properties();
-
-        try
-        {
-            // read login data from file
-            prop.load(new FileInputStream("/usr/local/tomcat/conf/emailLoginData.properties"));
-        }
-
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        // set login data
-        String senderMail = prop.getProperty("username");
-        String password = prop.getProperty("password");
-
-        // set host and port for mail transfer
-        String smtpHost = "smtp.strato.de";
-        String smtpPort = "587";
-
-        // set receiver mail address
-        String receiverMail = recMail;
-
-        Properties properties = new Properties();
-
-        properties.put("mail.smtp.host", smtpHost);
-        properties.put("mail.smtp.port", smtpPort);
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-
-        Authenticator authenticator = new Authenticator() {
-            //override the getPasswordAuthentication method
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderMail, password);
-            }
-        };
-
-        // Create new Session
-        Session session = Session.getInstance(properties, authenticator);
+        // Get SenderMail from Properties
+        String  senderMail = session.getProperties().getProperty("senderMail");
 
         // Call transferMail method with args
-        transferMultipartMail(session, session.getProperty("username"), recMail, subject, emailBody, filePath);
+        transferMultipartMail(session, senderMail, recMail, subject, emailBody, filePath);
     }
 
     /**
@@ -239,7 +161,7 @@ public class Email_Sender
      * @param recMail
      * @return session
      */
-/*    private static Session getSession(String recMail)
+    private static Session getSession(String recMail)
     {
         // Create new properties
         Properties prop = new Properties();
@@ -273,6 +195,8 @@ public class Email_Sender
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
 
+        properties.put("senderMail",senderMail);
+
         Authenticator authenticator = new Authenticator() {
             //override the getPasswordAuthentication method
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -284,5 +208,5 @@ public class Email_Sender
         Session session = Session.getInstance(properties, authenticator);
 
         return session;
-    }*/
+    }
 }

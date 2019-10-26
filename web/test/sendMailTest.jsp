@@ -11,7 +11,7 @@
     out.println("Done!<br><br>");
 
     out.println("Try sending File Attachement<br><br>");
-    Email_Sender.sendMultipartMail("xivese@3dmail.top", "Test", "TestString", "web/img/1.jpg");
+    Email_Sender.sendMultipartMail("xivese@3dmail.top", "Test", "TestString", "/usr/local/tomcat/buchungsbelege_pdf/<FILENAME.END>");
     out.println("Done!");
 %>
 
