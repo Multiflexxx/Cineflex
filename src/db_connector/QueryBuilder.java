@@ -69,24 +69,6 @@ public class QueryBuilder {
         return "SELECT `Genrebezeichnung`, `Deskriptor` FROM Genre, Film, FilmGenre WHERE FilmGenre.GenreID = Genre.GenreID AND Film.FilmID = FilmGenre.FilmID AND Film.FilmID = " + filmID + ";";
     }
 
-    public static String showSearchResults(String search, String date, String time, int fsk)
-    {
-        if(search != "") {
-            return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` " +
-                    "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
-                    "WHERE (`Titel` LIKE '%" + search + "%' OR `Beschreibung` LIKE '%" + search + "%') " +
-                    "AND `Datum` >= '" + date + "'" +
-                    "AND `Uhrzeit` >= '" + time + "'" +
-                    "AND `FSK` <= " + fsk + " ;";
-        }else {
-            return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` " +
-                    "FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
-                    "WHERE `Datum` >= '" + date + "'" +
-                    "AND `Uhrzeit` >= '" + time + "'" +
-                    "AND `FSK` <= " + fsk + " ;";
-        }
-    }
-
     public static String defaultSearchQuery(String search, String date, String time, int fsk, String plz) {
         if(search != "") {
             return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` " +
@@ -106,14 +88,13 @@ public class QueryBuilder {
                     "AND Gebäude.PLZ = '"+ plz + "' " +
                     "AND `FSK` <= " + fsk + " ;";
         }
-
     }
 
   public static String genreSearchQuery(String search, String date, String time, int fsk, String plz, int genreID) {
     if(search != "") {
-      return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE (`Titel` LIKE '%" + search + "%' OR `Beschreibung` LIKE '%" + search + "%') AND `Datum` >= '" + date + "' AND `Uhrzeit`>= '" + time + "' AND Gebäude.PLZ = '" + plz + "' AND `FSK` <= "+ fsk + " AND Genre.GenreID = " + genreID + " ;";
+      return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE (`Titel` LIKE '%" + search + "%' OR `Beschreibung` LIKE '%" + search + "%') AND concat(`Datum`,  ' ', `Uhrzeit`) >= '" + date + " " + time + "' AND Gebäude.PLZ = '" + plz + "' AND `FSK` <= "+ fsk + " AND Genre.GenreID = " + genreID + " ;";
     } else {
-      return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE `Datum` >= '" + date + "' AND `Uhrzeit`>= '" + time + "' AND Gebäude.PLZ = '" + plz + "' AND `FSK` <= "+ fsk + " AND Genre.GenreID = " + genreID + " ;";
+      return "SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE concat(`Datum`,  ' ', `Uhrzeit`) >= '" + date + " " + time + "' AND Gebäude.PLZ = '" + plz + "' AND `FSK` <= "+ fsk + " AND Genre.GenreID = " + genreID + " ;";
     }
 
   }

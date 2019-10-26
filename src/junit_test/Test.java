@@ -955,10 +955,6 @@ public class Test {
         //showGeneresForFilmTitle
         Assert.assertEquals("SELECT `Genrebezeichnung`, `Deskriptor` FROM Genre, Film, FilmGenre WHERE FilmGenre.GenreID = Genre.GenreID AND Film.FilmID = FilmGenre.FilmID AND `Titel` = 'Der Herr der Ringe';", QueryBuilder.showGenresForFilmTitle("Der Herr der Ringe"));
 
-        //showSearchResults
-        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE (`Titel` LIKE '%Der Herr der Ringe%' OR `Beschreibung` LIKE '%Der Herr der Ringe%') AND `Datum` >= '2019-08-07'AND `Uhrzeit` >= '19:30:00'AND `FSK` <= 12 ;",QueryBuilder.showSearchResults("Der Herr der Ringe", "2019-08-07", "19:30:00", 12));
-        Assert.assertEquals("SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, `Sprachenname` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID WHERE `Datum` >= '2019-08-07'AND `Uhrzeit` >= '19:30:00'AND `FSK` <= 12 ;", QueryBuilder.showSearchResults("","2019-08-07","19:30:00", 12));
-
         //TODO: Change concat with Date and Time
 
         // defaultSearchQuery with Search Text
