@@ -50,11 +50,11 @@ public class RegistrierungFactory {
         try {
             getRegistrierungByEmail(email);
             throw new UserAlreadyExistsException();
+        } catch (ResultSetIsNullException e) {
+             e.printStackTrace();
+             throw new RequiredFactoryFailedException();
         } catch (EmptyResultSetException e) {
             // continue
-        } catch (ResultSetIsNullException e) {
-            e.printStackTrace();
-            throw new RequiredFactoryFailedException();
         }
 
         // Now create user
