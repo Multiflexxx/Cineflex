@@ -88,13 +88,13 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="formVorname">Vorname</label>
-                                <input type="text" class="form-control" id="formVorname" placeholder=""
+                                <input type="text" class="form-control" id="formVorname" name="formVorname"
                                        value="<%=k.getVorname()%>"
                                        readonly>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="formNachname">Name</label>
-                                <input type="text" class="form-control" id="formNachname" placeholder=""
+                                <input type="text" class="form-control" id="formNachname" name="formNachname"
                                        value="<%=k.getNachname()%>"
                                        readonly>
                             </div>
@@ -102,22 +102,22 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail">E-Mail</label>
-                                <input type="text" class="form-control" id="inputEmail" placeholder=""
+                                <input type="text" class="form-control" id="inputEmail" name="inputEmail"
                                        value="<%=k.getEmail()%>"
                                        readonly>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPasswort">Passwort</label>
-                                <input type="text" class="form-control" id="inputPasswort" placeholder=""
+                                <input type="text" class="form-control" id="inputPasswort" name="inputPasswort"
                                        value="<%=k.getPasswort()%>"
                                        readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputStrasse">Straße</label>
-                            <input type="text" class="form-control" id="inputStrasse" placeholder=""
+                            <input type="text" class="form-control" id="inputStrasse" name="inputStrasse"
                                    value="<%=k.getStrasse()%> <%=k.getHausnummer()%>" readonly>
-                            <input id="PID" style="display: none" value="<%=k.getPersonenID()%>">
+                            <input id="PID" style="display: none" name="PID" value="<%=k.getPersonenID()%>">
                         </div>
                         <button type="button" class="btn btn-primary" id="bearbeitenButton"
                                 onclick="onClickProfilBearbeiten()">
