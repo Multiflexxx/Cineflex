@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="card lootbox" style="width: 15rem;  margin-top:2rem; margin-bottom: 1rem;">
-                <img src="img/specials/s_g.png" class="card-img-top" alt="...">
+                <img src="img/specials/s_g.svg" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Seltene Lootbox</h5>
                     <p class="card-text">Mindestens 3 seltene Gewinne, mit geringer Chance auf epische Gewinne.*</p>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="card lootbox" style="width: 15rem;  margin-top:2rem; margin-bottom: 1rem;">
-                <img src="img/specials/e_g.png" class="card-img-top" alt="...">
+                <img src="img/specials/e_g.svg" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title">Epische Lootbox</h5>
                     <p class="card-text">Mindestens 3 epische Gewinne, mit Chance auf einen Supergewinn.*</p>
@@ -80,7 +80,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="img/specials/g_g.png" class="card-img-top" id="gLoot" alt="Gewöhnliche Lootbox">
+                <img src="img/specials/g_g.svg" class="card-img-top" id="gLoot" alt="Gewöhnliche Lootbox">
                 <p id="gewinneg"></p>
             </div>
             <div class="modal-footer">
@@ -103,7 +103,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="img/specials/s_g.png" class="card-img-top" id="sLoot" alt="...">
+                <img src="img/specials/s_g.svg" class="card-img-top" id="sLoot" alt="...">
                 <p id="gewinnes"></p>
             </div>
             <div class="modal-footer">
@@ -126,7 +126,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img src="img/specials/e_g.png" class="card-img-top" id="eLoot" alt="...">
+                <img src="img/specials/e_g.svg" class="card-img-top" id="eLoot" alt="...">
                 <p id="gewinnee"></p>
             </div>
             <div class="modal-footer">
