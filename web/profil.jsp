@@ -73,6 +73,7 @@
                                     </p>
                                     <p class="card-text">Tickets: ...</p>
                                     <p class="card-text">Preis: <%=b.getPreis()%> €</p>
+                                    <img class="card-img" src="img/qrcode/qrcode<%=k.getKundenID() + "" + b.getBelegID()%>.png">
                                 </div>
                             </div>
                         </div>

@@ -219,7 +219,8 @@ public class QueryBuilder {
     }
 
     public static String getJustCreatedBuchung(int KID) {
-        return "SELECT BNR, KID, VorstellungsID, Preis, MAX(Zeitstempel) as `Zeitstempel` FROM `Buchungsbeleg` WHERE KID = " + KID;
+        //return "SELECT BNR, KID, VorstellungsID, Preis, MAX(Zeitstempel) as `Zeitstempel` FROM `Buchungsbeleg` WHERE KID = " + KID;
+        return  "SELECT * FROM `Buchungsbeleg` WHERE KID = " + KID + " ORDER BY Zeitstempel DESC LIMIT 1";
     }
 
     public static String aendereProfil(String vorname, String nachname, String email, String passwort, String strasse, String hausnummer, int PID) {
