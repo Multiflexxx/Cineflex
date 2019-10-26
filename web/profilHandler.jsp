@@ -13,5 +13,6 @@
 
     passwort = PassMD5.hash(passwort);
     ProfilFactory.aendereProfil(vorname, nachname, email, passwort, "", "", PID);
+    response.sendRedirect("profil.jsp");
 
 %>
