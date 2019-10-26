@@ -24,6 +24,7 @@ public class QrCodeGenerator {
         //Path path = FileSystems.getDefault().getPath(filepath);
         Path path = FileSystems.getDefault().getPath(filepath);
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+
     }
 
     public static void main(String[] args) {

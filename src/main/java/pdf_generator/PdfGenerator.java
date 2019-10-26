@@ -9,19 +9,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 public class PdfGenerator {
-    public static final String PDF_PATH = "web/img/qrcode/buchung.pdf";
-
     public static void createPdf () {
         Document document = new Document();
         try {
-            //Initialize PDF-writer and PDF-Document
-            PdfWriter.getInstance(document, new FileOutputStream(PDF_PATH));
+            PdfWriter.getInstance(document, new FileOutputStream("web/img/qrcode/buchung.pdf"));
             document.open();
-
             Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-
-
-            Paragraph p = new Paragraph("", font);
             Chunk chunk = new Chunk("Buchung", font);
             Image img = Image.getInstance("web/img/qrcode/MyQRCode.png");
             document.add(chunk);
