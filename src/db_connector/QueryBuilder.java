@@ -289,7 +289,7 @@ public class QueryBuilder {
   }
 
   public static String getUserByEmail(String email) {
-        return "Select * From Person Where `E-Mail` = " + email + ";";
+        return "Select * From Person Where `E-Mail` = '" + email + "';";
   }
 
   public static String getPreisänderungByID(int ID) {
