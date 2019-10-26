@@ -316,6 +316,41 @@ public class QueryBuilder {
         //return "SELECT BNR, KID, VorstellungsID, Preis, MAX(Zeitstempel) as `Zeitstempel` FROM `Buchungsbeleg` WHERE KID = " + KID;
         return  "SELECT * FROM `Buchungsbeleg` WHERE KID = " + KID + " ORDER BY Zeitstempel DESC LIMIT 1";
     }
+
+    public static String createBuchungsStornierung(int BNR) {
+        return "Insert Into Buchungsstonierung (BNR) VALUES (" + BNR + ");";
+    }
+
+    public static String createReservierungsStornierung(int RNR) {
+        return "Insert Into Buchungsstonierung (BNR) VALUES (" + RNR + ");";
+
+    }
+
+    public static String getBuchungsStornierungByStrnNR(int StrnNR) {
+        return "Select * from Buchungsstornierung Where StrnNR = " + StrnNR + ";";
+    }
+
+    public static String getBuchungsStornierungByBNR(int BNR) {
+        return "Select * from Buchungsstornierung Where BNR = " + BNR + ";";
+    }
+
+    public static String getReservierungsStornierungByRNR(int RNR) {
+        return "Select * from Reservierungsstornierung Where BNR = " + RNR + ";";
+    }
+
+    public static String getReservierungsStornierungByStrnNR(int StrnNR) {
+        return "Select * from Reservierungsstornierung Where StrnNR = " + StrnNR + ";";
+    }
+
+    public static String getBuchungsStornierungByKID(int KID) {
+        return "Select * From Buchungsstonierung Join Buchungsbeleg On `Buchungsstonierung.BNR` = `buchungsbeleg.BNR` Where KID = " + KID + ";";
+    }
+
+    public static String getReservierungsStornierungByKID(int KID) {
+        return "Select * From Buchungsstonierung Join Buchungsbeleg On `Buchungsstonierung.BNR` = `Buchungsbeleg.BNR` Where KID = " + KID + ";";
+    }
+
+
     // NOT USED
     /*
     public static String getSeatInfo(int vorstellungsID)
