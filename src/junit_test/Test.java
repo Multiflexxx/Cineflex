@@ -761,13 +761,14 @@ public class Test {
     }
     //----
 
-    // TEsts for class Registrierung
+    // Tests for class Registrierung
     @org.junit.Test
     public void testeRegistrierung()
     {
         Date date = new Date();
         Date date2 = new Date();
 
+        // Create Object
         Registrierung registrierung1 = new Registrierung("Peter", "Meier", date, "mail@mail.com", "hash", 12345, "kurze Straße", 2, "a");
 
         // Tests for Getters
@@ -795,6 +796,7 @@ public class Test {
         Assert.assertEquals("hash", registrierung2.getPasswordHash());
         Assert.assertEquals("kurze Straße", registrierung2.getStraße());
 
+        // Tests for Setters
         registrierung2.setVorname("Nils");
         registrierung2.setNachname("Peters");
         registrierung2.setPID(3);
@@ -814,8 +816,70 @@ public class Test {
         Assert.assertEquals(45678, registrierung2.getPlz());
         Assert.assertEquals(69, registrierung2.getHausnummer());
         Assert.assertEquals("c", registrierung2.getAdresszusatz());
-
     }
+    //----
+
+    // Tests for class BuchungsStornierung
+    @org.junit.Test
+    public void testeBuchungsStornierung()
+    {
+        // Create Object
+        BuchungsStornierung buchungsStornierung = new BuchungsStornierung(12, 13);
+
+        //Tests for Getters
+        Assert.assertEquals(12, buchungsStornierung.getBNR());
+        Assert.assertEquals(13, buchungsStornierung.getStrnNr());
+
+        // Tests for Setters
+        buchungsStornierung.setBNR(14);
+        buchungsStornierung.setStrnNr(15);
+
+        Assert.assertEquals(14, buchungsStornierung.getBNR());
+        Assert.assertEquals(15, buchungsStornierung.getStrnNr());
+    }
+    //----
+
+    // Tests for class ReservierungsStornierung
+    @org.junit.Test
+    public void testeReservierungsStornierung()
+    {
+        // Create Object
+        ReservierungsStornierung reservierungsStornierung = new ReservierungsStornierung(15, 20);
+
+        // Tests for Getters
+        Assert.assertEquals(15, reservierungsStornierung.getRNR());
+        Assert.assertEquals(20, reservierungsStornierung.getStrnNr());
+
+        // Tests for Setters
+        reservierungsStornierung.setRNR(30);
+        reservierungsStornierung.setStrnNr(31);
+
+        Assert.assertEquals(30, reservierungsStornierung.getRNR());
+        Assert.assertEquals(31, reservierungsStornierung.getStrnNr());
+    }
+    //----
+
+    // Tests for class Buchungsposition
+    @org.junit.Test
+    public void testeBuchungposition()
+    {
+        BuchungsPosition buchungsPosition = new BuchungsPosition(1,2,3);
+
+        // Tests for Getters
+        Assert.assertEquals(1, buchungsPosition.getPositionsID());
+        Assert.assertEquals(2, buchungsPosition.getBNR());
+        Assert.assertEquals(3, buchungsPosition.getSitzID());
+
+        // Tests for Setters
+        buchungsPosition.setPositionsID(12);
+        buchungsPosition.setBNR(55);
+        buchungsPosition.setSitzID(56);
+
+        Assert.assertEquals(12, buchungsPosition.getPositionsID());
+        Assert.assertEquals(55, buchungsPosition.getBNR());
+        Assert.assertEquals(56, buchungsPosition.getSitzID());
+    }
+
 
     // TESTS FOR PASSWORD
     // Test for class PassMD5
