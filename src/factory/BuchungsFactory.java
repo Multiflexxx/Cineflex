@@ -1,5 +1,6 @@
 package factory;
 
+import com.google.zxing.WriterException;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 //import oo.Buchungsbeleg;
@@ -10,7 +11,9 @@ import oo.Buchungsbeleg;
 import oo.Kunde;
 import oo.Sitz;
 import oo.Vorstellung;
+import qr_code.QrCodeGenerator;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -79,6 +82,8 @@ public class BuchungsFactory {
 //        }
         createBuchungsPositionen(c, lastBNR, sitze, preiseVerIDs);
 
+        createBuchungsbelegQrCode(KNR, vorstellung, sitze);
+
         Connector.closeResultSet(rs);
         Connector.closeConnection(c);
         return 0;
@@ -116,6 +121,46 @@ public class BuchungsFactory {
         }
         SupportMethods.close(c, rs);
         return buchungsbeleg;
+    }
+
+    public static void createBuchungsbelegQrCode(int KID, Vorstellung vorstellung, Sitz [] sitze) {
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.getJustCreatedBuchung(KID);
+        ResultSet rs = Connector.getQueryResult(c, sql);
+        Buchungsbeleg buchungsbeleg = null;
+
+        if (rs != null) {
+            try {
+                if (rs.next()) {
+                    Kunde kunde = KundenFactory.getKundeByKID(rs.getInt("KID"));
+                    buchungsbeleg = new Buchungsbeleg(
+                            rs.getInt("BNR"),
+                            rs.getFloat("Preis"),
+                            vorstellung,
+                            kunde,
+                            new Date(rs.getTimestamp("Zeitstempel").getTime())
+                    );
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                SupportMethods.close(c, rs);
+            }
+        } else {
+            SupportMethods.close(c, rs);
+        }
+        SupportMethods.close(c, rs);
+
+        String path = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/qrcode" + KID + ".png";
+        String qrcodeinfo = "{'Kundennr': " + KID;
+        qrcodeinfo += ", 'VorstellungID': " + vorstellung.getVorstellungsID();
+        qrcodeinfo += ", 'Film': " + vorstellung.getFilm().getTitel() + "'}";
+        try {
+            QrCodeGenerator.generateQRCodeImage(qrcodeinfo, path);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Buchungsbeleg[] getBuchungsbelegeByKID(int KID) {

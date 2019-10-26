@@ -12,17 +12,13 @@
 
 
 <%
-//    int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungs_id"));
-//    String seats = request.getParameter("seats_input");
-//    String preisVer = request.getParameter("presVerInput");
-//    int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
-//    int[] preisVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
-//    int KID = Integer.parseInt(session.getAttribute("KID").toString());
-//    BuchungsFactory.createBuchungBeleg(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
-
-    String path = "img/qrcode/qrcode1.png";
-    String qrcode = "Geht das?";
-    QrCodeGenerator.generateQRCodeImage(qrcode, path);
+    int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungs_id"));
+    String seats = request.getParameter("seats_input");
+    String preisVer = request.getParameter("presVerInput");
+    int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
+    int[] preisVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
+    int KID = Integer.parseInt(session.getAttribute("KID").toString());
+    BuchungsFactory.createBuchungBeleg(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
 %>
 
 <div class="container">
@@ -33,6 +29,7 @@
         <div class="card-body">
             <p class="card-text">Sie erhalten per E-Mail eine Bestätigung Ihres Kaufes.</p>
             <p>Hier stehen Infos zur Buchung..</p>
+            <img class="card-img" src="img/qrcode/qrcode<%=KID%>.png">
             <p class="card-text">Sie können nun zurück zur Startseite</p>
             <a class="btn btn-primary btn-lg" href="index.jsp" role="button">Zurück zur Startseite</a>
         </div>
@@ -42,4 +39,3 @@
 <jsp:include page="elements/footer.jsp"/>
 </body>
 </html>
-
