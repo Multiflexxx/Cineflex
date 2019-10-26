@@ -1092,6 +1092,11 @@ public class Test {
         String checkString = " html Test /html  123  Test. A BC";
 
         Assert.assertEquals(checkString, SupportMethods.removeHTMLCode(html));
+
+        String sqlInject = "Test#A-B--C/*D";
+        String checkStringSQL = "Test A B  C  D";
+
+        Assert.assertEquals(checkStringSQL, SupportMethods.removeSQLInjections(sqlInject));
     }
 
     // Tests for class Exception Handler
