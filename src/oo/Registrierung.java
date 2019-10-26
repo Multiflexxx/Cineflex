@@ -53,6 +53,7 @@ public class Registrierung {
      */
     public Registrierung(int PID, String vorname, String nachname, Date geburtsdatum, String email, String passwordHash, int plz, String straße, int hausnummer, String adresszusatz) {
         this.PID = PID;
+        this.vorname = vorname;
         this.nachname = nachname;
         this.geburtsdatum = geburtsdatum;
         this.email = email;
@@ -205,5 +206,19 @@ public class Registrierung {
      */
     public void setAdresszusatz(String adresszusatz) {
         this.adresszusatz = adresszusatz;
+    }
+
+    /**
+     *
+     * @return PID
+     */
+    public int getPID()
+    {
+        return PID;
+    }
+
+    public void setPID(int PID)
+    {
+        this.PID = PID;
     }
 }

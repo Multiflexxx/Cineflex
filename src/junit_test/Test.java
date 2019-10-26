@@ -761,6 +761,62 @@ public class Test {
     }
     //----
 
+    // TEsts for class Registrierung
+    @org.junit.Test
+    public void testeRegistrierung()
+    {
+        Date date = new Date();
+        Date date2 = new Date();
+
+        Registrierung registrierung1 = new Registrierung("Peter", "Meier", date, "mail@mail.com", "hash", 12345, "kurze Straße", 2, "a");
+
+        // Tests for Getters
+        Assert.assertEquals("Peter", registrierung1.getVorname());
+        Assert.assertEquals("Meier", registrierung1.getNachname());
+        Assert.assertEquals(date, registrierung1.getGeburtsdatum());
+        Assert.assertEquals("mail@mail.com", registrierung1.getEmail());
+        Assert.assertEquals(12345, registrierung1.getPlz());
+        Assert.assertEquals(2, registrierung1.getHausnummer());
+        Assert.assertEquals("a", registrierung1.getAdresszusatz());
+        Assert.assertEquals("hash", registrierung1.getPasswordHash());
+        Assert.assertEquals("kurze Straße", registrierung1.getStraße());
+
+        Registrierung registrierung2 = new Registrierung(55,"Hans", "Meier", date, "mail@mail1.com", "hash", 12346, "kurze Straße", 6, "b");
+
+        // Tests for Getters
+        Assert.assertEquals(55, registrierung2.getPID());
+        Assert.assertEquals("Hans", registrierung2.getVorname());
+        Assert.assertEquals("Meier", registrierung2.getNachname());
+        Assert.assertEquals(date, registrierung2.getGeburtsdatum());
+        Assert.assertEquals("mail@mail1.com", registrierung2.getEmail());
+        Assert.assertEquals(12346, registrierung2.getPlz());
+        Assert.assertEquals(6, registrierung2.getHausnummer());
+        Assert.assertEquals("b", registrierung2.getAdresszusatz());
+        Assert.assertEquals("hash", registrierung2.getPasswordHash());
+        Assert.assertEquals("kurze Straße", registrierung2.getStraße());
+
+        registrierung2.setVorname("Nils");
+        registrierung2.setNachname("Peters");
+        registrierung2.setPID(3);
+        registrierung2.setPlz(45678);
+        registrierung2.setPasswordHash("123456");
+        registrierung2.setAdresszusatz("c");
+        registrierung2.setGeburtsdatum(date2);
+        registrierung2.setEmail("neue@mail.com");
+        registrierung2.setHausnummer(69);
+        registrierung2.setStraße("neue Straße");
+
+        Assert.assertEquals(3, registrierung2.getPID());
+        Assert.assertEquals("Nils", registrierung2.getVorname());
+        Assert.assertEquals("Peters", registrierung2.getNachname());
+        Assert.assertEquals(date2, registrierung2.getGeburtsdatum());
+        Assert.assertEquals("neue@mail.com", registrierung2.getEmail());
+        Assert.assertEquals(45678, registrierung2.getPlz());
+        Assert.assertEquals(69, registrierung2.getHausnummer());
+        Assert.assertEquals("c", registrierung2.getAdresszusatz());
+
+    }
+
     // TESTS FOR PASSWORD
     // Test for class PassMD5
     @org.junit.Test
