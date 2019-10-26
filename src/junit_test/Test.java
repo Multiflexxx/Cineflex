@@ -511,11 +511,17 @@ public class Test {
         Assert.assertEquals(sitzplan, kinosaal.getSitzplan());
         Assert.assertEquals(sitz1, kinosaal.getSitzplan()[0]);
         Assert.assertEquals(sitz2.getReihe(), kinosaal.getSitzplan()[0].getReihe());
+        Assert.assertEquals(null, kinosaal.getGebaeude());
 
         kinosaal.setSaalID(3);
         Assert.assertEquals(3, kinosaal.getSaalID());
         kinosaal.setBezeichnung("Saal 2");
         Assert.assertEquals("Saal 2", kinosaal.getBezeichnung());
+
+        Gebaeude gebaeude = new Gebaeude(12, "kurze Strasse", 5, 12345, "Teststadt");
+        kinosaal.setGebaeude(gebaeude);
+
+        Assert.assertEquals(gebaeude, kinosaal.getGebaeude());
 
         Sitz sitz4 = new Sitz(8, 7, 'C', 'L');
         Sitz sitz5 = new Sitz(9, 9, 'D', 'B');
