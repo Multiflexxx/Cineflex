@@ -26,6 +26,9 @@ public class RegistrierungFactory {
         straße = SupportMethods.removeHTMLCode(straße);
         adresszusatz = SupportMethods.removeHTMLCode(adresszusatz);
 
+        // Cast Email to lower case
+        email = email.toLowerCase();
+
         // Check Password
         if (!passwordHash.equals(passwordHashWdh)) {
             throw new UnmatchingPasswordException();
