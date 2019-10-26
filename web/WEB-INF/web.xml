@@ -4,16 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>RegistrationHandler</servlet-name>
-        <servlet-class>handler.RegistrationHandler</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>RegistrationHandler</servlet-name>
-        <url-pattern>/RegistrationHandler</url-pattern>
-    </servlet-mapping>
-
     <error-page>
         <error-code>500</error-code>
         <location>/error500.jsp</location>
