@@ -2,6 +2,7 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import exception.RequiredFactoryFailedException;
 import helper.DateFormatter;
 import helper.SupportMethods;
 
@@ -24,8 +25,8 @@ public class ReservierungsFactory {
      * @param KNR
      * @return
      */
-    public static int createReservierungsBelege(int[] sitzeIDs, int[] preiseVerIDs,
-                                                int vorstellungsID, int KNR) {
+    public static int createReservierungsBelege(int[] sitzeIDs, int[] preiseVerIDs, String seats,
+                                                String preisVer, int vorstellungsID, int KNR) {
         if (sitzeIDs.length != preiseVerIDs.length) {
 //      throw new UnequalParameterLength();
             return -1;
@@ -36,12 +37,25 @@ public class ReservierungsFactory {
             sitze[i] = SitzFactory.getSitzById(sitzeIDs[i]);
         }
 
+
+
         Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(vorstellungsID);
+
+        float preis = 0;
+
+        try {
+            preis = PreisFactory.getBuchungsPreis(seats,preisVer,vorstellung.getFilm().getFilmID());
+        }
+        catch (RequiredFactoryFailedException e)
+        {
+            e.printStackTrace();
+        }
+
 
         // Create reservierungsbeleg with timestamp
         Connection c = Connector.getConnection();
         String timeStamp = DateFormatter.getSQLDateAndTime(new Date());
-        String sql = QueryBuilder.createReservierungsbeleg(KNR, vorstellung.getVorstellungsID(), 0, timeStamp);
+        String sql = QueryBuilder.createReservierungsbeleg(KNR, vorstellung.getVorstellungsID(), preis, timeStamp);
         Connector.executeQuery(c, sql);
 
         // Get RNR for the created Beleg
