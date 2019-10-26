@@ -63,12 +63,10 @@ public class GebaeudeFactory {
                     e.printStackTrace();
                 }
             }
-            Connector.closeResultSet(rs);
-            Connector.closeConnection(c);
+            SupportMethods.close(c, rs);
             return gebäude;
         } else {
-            Connector.closeResultSet(rs);
-            Connector.closeConnection(c);
+            SupportMethods.close(c, rs);
             return gebäude;
         }
     }
@@ -119,6 +117,7 @@ public class GebaeudeFactory {
             throw new FailedObjectCreationException();
         }
 
+        SupportMethods.close(c, rs);
         return gebaeude;
     }
 }

@@ -100,19 +100,19 @@ public class GenreFactory {
         }catch(SQLException e){
           e.printStackTrace();
         }
-        Connector.closeResultSet(rs);
-        Connector.closeConnection(c);
+        SupportMethods.close(c, rs);
+
         return genres;
       } else {
         genres = new Genre[1];
         genres[0] = null;
-        Connector.closeResultSet(rs);
-        Connector.closeConnection(c);
+        SupportMethods.close(c, rs);
+
         return genres;
       }
     }
-    Connector.closeResultSet(rs);
-    Connector.closeConnection(c);
+    SupportMethods.close(c, rs);
+
     return null;
   }
 

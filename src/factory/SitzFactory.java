@@ -7,22 +7,16 @@ import exception.FailedObjectCreationException;
 import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
 import helper.SupportMethods;
+import oo.BuchungsPosition;
+import oo.Buchungsbeleg;
 import oo.Sitz;
 import oo.Sitzsperre;
-import org.junit.internal.runners.statements.Fail;
 
-import javax.management.Query;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SitzFactory {
-    /**
-     *
-     * @param id
-     * @param mockRs
-     * @return sitz
-     */
     public static Sitz getSitzById(int id, ResultSet mockRs) {
         Sitz sitz = null;
         Connection c = Connector.getConnection();
@@ -54,19 +48,10 @@ public class SitzFactory {
             }
         }
 
-        Connector.closeResultSet(rs);
-        Connector.closeConnection(c);
+        SupportMethods.close(c, rs);
         return sitz;
     }
 
-    /**
-     *
-     * @param vorstellungsID
-     * @return bookedSeats
-     * @throws FailedObjectCreationException
-     * @throws EmptyResultSetException
-     * @throws ResultSetIsNullException
-     */
     public static Sitz[] getBookedSeats(int vorstellungsID) throws FailedObjectCreationException, EmptyResultSetException, ResultSetIsNullException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getBookedSeats(vorstellungsID);
@@ -99,7 +84,7 @@ public class SitzFactory {
 
     /**
      * Returns a Sitz[] Array of all locked for a given Vorstellung
-     * @param vorstellungsID ID of Vorstellung
+     * @param vorstellungsID ID of Vortsellung
      * @return Return @code{null} when there is no seat locked Seat in any way, otherwise Sitz[]
      * @throws RequiredFactoryFailedException
      */
@@ -159,11 +144,21 @@ public class SitzFactory {
         return allLockedSeats;
     }
 
-    /**
-     *
-     * @param id
-     * @return Sitz
-     */
+
+    public static Sitz[] getSitzeByBNR(int BNR) {
+        try {
+            BuchungsPosition[] posi = BuchungspositionFactory.getBuchungspositionenByBNR(BNR);
+        } catch (EmptyResultSetException e) {
+            e.printStackTrace();
+        } catch (ResultSetIsNullException e) {
+            e.printStackTrace();
+        } catch (RequiredFactoryFailedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public static Sitz getSitzById(int id)
     {
         return getSitzById(id, null);

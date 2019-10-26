@@ -41,6 +41,7 @@ public class OrtsFactory {
     }catch (SQLException e) {
       e.printStackTrace();
     }
+    SupportMethods.close(c, rs);
 
     return ort;
   }
