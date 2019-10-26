@@ -73,7 +73,9 @@ public class RegistrierungFactory {
             throw new RequiredFactoryFailedException();
         }
 
-        //Email_Sender.sendMail(registrierung.getEmail(), "Wilkommen bei Cineflexxx", "Hallo "+registrierung.getVorname()+", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
+        if(System.getProperties().get("user.home") != "C:\\Users\\benno") {
+            Email_Sender.sendMail(registrierung.getEmail(), "Wilkommen bei Cineflexxx", "Hallo "+registrierung.getVorname()+", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
+        }
 
         return registrierung;
     }
