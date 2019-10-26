@@ -879,7 +879,8 @@ public class Test {
         Assert.assertEquals("Select `Genrebezeichnung` FROM FilmGenre JOIN Genre ON Genre.GenreID = Filmgenre.GenreID Where `GenreID` = 15 ;", QueryBuilder.getGenreByID(15));
 
         //createUser
-        Assert.assertEquals("INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '01.01.1970' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);\n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '"+date4+"' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
+        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('Hans', 'Meier', '2019-10-26', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', '', '68165'); \n" +
+                " INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '2019-10-26' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
 
         //getGenres
         Assert.assertEquals("SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;", QueryBuilder.getGenres());
@@ -1283,7 +1284,7 @@ public class Test {
         Mockito.when(resultSetMock9.getString("Sitzklasse")).thenReturn("L").thenReturn("P").thenReturn("B");
 
         Mockito.when(resultSetMock10.getString("Saalbezeichnung")).thenReturn("Saal 1");
-        Mockito.when(resultSetMock10.getString("GebäudeID")).thenReturn("12");
+        Mockito.when(resultSetMock10.getInt("GebäudeID")).thenReturn(12);
 
         // Add next() to ResultSet
         Mockito.when(resultSetMock9.next()).thenReturn(true).thenReturn(true).thenReturn(true).thenReturn(false);
@@ -1294,6 +1295,8 @@ public class Test {
 
         // Check if Object is not null
         Assert.assertNotNull(resultKinosaal);
+
+        //TODO: Add RS in call for getGebäudeByID Line 72
 
         // Test if Sitzplan array is filled correctly
         Assert.assertEquals(15, resultKinosaal.getSaalID());
