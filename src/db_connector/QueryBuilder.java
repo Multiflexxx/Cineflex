@@ -311,6 +311,11 @@ public class QueryBuilder {
   public static String getOrtByPLZ(int plz) {
       return "Select * From Ort Where PLZ = " + plz + ";";
   }
+
+    public static String getJustCreatedBuchung(int KID) {
+        //return "SELECT BNR, KID, VorstellungsID, Preis, MAX(Zeitstempel) as `Zeitstempel` FROM `Buchungsbeleg` WHERE KID = " + KID;
+        return  "SELECT * FROM `Buchungsbeleg` WHERE KID = " + KID + " ORDER BY Zeitstempel DESC LIMIT 1";
+    }
     // NOT USED
     /*
     public static String getSeatInfo(int vorstellungsID)
