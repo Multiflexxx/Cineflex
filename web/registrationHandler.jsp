@@ -9,6 +9,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="factory.LoginFactory" %>
 <%@ page import="oo.UserLogin" %>
+<%@ page import="factory.RegistrierungFactory" %>
 <%
     String firstname = SupportMethods.removeHTMLCode(request.getParameter("inputVorname"));
     String lastname = SupportMethods.removeHTMLCode(request.getParameter("inputNachname"));
@@ -43,23 +44,23 @@
         e.printStackTrace();
     }
 
-    Connection c = null;
-
-    c = Connector.getConnection();
-    if (c == null)
-        response.getOutputStream().print("Geht nicht!");
-
-    String checkUserSQL = QueryBuilder.getUserForRegistration(firstname, lastname, date, email);
-
-    ResultSet resultSet = Connector.getQueryResult(c, checkUserSQL);
-
-    if (SupportMethods.getResultSetSize(resultSet) > 0) {
-        // User Already Exists in DB!
-        response.sendRedirect("/error500.jsp");
-    }
-
-    // E-mail to lower case
-    email = email.toLowerCase();
+//    Connection c = null;
+//
+//    c = Connector.getConnection();
+//    if (c == null)
+//        response.getOutputStream().print("Geht nicht!");
+//
+//    String checkUserSQL = QueryBuilder.getUserForRegistration(firstname, lastname, date, email);
+//
+//    ResultSet resultSet = Connector.getQueryResult(c, checkUserSQL);
+//
+//    if (SupportMethods.getResultSetSize(resultSet) > 0) {
+//        // User Already Exists in DB!
+//        response.sendRedirect("/error500.jsp");
+//    }
+//
+//    // E-mail to lower case
+//    email = email.toLowerCase();
 
     Date gebDateSQL;
 
@@ -69,9 +70,9 @@
         return;
     }
 
-    String sql = QueryBuilder.createUser(firstname, lastname, gebDateSQL, email, pass, Integer.parseInt(hausnummer), straße, adresszusatz, Integer.parseInt(postleitzahl));
-    Connector.executeQuery(c, sql);
-
+//    String sql = QueryBuilder.createUser(firstname, lastname, gebDateSQL, email, pass, Integer.parseInt(hausnummer), straße, adresszusatz, Integer.parseInt(postleitzahl));
+//    Connector.executeQuery(c, sql);
+    RegistrierungFactory.createRegistrierung(firstname, lastname, gebDateSQL, email, pass, passWdh, wohnort, Integer.parseInt(hausnummer), straße, Integer.parseInt(postleitzahl), adresszusatz,);
     UserLogin userLogin = LoginFactory.getUserLogin(email, pass);
 
     try {
@@ -91,5 +92,5 @@
         e.printStackTrace();
     }
 
-    Connector.closeConnection(c);
+   // Connector.closeConnection(c);
 %>
