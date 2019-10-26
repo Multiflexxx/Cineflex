@@ -10,6 +10,11 @@
 <%@ page import="factory.LoginFactory" %>
 <%@ page import="oo.UserLogin" %>
 <%@ page import="factory.RegistrierungFactory" %>
+<%@ page import="exception.registrierung.UnmatchingPasswordException" %>
+<%@ page import="exception.registrierung.EmptyInputValueException" %>
+<%@ page import="exception.registrierung.UserAlreadyExistsException" %>
+<%@ page import="exception.RequiredFactoryFailedException" %>
+<%@ page import="exception.EmptyResultSetException" %>
 <%
     String firstname = SupportMethods.removeHTMLCode(request.getParameter("inputVorname"));
     String lastname = SupportMethods.removeHTMLCode(request.getParameter("inputNachname"));
@@ -40,6 +45,7 @@
 
     try {
         pass = PassMD5.hash(pass);
+        passWdh = PassMD5.hash(passWdh);
     } catch (NoSuchAlgorithmException e) {
         e.printStackTrace();
     }
@@ -72,7 +78,11 @@
 
 //    String sql = QueryBuilder.createUser(firstname, lastname, gebDateSQL, email, pass, Integer.parseInt(hausnummer), straße, adresszusatz, Integer.parseInt(postleitzahl));
 //    Connector.executeQuery(c, sql);
-    RegistrierungFactory.createRegistrierung(firstname, lastname, gebDateSQL, email, pass, passWdh, wohnort, Integer.parseInt(hausnummer), straße, Integer.parseInt(postleitzahl), adresszusatz,);
+    try {
+        RegistrierungFactory.createRegistrierung(firstname, lastname, gebDateSQL, email, pass, passWdh, wohnort, Integer.parseInt(hausnummer), straße, Integer.parseInt(postleitzahl), adresszusatz);
+    } catch (UnmatchingPasswordException | EmptyInputValueException | UserAlreadyExistsException | RequiredFactoryFailedException | EmptyResultSetException e) {
+        e.printStackTrace();
+    }
     UserLogin userLogin = LoginFactory.getUserLogin(email, pass);
 
     try {
