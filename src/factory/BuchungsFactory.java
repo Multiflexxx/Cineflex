@@ -150,7 +150,7 @@ public class BuchungsFactory {
         }
         SupportMethods.close(c, rs);
 
-        String path = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/qrcode" + KID + ".png";
+        String path = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/qrcode" + KID + buchungsbeleg.getBelegID() + ".png";
         String qrcodeinfo = "{'Kundennr': " + KID;
         qrcodeinfo += ", 'VorstellungID': " + vorstellung.getVorstellungsID();
         qrcodeinfo += ", 'Film': " + vorstellung.getFilm().getTitel() + "'}";
