@@ -268,8 +268,8 @@ function btndclickable(countChoosenSeats) {
     }
 }
 
-function onClickReservieren() {
-    var preiscat = [];
+function onClickReservieren(vID , fID) {
+    /*var preiscat = [];
     var seatcat = [];
     for (let i = 0; i < preisMultiplikator.length; i++) {
         for (let j = 0; j<2; j++) {
@@ -290,7 +290,69 @@ function onClickReservieren() {
     var preisInput = preiscat.join(",");
     var seatcatInput = seatcat.join(",");
     console.log(preisInput)
-    console.log(seatcatInput);
+    console.log(seatcatInput);*/
+
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "reservierungsHandler.jsp");
+
+    var inputs = document.getElementsByClassName("seat");
+    var seats = [];
+    for (var j = 0; j < inputs.length; j++) {
+        if (inputs[j].style.backgroundColor == "green") {
+            seats.push(inputs[j].getAttribute("uniqueID"));
+        }
+    }
+    var seatsInput = seats.join(",");
+
+    var preiscat = [];
+    // var seatcat = [];
+    for (let i = 0; i < preisMultiplikator.length; i++) {
+        for (let j = 0; j<2; j++) {
+            var ctr = preisMultiplikator[i][j];
+            var id = preistyp[i].id;
+            var cat ="";
+            if (j == 0) {
+                cat = "P";
+            } else {
+                cat = "L";
+            }
+            for (let k = 0; k < ctr; k++) {
+                preiscat.push(id);
+                // seatcat.push(cat);
+            }
+        }
+    }
+    var preisInput = preiscat.join(",");
+    // var seatcatInput = seatcat.join(",");
+    var hiddenField0 = document.createElement("input");
+    hiddenField0.setAttribute("type", "hidden");
+    hiddenField0.setAttribute("name", "vorstellungs_id");
+    hiddenField0.setAttribute("value", vID);
+    var hiddenField1 = document.createElement("input");
+    hiddenField1.setAttribute("type", "hidden");
+    hiddenField1.setAttribute("name", "seats_data");
+    hiddenField1.setAttribute("value", seatsInput);
+    var hiddenField2 = document.createElement("input");
+    hiddenField2.setAttribute("type", "hidden");
+    hiddenField2.setAttribute("name", "tickets_data");
+    hiddenField2.setAttribute("value", preisInput);
+    var hiddenField3 = document.createElement("input");
+    hiddenField3.setAttribute("type", "hidden");
+    hiddenField3.setAttribute("name", "film_id");
+    hiddenField3.setAttribute("value", fID);
+    var hiddenField4 = document.createElement("input");
+    hiddenField4.setAttribute("type", "hidden");
+    hiddenField4.setAttribute("name", "url");
+    hiddenField4.setAttribute("value", url);
+    form.appendChild(hiddenField0);
+    form.appendChild(hiddenField1);
+    form.appendChild(hiddenField2);
+    form.appendChild(hiddenField3);
+    form.appendChild(hiddenField4);
+
+    document.body.appendChild(form);
+    form.submit();
 }
 
 
