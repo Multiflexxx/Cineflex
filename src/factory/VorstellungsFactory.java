@@ -29,7 +29,7 @@ public class VorstellungsFactory {
      * @param plz
      * @return vorstellungen
      */
-    public static Vorstellung[] getVorstellungen(Film film, String date, String time, String plz) {
+    public static Vorstellung[] getVorstellungen(Film film, String date, String time, String plz, ResultSet mockRs) {
 
         sfilm = film;
         sdate = date;
@@ -39,7 +39,18 @@ public class VorstellungsFactory {
         Vorstellung[] vorstellungen = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.showMovieById("" + film.getFilmID(), date, time, plz);
-        ResultSet rs = Connector.getQueryResult(c, sql);
+
+        ResultSet rs = null;
+
+        if(mockRs == null)
+        {
+            rs = Connector.getQueryResult(c, sql);
+        }
+
+        else
+        {
+            rs = mockRs;
+        }
 
         if(rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
@@ -61,8 +72,10 @@ public class VorstellungsFactory {
             vorstellungen = new Vorstellung[rsSize];
             if(rsSize > 0) {
                 try {
-                    int counter = 0;
-                    while (rs.next()) {
+                    //int counter = 0;
+                    //while (rs.next()) {
+                    for (int i = 0; i < rsSize; i++){
+                        rs.next();
                         // `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname
                         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
                         Date date_Datum = null;
@@ -86,13 +99,13 @@ public class VorstellungsFactory {
                             return null;
                         }
 
-                        vorstellungen[counter] = new Vorstellung(rs.getInt("VorstellungsID"),
+                        vorstellungen[i] = new Vorstellung(rs.getInt("VorstellungsID"),
                                                                     date_Datum,
                                                                     time_Uhrzeit,
                                                                     rs.getString("Sprache.Sprachenname"),
                                                                     film,
                                                                     KinosaalFactory.getKinosaal(rs.getInt("Kinosaal.SaalID")));
-                        counter++;
+                        //counter++;
                     }
                 }catch(SQLException e) {
                     e.printStackTrace();
@@ -113,18 +126,33 @@ public class VorstellungsFactory {
         return null;
     }
 
+    public static Vorstellung[] getVorstellungen(Film film, String date, String time, String plz)
+    {
+        return getVorstellungen(film, date, time, plz, null);
+    }
+
     /**
      *
      * @param id
      * @return vorstellung
      */
-    public static Vorstellung getVorstellungById(int id) {
+    public static Vorstellung getVorstellungById(int id,ResultSet mockRs) {
         Vorstellung vorstellung = null;
 
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getVorstellungByID(id);
-        ResultSet rs = Connector.getQueryResult(c, sql);
-        // Connector.closeConnection(c);
+
+        ResultSet rs = null;
+
+        if(mockRs == null)
+        {
+            rs = Connector.getQueryResult(c, sql);
+        }
+
+        else
+        {
+            rs = mockRs;
+        }
 
         if(rs!=null) {
 
@@ -165,6 +193,11 @@ public class VorstellungsFactory {
         Connector.closeConnection(c);
 
       return vorstellung;
+    }
+
+    public static Vorstellung getVorstellungById(int id)
+    {
+        return getVorstellungById(id, null);
     }
 
     /**

@@ -80,6 +80,10 @@ public class Test {
     private ResultSet resultSetMock23;
     @Mock
     private ResultSet resultSetMock24;
+    @Mock
+    private ResultSet resultSetMock25;
+    @Mock
+    private ResultSet resultSetMock26;
 
     @Before
     public void setUp() throws Exception
@@ -1538,9 +1542,54 @@ public class Test {
     }
 
     @org.junit.Test
-    public void testeVorstellungsFactory()
+    public void testeVorstellungsFactory() throws Exception
     {
+        // Create Resultsets
+        resultSetMock25 = Mockito.mock(ResultSet.class);
+        resultSetMock26 = Mockito.mock(ResultSet.class);
 
+        // Add values to Resultset
+        Mockito.when(resultSetMock25.getInt("VorstellungsID")).thenReturn(12).thenReturn(13);
+        Mockito.when(resultSetMock25.getString("Datum")).thenReturn("2019-08-08").thenReturn("2019-09-09");
+        Mockito.when(resultSetMock25.getString("Uhrzeit")).thenReturn("12:12:00").thenReturn("13:13:00");
+        Mockito.when(resultSetMock25.getString("Sprache.Sprachenname")).thenReturn("deutsch").thenReturn("englisch");
+        Mockito.when(resultSetMock25.getInt("Kinosaal.SaalID")).thenReturn(5).thenReturn(6);
+
+        Mockito.when(resultSetMock26.getInt("VorstellungsID")).thenReturn(17);
+        Mockito.when(resultSetMock26.getString("Datum")).thenReturn("2019-08-08");
+        Mockito.when(resultSetMock26.getString("Uhrzeit")).thenReturn("12:12:00");
+        Mockito.when(resultSetMock26.getString("Sprache.Sprachenname")).thenReturn("deutsch");
+        Mockito.when(resultSetMock2.getInt("Kinosaal.SaalID")).thenReturn(7);
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock25.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+        Mockito.when(resultSetMock26.next()).thenReturn(true).thenReturn(false);
+
+        // Create mock film
+        Film film = new Film(15);
+
+        // getVorstellungen()
+        Vorstellung[] vorstellungen = VorstellungsFactory.getVorstellungen(film, "", "", "", resultSetMock25);
+
+        // Check if object is not null
+        Assert.assertNotNull(vorstellungen);
+
+        Assert.assertEquals(12, vorstellungen[0].getVorstellungsID());
+        Assert.assertEquals(13, vorstellungen[1].getVorstellungsID());
+
+        Assert.assertEquals("deutsch", vorstellungen[0].getSprache());
+        Assert.assertEquals("englisch", vorstellungen[1].getSprache());
+
+        Assert.assertEquals(film, vorstellungen[0].getFilm());
+        Assert.assertEquals(film, vorstellungen[1].getFilm());
+
+        // getVorstellungById
+        Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(18, resultSetMock26);
+
+        // Check if object is not null
+        Assert.assertNotNull(vorstellung);
+
+        Assert.assertEquals(17, vorstellung.getVorstellungsID());
     }
 
     @org.junit.Test
