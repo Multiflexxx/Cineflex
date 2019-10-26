@@ -79,7 +79,7 @@
 //    String sql = QueryBuilder.createUser(firstname, lastname, gebDateSQL, email, pass, Integer.parseInt(hausnummer), straße, adresszusatz, Integer.parseInt(postleitzahl));
 //    Connector.executeQuery(c, sql);
     try {
-        RegistrierungFactory.createRegistrierung(firstname, lastname, gebDateSQL, email, pass, passWdh, wohnort, Integer.parseInt(hausnummer), straße, Integer.parseInt(postleitzahl), adresszusatz);
+        RegistrierungFactory.createRegistrierung(firstname, lastname, gebDateSQL, email, pass, passWdh, wohnort, Integer.parseInt(postleitzahl), straße, Integer.parseInt(hausnummer), adresszusatz);
     } catch (UnmatchingPasswordException | EmptyInputValueException | UserAlreadyExistsException | RequiredFactoryFailedException | EmptyResultSetException e) {
         e.printStackTrace();
     }

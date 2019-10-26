@@ -111,7 +111,7 @@ public class RegistrierungFactory {
             e.printStackTrace();
         }
 
-        Email_Sender.sendMail(registrierung.getEmail(), "Wilkommen bei Cineflexxx", "Hallo "+registrierung.getVorname()+", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
+        //Email_Sender.sendMail(registrierung.getEmail(), "Wilkommen bei Cineflexxx", "Hallo "+registrierung.getVorname()+", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
 
         return registrierung;
     }
