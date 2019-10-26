@@ -3,7 +3,10 @@ package junit_test;
 import Password.PassMD5;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-import exception.UnequalParameterLengthException;
+import exception.*;
+import exception.registrierung.EmptyInputValueException;
+import exception.registrierung.UnmatchingPasswordException;
+import exception.registrierung.UserAlreadyExistsException;
 import factory.*;
 import helper.*;
 import oo.*;
@@ -1584,6 +1587,132 @@ public class Test {
 
         // Throw new Exception to catch
         throw new UnequalParameterLengthException();
+    }
+
+    //Tests for EmptyResultSetException
+    @org.junit.Test(expected = EmptyResultSetException.class)
+    public void testeEmptyResultSetException() throws EmptyResultSetException
+    {
+        // Create Exception Object
+        EmptyResultSetException emptyResultSetException = new EmptyResultSetException();
+
+        // Test Message of Object
+        Assert.assertEquals("The ResultSet returned by the database Connector is empty", emptyResultSetException.getMessage());
+
+        // Throw new Exception to catch
+        throw new EmptyResultSetException();
+    }
+
+    // Tests for FailedDataInsertionException
+    @org.junit.Test(expected = FailedDataInsertionException.class)
+    public void testeFailedDataInsertionException() throws FailedDataInsertionException
+    {
+        // Create Exception Object
+        FailedDataInsertionException failedDataInsertionException = new FailedDataInsertionException();
+
+        // Test Message of Object
+        Assert.assertEquals("Faild to insert data into database", failedDataInsertionException.getMessage());
+
+        // Throw new Exception to catch
+        throw new FailedDataInsertionException();
+    }
+
+    // Tests for FailedObjectCreationException
+    @org.junit.Test(expected = FailedObjectCreationException.class)
+    public void testeFailedObjectCreationException() throws FailedObjectCreationException
+    {
+        // Create Exception Object
+        FailedObjectCreationException failedObjectCreationException = new FailedObjectCreationException();
+
+        // Test Message of Object
+        Assert.assertEquals("Failed to create Object in Factory", failedObjectCreationException.getMessage());
+
+        // Throw new Exception to catch
+        throw new FailedObjectCreationException();
+    }
+
+    // Tests for InvalidInputValueException
+    @org.junit.Test(expected = InvalidInputValueException.class)
+    public void testeInvalidInputValueException() throws InvalidInputValueException
+    {
+        // Create Exception Object
+        InvalidInputValueException invalidInputValueException = new InvalidInputValueException();
+
+        // Test Message of Object
+        Assert.assertEquals("Input Parameter passed to this function is not valid in the functions context", invalidInputValueException.getMessage());
+
+        // Throw new Exception to catch
+        throw new InvalidInputValueException();
+    }
+
+    // Tests for RequiredFactoryFailedException
+    @org.junit.Test(expected = RequiredFactoryFailedException.class)
+    public void testeRequiredFactoryFailedException() throws RequiredFactoryFailedException
+    {
+        // Create Exception Object
+        RequiredFactoryFailedException requiredFactoryFailedException = new RequiredFactoryFailedException();
+
+        // Test Message of Object
+        Assert.assertEquals("Failed to get a required Object from a Factory", requiredFactoryFailedException.getMessage());
+
+        // Throw new Exception to catch
+        throw new RequiredFactoryFailedException();
+    }
+
+    // Tests for ResultSetIsNullException
+    @org.junit.Test(expected = ResultSetIsNullException.class)
+    public void testeResultSetIsNullException() throws ResultSetIsNullException
+    {
+        // Create Exception Object
+        ResultSetIsNullException resultSetIsNullException = new ResultSetIsNullException();
+
+        // Test Message of Object
+        Assert.assertEquals("ResultSet returned by Connector is null", resultSetIsNullException.getMessage());
+
+        // Throw new Exception to catch
+        throw new ResultSetIsNullException();
+    }
+
+    // Tests for EmptyInputValueException
+    @org.junit.Test(expected = EmptyInputValueException.class)
+    public void testeEmptyInputValueException() throws EmptyInputValueException
+    {
+        // Create Exception Object
+        EmptyInputValueException emptyInputValueException = new EmptyInputValueException();
+
+        // Test Message of Object
+        Assert.assertEquals("Input value that can't be empty is empty", emptyInputValueException.getMessage());
+
+        // Throw new Exception to catch
+        throw new EmptyInputValueException();
+    }
+
+    // Tests for EmptyInputValueException
+    @org.junit.Test(expected = UnmatchingPasswordException.class)
+    public void testeUnmatchingPasswordException() throws UnmatchingPasswordException
+    {
+        // Create Exception Object
+        UnmatchingPasswordException unmatchingPasswordException = new UnmatchingPasswordException();
+
+        // Test Message of Object
+        Assert.assertEquals("Entered passwords don't match", unmatchingPasswordException.getMessage());
+
+        // Throw new Exception to catch
+        throw new UnmatchingPasswordException();
+    }
+
+    // Tests for EmptyInputValueException
+    @org.junit.Test(expected = UserAlreadyExistsException.class)
+    public void testeUserAlreadyExistsException() throws UserAlreadyExistsException
+    {
+        // Create Exception Object
+        UserAlreadyExistsException userAlreadyExistsException = new UserAlreadyExistsException();
+
+        // Test Message of Object
+        Assert.assertEquals("A account already exists for the entered Email", userAlreadyExistsException.getMessage());
+
+        // Throw new Exception to catch
+        throw new UserAlreadyExistsException();
     }
 
     //Mockito.when(resultSetMock1.getString("Straße")).thenReturn("Kurze Straße").thenReturn("Lange Straße").thenReturn("Test Straße");
