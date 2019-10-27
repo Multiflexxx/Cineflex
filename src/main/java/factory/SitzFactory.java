@@ -7,10 +7,7 @@ import exception.FailedObjectCreationException;
 import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
 import helper.SupportMethods;
-import oo.BuchungsPosition;
-import oo.Buchungsbeleg;
-import oo.Sitz;
-import oo.Sitzsperre;
+import oo.*;
 
 import javax.management.Query;
 import java.sql.Connection;
@@ -90,6 +87,8 @@ public class SitzFactory {
      * @throws RequiredFactoryFailedException
      */
     public static Sitz[] getAllLockedSeats(int vorstellungsID) throws RequiredFactoryFailedException {
+
+        // Get all booked seats for Vorstellung with vorstellungsID
         Sitz[] bookedSeats = null;
         try {
             bookedSeats = getBookedSeats(vorstellungsID);
@@ -100,6 +99,7 @@ public class SitzFactory {
            // Empty resultSet -> no booked Seats
         }
 
+        // Get all reserved seats for Vorstellung with vorstellungsID
         Sitz[] reservedSeats = null;
         try{
             reservedSeats = getReservedSeats(vorstellungsID);
@@ -110,19 +110,18 @@ public class SitzFactory {
             // Empty ResultSet -> No reserved Seats
         }
 
+        // Get all temporarily locked seats for Vorstellung with vorstellungsID
         Sitzsperre[] lockedSeats = null;
         try {
             lockedSeats = SitzsperreFactory.getLockedSeats(vorstellungsID);
-        } catch (FailedObjectCreationException e) {
-            e.printStackTrace();
-            throw new RequiredFactoryFailedException();
-        } catch (ResultSetIsNullException e) {
+        } catch (FailedObjectCreationException | ResultSetIsNullException e) {
             e.printStackTrace();
             throw new RequiredFactoryFailedException();
         } catch (EmptyResultSetException e) {
             // Empty ResultSet -> no locked Seats
         }
 
+        // Get Total length of all locked seats
         int length1 = 0;
         if(bookedSeats != null) {
             length1 = bookedSeats.length;
@@ -138,23 +137,29 @@ public class SitzFactory {
             length3 = reservedSeats.length;
         }
 
+        // Create array to return all locked seats
         Sitz[] allLockedSeats = null;
         if(length1 + length2 + length3 > 0) {
             allLockedSeats = new Sitz[length1 + length2 + length3];
         }
 
+        // Add booked seats to return array (if there ary any)
         int i = 0;
         if(bookedSeats != null) {
             for(i = 0; i < length1; i++) {
                 allLockedSeats[i] = bookedSeats[i];
             }
         }
+
+        // Add temporarily locked seats to return array (if there ary any)
         int j = 0;
         if(lockedSeats != null) {
             for(j = 0; j < length2; j++) {
                 allLockedSeats[length1 + j] = getSitzById(lockedSeats[j].getSitzplatzID());
             }
         }
+
+        // Add reserved seats to return array (if there ary any)
         int k = 0;
         if(reservedSeats != null) {
             for(k = 0; k < length3; k++) {
@@ -165,18 +170,20 @@ public class SitzFactory {
         return allLockedSeats;
     }
 
-    public static Sitz[] getReservedSeats(int vorstellungsID) throws ResultSetIsNullException, EmptyResultSetException, FailedObjectCreationException {
+    private static Sitz[] getReservedSeats(int vorstellungsID) throws ResultSetIsNullException, EmptyResultSetException, FailedObjectCreationException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getReservedSeats(vorstellungsID);
         ResultSet rs = Connector.getQueryResult(c, sql);
         Sitz[] reservedSeats = null;
 
         if(rs == null) {
+            SupportMethods.close(c, rs);
             throw new ResultSetIsNullException();
         }
 
         int rsSize = SupportMethods.getResultSetSize(rs);
         if(rsSize < 1) {
+            SupportMethods.close(c, rs);
             throw new EmptyResultSetException();
         }
 
@@ -194,25 +201,75 @@ public class SitzFactory {
             }
         } catch(SQLException e) {
             e.printStackTrace();
+            SupportMethods.close(c, rs);
+
             throw new FailedObjectCreationException();
         }
-
+        SupportMethods.close(c, rs);
         return reservedSeats;
     }
 
 
-    public static Sitz[] getSitzeByBNR(int BNR) {
+    public static Sitz[] getSitzeByBNR(int BNR) throws RequiredFactoryFailedException {
+        BuchungsPosition[] buchungspositionen = null;
+        Sitz[] sitze = null;
         try {
-            BuchungsPosition[] posi = BuchungspositionFactory.getBuchungspositionenByBNR(BNR);
-        } catch (EmptyResultSetException e) {
+            buchungspositionen = BuchungspositionFactory.getBuchungspositionenByBNR(BNR);
+        } catch (EmptyResultSetException | ResultSetIsNullException | RequiredFactoryFailedException e) {
             e.printStackTrace();
-        } catch (ResultSetIsNullException e) {
-            e.printStackTrace();
-        } catch (RequiredFactoryFailedException e) {
-            e.printStackTrace();
+            throw new RequiredFactoryFailedException();
         }
 
-        return null;
+        if(buchungspositionen == null) {
+            throw new RequiredFactoryFailedException();
+        }
+
+        if(buchungspositionen.length < 1) {
+            throw new RequiredFactoryFailedException();
+        }
+
+        try{
+            sitze = new Sitz[buchungspositionen.length];
+            for(int i = 0; i < buchungspositionen.length; i++) {
+                sitze[i] = getSitzById(buchungspositionen[i].getSitzID());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RequiredFactoryFailedException();
+        }
+
+        return sitze;
+    }
+
+    public static Sitz[] getSitzeByRNR(int RNR) throws RequiredFactoryFailedException {
+        ReservierungsPosition[] reservierungspositionen = null;
+        Sitz[] sitze = null;
+        try {
+            reservierungspositionen = ReservierungspositionFactory.getReservierungsPositionenByRNR(RNR);
+        } catch (ResultSetIsNullException | EmptyResultSetException | RequiredFactoryFailedException e) {
+            e.printStackTrace();
+            throw new RequiredFactoryFailedException();
+        }
+
+        if(reservierungspositionen == null) {
+            throw new RequiredFactoryFailedException();
+        }
+
+        if(reservierungspositionen.length < 1) {
+            throw new RequiredFactoryFailedException();
+        }
+
+        try {
+            sitze = new Sitz[reservierungspositionen.length];
+            for(int i = 0; i < reservierungspositionen.length; i++) {
+                sitze[i] = getSitzById(reservierungspositionen[i].getSitzID());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RequiredFactoryFailedException();
+        }
+
+        return sitze;
     }
 
     public static Sitz getSitzById(int id)

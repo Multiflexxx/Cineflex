@@ -6,52 +6,52 @@ import exception.EmptyResultSetException;
 import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
 import helper.SupportMethods;
+import oo.BuchungsPosition;
+import oo.ReservierungsPosition;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import oo.BuchungsPosition;
-import oo.Buchungsbeleg;
+public class ReservierungspositionFactory {
+    public static ReservierungsPosition[] getReservierungsPositionenByRNR(int RNR) throws ResultSetIsNullException, EmptyResultSetException, RequiredFactoryFailedException {
 
-public class BuchungspositionFactory {
-    public static BuchungsPosition[] getBuchungspositionenByBNR(int BNR)
-            throws EmptyResultSetException, ResultSetIsNullException, RequiredFactoryFailedException {
         Connection c = Connector.getConnection();
-        String sql = QueryBuilder.getBuchungsPositionenByBNR(BNR);
+        String sql = QueryBuilder.getReservierungsPositionenByRNR(RNR);
         ResultSet rs = Connector.getQueryResult(c, sql);
-        BuchungsPosition[] buchungspositionen = null;
+        ReservierungsPosition[] reservierungspositionen = null;
 
         if (rs == null) {
-			SupportMethods.close(c, rs);
+            SupportMethods.close(c, rs);
             throw new ResultSetIsNullException();
         }
 
         int rsSize = SupportMethods.getResultSetSize(rs);
 
         if (rsSize < 1) {
-			SupportMethods.close(c, rs);
+            SupportMethods.close(c, rs);
             throw new EmptyResultSetException();
         }
 
-        buchungspositionen = new BuchungsPosition[rsSize];
+        reservierungspositionen = new ReservierungsPosition[rsSize];
         try {
             int counter = 0;
             while (rs.next()) {
-                buchungspositionen[counter] = new BuchungsPosition(
+                reservierungspositionen[counter] = new ReservierungsPosition(
                         rs.getInt("PositionsID"),
-                        rs.getInt("BNR"),
+                        rs.getInt("RNR"),
                         rs.getInt("SitzID")
                 );
                 counter++;
             }
-        } catch (SQLException e) {
+        } catch (
+                SQLException e) {
             e.printStackTrace();
-			SupportMethods.close(c, rs);
+            SupportMethods.close(c, rs);
             throw new RequiredFactoryFailedException();
         }
 
         SupportMethods.close(c, rs);
-        return buchungspositionen;
+        return reservierungspositionen;
     }
 }

@@ -280,6 +280,10 @@ public class QueryBuilder {
         return "Select * From Buchungsposition Where BNR = " + BNR + ";";
     }
 
+    public static String getReservierungsPositionenByRNR(int RNR) {
+        return "Select * From Reservierungsposition Where BNR = " + RNR + ";";
+    }
+
     public static String getOrtByPLZ(int plz) {
         return "Select * From Ort Where PLZ = " + plz + ";";
     }
