@@ -1,6 +1,7 @@
 package factory;
 
 import com.google.zxing.WriterException;
+import com.itextpdf.text.DocumentException;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 //import oo.Buchungsbeleg;
@@ -11,7 +12,9 @@ import oo.Buchungsbeleg;
 import oo.Kunde;
 import oo.Sitz;
 import oo.Vorstellung;
+import pdf_generator.PdfGenerator;
 import qr_code.QrCodeGenerator;
+import send_mail.Email_Sender;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -22,7 +25,7 @@ import java.util.Date;
 public class BuchungsFactory {
 
     // TODO: Change Signature to Buchungsbeleg?
-    public static int createBuchungBeleg(int[] sitzeIDs, int[] preiseVerIDs, String seats, String preisVer, int vorstellungsID, int KNR) {
+    public static int createBuchungBeleg(int[] sitzeIDs, int[] preiseVerIDs, String seats, String preisVer, int vorstellungsID, int KNR) throws IOException, DocumentException {
         // TODO: sitzeIDs and preise must have the same length -> check
         if (sitzeIDs.length != preiseVerIDs.length) {
             // throw new UnequalParameterLength();
@@ -82,7 +85,7 @@ public class BuchungsFactory {
 //        }
         createBuchungsPositionen(c, lastBNR, sitze, preiseVerIDs);
 
-        createBuchungsbelegQrCode(KNR, vorstellung, sitze);
+        createBuchungsbelegPDF(KNR, vorstellung, sitze);
 
         Connector.closeResultSet(rs);
         Connector.closeConnection(c);
@@ -123,16 +126,17 @@ public class BuchungsFactory {
         return buchungsbeleg;
     }
 
-    public static void createBuchungsbelegQrCode(int KID, Vorstellung vorstellung, Sitz [] sitze) {
+    public static void createBuchungsbelegPDF(int KID, Vorstellung vorstellung, Sitz [] sitze) throws IOException, DocumentException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getJustCreatedBuchung(KID);
         ResultSet rs = Connector.getQueryResult(c, sql);
         Buchungsbeleg buchungsbeleg = null;
+        Kunde kunde = null;
 
         if (rs != null) {
             try {
                 if (rs.next()) {
-                    Kunde kunde = KundenFactory.getKundeByKID(rs.getInt("KID"));
+                    kunde = KundenFactory.getKundeByKID(rs.getInt("KID"));
                     buchungsbeleg = new Buchungsbeleg(
                             rs.getInt("BNR"),
                             rs.getFloat("Preis"),
@@ -150,18 +154,22 @@ public class BuchungsFactory {
         }
         SupportMethods.close(c, rs);
 
-        // PATH: /usr/local/tomcat/qr_codes/qrcode+KID+buchungsbeleg.getBelegID().png
-        String path = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/qrcode" + KID + buchungsbeleg.getBelegID() + ".png";
+        String pathQR = "/usr/local/tomcat/qr_codes/qrcode" + KID + buchungsbeleg.getBelegID() + ".png";
+        //String pathQR = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/qrcode" + KID + buchungsbeleg.getBelegID() + ".png";
         String qrcodeinfo = "{'Kundennr': " + KID;
         qrcodeinfo += ", 'VorstellungID': " + vorstellung.getVorstellungsID();
         qrcodeinfo += ", 'Film': " + vorstellung.getFilm().getTitel() + "'}";
         try {
-            QrCodeGenerator.generateQRCodeImage(qrcodeinfo, path);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            QrCodeGenerator.generateQRCodeImage(qrcodeinfo, pathQR);
+        } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
+        String pathPDF = "/usr/local/tomcat/buchungsbelege_pdf/pdf" + KID + buchungsbeleg.getBelegID() + ".pdf";
+        //String pathPDF = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/pdf" + KID + buchungsbeleg.getBelegID() + ".pdf";
+        PdfGenerator.createBuchungsPDF(pathPDF, pathQR, buchungsbeleg, vorstellung, sitze, kunde);
+
+        String m_body = "Vielen Dank " + kunde.getVorname() + " für deine Buchung.<br><br> Anbei erhältst du deine Tickets. <br>Viel Spaß. Dein Multiflexxx Team";
+        Email_Sender.sendMultipartMail(kunde.getEmail(), "Buchung" + kunde.getKundenID() + buchungsbeleg.getBelegID(), m_body, pathPDF);
     }
 
     public static Buchungsbeleg[] getBuchungsbelegeByKID(int KID) {

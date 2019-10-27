@@ -11,6 +11,7 @@ import exception.registrierung.UserAlreadyExistsException;
 import helper.SupportMethods;
 import oo.Registrierung;
 import send_mail.Email_Sender;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,8 +52,8 @@ public class RegistrierungFactory {
             getRegistrierungByEmail(email);
             throw new UserAlreadyExistsException();
         } catch (ResultSetIsNullException e) {
-             e.printStackTrace();
-             throw new RequiredFactoryFailedException();
+            e.printStackTrace();
+            throw new RequiredFactoryFailedException();
         } catch (EmptyResultSetException e) {
             // continue
         }
@@ -73,9 +74,8 @@ public class RegistrierungFactory {
             throw new RequiredFactoryFailedException();
         }
 
-        if(System.getProperties().get("user.home") != "C:\\Users\\benno") {
-            Email_Sender.sendMail(registrierung.getEmail(), "Wilkommen bei Cineflexxx", "Hallo "+registrierung.getVorname()+", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
-        }
+
+        Email_Sender.sendMail(registrierung.getEmail(), "Wilkommen bei Cineflexxx", "Hallo " + registrierung.getVorname() + ", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
 
         return registrierung;
     }
