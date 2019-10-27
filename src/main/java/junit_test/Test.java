@@ -890,6 +890,29 @@ public class Test {
         Assert.assertEquals(55, buchungsPosition.getBNR());
         Assert.assertEquals(56, buchungsPosition.getSitzID());
     }
+    //----
+
+    // Tests for class ReservierungsPosition
+    @org.junit.Test
+    public void ReservierungsPosition()
+    {
+        ReservierungsPosition reservierungsPosition = new ReservierungsPosition(2,3,4);
+
+        // Tests for Getters
+        Assert.assertEquals(2, reservierungsPosition.getPositionsID());
+        Assert.assertEquals(3, reservierungsPosition.getBNR());
+        Assert.assertEquals(4, reservierungsPosition.getSitzID());
+
+        // Tests for Setters
+        reservierungsPosition.setPositionsID(13);
+        reservierungsPosition.setBNR(56);
+        reservierungsPosition.setSitzID(57);
+
+        Assert.assertEquals(13, reservierungsPosition.getPositionsID());
+        Assert.assertEquals(56, reservierungsPosition.getBNR());
+        Assert.assertEquals(57, reservierungsPosition.getSitzID());
+    }
+    //----
 
 
     // TESTS FOR PASSWORD
