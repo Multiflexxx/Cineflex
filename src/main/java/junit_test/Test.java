@@ -17,11 +17,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import javax.mail.Session;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Locale;
 
 public class Test {
@@ -1127,6 +1132,7 @@ public class Test {
         Assert.assertEquals(null, SeatIDFormatter.seatsStringToIntArray("-1|-1"));
     }
 
+    // Tests for class ArrayBuilder
     @org.junit.Test
     public void testeArrayBuilder()
     {
@@ -1144,6 +1150,7 @@ public class Test {
         Assert.assertEquals("6< 7< 8", ArrayBuilder.intArrayToString(array, "< "));
     }
 
+    // Tests for class PLZFormatter
     @org.junit.Test
     public void testePLZFormatter()
     {
@@ -1163,6 +1170,29 @@ public class Test {
         Assert.assertEquals("01234", out);
         out = PLZFormatter.addLeadingZeros(plz5);
         Assert.assertEquals("12345", out);
+    }
+
+    // Tests for class TempBuchungsHandler
+    @org.junit.Test
+    public void testeTempBuchungsHandler()
+    {
+        HttpSession session = Mockito.mock(HttpSession.class);
+        String sitzIDs = "1,2,3";
+        String preisIDs = "1,2,3";
+        int vorstellungsID = 2;
+
+        try
+        {
+            TempBuchungHandler.addTempBuchungToSession(session, sitzIDs, preisIDs, vorstellungsID);
+        }
+        catch (Exception e)
+        {
+            Assert.assertEquals("Failed to get a required Object from a Factory", e.getMessage());
+        }
+
+        Assert.assertEquals(null, session.getAttribute("temp_sitze"));
+        Assert.assertEquals(null, session.getAttribute("temp_preisänderungen"));
+        Assert.assertEquals(null, session.getAttribute("temp_vorstellung"));
     }
 
 
