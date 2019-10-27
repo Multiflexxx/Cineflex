@@ -89,7 +89,7 @@ public class BuchungsFactory {
 
         Connector.closeResultSet(rs);
         Connector.closeConnection(c);
-        return 0;
+        return lastBNR;
     }
 
     public static Buchungsbeleg getBuchungsbelegByBNR(int BNR) {
@@ -154,7 +154,7 @@ public class BuchungsFactory {
         }
         SupportMethods.close(c, rs);
 
-        String pathQR = "/usr/local/tomcat/qr_codes/qrcode" + KID + buchungsbeleg.getBelegID() + ".png";
+        String pathQR = "/usr/local/tomcat/qr_codes/qrcodeB" + KID + buchungsbeleg.getBelegID() + ".png";
         //String pathQR = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/qrcode" + KID + buchungsbeleg.getBelegID() + ".png";
         String qrcodeinfo = "{'Kundennr': " + KID;
         qrcodeinfo += ", 'VorstellungID': " + vorstellung.getVorstellungsID();
@@ -164,7 +164,7 @@ public class BuchungsFactory {
         } catch (WriterException | IOException e) {
             e.printStackTrace();
         }
-        String pathPDF = "/usr/local/tomcat/buchungsbelege_pdf/pdf" + KID + buchungsbeleg.getBelegID() + ".pdf";
+        String pathPDF = "/usr/local/tomcat/belege_pdf/pdfB" + KID + buchungsbeleg.getBelegID() + ".pdf";
         //String pathPDF = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/pdf" + KID + buchungsbeleg.getBelegID() + ".pdf";
         PdfGenerator.createBuchungsPDF(pathPDF, pathQR, buchungsbeleg, vorstellung, sitze, kunde);
 

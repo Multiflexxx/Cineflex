@@ -1,5 +1,6 @@
 <%@ page import="helper.ArrayBuilder" %>
 <%@ page import="factory.ReservierungsFactory" %>
+<%@ page import="com.itextpdf.text.DocumentException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -17,7 +18,11 @@
     int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
     int[] preisVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
     int KID = Integer.parseInt(session.getAttribute("KID").toString());
-    ReservierungsFactory.createReservierungsBelege(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
+    try {
+        ReservierungsFactory.createReservierungsBelege(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
+    } catch (DocumentException e) {
+        e.printStackTrace();
+    }
 %>
 
 <div class="container">

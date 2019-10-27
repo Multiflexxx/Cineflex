@@ -18,8 +18,10 @@
     int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
     int[] preisVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
     int KID = Integer.parseInt(session.getAttribute("KID").toString());
-    BuchungsFactory.createBuchungBeleg(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
+    int BID = BuchungsFactory.createBuchungBeleg(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
 %>
+
+<script src="javascript/download.js"></script>
 
 <div class="container">
     <div class="card mt-3 mb-3">
@@ -28,8 +30,8 @@
         </div>
         <div class="card-body">
             <p class="card-text">Sie erhalten per E-Mail eine Bestätigung Ihres Kaufes.</p>
-            <p>Hier stehen Infos zur Buchung..</p>
-            <img class="card-img" src="img/qrcode/qrcode<%=KID%>.png">
+            <p>Lade dir jetzt schon deine Tickets herunter!</p>
+            <button class="btn btn-outline-primary" onclick="download_buchung(<%=BID%>)">Download</button>
             <p class="card-text">Sie können nun zurück zur Startseite</p>
             <a class="btn btn-primary btn-lg" href="index.jsp" role="button">Zurück zur Startseite</a>
         </div>

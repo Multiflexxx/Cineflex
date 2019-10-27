@@ -11,5 +11,19 @@ function download_buchung(BID) {
 
     document.body.appendChild(form);
     form.submit();
+}
 
+function download_reservierung(RID) {
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "downloadReservierung.jsp");
+    var hiddenField0 = document.createElement("input");
+    hiddenField0.setAttribute("type", "hidden");
+    hiddenField0.setAttribute("name", "RID");
+    hiddenField0.setAttribute("value", RID);
+
+    form.appendChild(hiddenField0);
+
+    document.body.appendChild(form);
+    form.submit();
 }

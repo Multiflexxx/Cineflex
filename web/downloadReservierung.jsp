@@ -1,5 +1,5 @@
 <%
-    String filename = "pdfB" + session.getAttribute("KID") + request.getParameter("BID") + ".pdf";
+    String filename = "pdfR" + session.getAttribute("KID") + request.getParameter("BID") + ".pdf";
     String filepath = "/usr/local/tomcat/belege_pdf/";
     response.setContentType("APPLICATION/OCTET-STREAM");
     response.setHeader("Content-Disposition","attachment; filename=\"" + filename + "\"");
