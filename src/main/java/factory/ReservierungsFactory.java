@@ -84,7 +84,7 @@ public class ReservierungsFactory {
 
         createReservierungsBelegPDF(KNR, vorstellung, sitze);
 
-        return 0;
+        return lastRNR;
     }
 
     /**
