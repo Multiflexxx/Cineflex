@@ -10,6 +10,9 @@
 <%@ page import="oo.Sitz" %>
 <%@ page import="exception.InvalidInputValueException" %>
 <%@ page import="exception.RequiredFactoryFailedException" %>
+<%@ page import="oo.Vorstellung" %>
+<%@ page import="factory.VorstellungsFactory" %>
+<%@ page import="helper.DateFormatter" %>
 <%
     if (session.getAttribute("email") != null) {
         int vorstellungsID = Integer.parseInt(request.getParameter("vorstellungs_id"));
@@ -19,6 +22,7 @@
         int KID = Integer.parseInt(session.getAttribute("KID").toString());
         int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
         SitzsperreFactory.lockSeats(seatsInt, vorstellungsID, KID);
+        Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(vorstellungsID);
 
         try {
             TempBuchungHandler.addTempBuchungToSession(session, seats, preisVer, vorstellungsID);
@@ -54,16 +58,22 @@
             <div class="col-lg-5">
                 <div class="card-body">
                     <%
+                        String titel =  vorstellung.getFilm().getTitel();
+                        String datum = DateFormatter.getFrontendDate(vorstellung.getDatum());
+                        String time = DateFormatter.getFrontendTime(vorstellung.getUhrzeit());
+
                         if (sitz.length > 1) {
-                            out.write("<h5 class=\"card-title\">Deine ausgewählten Tickets</h5>");
+                            out.write("<h5 class=\"card-title\">Deine ausgewählten Tickets für:</h5>");
                         } else {
-                            out.write("<h5 class=\"card-title\">Dein ausgewähltes Ticket</h5>");
+                            out.write("<h5 class=\"card-title\">Dein ausgewähltes Ticket für:</h5>");
                         }
+                        out.write("<h6 class=\"card-title\">" + titel + "</h6>");
+                        out.write("<h6 class=\"card-title\">" + datum + " um " + time +"</h6>");
                     %>
-                    <ul class="li st-group">
+                    <ul class="list-group list-group-flush list-ticket">
                         <%
                             for (int i = 0; i < sitz.length; i++) {
-                                out.write("<li class=\"list-group-item list-group-item-light\">Reihe " + sitz[i].getReihe() + " Platz " + sitz[i].getNummer() + "</li>");
+                                out.write("<li class=\"list-group-item list-group-item-light list-group-item-action rounded text-center mb-2\">" + vorstellung.getSaal().getBezeichnung()  + " Reihe " + sitz[i].getReihe() + " Platz " + sitz[i].getNummer() + "</li>");
                             }
                         %>
                     </ul>
@@ -79,9 +89,11 @@
                     <h5 class="card-title">Bist du sicher, dass du diese Tickets reservieren möchtest?</h5>
 
                     <br><br>
-                    <button id="btn_res" onclick="submitReservierung()" class="btn btn-outline-primary mb-2">
+                    <div class="text-center">
+                    <button id="btn_res" onclick="submitReservierung()" class="btn btn-outline-primary btn-lg mb-2">
                         Jetzt reservieren
                     </button>
+                    </div>
 
                     <script>
                         // Render the PayPal button into #paypal-button-container
