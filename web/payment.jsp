@@ -37,7 +37,7 @@
         <div class="card-body">
             <p class="card-text">Sie erhalten per E-Mail eine Bestätigung Ihres Kaufes.</p>
             <p>Lade dir jetzt schon deine Tickets herunter!</p>
-            <button class="btn btn-outline-primary" onclick="download_buchung(<%=BID%>)">Download</button>
+            <button class="btn btn-outline-primary mb-2" onclick="download_buchung(<%=BID%>)">Download</button>
             <p class="card-text">Sie können nun zurück zur Startseite</p>
             <a class="btn btn-primary btn-lg" href="index.jsp" role="button">Zurück zur Startseite</a>
         </div>

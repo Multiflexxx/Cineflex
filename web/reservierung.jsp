@@ -35,7 +35,7 @@
         </div>
         <div class="card-body">
             <p class="card-text">Ihr Reservierung bleibt bis 30 Minuten vor Filmbegin bestehen.</p>
-            <button class="btn btn-outline-primary" onclick="download_reservierung(<%=RID%>)">Download</button>
+            <button class="btn btn-outline-primary mb-2" onclick="download_reservierung(<%=RID%>)">Download</button>
             <p class="card-text">Sie können nun zurück zur Startseite</p>
             <a class="btn btn-primary btn-lg" href="index.jsp" role="button">Zurück zur Startseite</a>
         </div>
