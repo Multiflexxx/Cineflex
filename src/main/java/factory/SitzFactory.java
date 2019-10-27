@@ -187,24 +187,36 @@ public class SitzFactory {
             throw new EmptyResultSetException();
         }
 
+
         reservedSeats = new Sitz[rsSize];
         try {
+            reservedSeats = new Sitz[rsSize];
             int counter = 0;
             while(rs.next()) {
-                reservedSeats[counter] = new Sitz(
-                        rs.getInt("SitzplatzID"),
-                        rs.getInt("Nummer"),
-                        rs.getString("Reihe").charAt(0),
-                        rs.getString("Sitzklasse").charAt(0)
-                );
+                reservedSeats[counter] = getSitzById(rs.getInt("SitzID"));
                 counter++;
             }
-        } catch(SQLException e) {
+        }catch (SQLException e) {
             e.printStackTrace();
-            SupportMethods.close(c, rs);
-
             throw new FailedObjectCreationException();
         }
+//        try {
+//            int counter = 0;
+//            while(rs.next()) {
+//                reservedSeats[counter] = new Sitz(
+//                        rs.getInt("SitzplatzID"),
+//                        rs.getInt("Nummer"),
+//                        rs.getString("Reihe").charAt(0),
+//                        rs.getString("Sitzklasse").charAt(0)
+//                );
+//                counter++;
+//            }
+//        } catch(SQLException e) {
+//            e.printStackTrace();
+//            SupportMethods.close(c, rs);
+//
+//            throw new FailedObjectCreationException();
+//        }
         SupportMethods.close(c, rs);
         return reservedSeats;
     }

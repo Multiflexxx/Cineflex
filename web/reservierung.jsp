@@ -18,12 +18,15 @@
     int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
     int[] preisVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
     int KID = Integer.parseInt(session.getAttribute("KID").toString());
+    int RID = 0;
     try {
-        ReservierungsFactory.createReservierungsBelege(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
+       RID = ReservierungsFactory.createReservierungsBelege(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
     } catch (DocumentException e) {
         e.printStackTrace();
     }
 %>
+
+<script src="javascript/download.js"></script>
 
 <div class="container">
     <div class="card mt-3 mb-3">
@@ -32,6 +35,7 @@
         </div>
         <div class="card-body">
             <p class="card-text">Ihr Reservierung bleibt bis 30 Minuten vor Filmbegin bestehen.</p>
+            <button class="btn btn-outline-primary" onclick="download_reservierung(<%=RID%>)">Download</button>
             <p class="card-text">Sie können nun zurück zur Startseite</p>
             <a class="btn btn-primary btn-lg" href="index.jsp" role="button">Zurück zur Startseite</a>
         </div>
