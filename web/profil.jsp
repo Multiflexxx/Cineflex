@@ -24,6 +24,9 @@
     Kunde k = KundenFactory.getKunde(PID);
     Buchungsbeleg buchungsbelege[] = BuchungsFactory.getBuchungsbelegeByKID(k.getKundenID());
 %>
+
+<script src="javascript/download.js"></script>
+
 <div class="container">
     <div class="card mt-3 mb-3">
         <div class="card-header">
@@ -73,7 +76,7 @@
                                     </p>
                                     <p class="card-text">Tickets: ...</p>
                                     <p class="card-text">Preis: <%=b.getPreis()%> €</p>
-                                    <img class="card-img" src="img/qrcode/qrcode<%=k.getKundenID() + "" + b.getBelegID()%>.png">
+                                    <button class="btn btn-outline-primary" onclick="download_buchung(<%=b.getBelegID()%>)">Download</button>
                                 </div>
                             </div>
                         </div>

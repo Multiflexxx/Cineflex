@@ -12,6 +12,7 @@ import oo.Buchungsbeleg;
 import oo.Sitz;
 import oo.Sitzsperre;
 
+import javax.management.Query;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,7 +53,7 @@ public class SitzFactory {
         return sitz;
     }
 
-    public static Sitz[] getBookedSeats(int vorstellungsID) throws FailedObjectCreationException, EmptyResultSetException, ResultSetIsNullException {
+    private static Sitz[] getBookedSeats(int vorstellungsID) throws FailedObjectCreationException, EmptyResultSetException, ResultSetIsNullException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getBookedSeats(vorstellungsID);
         ResultSet rs = Connector.getQueryResult(c, sql);
@@ -92,13 +93,21 @@ public class SitzFactory {
         Sitz[] bookedSeats = null;
         try {
             bookedSeats = getBookedSeats(vorstellungsID);
-        } catch (FailedObjectCreationException e) {
+        } catch (FailedObjectCreationException | ResultSetIsNullException e) {
             e.printStackTrace();
-            throw new RequiredFactoryFailedException();
-        } catch (ResultSetIsNullException e) {
             throw new RequiredFactoryFailedException();
         } catch (EmptyResultSetException e) {
            // Empty resultSet -> no booked Seats
+        }
+
+        Sitz[] reservedSeats = null;
+        try{
+            reservedSeats = getReservedSeats(vorstellungsID);
+        } catch (ResultSetIsNullException | FailedObjectCreationException e) {
+            e.printStackTrace();
+            throw new RequiredFactoryFailedException();
+        } catch (EmptyResultSetException e) {
+            // Empty ResultSet -> No reserved Seats
         }
 
         Sitzsperre[] lockedSeats = null;
@@ -124,9 +133,14 @@ public class SitzFactory {
             length2 = lockedSeats.length;
         }
 
+        int length3 = 0;
+        if(reservedSeats != null) {
+            length3 = reservedSeats.length;
+        }
+
         Sitz[] allLockedSeats = null;
-        if(length1 + length2 > 0) {
-            allLockedSeats = new Sitz[length1 + length2];
+        if(length1 + length2 + length3 > 0) {
+            allLockedSeats = new Sitz[length1 + length2 + length3];
         }
 
         int i = 0;
@@ -135,13 +149,55 @@ public class SitzFactory {
                 allLockedSeats[i] = bookedSeats[i];
             }
         }
+        int j = 0;
         if(lockedSeats != null) {
-            for(int j = 0; j < length2; j++) {
+            for(j = 0; j < length2; j++) {
                 allLockedSeats[length1 + j] = getSitzById(lockedSeats[j].getSitzplatzID());
+            }
+        }
+        int k = 0;
+        if(reservedSeats != null) {
+            for(k = 0; k < length3; k++) {
+                allLockedSeats[length1 + length2 + k] = reservedSeats[k];
             }
         }
 
         return allLockedSeats;
+    }
+
+    public static Sitz[] getReservedSeats(int vorstellungsID) throws ResultSetIsNullException, EmptyResultSetException, FailedObjectCreationException {
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.getReservedSeats(vorstellungsID);
+        ResultSet rs = Connector.getQueryResult(c, sql);
+        Sitz[] reservedSeats = null;
+
+        if(rs == null) {
+            throw new ResultSetIsNullException();
+        }
+
+        int rsSize = SupportMethods.getResultSetSize(rs);
+        if(rsSize < 1) {
+            throw new EmptyResultSetException();
+        }
+
+        reservedSeats = new Sitz[rsSize];
+        try {
+            int counter = 0;
+            while(rs.next()) {
+                reservedSeats[counter] = new Sitz(
+                        rs.getInt("SitzplatzID"),
+                        rs.getInt("Nummer"),
+                        rs.getString("Reihe").charAt(0),
+                        rs.getString("Sitzklasse").charAt(0)
+                );
+                counter++;
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            throw new FailedObjectCreationException();
+        }
+
+        return reservedSeats;
     }
 
 

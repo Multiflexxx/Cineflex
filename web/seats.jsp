@@ -183,7 +183,7 @@
                 </div>
             </div>
             <div class="col-lg-2 pay-to-win">
-                <button id="btn_res" onclick="onClickReservieren()" class="btn btn-outline-secondary mb-2" disabled>
+                <button id="btn_res" onclick="onClickReservieren(<%=vorstellung.getVorstellungsID() + ", " + vorstellung.getFilm().getFilmID()%>)" class="btn btn-outline-secondary mb-2" disabled>
                     Reservieren
                 </button>
                 <button id="btn_buc" onclick="onClickBuchen(<%=vorstellung.getVorstellungsID() + ", " + vorstellung.getFilm().getFilmID()%>)" class="btn btn-outline-secondary mb-2 " disabled>
