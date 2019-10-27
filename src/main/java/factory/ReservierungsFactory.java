@@ -187,7 +187,7 @@ public class ReservierungsFactory {
                 if (rs.next()) {
                     kunde = KundenFactory.getKundeByKID(rs.getInt("KID"));
                     reservierungsbeleg = new Reservierungsbeleg(
-                            rs.getInt("BNR"),
+                            rs.getInt("RNR"),
                             rs.getFloat("Preis"),
                             vorstellung,
                             kunde,
@@ -217,8 +217,8 @@ public class ReservierungsFactory {
         //String pathPDF = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/pdf" + KID + buchungsbeleg.getBelegID() + ".pdf";
         PdfGenerator.createReservierungsPDF(pathPDF, pathQR, reservierungsbeleg, vorstellung, sitze, kunde);
 
-        String m_body = "Vielen Dank " + kunde.getVorname() + " für deine Reservierung.<br><br> Hole deine Tickets min. 30 Minuten vor Vorstellungsbeginn bei uns an der Kasse ab.<br>Viel Spaß. Dein Multiflexxx Team";
-        Email_Sender.sendMultipartMail(kunde.getEmail(), "Buchung" + kunde.getKundenID() + reservierungsbeleg.getBelegID(), m_body, pathPDF);
+        String m_body = "Vielen Dank " + kunde.getVorname() + " für deine Reservierung. \n\n Hole deine Tickets min. 30 Minuten vor Vorstellungsbeginn bei uns an der Kasse ab. \n\n Viel Spaß. Dein Multiflexxx Team";
+        Email_Sender.sendMultipartMail(kunde.getEmail(), "Reservierung by Multiflexxx" + kunde.getKundenID() + reservierungsbeleg.getBelegID(), m_body, pathPDF);
     }
 
 }

@@ -25,7 +25,7 @@ public class PdfGenerator {
         Font smalltext = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8, BaseColor.BLACK);
         Font text = FontFactory.getFont(FontFactory.TIMES_ROMAN, 12, BaseColor.BLACK);
 
-        document.add(new Paragraph("Deine Buchung im Cineflex" + vorstellung.getSaal().getGebaeude().getOrtsname() +  " by Multiflexxx", titel));
+        document.add(new Paragraph("Deine Buchung im Cineflex " + vorstellung.getSaal().getGebaeude().getOrtsname() +  " by Multiflexxx", titel));
 
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);
@@ -133,7 +133,7 @@ public class PdfGenerator {
         Font smalltext = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8, BaseColor.BLACK);
         Font text = FontFactory.getFont(FontFactory.TIMES_ROMAN, 12, BaseColor.BLACK);
 
-        document.add(new Paragraph("Deine Reservierung im Cineflex" + vorstellung.getSaal().getGebaeude().getOrtsname() +  " by Multiflexxx", titel));
+        document.add(new Paragraph("Deine Reservierung im Cineflex " + vorstellung.getSaal().getGebaeude().getOrtsname() +  " by Multiflexxx", titel));
 
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100);

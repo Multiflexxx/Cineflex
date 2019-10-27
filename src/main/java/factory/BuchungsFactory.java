@@ -168,8 +168,8 @@ public class BuchungsFactory {
         //String pathPDF = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/pdf" + KID + buchungsbeleg.getBelegID() + ".pdf";
         PdfGenerator.createBuchungsPDF(pathPDF, pathQR, buchungsbeleg, vorstellung, sitze, kunde);
 
-        String m_body = "Vielen Dank " + kunde.getVorname() + " für deine Buchung.<br><br> Anbei erhältst du deine Tickets. <br>Viel Spaß. Dein Multiflexxx Team";
-        Email_Sender.sendMultipartMail(kunde.getEmail(), "Buchung" + kunde.getKundenID() + buchungsbeleg.getBelegID(), m_body, pathPDF);
+        String m_body = "Vielen Dank " + kunde.getVorname() + " für deine Buchung.\n\n Anbei erhältst du deine Tickets. \n\n Viel Spaß. Dein Multiflexxx Team";
+        Email_Sender.sendMultipartMail(kunde.getEmail(), "Buchung by Multiflexxx" + kunde.getKundenID() + buchungsbeleg.getBelegID(), m_body, pathPDF);
     }
 
     public static Buchungsbeleg[] getBuchungsbelegeByKID(int KID) {
