@@ -113,14 +113,15 @@
                             <div class="form-group col-md-6">
                                 <label for="inputPasswort">Passwort</label>
                                 <input type="text" class="form-control" id="inputPasswort" name="inputPasswort"
-                                       value="<%=k.getPasswort()%>"
+                                       value="********"
                                        readonly>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputStrasse">Straße</label>
                             <input type="text" class="form-control" id="inputStrasse" name="inputStrasse"
-                                   value="<%=k.getStrasse()%> <%=k.getHausnummer()%>" readonly>
+                                   value="<%=k.getStrasse()%>" readonly>
+                            <input type="text" class="form-control" id="inputHausnummer" name="inputHausnummer" value="<%=k.getHausnummer()%>" readonly>
                             <input id="PID" style="display: none" name="PID" value="<%=k.getPersonenID()%>">
                         </div>
                         <button type="button" class="btn btn-primary" id="bearbeitenButton"

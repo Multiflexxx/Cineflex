@@ -16,7 +16,7 @@ public class ProfilFactory {
      * @param hausnummer
      * @param PID
      */
-    public static void aendereProfil(String vorname, String nachname, String email, String passwort, String strasse, String hausnummer, int PID) {
+    public static void aendereProfil(String vorname, String nachname, String email, String passwort, String strasse, int hausnummer, int PID) {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.aendereProfil(vorname, nachname, email, passwort, strasse, hausnummer, PID);
         Connector.executeQuery(c, sql);
