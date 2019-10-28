@@ -70,6 +70,9 @@ fabric.properties
 /.idea/
 
 CineflexV1.iml
+cineflex.iml
+cineflex_mvn.iml
+Cineflex.iml
 
 # Maven
 target/
