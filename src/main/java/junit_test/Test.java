@@ -17,11 +17,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import javax.mail.Session;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Locale;
 
 public class Test {
@@ -885,6 +890,29 @@ public class Test {
         Assert.assertEquals(55, buchungsPosition.getBNR());
         Assert.assertEquals(56, buchungsPosition.getSitzID());
     }
+    //----
+
+    // Tests for class ReservierungsPosition
+    @org.junit.Test
+    public void ReservierungsPosition()
+    {
+        ReservierungsPosition reservierungsPosition = new ReservierungsPosition(2,3,4);
+
+        // Tests for Getters
+        Assert.assertEquals(2, reservierungsPosition.getPositionsID());
+        Assert.assertEquals(3, reservierungsPosition.getBNR());
+        Assert.assertEquals(4, reservierungsPosition.getSitzID());
+
+        // Tests for Setters
+        reservierungsPosition.setPositionsID(13);
+        reservierungsPosition.setBNR(56);
+        reservierungsPosition.setSitzID(57);
+
+        Assert.assertEquals(13, reservierungsPosition.getPositionsID());
+        Assert.assertEquals(56, reservierungsPosition.getBNR());
+        Assert.assertEquals(57, reservierungsPosition.getSitzID());
+    }
+    //----
 
 
     // TESTS FOR PASSWORD
@@ -1001,8 +1029,7 @@ public class Test {
         Assert.assertEquals("Select `Genrebezeichnung` FROM FilmGenre JOIN Genre ON Genre.GenreID = Filmgenre.GenreID Where `GenreID` = 15 ;", QueryBuilder.getGenreByID(15));
 
         //createUser
-        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('Hans', 'Meier', '2019-10-26', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', '', '68165'); \n" +
-                " INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '2019-10-26' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
+        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('Hans', 'Meier', '2019-10-27', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', '', '68165');\nINSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '2019-10-27' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
 
         //getGenres
         Assert.assertEquals("SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;", QueryBuilder.getGenres());
@@ -1128,6 +1155,7 @@ public class Test {
         Assert.assertEquals(null, SeatIDFormatter.seatsStringToIntArray("-1|-1"));
     }
 
+    // Tests for class ArrayBuilder
     @org.junit.Test
     public void testeArrayBuilder()
     {
@@ -1145,6 +1173,7 @@ public class Test {
         Assert.assertEquals("6< 7< 8", ArrayBuilder.intArrayToString(array, "< "));
     }
 
+    // Tests for class PLZFormatter
     @org.junit.Test
     public void testePLZFormatter()
     {
@@ -1164,6 +1193,29 @@ public class Test {
         Assert.assertEquals("01234", out);
         out = PLZFormatter.addLeadingZeros(plz5);
         Assert.assertEquals("12345", out);
+    }
+
+    // Tests for class TempBuchungsHandler
+    @org.junit.Test
+    public void testeTempBuchungsHandler()
+    {
+        HttpSession session = Mockito.mock(HttpSession.class);
+        String sitzIDs = "1,2,3";
+        String preisIDs = "1,2,3";
+        int vorstellungsID = 2;
+
+        try
+        {
+            TempBuchungHandler.addTempBuchungToSession(session, sitzIDs, preisIDs, vorstellungsID);
+        }
+        catch (Exception e)
+        {
+            Assert.assertEquals("Failed to get a required Object from a Factory", e.getMessage());
+        }
+
+        Assert.assertEquals(null, session.getAttribute("temp_sitze"));
+        Assert.assertEquals(null, session.getAttribute("temp_preisänderungen"));
+        Assert.assertEquals(null, session.getAttribute("temp_vorstellung"));
     }
 
 
@@ -1627,7 +1679,7 @@ public class Test {
         // Mock resultset is null
         Film[] resultFilmeArray4 = FilmFactory.getFilme("r", "2019-07-07","19:30:00", 6, "68165", 5, null, resultSetMock17, resultSetMock18);
 
-        Assert.assertNull(resultFilmeArray4);
+        Assert.assertNull(resultFilmeArray4[0]);
 
         // Mock for Method:
         //getTitelPageFilme(String plz)
@@ -1653,7 +1705,7 @@ public class Test {
         // Mock resultset is null
         Film[] resultFilmeArray6 = FilmFactory.getTitelPageFilme("68165", null, resultSetMock20, resultSetMock21);
 
-        Assert.assertNull(resultFilmeArray6);
+        Assert.assertNull(resultFilmeArray6[0]);
 
         // Mock for Method:
         // getFilm(int id)
@@ -1688,7 +1740,8 @@ public class Test {
         Mockito.when(resultSetMock26.getInt("VorstellungsID")).thenReturn(17);
         Mockito.when(resultSetMock26.getString("Datum")).thenReturn("2019-08-08");
         Mockito.when(resultSetMock26.getString("Uhrzeit")).thenReturn("12:12:00");
-        Mockito.when(resultSetMock26.getString("Sprache.Sprachenname")).thenReturn("deutsch");
+        Mockito.when(resultSetMock26.getString("Sprachenname")).thenReturn("deutsch");
+        Mockito.when(resultSetMock26.getInt("FilmID")).thenReturn(3);
         Mockito.when(resultSetMock2.getInt("Kinosaal.SaalID")).thenReturn(7);
 
         // Add next() to ResultSet

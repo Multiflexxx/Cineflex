@@ -181,6 +181,19 @@ h6 {
 }
 
 
+/* Ticket overview */
+.list-ticket {
+    width: 65%;
+    margin: 0 auto;
+}
+
+.list-ticket li {
+    background: #4a9be8;
+    color: whitesmoke;
+    font-weight: bold;
+
+}
+
 /* Responsive */
 @media (max-width: 992px) {
     .seat {

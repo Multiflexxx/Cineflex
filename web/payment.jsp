@@ -1,6 +1,7 @@
 <%@ page import="factory.BuchungsFactory" %>
 <%@ page import="helper.ArrayBuilder" %>
 <%@ page import="qr_code.QrCodeGenerator" %>
+<%@ page import="com.itextpdf.text.DocumentException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -18,7 +19,12 @@
     int[] seatsInt = ArrayBuilder.stringToIntArray(seats, ",");
     int[] preisVerInt = ArrayBuilder.stringToIntArray(preisVer, ",");
     int KID = Integer.parseInt(session.getAttribute("KID").toString());
-    int BID = BuchungsFactory.createBuchungBeleg(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
+    int BID = 0;
+    try {
+        BID = BuchungsFactory.createBuchungBeleg(seatsInt, preisVerInt, seats, preisVer, vorstellungsID, KID);
+    } catch (DocumentException e) {
+        e.printStackTrace();
+    }
 %>
 
 <script src="javascript/download.js"></script>
@@ -31,7 +37,7 @@
         <div class="card-body">
             <p class="card-text">Sie erhalten per E-Mail eine Bestätigung Ihres Kaufes.</p>
             <p>Lade dir jetzt schon deine Tickets herunter!</p>
-            <button class="btn btn-outline-primary" onclick="download_buchung(<%=BID%>)">Download</button>
+            <button class="btn btn-outline-primary mb-2" onclick="download_buchung(<%=BID%>)">Download</button>
             <p class="card-text">Sie können nun zurück zur Startseite</p>
             <a class="btn btn-primary btn-lg" href="index.jsp" role="button">Zurück zur Startseite</a>
         </div>

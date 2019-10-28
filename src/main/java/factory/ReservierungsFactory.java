@@ -82,8 +82,10 @@ public class ReservierungsFactory {
         createReservierungsPositionen(c, lastRNR, sitze, preiseVerIDs);
         createReservierungsBelegPDF(KNR, vorstellung, sitze);
         SitzsperreFactory.deleteSitzsperrenByVorstellung(vorstellungsID);
+
         SupportMethods.close(c, rs);
-        return 0;
+
+        return lastRNR;
     }
 
     /**

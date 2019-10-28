@@ -20,7 +20,7 @@ public class QueryBuilder {
 
     public static String createUser(String name, String lastname, Date gebDate, String email, String passwordHash, int hausnummer, String straße, String adresszusatz, int plz) {
         String sqlDateString = DateFormatter.getSQLDate(gebDate);
-        return "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('" + name + "', '" + lastname + "', '" + sqlDateString + "', '" + email + "', '" + passwordHash + "', '" + hausnummer + "', '" + straße + "', '" + adresszusatz + "', '" + plz + "'); \n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = '" + name + "' AND `Nachname` = '" + lastname + "' AND `GebDatum` = '" + sqlDateString + "' AND `E-Mail` = '" + email + "' AND `Passwort` = '" + passwordHash + "'), 0);";
+        return "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('" + name + "', '" + lastname + "', '" + sqlDateString + "', '" + email + "', '" + passwordHash + "', '" + hausnummer + "', '" + straße + "', '" + adresszusatz + "', '" + plz + "');\nINSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = '" + name + "' AND `Nachname` = '" + lastname + "' AND `GebDatum` = '" + sqlDateString + "' AND `E-Mail` = '" + email + "' AND `Passwort` = '" + passwordHash + "'), 0);";
     }
 
     public static String showAllCinemas() {
