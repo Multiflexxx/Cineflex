@@ -154,4 +154,11 @@ public class SitzsperreFactory {
 
         return null;
     }
+
+    public static void deleteSitzsperrenByVorstellung(int vorstellungsID) {
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.deleteSitzsperreByVorstellung(vorstellungsID);
+        Connector.executeQuery(c, sql);
+        SupportMethods.close(c);
+    }
 }

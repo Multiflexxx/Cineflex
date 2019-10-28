@@ -9,7 +9,6 @@ import exception.ResultSetIsNullException;
 import helper.SupportMethods;
 import oo.*;
 
-import javax.management.Query;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

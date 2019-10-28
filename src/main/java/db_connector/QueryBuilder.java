@@ -216,6 +216,10 @@ public class QueryBuilder {
         return "Delete From Sitzsperre Where Timestampdiff(Minute, Zeitstempel, '" + DateFormatter.getSQLDateAndTime(date) + "') > " + minuteTimeDiff + ";";
     }
 
+    public static String deleteSitzsperreByVorstellung(int vorstellungsID) {
+        return "Delete From Sitzsperre Where VorstellungsID = " + vorstellungsID + ";";
+    }
+
     public static String createSitzsperre(int sitzplatzID, int vorstellungsID, int KID, Date date) {
         return "Insert into Sitzsperre(SitzplatzID, VorstellungsID, KID, Zeitstempel) VALUES( " + sitzplatzID + ", " + vorstellungsID + ", " + KID + ", '" + DateFormatter.getSQLDateAndTime(date) + "');";
     }

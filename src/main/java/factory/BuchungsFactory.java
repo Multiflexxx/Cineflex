@@ -84,11 +84,10 @@ public class BuchungsFactory {
 //            }
 //        }
         createBuchungsPositionen(c, lastBNR, sitze, preiseVerIDs);
-
         createBuchungsbelegPDF(KNR, vorstellung, sitze);
+        SitzsperreFactory.deleteSitzsperrenByVorstellung(vorstellungsID);
 
-        Connector.closeResultSet(rs);
-        Connector.closeConnection(c);
+        SupportMethods.close(c, rs);
         return lastBNR;
     }
 
