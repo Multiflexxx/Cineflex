@@ -29,9 +29,9 @@
             <nav>
                 <div class="nav nav-pills nav-justified mb-2" id="nav-pills" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                       aria-controls="nav-home" aria-selected="true">Buchung</a>
+                       aria-controls="nav-home" aria-selected="true">Filme hinzufügen</a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                       aria-controls="nav-profile" aria-selected="false">Profil</a>
+                       aria-controls="nav-profile" aria-selected="false">Vorstellungen hinzufügen</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
