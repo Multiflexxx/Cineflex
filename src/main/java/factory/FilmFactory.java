@@ -413,4 +413,10 @@ public class FilmFactory {
         Connector.closeResultSet(rs);
         Connector.closeConnection(c);
     }
+    public static void filmHinzufuegen(String titel, String beschreibung, int dauer, int FSK, int DDD, String bildLink, String trailerLink, float Grundpreis) {
+        Connection c = Connector.getConnection();
+        String sql = QueryBuilder.createFilm(titel,beschreibung,dauer,FSK,DDD,bildLink,trailerLink,Grundpreis);
+        Connector.executeQuery(c, sql);
+        Connector.closeConnection(c);
+    }
 }

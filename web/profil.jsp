@@ -129,14 +129,20 @@
                             Bearbeiten
                         </button>
                         <nav>
+                            <div class="form-row">
+                                <div class="col-md-6">
                             <button type="submit" class="btn btn-primary" id="submitButton" onclick="onSubmit()"
                                     style="display: none">
                                 Speichern
                             </button>
+                                </div>
+                                <div class="col-md-6">
                             <button type="button" class="btn btn-primary" id="abbrechenButton"
                                     onclick="onClickProfilAbbrechen()"
                                     style="display: none">Abbrechen
                             </button>
+                                </div>
+                            </div>
                         </nav>
                     </form>
                 </div>

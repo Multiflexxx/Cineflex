@@ -23,24 +23,51 @@
 <div class="container">
     <div class="card mt-3 mb-3">
         <div class="card-header">
-            <h1>Willkommen</h1>
+            <h1>Administration</h1>
         </div>
         <div class="card-body">
             <nav>
                 <div class="nav nav-pills nav-justified mb-2" id="nav-pills" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                       aria-controls="nav-home" aria-selected="true">Filme hinzufügen</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                       aria-controls="nav-profile" aria-selected="false">Vorstellungen hinzufügen</a>
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-filme" role="tab"
+                       aria-controls="nav-filme" aria-selected="true">Filme hinzufügen</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-vorstellungen" role="tab"
+                       aria-controls="nav-vorstellungen" aria-selected="false">Vorstellungen hinzufügen</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
 
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-
+                <div class="tab-pane fade show active" id="nav-filme" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <h3>Filme hinzufügen</h3>
+                    <form name="filmeForm" action="adminHandler.jsp" method="post">
+                        <label for="filmeTitel">Titel</label>
+                        <input type="text" class="form-control" id="filmeTitel" placeholder="Titel des Films" name="filmTitel">
+                        <label for="filmeBeschreibung">Beschreibung</label>
+                        <textarea class="form-control" id="filmeBeschreibung" placeholder="Beschreibung des Films" name="filmBeschreibung"></textarea>
+                        <label for="filmeDauer">Dauer</label>
+                        <input type="number" class="form-control" id="filmeDauer" placeholder="Dauer in Minuten" name="filmDauer">
+                        <label for="FSKnull">FSK</label><br>
+                        <label class="radio-inline"><input type="radio" id="FSKnull" name="FSK" value="0">0</label>
+                        <label class="radio-inline"><input type="radio" id="FSKsechs" name="FSK" value="6">6</label>
+                        <label class="radio-inline"><input type="radio" id="FSKzwoelf" name="FSK" value="12">12</label>
+                        <label class="radio-inline"><input type="radio" id="FSKsechszehn" name="FSK" value="16">16</label>
+                        <label class="radio-inline"><input type="radio" id="FSKachtzehn" name="FSK" value="18">18</label>
+                        <br>
+                        <label for="DDD">3D</label><br>
+                        <label><input type="checkbox" id="DDD" name="DDD" value="1">3D</label><br>
+                        <label>Bild Link</label>
+                        <input type="text" class="form-control" id="bildLink" placeholder="Link zum Bild auf dem Server" name="bildLink">
+                        <label>Trailer Link</label>
+                        <input type="text" class="form-control" id="trailerLink" placeholder="YouTube Embedded Link" name="trailerLink">
+                        <label>Grundpreis</label>
+                        <input type="number" class="form-control" id="grundpreis" placeholder="Grundpreis" name="filmGrundpreis">
+                        <button type="submit" class="btn btn-primary" id="filmHinzufuegen" onclick="filmHinzufuegen()">
+                            Film hinzufügen
+                        </button>
+                    </form>
 
                 </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                <div class="tab-pane fade" id="nav-vorstellungen" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <h3>Accountinformationen</h3>
                     <form name="ProfilForm" action="profilHandler.jsp" method="post">
                         <div class="form-row">
@@ -98,6 +125,6 @@
     </div>
 </div>
 <jsp:include page="elements/footer.jsp"/>
-<script src="" crossorigin="anonymous" type="text/javascript"></script>
+<script src="javascript/admin.js" crossorigin="anonymous" type="text/javascript"></script>
 </body>
 </html>

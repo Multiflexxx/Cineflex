@@ -236,6 +236,7 @@ public class QueryBuilder {
         return "Insert INTO Reservierungsbeleg (RNR, KID, VorstellungsID, Preis, Zeitstempel) VALUES (NULL, " + KID + ", " + vorstellungsID + ", " + preis + ", '" + timestamp + "');";
     }
 
+
     public static String getReservierungsbelegByKIDandTimestamp(int KID, String timestamp) {
         return "Select * From Reservierungsbeleg Where `KID` = " + KID + " AND `Zeitstempel` = '" + timestamp + "';";
     }
@@ -308,6 +309,9 @@ public class QueryBuilder {
     public static String createReservierungsStornierung(int RNR) {
         return "Insert Into Buchungsstonierung (BNR) VALUES (" + RNR + ");";
 
+    }
+    public static String createFilm(String titel, String beschreibung, int dauer, int FSK, int DDD, String BildLink, String TrailerLink, float Grundpreis){
+        return "Insert Into Film (Titel, Beschreibung, Dauer, FSK, 3D, BildLink, TrailerLink, Grundpreis) VALUES ('" + titel + "','" + beschreibung + "' , " + dauer + " , "+ FSK + ", " + DDD + ",'" + BildLink + "','" + TrailerLink + "'," + Grundpreis +");";
     }
 
     public static String getBuchungsStornierungByStrnNR(int StrnNR) {

@@ -8,6 +8,7 @@ function onClickProfilBearbeiten() {
     document.getElementById("inputPasswort").readOnly = false;
     document.getElementById("inputStrasse").readOnly = false;
     document.getElementById("inputHausnummer").readOnly = false;
+    document.getElementById("inputPasswort").value = "";
 
 }
 
@@ -21,12 +22,14 @@ function onClickProfilAbbrechen() {
     document.getElementById("inputPasswort").readOnly = true;
     document.getElementById("inputStrasse").readOnly = true;
     document.getElementById("inputHausnummer").readOnly = true;
+    document.getElementById("inputPasswort").value = "********";
 
 }
 
 function onSubmit() {
     if(document.getElementById("inputPasswort").value.length < 6){
         alert('Das Passwort muss mindestens 6 Zeichen lang sein!');
+        return;
     }else {
         document.ProfilForm.submit();
     }
