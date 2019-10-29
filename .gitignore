@@ -76,3 +76,6 @@ Cineflex.iml
 
 # Maven
 target/
+
+#
+*.class

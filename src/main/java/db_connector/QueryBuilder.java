@@ -285,7 +285,7 @@ public class QueryBuilder {
     }
 
     public static String getReservierungsPositionenByRNR(int RNR) {
-        return "Select * From Reservierungsposition Where BNR = " + RNR + ";";
+        return "Select * From Reservierungsposition Where RNR = " + RNR + ";";
     }
 
     public static String getOrtByPLZ(int plz) {
