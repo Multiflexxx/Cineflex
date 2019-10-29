@@ -44,16 +44,13 @@ public class ReservierungsFactory {
         }
 
 
-
         Vorstellung vorstellung = VorstellungsFactory.getVorstellungById(vorstellungsID);
 
         float preis = 0;
 
         try {
-            preis = PreisFactory.getBuchungsPreis(seats,preisVer,vorstellung.getFilm().getFilmID());
-        }
-        catch (RequiredFactoryFailedException e)
-        {
+            preis = PreisFactory.getBuchungsPreis(seats, preisVer, vorstellung.getFilm().getFilmID());
+        } catch (RequiredFactoryFailedException e) {
             e.printStackTrace();
         }
 
