@@ -16,16 +16,13 @@
 <%
     int PID = Integer.parseInt(session.getAttribute("PID").toString());
     Kunde k = KundenFactory.getKunde(PID);
-    TicketHistory[] buchungsbelege = null;
+    TicketHistory[] beleg = null;
     try {
-        buchungsbelege = TicketHistoryFactory.getTicketHistoryByKID(k.getKundenID());
+        beleg = TicketHistoryFactory.getTicketHistoryByKID(k.getKundenID());
     } catch (RequiredFactoryFailedException e) {
         e.printStackTrace();
     }
-    //Buchungsbeleg buchungsbelege[] = BuchungsFactory.getBuchungsbelegeByKID(k.getKundenID());
 %>
-
-<script src="javascript/download.js"></script>
 
 <div class="container">
     <div class="card mt-3 mb-3">
@@ -39,44 +36,51 @@
             <nav>
                 <div class="nav nav-pills nav-justified mb-2" id="nav-pills" role="tablist">
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                       aria-controls="nav-home" aria-selected="true">Buchung</a>
+                       aria-controls="nav-home" aria-selected="true">Bestellungen</a>
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                        aria-controls="nav-profile" aria-selected="false">Profil</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
 
-<%--                <script>--%>
-<%--                    function showQR(titelImg, qrImg) {--%>
-<%--                        var img1 = titelImg,--%>
-<%--                            img2 = qrImg;--%>
+                <%--                <script>--%>
+                <%--                    function showQR(titelImg, qrImg) {--%>
+                <%--                        var img1 = titelImg,--%>
+                <%--                            img2 = qrImg;--%>
 
-<%--                        var cardImg = document.getElementById('cardImg');--%>
+                <%--                        var cardImg = document.getElementById('cardImg');--%>
 
-<%--                        console.log(img1, img2);--%>
-<%--                        console.log("Click");--%>
+                <%--                        console.log(img1, img2);--%>
+                <%--                        console.log("Click");--%>
 
-<%--                        cardImg.src = img2;--%>
-<%--                        console.log(cardImg.src);--%>
-<%--                    }--%>
-<%--                </script>--%>
+                <%--                        cardImg.src = img2;--%>
+                <%--                        console.log(cardImg.src);--%>
+                <%--                    }--%>
+                <%--                </script>--%>
 
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <%
-                        if (buchungsbelege != null) {
-                            for (TicketHistory b : buchungsbelege) {
+                        if (beleg != null) {
+                            for (TicketHistory b : beleg) {
+                                String storno = "";
+                                String card_color = "border-primary";
+                                if (b.isStorniert()) {
+                                    storno = "- Storniert";
+                                    card_color = "border-danger";
+                                }
                     %>
-                    <div class="card border-primary mt-3 mb-3">
-                        <div class="card-header border-primary"><h3 class="card-title"><%=b.getBelegBezeichnung()%>
+                    <div class="card <%=card_color%> mt-3 mb-3">
+                        <div class="card-header <%=card_color%>"><h3 class="card-title"><%=b.getBelegBezeichnung()%>
+                            vom <%=DateFormatter.getFrontendDate(b.getBelegZeitstempel())%> <%=storno%>
                         </h3></div>
-                        <div class="card-body border-primary card-body-beleg">
+                        <div class="card-body <%=card_color%> card-body-beleg">
                             <div class="row mb-2">
                                 <div class="col-lg-3 text-center mb-2">
                                     <img src="<%=b.getBelegVorstellung().getFilm().getBildLink()%>"
                                          class="card-img beleg_img" id="cardImg"
                                          alt="<%= b.getBelegVorstellung().getFilm().getTitel()%>">
                                 </div>
-<%--                                onclick="showQR('<%=b.getBelegVorstellung().getFilm().getBildLink()%>', 'img/specials/g_o.png')--%>
+                                <%--                                onclick="showQR('<%=b.getBelegVorstellung().getFilm().getBildLink()%>', 'img/specials/g_o.png')--%>
 
                                 <div class="col-lg-9 d-flex flex-column justify-content-center">
                                     <h4 class="card-title"><%=b.getBelegVorstellung().getFilm().getTitel()%>
@@ -102,7 +106,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer border-primary">
+                        <%
+                            if (!b.isStorniert()) {
+                        %>
+
+                        <div class="card-footer <%=card_color%>">
                             <div class="row">
                                 <div class="col-lg-6 mb-2">
                                     <button class="btn btn-primary btn-block"
@@ -110,10 +118,21 @@
                                     </button>
                                 </div>
                                 <div class="col-lg-6 mb-2">
-                                    <button class="btn btn-danger btn-block" onclick="">Stornieren</button>
+                                    <%
+                                        String js_call = "";
+                                        if (b.getBelegBezeichnung().equals("Buchung")) {
+                                            js_call = "cancellationBuc(" + b.getBelegID() + ")";
+                                        } else if (b.getBelegBezeichnung().equals("Reservierung")) {
+                                            js_call = "cancellationRes(" + b.getBelegID() + ")";
+                                        }
+                                    %>
+                                    <button class="btn btn-danger btn-block" onclick="<%=js_call%>">Stornieren</button>
                                 </div>
                             </div>
                         </div>
+                        <%
+                            }
+                        %>
                     </div>
                     <%
                             }

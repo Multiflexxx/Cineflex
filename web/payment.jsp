@@ -32,13 +32,13 @@
 <div class="container">
     <div class="card mt-3 mb-3">
         <div class="card-header">
-            <h1 class="card-title">Vielen Dank für Ihren Einkauf und viel Spaß beim Film!</h1>
+            <h1 class="card-title">Vielen Dank für deinen Einkauf und viel Spaß beim Film!</h1>
         </div>
         <div class="card-body">
-            <p class="card-text">Sie erhalten per E-Mail eine Bestätigung Ihres Kaufes.</p>
+            <p class="card-text">Du erhältst per E-Mail eine Bestätigung zu deinem Kauf.</p>
             <p>Lade dir jetzt schon deine Tickets herunter!</p>
             <button class="btn btn-outline-primary mb-2" onclick="download_buchung(<%=BID%>)">Download</button>
-            <p class="card-text">Sie können nun zurück zur Startseite</p>
+            <p class="card-text">Du kannst nun zurück zur Startseite</p>
             <a class="btn btn-primary btn-lg" href="index.jsp" role="button">Zurück zur Startseite</a>
         </div>
     </div>

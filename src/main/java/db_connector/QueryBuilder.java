@@ -307,7 +307,7 @@ public class QueryBuilder {
     }
 
     public static String createReservierungsStornierung(int RNR) {
-        return "Insert Into Buchungsstonierung (BNR) VALUES (" + RNR + ");";
+        return "Insert Into Reservierungsstonierung (RNR) VALUES (" + RNR + ");";
 
     }
     public static String createFilm(String titel, String beschreibung, int dauer, int FSK, int DDD, String BildLink, String TrailerLink, float Grundpreis){
@@ -319,15 +319,15 @@ public class QueryBuilder {
     }
 
     public static String getBuchungsStornierungByBNR(int BNR) {
-        return "Select * from Buchungsstornierung Where BNR = " + BNR + ";";
+        return "Select * from Buchungsstonierung Where BNR = " + BNR + ";";
     }
 
     public static String getReservierungsStornierungByRNR(int RNR) {
-        return "Select * from Reservierungsstornierung Where BNR = " + RNR + ";";
+        return "Select * from Reservierungsstonierung Where RNR = " + RNR + ";";
     }
 
     public static String getReservierungsStornierungByStrnNR(int StrnNR) {
-        return "Select * from Reservierungsstornierung Where StrnNR = " + StrnNR + ";";
+        return "Select * from Reservierungsstonierung Where StrnNR = " + StrnNR + ";";
     }
 
     public static String getBuchungsStornierungByKID(int KID) {
@@ -335,7 +335,7 @@ public class QueryBuilder {
     }
 
     public static String getReservierungsStornierungByKID(int KID) {
-        return "Select * From Buchungsstonierung Join Buchungsbeleg On `Buchungsstonierung.BNR` = `Buchungsbeleg.BNR` Where KID = " + KID + ";";
+        return "Select * From Reservierungsstonierung Join Buchungsbeleg On `Buchungsstonierung.BNR` = `Buchungsbeleg.BNR` Where KID = " + KID + ";";
     }
 
     public static String addTreuepunkte(int KID, int punkte) {
