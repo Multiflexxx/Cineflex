@@ -115,7 +115,7 @@ public class ReservierungsStornierungFactory {
             int counter = 0;
             while(rs.next()) {
                 reservierungsStornierungs[counter] = new ReservierungsStornierung(
-                        rs.getInt("BNR"),
+                        rs.getInt("RNR"),
                         rs.getInt("StrnNR")
                 );
                 counter++;
