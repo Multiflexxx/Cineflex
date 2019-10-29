@@ -79,6 +79,6 @@ public class TicketHistory implements Comparable<TicketHistory> {
 
 		@Override
 		public int compareTo(TicketHistory o) {
-				return getBelegZeitstempel().compareTo(o.getBelegZeitstempel());
+				return (getBelegZeitstempel().compareTo(o.getBelegZeitstempel()) * -1);
 		}
 }
