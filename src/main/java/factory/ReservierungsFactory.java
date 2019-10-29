@@ -222,6 +222,6 @@ public class ReservierungsFactory {
         PdfGenerator.createReservierungsPDF(pathPDF, pathQR, reservierungsbeleg, vorstellung, sitze, kunde);
 
         String m_body = "Vielen Dank " + kunde.getVorname() + " für deine Reservierung. \n\n Hole deine Tickets min. 30 Minuten vor Vorstellungsbeginn bei uns an der Kasse ab. \n\n Viel Spaß. Dein Multiflexxx Team";
-        //Email_Sender.sendMultipartMail(kunde.getEmail(), "Reservierung by Multiflexxx" + kunde.getKundenID() + reservierungsbeleg.getBelegID(), m_body, pathPDF);
+        Email_Sender.sendMultipartMail(kunde.getEmail(), "Reservierung by Multiflexxx" + kunde.getKundenID() + reservierungsbeleg.getBelegID(), m_body, pathPDF);
     }
 }
