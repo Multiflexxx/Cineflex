@@ -4,6 +4,9 @@ import exception.EmptyResultSetException;
 import exception.FailedObjectCreationException;
 import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import oo.BuchungsStornierung;
 import oo.Buchungsbeleg;
 import oo.ReservierungsStornierung;
@@ -15,6 +18,8 @@ public class TicketHistoryFactory {
 		public static TicketHistory[] getTicketHistoryByKID(int KID)
 				throws RequiredFactoryFailedException {
 				TicketHistory[] ticketHistories = null;
+				ArrayList<TicketHistory> history = new ArrayList<TicketHistory>();
+
 				Buchungsbeleg[] buchungsbelege = null;
 				Reservierungsbeleg[] reservierungsbelege = null;
 
@@ -83,6 +88,19 @@ public class TicketHistoryFactory {
 								ticketHistories[buchungsbelege.length + i] = new TicketHistory(
 										reservierungsbelege[i], sitze, reservierungsStornierung);
 						}
+				}
+
+				for(int i = 0; i < ticketHistories.length; i++) {
+						history.add(ticketHistories[i]);
+				}
+				Collections.sort(history);
+
+				Iterator<TicketHistory> iterator = history.iterator();
+				int counter = 0;
+				while(iterator.hasNext()) {
+						TicketHistory currentTicket = iterator.next();
+						ticketHistories[counter] = currentTicket;
+						counter++;
 				}
 
 				return ticketHistories;

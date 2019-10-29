@@ -2,7 +2,7 @@ package oo;
 
 import java.util.Date;
 
-public class TicketHistory {
+public class TicketHistory implements Comparable<TicketHistory> {
 		String belegBezeichnung;
 		Buchungsbeleg buchungsbeleg;
 		Reservierungsbeleg reservierungsbeleg;
@@ -60,15 +60,25 @@ public class TicketHistory {
 				}
 		}
 
-		public Date getBelegZeitstempel() {
-				if(buchungsbeleg != null) {
-						return buchungsbeleg.uhrzeit;
-				} else {
-						return reservierungsbeleg.uhrzeit;
-				}
+		public String getBelegBezeichnung() {
+				return this.belegBezeichnung;
 		}
+
 
 		public boolean isStorniert() {
 				return (buchungsStornierung != null || reservierungsStornierung != null);
+		}
+
+		public Date getBelegZeitstempel() {
+				if(buchungsbeleg != null) {
+						return buchungsbeleg.getUhrzeit();
+				} else {
+						return reservierungsbeleg.getUhrzeit();
+				}
+		}
+
+		@Override
+		public int compareTo(TicketHistory o) {
+				return getBelegZeitstempel().compareTo(o.getBelegZeitstempel());
 		}
 }
