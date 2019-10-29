@@ -76,4 +76,9 @@ public class SupportMethods {
     public static String removeSQLInjections(String input) {
         return input.replaceAll("[*#'\\-\\/(),\\[\\]\\^(--)]", " ");
     }
+
+
+    public static int preisToTreuepunkte(float preis) {
+        return (int) Math.floor(preis);
+    }
 }

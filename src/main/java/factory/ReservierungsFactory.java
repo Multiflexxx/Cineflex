@@ -81,6 +81,10 @@ public class ReservierungsFactory {
         // Create Reservierungsbelege
         createReservierungsPositionen(c, lastRNR, sitze, preiseVerIDs);
         createReservierungsBelegPDF(KNR, vorstellung, sitze);
+
+        // Give Kunde Treuepunkte
+        KundenFactory.addTreuepunkte(KNR, preis);
+
         SitzsperreFactory.deleteSitzsperrenByVorstellung(vorstellungsID);
 
         SupportMethods.close(c, rs);

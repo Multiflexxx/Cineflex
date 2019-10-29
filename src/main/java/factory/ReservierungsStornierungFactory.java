@@ -10,6 +10,7 @@ import oo.ReservierungsStornierung;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import oo.Reservierungsbeleg;
 
 public class ReservierungsStornierungFactory {
     public static ReservierungsStornierung createStornierung(int RNR) throws RequiredFactoryFailedException, FailedDataInsertionException {
@@ -29,6 +30,11 @@ public class ReservierungsStornierungFactory {
         } catch (EmptyResultSetException e) {
             e.printStackTrace();
             throw new FailedDataInsertionException();
+        }
+
+        Reservierungsbeleg reservierungsbeleg = ReservierungsFactory.getReservierungsbelegByRNR(RNR);
+        if(reservierungsbeleg != null) {
+            KundenFactory.subtractTreuepunkte(reservierungsbeleg.getKunde().getKundenID(), reservierungsbeleg.getPreis());
         }
 
         return reservierungsStornierung;

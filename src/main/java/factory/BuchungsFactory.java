@@ -87,6 +87,9 @@ public class BuchungsFactory {
         createBuchungsbelegPDF(KNR, vorstellung, sitze);
         SitzsperreFactory.deleteSitzsperrenByVorstellung(vorstellungsID);
 
+        // Give Kunde Treuepunkte
+        KundenFactory.addTreuepunkte(KNR, price);
+
         SupportMethods.close(c, rs);
         return lastBNR;
     }

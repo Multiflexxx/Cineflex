@@ -338,6 +338,13 @@ public class QueryBuilder {
         return "Select * From Buchungsstonierung Join Buchungsbeleg On `Buchungsstonierung.BNR` = `Buchungsbeleg.BNR` Where KID = " + KID + ";";
     }
 
+    public static String addTreuepunkte(int KID, int punkte) {
+        return "Update Kunde Set Treuepunkte = Treuepunkte + " + punkte + " Where KID = " + KID + ";";
+    }
+
+    public static String subtractTreuepunkte(int KID, int punkte) {
+        return "Update Kunde Set Treuepunkte = Treuepunkte - " + punkte + " Where KID = " + KID + ";";
+    }
 
     // NOT USED
     /*
