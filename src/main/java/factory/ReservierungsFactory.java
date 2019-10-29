@@ -209,7 +209,6 @@ public class ReservierungsFactory {
         SupportMethods.close(c, rs);
 
         String pathQR = "/usr/local/tomcat/qr_codes/qrcodeR" + KID + reservierungsbeleg.getBelegID() + ".png";
-        //String pathQR = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/qrcode" + KID + buchungsbeleg.getBelegID() + ".png";
         String qrcodeinfo = "{'Kundennr': " + KID;
         qrcodeinfo += ", 'VorstellungID': " + vorstellung.getVorstellungsID();
         qrcodeinfo += ", 'Film': " + vorstellung.getFilm().getTitel() + "'}";
@@ -219,11 +218,9 @@ public class ReservierungsFactory {
             e.printStackTrace();
         }
         String pathPDF = "/usr/local/tomcat/belege_pdf/pdfR" + KID + reservierungsbeleg.getBelegID() + ".pdf";
-        //String pathPDF = "../../../GitProjekte/CineflexV1/out/artifacts/CineflexV1_war_exploded/img/qrcode/pdf" + KID + buchungsbeleg.getBelegID() + ".pdf";
         PdfGenerator.createReservierungsPDF(pathPDF, pathQR, reservierungsbeleg, vorstellung, sitze, kunde);
 
         String m_body = "Vielen Dank " + kunde.getVorname() + " für deine Reservierung. \n\n Hole deine Tickets min. 30 Minuten vor Vorstellungsbeginn bei uns an der Kasse ab. \n\n Viel Spaß. Dein Multiflexxx Team";
-        Email_Sender.sendMultipartMail(kunde.getEmail(), "Reservierung by Multiflexxx" + kunde.getKundenID() + reservierungsbeleg.getBelegID(), m_body, pathPDF);
+        //Email_Sender.sendMultipartMail(kunde.getEmail(), "Reservierung by Multiflexxx" + kunde.getKundenID() + reservierungsbeleg.getBelegID(), m_body, pathPDF);
     }
-
 }

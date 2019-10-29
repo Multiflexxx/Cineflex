@@ -16,7 +16,7 @@
 <%
     int PID = Integer.parseInt(session.getAttribute("PID").toString());
     Kunde k = KundenFactory.getKunde(PID);
-    TicketHistory [] buchungsbelege = null;
+    TicketHistory[] buchungsbelege = null;
     try {
         buchungsbelege = TicketHistoryFactory.getTicketHistoryByKID(k.getKundenID());
     } catch (RequiredFactoryFailedException e) {
@@ -46,37 +46,71 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
 
+<%--                <script>--%>
+<%--                    function showQR(titelImg, qrImg) {--%>
+<%--                        var img1 = titelImg,--%>
+<%--                            img2 = qrImg;--%>
+
+<%--                        var cardImg = document.getElementById('cardImg');--%>
+
+<%--                        console.log(img1, img2);--%>
+<%--                        console.log("Click");--%>
+
+<%--                        cardImg.src = img2;--%>
+<%--                        console.log(cardImg.src);--%>
+<%--                    }--%>
+<%--                </script>--%>
+
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <%
                         if (buchungsbelege != null) {
                             for (TicketHistory b : buchungsbelege) {
                     %>
                     <div class="card border-primary mt-3 mb-3">
-                        <div class="card-header border-primary">Buchung <%=b.getBelegID()%>
-                        </div>
+                        <div class="card-header border-primary"><h3 class="card-title"><%=b.getBelegBezeichnung()%>
+                        </h3></div>
                         <div class="card-body border-primary card-body-beleg">
-                            <div class="row">
+                            <div class="row mb-2">
                                 <div class="col-lg-3 text-center mb-2">
                                     <img src="<%=b.getBelegVorstellung().getFilm().getBildLink()%>"
-                                         class="card-img beleg_img" alt="<%= b.getBelegVorstellung().getFilm().getTitel()%>">
+                                         class="card-img beleg_img" id="cardImg"
+                                         alt="<%= b.getBelegVorstellung().getFilm().getTitel()%>">
                                 </div>
+<%--                                onclick="showQR('<%=b.getBelegVorstellung().getFilm().getBildLink()%>', 'img/specials/g_o.png')--%>
 
                                 <div class="col-lg-9 d-flex flex-column justify-content-center">
-                                    <h3 class="card-title"><%=b.getBelegVorstellung().getFilm().getTitel()%>
+                                    <h4 class="card-title"><%=b.getBelegVorstellung().getFilm().getTitel()%>
                                         am <%=DateFormatter.getFrontendDate(b.getBelegVorstellung().getDatum())%>
                                         um <%=DateFormatter.getFrontendTime(b.getBelegVorstellung().getUhrzeit())%>
-                                        Uhr</h3>
+                                        Uhr</h4>
                                     <%
                                         Gebaeude g = b.getBelegVorstellung().getSaal().getGebaeude();
                                     %>
-                                    <p class="card-text"><%=b.getBelegVorstellung().getSaal().getBezeichnung()%>
-                                    </p>
-                                    <p class="card-text">Adresse: <%=g.getStrasse()%> <%=g.getHausnummer()%>
+                                    <p class="card-text"><small
+                                            class="text-muted">Adresse: <%=g.getStrasse()%> <%=g.getHausnummer()%>
                                         , <%=g.getPlz()%> <%=g.getOrtsname()%>
-                                    </p>
-                                    <p class="card-text">Tickets: ...</p>
-                                    <p class="card-text">Preis: <%=b.getBelegPreis()%> €</p>
-                                    <button class="btn btn-outline-primary" onclick="download_buchung(<%=b.getBelegID()%>)">Download</button>
+                                    </small></p>
+                                    <h5 class="card-text">Preis: <%=b.getBelegPreis()%> €</h5>
+                                    <ul class="list-group list-group-flush list-ticket">
+                                        <%
+                                            Sitz[] sitz = b.getSitze();
+                                            for (int i = 0; i < sitz.length; i++) {
+                                                out.write("<li class=\"list-group-item list-group-item-light rounded text-center mb-2\">" + b.getBelegVorstellung().getSaal().getBezeichnung() + " Reihe " + sitz[i].getReihe() + " Platz " + sitz[i].getNummer() + "</li>");
+                                            }
+                                        %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer border-primary">
+                            <div class="row">
+                                <div class="col-lg-6 mb-2">
+                                    <button class="btn btn-primary btn-block"
+                                            onclick="download_buchung(<%=b.getBelegID()%>)">Download
+                                    </button>
+                                </div>
+                                <div class="col-lg-6 mb-2">
+                                    <button class="btn btn-danger btn-block" onclick="">Stornieren</button>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +155,8 @@
                             <label for="inputStrasse">Straße</label>
                             <input type="text" class="form-control" id="inputStrasse" name="inputStrasse"
                                    value="<%=k.getStrasse()%>" readonly>
-                            <input type="text" class="form-control" id="inputHausnummer" name="inputHausnummer" value="<%=k.getHausnummer()%>" readonly>
+                            <input type="text" class="form-control" id="inputHausnummer" name="inputHausnummer"
+                                   value="<%=k.getHausnummer()%>" readonly>
                             <input id="PID" style="display: none" name="PID" value="<%=k.getPersonenID()%>">
                         </div>
                         <button type="button" class="btn btn-primary" id="bearbeitenButton"
@@ -131,16 +166,16 @@
                         <nav>
                             <div class="form-row">
                                 <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary" id="submitButton" onclick="onSubmit()"
-                                    style="display: none">
-                                Speichern
-                            </button>
+                                    <button type="submit" class="btn btn-primary" id="submitButton" onclick="onSubmit()"
+                                            style="display: none">
+                                        Speichern
+                                    </button>
                                 </div>
                                 <div class="col-md-6">
-                            <button type="button" class="btn btn-primary" id="abbrechenButton"
-                                    onclick="onClickProfilAbbrechen()"
-                                    style="display: none">Abbrechen
-                            </button>
+                                    <button type="button" class="btn btn-primary" id="abbrechenButton"
+                                            onclick="onClickProfilAbbrechen()"
+                                            style="display: none">Abbrechen
+                                    </button>
                                 </div>
                             </div>
                         </nav>
