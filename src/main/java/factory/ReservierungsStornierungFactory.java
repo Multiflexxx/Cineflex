@@ -85,7 +85,7 @@ public class ReservierungsStornierungFactory {
         try{
             rs.next();
             reservierungsStornierung = new ReservierungsStornierung(
-                    rs.getInt("BNR"),
+                    rs.getInt("RNR"),
                     rs.getInt("StrnNR")
             );
         } catch (SQLException e) {
