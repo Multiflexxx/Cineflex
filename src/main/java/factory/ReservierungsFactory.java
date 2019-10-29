@@ -115,9 +115,11 @@ public class ReservierungsFactory {
                         new Date(rs.getTimestamp("Zeitstempel").getTime())
                 );
             } catch (SQLException e) {
+                SupportMethods.close(c, rs);
                 e.printStackTrace();
             }
         }
+        SupportMethods.close(c, rs);
         return reservierungsbeleg;
     }
 
@@ -150,10 +152,12 @@ public class ReservierungsFactory {
                         counter++;
                     }
                 } catch (SQLException e) {
+                    SupportMethods.close(c, rs);
                     e.printStackTrace();
                 }
             }
         }
+        SupportMethods.close(c, rs);
         return reservierungsbelege;
 
     }

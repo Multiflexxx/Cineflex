@@ -68,9 +68,11 @@ public class RegistrierungFactory {
             registrierung = getRegistrierungByEmail(email);
         } catch (EmptyResultSetException e) {
             e.printStackTrace();
+            SupportMethods.close(c);
             throw new EmptyResultSetException();
         } catch (ResultSetIsNullException e) {
             e.printStackTrace();
+            SupportMethods.close(c);
             throw new RequiredFactoryFailedException();
         }
 
@@ -88,10 +90,12 @@ public class RegistrierungFactory {
         Registrierung registrierung = null;
 
         if (rs == null) {
+            SupportMethods.close(c, rs);
             throw new ResultSetIsNullException();
         }
 
         if (SupportMethods.getResultSetSize(rs) < 1) {
+            SupportMethods.close(c, rs);
             throw new EmptyResultSetException();
         }
 
@@ -110,11 +114,12 @@ public class RegistrierungFactory {
                     rs.getString("Adresszusatz")
             );
         } catch (SQLException e) {
+            SupportMethods.close(c, rs);
             e.printStackTrace();
         }
 
         //Email_Sender.sendMail(registrierung.getEmail(), "Wilkommen bei Cineflexxx", "Hallo "+registrierung.getVorname()+", \n\n wir freuen uns, dass du dich für Cineflexxx entschieden hast und wünschen dir viel Spaß bei unseren Kinofilmen.\n\nDein Cineflexxx Team");
-
+        SupportMethods.close(c, rs);
         return registrierung;
     }
 }
