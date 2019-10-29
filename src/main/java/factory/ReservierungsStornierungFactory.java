@@ -46,7 +46,7 @@ public class ReservierungsStornierungFactory {
         ResultSet rs = Connector.getQueryResult(c, sql);
 
         ReservierungsStornierung reservierungsStornierung = null;
-        if(rs != null) {
+        if(rs == null) {
             throw new ResultSetIsNullException();
         }
 
@@ -74,7 +74,7 @@ public class ReservierungsStornierungFactory {
         ResultSet rs = Connector.getQueryResult(c, sql);
         ReservierungsStornierung reservierungsStornierung = null;
 
-        if(rs != null) {
+        if(rs == null) {
             throw new ResultSetIsNullException();
         }
 
@@ -102,7 +102,7 @@ public class ReservierungsStornierungFactory {
         ResultSet rs = Connector.getQueryResult(c, sql);
         ReservierungsStornierung[] reservierungsStornierungs = null;
 
-        if(rs != null) {
+        if(rs == null) {
             throw new ResultSetIsNullException();
         }
 

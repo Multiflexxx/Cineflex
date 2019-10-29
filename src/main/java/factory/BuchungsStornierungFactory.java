@@ -47,7 +47,7 @@ public class BuchungsStornierungFactory {
 				String sql = QueryBuilder.getBuchungsStornierungByStrnNR(StrnNR);
 				ResultSet rs = Connector.getQueryResult(c, sql);
 				BuchungsStornierung buchungsStornierung = null;
-				if (rs != null) {
+				if (rs == null) {
 						throw new ResultSetIsNullException();
 				}
 
@@ -75,7 +75,7 @@ public class BuchungsStornierungFactory {
 				String sql = QueryBuilder.getBuchungsStornierungByBNR(BNR);
 				ResultSet rs = Connector.getQueryResult(c, sql);
 				BuchungsStornierung buchungsStornierung = null;
-				if (rs != null) {
+				if (rs == null) {
 						throw new ResultSetIsNullException();
 				}
 
@@ -104,7 +104,7 @@ public class BuchungsStornierungFactory {
 				ResultSet rs = Connector.getQueryResult(c, sql);
 				BuchungsStornierung[] buchungsStornierung = null;
 
-				if (rs != null) {
+				if (rs == null) {
 						throw new ResultSetIsNullException();
 				}
 
