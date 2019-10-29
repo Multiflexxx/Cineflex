@@ -1,15 +1,9 @@
-<%@ page import="oo.Kunde" %>
 <%@ page import="factory.KundenFactory" %>
-<%@ page import="oo.Buchungsbeleg" %>
 <%@ page import="factory.BuchungsFactory" %>
 <%@ page import="helper.DateFormatter" %>
-<%@ page import="oo.Gebaeude" %><%--
-  Created by IntelliJ IDEA.
-  User: Anton
-  Date: 16.10.2019
-  Time: 22:42
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="factory.TicketHistoryFactory" %>
+<%@ page import="oo.*" %>
+<%@ page import="exception.RequiredFactoryFailedException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -22,7 +16,13 @@
 <%
     int PID = Integer.parseInt(session.getAttribute("PID").toString());
     Kunde k = KundenFactory.getKunde(PID);
-    Buchungsbeleg buchungsbelege[] = BuchungsFactory.getBuchungsbelegeByKID(k.getKundenID());
+    TicketHistory [] buchungsbelege = null;
+    try {
+        buchungsbelege = TicketHistoryFactory.getTicketHistoryByKID(k.getKundenID());
+    } catch (RequiredFactoryFailedException e) {
+        e.printStackTrace();
+    }
+    //Buchungsbeleg buchungsbelege[] = BuchungsFactory.getBuchungsbelegeByKID(k.getKundenID());
 %>
 
 <script src="javascript/download.js"></script>
@@ -49,7 +49,7 @@
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <%
                         if (buchungsbelege != null) {
-                            for (Buchungsbeleg b : buchungsbelege) {
+                            for (TicketHistory b : buchungsbelege) {
                     %>
                     <div class="card border-primary mt-3 mb-3">
                         <div class="card-header border-primary">Buchung <%=b.getBelegID()%>
@@ -57,25 +57,25 @@
                         <div class="card-body border-primary card-body-beleg">
                             <div class="row">
                                 <div class="col-lg-3 text-center mb-2">
-                                    <img src="<%=b.getVorstellung().getFilm().getBildLink()%>"
-                                         class="card-img beleg_img" alt="<%= b.getVorstellung().getFilm().getTitel()%>">
+                                    <img src="<%=b.getBelegVorstellung().getFilm().getBildLink()%>"
+                                         class="card-img beleg_img" alt="<%= b.getBelegVorstellung().getFilm().getTitel()%>">
                                 </div>
 
                                 <div class="col-lg-9 d-flex flex-column justify-content-center">
-                                    <h3 class="card-title"><%=b.getVorstellung().getFilm().getTitel()%>
-                                        am <%=DateFormatter.getFrontendDate(b.getVorstellung().getDatum())%>
-                                        um <%=DateFormatter.getFrontendTime(b.getVorstellung().getUhrzeit())%>
+                                    <h3 class="card-title"><%=b.getBelegVorstellung().getFilm().getTitel()%>
+                                        am <%=DateFormatter.getFrontendDate(b.getBelegVorstellung().getDatum())%>
+                                        um <%=DateFormatter.getFrontendTime(b.getBelegVorstellung().getUhrzeit())%>
                                         Uhr</h3>
                                     <%
-                                        Gebaeude g = b.getVorstellung().getSaal().getGebaeude();
+                                        Gebaeude g = b.getBelegVorstellung().getSaal().getGebaeude();
                                     %>
-                                    <p class="card-text"><%=b.getVorstellung().getSaal().getBezeichnung()%>
+                                    <p class="card-text"><%=b.getBelegVorstellung().getSaal().getBezeichnung()%>
                                     </p>
                                     <p class="card-text">Adresse: <%=g.getStrasse()%> <%=g.getHausnummer()%>
                                         , <%=g.getPlz()%> <%=g.getOrtsname()%>
                                     </p>
                                     <p class="card-text">Tickets: ...</p>
-                                    <p class="card-text">Preis: <%=b.getPreis()%> €</p>
+                                    <p class="card-text">Preis: <%=b.getBelegPreis()%> €</p>
                                     <button class="btn btn-outline-primary" onclick="download_buchung(<%=b.getBelegID()%>)">Download</button>
                                 </div>
                             </div>
