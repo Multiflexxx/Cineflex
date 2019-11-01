@@ -51,6 +51,7 @@
             try {
                 StayLoggedIn stayLogged = StayLoggedInFactory.stayLoggedIn(email, pw);
                 Cookie stay = new Cookie("stayLoggedIn", stayLogged.getId());
+                response.addCookie(stay);
             } catch (FailedDataInsertionException | RequiredFactoryFailedException | FailedObjectCreationException e) {
                 e.printStackTrace();
             }

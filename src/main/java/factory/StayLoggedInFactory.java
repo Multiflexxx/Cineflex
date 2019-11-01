@@ -22,8 +22,10 @@ public class StayLoggedInFactory {
             throw new FailedDataInsertionException();
         }
 
+        boolean sessionAlreadyExists = false;
         try {
             getStayLoggedInById(id);
+            sessionAlreadyExists = true;
         } catch (ResultSetIsNullException | FailedObjectCreationException e) {
             e.printStackTrace();
             throw new RequiredFactoryFailedException();
@@ -32,8 +34,10 @@ public class StayLoggedInFactory {
         }
 
         Connection c = Connector.getConnection();
-        String sql = QueryBuilder.createStayLoggedIn(id, email, passwordHash);
-        Connector.executeQuery(c, sql);
+        if(!sessionAlreadyExists) {
+            String sql = QueryBuilder.createStayLoggedIn(id, email, passwordHash);
+            Connector.executeQuery(c, sql);
+        }
 
         StayLoggedIn stayLoggedIn = null;
         try {
