@@ -1,3 +1,4 @@
+<%@ page import="java.util.concurrent.Semaphore" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -14,28 +15,24 @@
     if (cookies != null) {
         for (int i = 0; i < cookies.length; i++) {
             if (cookies[i].getName().equals("stay")) {
-                Cookie stay = cookies [i];
+                Cookie stay = cookies[i];
                 stay.setMaxAge(0);
                 response.addCookie(stay);
             }
 
             if (cookies[i].getName().equals("email")) {
-                Cookie email = cookies [i];
+                Cookie email = cookies[i];
                 email.setMaxAge(0);
                 response.addCookie(email);
             }
 
             if (cookies[i].getName().equals("pw")) {
-                Cookie pw = cookies [i];
+                Cookie pw = cookies[i];
                 pw.setMaxAge(0);
                 response.addCookie(pw);
             }
         }
     }
-
-    s = request.getSession();
-    s.invalidate();
-
 %>
 <jsp:include page="elements/header.jsp"/>
 
@@ -54,12 +51,13 @@
         </div>
     </div>
 </div>
-<script>window.setTimeout(function(){
 
-    // Move to a new location or you can do something else
-    window.location.href = "/index.jsp";
-
-}, 5000);</script>
+<script>
+    window.setTimeout(function () {
+        // Move to a new location or you can do something else
+        window.location.href = "index.jsp";
+    }, 3000);
+</script>
 
 <jsp:include page="elements/footer.jsp"/>
 </body>
