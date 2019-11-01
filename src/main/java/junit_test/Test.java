@@ -89,6 +89,10 @@ public class Test {
     private ResultSet resultSetMock25;
     @Mock
     private ResultSet resultSetMock26;
+    @Mock
+    private ResultSet resultSetMock27;
+    @Mock
+    private ResultSet resultSetMock28;
 
     @Before
     public void setUp() throws Exception
@@ -1838,7 +1842,7 @@ public class Test {
         Mockito.when(resultSetMock26.getString("Uhrzeit")).thenReturn("12:12:00");
         Mockito.when(resultSetMock26.getString("Sprachenname")).thenReturn("deutsch");
         Mockito.when(resultSetMock26.getInt("FilmID")).thenReturn(3);
-        Mockito.when(resultSetMock2.getInt("Kinosaal.SaalID")).thenReturn(7);
+        Mockito.when(resultSetMock26.getInt("Kinosaal.SaalID")).thenReturn(7);
 
         // Add next() to ResultSet
         Mockito.when(resultSetMock25.next()).thenReturn(true).thenReturn(true).thenReturn(false);
@@ -1869,6 +1873,30 @@ public class Test {
         Assert.assertNotNull(vorstellung);
 
         Assert.assertEquals(17, vorstellung.getVorstellungsID());
+    }
+
+    @org.junit.Test
+    public void testeBuchungspositionFactory() throws Exception
+    {
+        // Create Resultsets
+        resultSetMock27 = Mockito.mock(ResultSet.class);
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock27.getInt("PositionsID")).thenReturn(1).thenReturn(2);
+        Mockito.when(resultSetMock27.getInt("BNR")).thenReturn(7).thenReturn(8);
+        Mockito.when(resultSetMock27.getInt("SitzID")).thenReturn(5).thenReturn(6);
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock27.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+
+        BuchungsPosition[] buchungsposition = BuchungspositionFactory.getBuchungspositionenByBNR(9, resultSetMock27);
+
+        Assert.assertEquals(1, buchungsposition[0].getPositionsID());
+        Assert.assertEquals(2, buchungsposition[1].getPositionsID());
+        Assert.assertEquals(7, buchungsposition[0].getBNR());
+        Assert.assertEquals(8, buchungsposition[1].getBNR());
+        Assert.assertEquals(5, buchungsposition[0].getSitzID());
+        Assert.assertEquals(6, buchungsposition[1].getSitzID());
     }
 
     @org.junit.Test
