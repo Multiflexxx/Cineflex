@@ -1900,6 +1900,30 @@ public class Test {
     }
 
     @org.junit.Test
+    public void testeReservierungspositionFactory() throws Exception
+    {
+        // Create Resultsets
+        resultSetMock28 = Mockito.mock(ResultSet.class);
+
+        // Add values to Resultset
+        Mockito.when(resultSetMock28.getInt("PositionsID")).thenReturn(4).thenReturn(5);
+        Mockito.when(resultSetMock28.getInt("RNR")).thenReturn(6).thenReturn(7);
+        Mockito.when(resultSetMock28.getInt("SitzID")).thenReturn(9).thenReturn(10);
+
+        // Add next() to ResultSet
+        Mockito.when(resultSetMock28.next()).thenReturn(true).thenReturn(true).thenReturn(false);
+
+        ReservierungsPosition[] reservierungsPositions = ReservierungspositionFactory.getReservierungsPositionenByRNR(9, resultSetMock28);
+
+        Assert.assertEquals(4, reservierungsPositions[0].getPositionsID());
+        Assert.assertEquals(5, reservierungsPositions[1].getPositionsID());
+        Assert.assertEquals(6, reservierungsPositions[0].getBNR());
+        Assert.assertEquals(7, reservierungsPositions[1].getBNR());
+        Assert.assertEquals(9, reservierungsPositions[0].getSitzID());
+        Assert.assertEquals(10, reservierungsPositions[1].getSitzID());
+    }
+
+    @org.junit.Test
     public void testeBuchungsFactory()
     {
 

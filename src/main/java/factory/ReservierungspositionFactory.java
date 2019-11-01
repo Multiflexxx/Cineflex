@@ -14,12 +14,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReservierungspositionFactory {
-    public static ReservierungsPosition[] getReservierungsPositionenByRNR(int RNR) throws ResultSetIsNullException, EmptyResultSetException, RequiredFactoryFailedException {
+    public static ReservierungsPosition[] getReservierungsPositionenByRNR(int RNR, ResultSet mockRs) throws ResultSetIsNullException, EmptyResultSetException, RequiredFactoryFailedException {
 
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getReservierungsPositionenByRNR(RNR);
-        ResultSet rs = Connector.getQueryResult(c, sql);
+
         ReservierungsPosition[] reservierungspositionen = null;
+
+        ResultSet rs = null;
+
+        // Set Mock Resultset, if available
+        if (mockRs == null) {
+            rs = Connector.getQueryResult(c, sql);
+        } else {
+            rs = mockRs;
+        }
 
         if (rs == null) {
             SupportMethods.close(c, rs);
@@ -35,14 +44,16 @@ public class ReservierungspositionFactory {
 
         reservierungspositionen = new ReservierungsPosition[rsSize];
         try {
-            int counter = 0;
-            while (rs.next()) {
-                reservierungspositionen[counter] = new ReservierungsPosition(
+            //int counter = 0;
+            //while (rs.next()) {
+            for (int i = 0; i < rsSize; i++) {
+                rs.next();
+                reservierungspositionen[i] = new ReservierungsPosition(
                         rs.getInt("PositionsID"),
                         rs.getInt("RNR"),
                         rs.getInt("SitzID")
                 );
-                counter++;
+                //counter++;
             }
         } catch (
                 SQLException e) {
@@ -53,5 +64,9 @@ public class ReservierungspositionFactory {
 
         SupportMethods.close(c, rs);
         return reservierungspositionen;
+    }
+
+    public static ReservierungsPosition[] getReservierungsPositionenByRNR(int RNR) throws ResultSetIsNullException, EmptyResultSetException, RequiredFactoryFailedException {
+        return getReservierungsPositionenByRNR(RNR, null);
     }
 }
