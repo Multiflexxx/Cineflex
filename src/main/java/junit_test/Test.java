@@ -1113,7 +1113,7 @@ public class Test {
         Assert.assertEquals("Select `Genrebezeichnung` FROM FilmGenre JOIN Genre ON Genre.GenreID = Filmgenre.GenreID Where `GenreID` = 15 ;", QueryBuilder.getGenreByID(15));
 
         //createUser
-        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('Hans', 'Meier', '"+DateFormatter.getSQLDate(date4)+"', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', '', '68165');\nINSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '"+DateFormatter.getSQLDate(date4)+"' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
+        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('Hans', 'Meier', '"+dateSQL4+"', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', '', '68165');\nINSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '"+dateSQL4+"' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
 
         //getGenres
         Assert.assertEquals("SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;", QueryBuilder.getGenres());
@@ -1145,6 +1145,112 @@ public class Test {
         //genreSearchQuery()
         Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') AND concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-08 16:30:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 16 AND Genre.GenreID = 5 ;", QueryBuilder.genreSearchQuery("Toy", "2019-08-08", "16:30:00", 16, "68165", 5));
         Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D`, Genre.GenreID FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID JOIN FilmGenre ON Film.FilmID = FilmGenre.FilmID JOIN Genre On Genre.GenreID = FilmGenre.GenreID WHERE concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-08 16:30:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 16 AND Genre.GenreID = 5 ;", QueryBuilder.genreSearchQuery("", "2019-08-08", "16:30:00", 16, "68165", 5));
+
+        //getGenres()
+        Assert.assertEquals("SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;", QueryBuilder.getGenres());
+
+
+        //getPreisLaenge
+        Assert.assertEquals("SELECT COUNT(*) as laenge FROM Preisänderung;", QueryBuilder.getPreiseLaenge());
+
+        //aendereProfil
+        Assert.assertEquals("UPDATE Person SET Vorname='Otto', Nachname='Paul',`E-Mail`='otto.paul@web.de',Passwort='aldfjewl',Straße='Weberstraße',Hausnummer=12  WHERE PID = 1;", QueryBuilder.aendereProfil("Otto", "Paul", "otto.paul@web.de", "aldfjewl", "Weberstraße", 12, 1));
+
+        //getBuchungsbelegByKIDandTimestamp
+
+        Assert.assertEquals("Select * From Buchungsbeleg Where `KID` = 1 AND `Zeitstempel` = '2019-08-08 12:30:33';", QueryBuilder.getBuchungsbelegByKIDandTimestamp(1, "2019-08-08 12:30:33"));
+
+        //getTimedOutSitzsperre
+        Date date5 = new Date();
+        String dateSQL5 = DateFormatter.getSQLDateAndTime(date5);
+        Assert.assertEquals("Select * From Sitzsperre Where Timestampdiff(Minute, Zeitstempel, '"+ dateSQL5 +"') < 10 AND VorstellungsID = 1;", QueryBuilder.getTimedOutSitzsperre(10,1));
+
+        //deleteTimedOutSitzSperre
+        Assert.assertEquals("Delete From Sitzsperre Where Timestampdiff(Minute, Zeitstempel, '"+ dateSQL5 +"') > 10;", QueryBuilder.deleteTimedOutSitzSperre(10));
+
+        //deleteSitzsperreByVorstellung
+        Assert.assertEquals("Delete From Sitzsperre Where VorstellungsID = 1;", QueryBuilder.deleteSitzsperreByVorstellung(1));
+
+        //createSitzsperre
+       Assert.assertEquals("Insert into Sitzsperre(SitzplatzID, VorstellungsID, KID, Zeitstempel) VALUES( 1, 1, 1, '" + dateSQL5 +"');", QueryBuilder.createSitzsperre(1, 1, 1, date5));
+
+        //getBuchungsbelegByBNR
+        Assert.assertEquals("Select * From Buchungsbeleg Where BNR = 1;", QueryBuilder.getBuchungsbelegByBNR(1));
+
+        //getBuchungsbelegeByKID
+        Assert.assertEquals("Select * from Buchungsbeleg Where KID = 1;", QueryBuilder.getBuchungsbelegeByKID(1));
+
+        //createReservierungsbeleg
+        Assert.assertEquals("Insert INTO Reservierungsbeleg (RNR, KID, VorstellungsID, Preis, Zeitstempel) VALUES (NULL, 1, 1, 13.0, '2019-08-08 12:30:33');", QueryBuilder.createReservierungsbeleg(1,1,13,"2019-08-08 12:30:33"));
+
+        //getReservierungsbelegByKIDandTimestamp
+        Assert.assertEquals("Select * From Reservierungsbeleg Where `KID` = 1 AND `Zeitstempel` = '2019-08-08 12:30:33';", QueryBuilder.getReservierungsbelegByKIDandTimestamp(1, "2019-08-08 12:30:33"));
+
+        //createReservierungsposition
+        Assert.assertEquals("Insert Into Reservierungsposition (PositionsID, RNR, SitzID) VALUES ( 1, 1, 1);", QueryBuilder.createReservierungsposition(1,1,1));
+
+        //createPreisänderungReservierung
+        Assert.assertEquals("Insert Into PreisänderungReservierung (PositionsID, RNR, PreisänderungsID) Values ( 1, 1, 1) ;", QueryBuilder.createPreisänderungReservierung(1,1,1));
+
+        //getReservierungsbelegByKID
+        Assert.assertEquals("Select * From Reservierungsbeleg Where KID = 1;", QueryBuilder.getReservierungsbelegByKID(1));
+
+        //getReservierungsbelegByRNR
+        Assert.assertEquals("Select * From Reservierungsbeleg Where RNR = 1;", QueryBuilder.getReservierungsbelegByRNR(1));
+
+        //getUserForRegistration
+        Assert.assertEquals("SELECT * FROM Person WHERE `Vorname` = 'Otto' AND `Nachname` = 'Paul' AND `GebDatum` = '2019-09-23' AND `E-Mail` = 'otto.paul@gmail.com';", QueryBuilder.getUserForRegistration("Otto", "Paul", "2019-09-23","otto.paul@gmail.com"));
+
+        //getUserByEmail
+        Assert.assertEquals("Select * From Person Where `E-Mail` = 'otto.paul@gmail.com';", QueryBuilder.getUserByEmail("otto.paul@gmail.com"));
+
+        //getPreisänderungByID
+        Assert.assertEquals("Select * From `Preisänderung` Where `PreisänderungsID` = 1;", QueryBuilder.getPreisänderungByID(1));
+
+        //getBookedSeats
+        Assert.assertEquals("Select Buchungsposition.* from Buchungsposition Join Buchungsbeleg On Buchungsposition.BNR = Buchungsbeleg.BNR Where Buchungsbeleg.VorstellungsID = 1 AND Not Exists (Select BNR FROM Buchungsstonierung Where Buchungsstonierung.BNR = Buchungsposition.BNR);", QueryBuilder.getBookedSeats(1));
+
+        //getReservedSeats
+        Assert.assertEquals("Select Reservierungsposition.* from Reservierungsposition Join Reservierungsbeleg On Reservierungsposition.RNR = Reservierungsbeleg.RNR Where Reservierungsbeleg.VorstellungsID = 1 AND Not Exists (Select RNR FROM Reservierungsstonierung Where Reservierungsstonierung.RNR = Reservierungsposition.RNR);", QueryBuilder.getReservedSeats(1));
+
+        //getBuchungsPositionenByBNR
+        Assert.assertEquals("Select * From Buchungsposition Where BNR = 1;", QueryBuilder.getBuchungsPositionenByBNR(1));
+
+        //getReservierungsPositionenByRNR
+        Assert.assertEquals("Select * From Reservierungsposition Where BNR = 1;", QueryBuilder.getReservierungsPositionenByRNR(1));
+
+        //getOrtByPLZ
+        Assert.assertEquals("Select * From Ort Where PLZ = 97950;", QueryBuilder.getOrtByPLZ(97950));
+
+        //getJustCreatedBuchung
+        Assert.assertEquals("SELECT * FROM `Buchungsbeleg` WHERE KID = 1 ORDER BY Zeitstempel DESC LIMIT 1", QueryBuilder.getJustCreatedBuchung(1));
+
+        //getJustCreatedReservierung
+        Assert.assertEquals("SELECT * FROM `Reservierungsbeleg` WHERE KID = 1 ORDER BY Zeitstempel DESC LIMIT 1", QueryBuilder.getJustCreatedReservierung(1));
+
+        //createBuchungsStornierung
+        Assert.assertEquals("Insert Into Buchungsstonierung (BNR) VALUES (1);", QueryBuilder.createBuchungsStornierung(1));
+
+        //createReservierungsStornierung
+        Assert.assertEquals("Insert Into Buchungsstonierung (BNR) VALUES (1);", QueryBuilder.createReservierungsStornierung(1));
+
+        //getBuchungsStornierungByStrnNR
+        Assert.assertEquals("Select * from Buchungsstornierung Where StrnNR = 1;", QueryBuilder.getBuchungsStornierungByStrnNR(1));
+
+        //getBuchungsStornierungByBNR
+        Assert.assertEquals("Select * from Buchungsstornierung Where BNR = 1;", QueryBuilder.getBuchungsStornierungByBNR(1));
+
+        //getReservierungsStornierungByRNR
+        Assert.assertEquals("Select * from Reservierungsstornierung Where BNR = 1;", QueryBuilder.getReservierungsStornierungByRNR(1));
+
+        //getReservierungsStornierungByStrnNR
+        Assert.assertEquals("Select * from Reservierungsstornierung Where StrnNR = 1;", QueryBuilder.getReservierungsStornierungByStrnNR(1));
+
+        //getBuchungsStornierungByKID
+        Assert.assertEquals("Select * From Buchungsstonierung Join Buchungsbeleg On `Buchungsstonierung.BNR` = `buchungsbeleg.BNR` Where KID = 1;", QueryBuilder.getBuchungsStornierungByKID(1));
+
+        //getReservierungsStornierungByKID
+        Assert.assertEquals("Select * From Buchungsstonierung Join Buchungsbeleg On `Buchungsstonierung.BNR` = `Buchungsbeleg.BNR` Where KID = 1;", QueryBuilder.getReservierungsStornierungByKID(1));
     }
 
     // TESTS FOR HELPERS
