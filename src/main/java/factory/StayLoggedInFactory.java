@@ -13,6 +13,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StayLoggedInFactory {
+    /**
+     *
+     * @param email
+     * @param passwordHash
+     * @return
+     * @throws FailedDataInsertionException
+     * @throws RequiredFactoryFailedException
+     * @throws FailedObjectCreationException
+     */
     public static StayLoggedIn stayLoggedIn(String email, String passwordHash) throws FailedDataInsertionException, RequiredFactoryFailedException, FailedObjectCreationException {
         String id = "";
         try {
@@ -52,6 +61,14 @@ public class StayLoggedInFactory {
         return stayLoggedIn;
     }
 
+    /**
+     *
+     * @param id
+     * @return stayLoggedIn
+     * @throws ResultSetIsNullException
+     * @throws EmptyResultSetException
+     * @throws FailedObjectCreationException
+     */
     public static StayLoggedIn getStayLoggedInById(String id) throws ResultSetIsNullException, EmptyResultSetException, FailedObjectCreationException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getStayLoggedIn(id);
@@ -84,6 +101,10 @@ public class StayLoggedInFactory {
         return stayLoggedIn;
     }
 
+    /**
+     *
+     * @param id
+     */
     public static void deleteStayLoggedIn(String id) {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.deleteStayLoggedIn(id);
