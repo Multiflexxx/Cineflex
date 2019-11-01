@@ -5,6 +5,37 @@
 <%
     HttpSession s = request.getSession();
     s.invalidate();
+
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+
+    cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("stay")) {
+                Cookie stay = cookies [i];
+                stay.setMaxAge(0);
+                response.addCookie(stay);
+            }
+
+            if (cookies[i].getName().equals("email")) {
+                Cookie email = cookies [i];
+                email.setMaxAge(0);
+                response.addCookie(email);
+            }
+
+            if (cookies[i].getName().equals("pw")) {
+                Cookie pw = cookies [i];
+                pw.setMaxAge(0);
+                response.addCookie(pw);
+            }
+        }
+    }
+
+    s = request.getSession();
+    s.invalidate();
+
 %>
 <jsp:include page="elements/header.jsp"/>
 

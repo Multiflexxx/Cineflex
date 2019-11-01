@@ -1,12 +1,13 @@
 <%@ page import="Password.PassMD5" %>
 <%@ page import="factory.LoginFactory" %>
 <%@ page import="oo.UserLogin" %>
-<%@ page import="java.sql.Connection" %>
 
 <%
     String email = request.getParameter("inputEmailLog");
     String url = request.getParameter("inputURL");
     String pw = null;
+    String check = "";
+    check = request.getParameter("inputCheckLogin");
 
     try {
         pw = PassMD5.hash(request.getParameter("inputPassword"));
@@ -32,6 +33,17 @@
         session.setAttribute("KID", userLogin.getKID());
         session.removeAttribute("login");
         session.setMaxInactiveInterval(600);
+        if (check != null && check.equals("true")) {
+            Cookie stay = new Cookie("stay", "yes");
+            Cookie stay_email = new Cookie("email", email);
+            Cookie stay_pwhash = new Cookie("pw", pw);
+            stay.setMaxAge(60*60*24*365);
+            stay_email.setMaxAge(60*60*24*365);
+            stay_pwhash.setMaxAge(60*60*24*365);
+            response.addCookie(stay);
+            response.addCookie(stay_email);
+            response.addCookie(stay_pwhash);
+        }
     }
     response.sendRedirect(url);
 %>

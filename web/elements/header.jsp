@@ -1,6 +1,50 @@
 <%@ page import="oo.Gebaeude" %>
 <%@ page import="factory.GebaeudeFactory" %>
+<%@ page import="oo.UserLogin" %>
+<%@ page import="factory.LoginFactory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+
+    cookies = request.getCookies();
+
+    if (cookies != null) {
+        String stay = "";
+        String email = "";
+        String pw = "";
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("stay")) {
+                stay = cookies[i].getValue();
+            }
+
+            if (cookies[i].getName().equals("email")) {
+                email = cookies[i].getValue();
+            }
+
+            if (cookies[i].getName().equals("pw")) {
+                pw = cookies[i].getValue();
+            }
+        }
+
+        if (stay.equals("yes") && session.getAttribute("KID") == null) {
+            UserLogin userLogin = LoginFactory.getUserLogin(email, pw);
+
+            if (userLogin == null) {
+                session.setAttribute("loginfailed", "1");
+            } else {
+                session.setAttribute("email", email);
+                session.setAttribute("vorname", userLogin.getFirstname());
+                session.setAttribute("nachname", userLogin.getLastname());
+                session.setAttribute("PID", userLogin.getPID());
+                session.setAttribute("KID", userLogin.getKID());
+                session.removeAttribute("login");
+                session.setMaxInactiveInterval(600);
+            }
+        }
+    }
+%>
 
 <header>
     <!-- Navbar -->
@@ -16,8 +60,8 @@
 
             <div class="dropdown">
                 <%
-                    Cookie cookie = null;
-                    Cookie[] cookies = null;
+                    cookie = null;
+                    cookies = null;
                     String outputValue = "Standort";
 
                     cookies = request.getCookies();
@@ -43,7 +87,7 @@
 
 
                         if (gebäude != null) {
-                            for(int i=0; i<gebäude.length; i++) {
+                            for (int i = 0; i < gebäude.length; i++) {
                                 out.println(" <a class=\"dropdown-item\" href=\"index.jsp\" onclick=\"setCookieUrl('" + gebäude[i].getOrtsname() + "', '" + gebäude[i].getPlz() + "')\">" + gebäude[i].getOrtsname() + "</a>");
                             }
                         } else {
@@ -65,7 +109,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <%
-                        if (session.getAttribute("email") == null ) {
+                        if (session.getAttribute("email") == null) {
                             out.println("<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownAccount\" role=\"button\"\n" +
                                     "                       data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Account</a>");
                         } else {

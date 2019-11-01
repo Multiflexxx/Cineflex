@@ -1,6 +1,3 @@
-<%@ page import="Password.PassMD5" %>
-<%@ page import="factory.LoginFactory" %>
-<%@ page import="oo.UserLogin" %>
 <!-- Login Screen-->
 
 <div class="modal fade" id="loginDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -31,9 +28,8 @@
                                placeholder="Passwort">
                     </div>
                     <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="stayLoggedIn">
-                        <label class="form-check-label" for="stayLoggedIn" value="true" id="inputCheckLogin">Angemeldet
-                            bleiben?</label>
+                        <input type="checkbox" class="form-check-input" value="true" id="inputCheckLogin" name="inputCheckLogin">
+                        <label class="form-check-label" for="inputCheckLogin">Angemeldet bleiben?</label>
                     </div>
                     <input type="hidden" id="inputURL" name="inputURL" value="">
                 </form>
