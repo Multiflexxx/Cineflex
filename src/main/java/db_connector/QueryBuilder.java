@@ -335,14 +335,14 @@ public class QueryBuilder {
     }
 
     public static String createStayLoggedIn(String id, String email, String passwordHash) {
-        return "Insert Into stay_logged_in (id, passwordHash, `E-Mail`) Values ( " + id + ", " + passwordHash + ", " + email + ");";
+        return "Insert Into stay_logged_in (id, passwordHash, `E-Mail`) Values ('" + id + "', '" + passwordHash + "', '" + email + "');";
     }
     public static String deleteStayLoggedIn(String id) {
-        return "Delete stay_logged_in Where id = " + id + ";";
+        return "Delete stay_logged_in Where id = '" + id + "';";
     }
 
     public static String getStayLoggedIn(String id) {
-        return "Select * From Where id = " + id + ";";
+        return "Select * From stay_logged_in Where id = '" + id + "';";
     }
 
     private static String getDateAsString() {
