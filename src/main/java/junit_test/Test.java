@@ -1008,6 +1008,26 @@ public class Test {
     }
     //----
 
+    // Test for class
+    @org.junit.Test
+    public void testeStayLoggedIn()
+    {
+        StayLoggedIn stayLoggedIn = new StayLoggedIn("5", "mail@mail.com", "hash");
+
+        Assert.assertEquals("5", stayLoggedIn.getId());
+        Assert.assertEquals("mail@mail.com", stayLoggedIn.getEmail());
+        Assert.assertEquals("hash", stayLoggedIn.getPasswordHash());
+
+        stayLoggedIn.setId("6");
+        stayLoggedIn.setEmail("neuemail@mail.com");
+        stayLoggedIn.setPasswordHash("neuerhash");
+
+        Assert.assertEquals("6", stayLoggedIn.getId());
+        Assert.assertEquals("neuemail@mail.com", stayLoggedIn.getEmail());
+        Assert.assertEquals("neuerhash", stayLoggedIn.getPasswordHash());
+    }
+    //----
+
     // TESTS FOR PASSWORD
     // Test for class PassMD5
     @org.junit.Test
@@ -1208,16 +1228,16 @@ public class Test {
         Assert.assertEquals("Select * From `Preisänderung` Where `PreisänderungsID` = 1;", QueryBuilder.getPreisänderungByID(1));
 
         //getBookedSeats
-        Assert.assertEquals("Select Buchungsposition.* from Buchungsposition Join Buchungsbeleg On Buchungsposition.BNR = Buchungsbeleg.BNR Where Buchungsbeleg.VorstellungsID = 1 AND Not Exists (Select BNR FROM Buchungsstonierung Where Buchungsstonierung.BNR = Buchungsposition.BNR);", QueryBuilder.getBookedSeats(1));
+        Assert.assertEquals("Select Buchungsposition.* from Buchungsposition Join Buchungsbeleg On Buchungsposition.BNR = Buchungsbeleg.BNR Where Buchungsbeleg.VorstellungsID = 1 AND Not Exists (Select BNR FROM Buchungsstornierung Where Buchungsstornierung.BNR = Buchungsposition.BNR);", QueryBuilder.getBookedSeats(1));
 
         //getReservedSeats
-        Assert.assertEquals("Select Reservierungsposition.* from Reservierungsposition Join Reservierungsbeleg On Reservierungsposition.RNR = Reservierungsbeleg.RNR Where Reservierungsbeleg.VorstellungsID = 1 AND Not Exists (Select RNR FROM Reservierungsstonierung Where Reservierungsstonierung.RNR = Reservierungsposition.RNR);", QueryBuilder.getReservedSeats(1));
+        Assert.assertEquals("Select Reservierungsposition.* from Reservierungsposition Join Reservierungsbeleg On Reservierungsposition.RNR = Reservierungsbeleg.RNR Where Reservierungsbeleg.VorstellungsID = 1 AND Not Exists (Select RNR FROM Reservierungsstornierung Where Reservierungsstornierung.RNR = Reservierungsposition.RNR);", QueryBuilder.getReservedSeats(1));
 
         //getBuchungsPositionenByBNR
         Assert.assertEquals("Select * From Buchungsposition Where BNR = 1;", QueryBuilder.getBuchungsPositionenByBNR(1));
 
         //getReservierungsPositionenByRNR
-        Assert.assertEquals("Select * From Reservierungsposition Where BNR = 1;", QueryBuilder.getReservierungsPositionenByRNR(1));
+        Assert.assertEquals("Select * From Reservierungsposition Where RNR = 1;", QueryBuilder.getReservierungsPositionenByRNR(1));
 
         //getOrtByPLZ
         Assert.assertEquals("Select * From Ort Where PLZ = 97950;", QueryBuilder.getOrtByPLZ(97950));
@@ -1229,10 +1249,10 @@ public class Test {
         Assert.assertEquals("SELECT * FROM `Reservierungsbeleg` WHERE KID = 1 ORDER BY Zeitstempel DESC LIMIT 1", QueryBuilder.getJustCreatedReservierung(1));
 
         //createBuchungsStornierung
-        Assert.assertEquals("Insert Into Buchungsstonierung (BNR) VALUES (1);", QueryBuilder.createBuchungsStornierung(1));
+        Assert.assertEquals("Insert Into Buchungsstornierung (BNR) VALUES (1);", QueryBuilder.createBuchungsStornierung(1));
 
         //createReservierungsStornierung
-        Assert.assertEquals("Insert Into Buchungsstonierung (BNR) VALUES (1);", QueryBuilder.createReservierungsStornierung(1));
+        Assert.assertEquals("Insert Into Reservierungsstornierung (RNR) VALUES (1);", QueryBuilder.createReservierungsStornierung(1));
 
         //getBuchungsStornierungByStrnNR
         Assert.assertEquals("Select * from Buchungsstornierung Where StrnNR = 1;", QueryBuilder.getBuchungsStornierungByStrnNR(1));
@@ -1241,16 +1261,16 @@ public class Test {
         Assert.assertEquals("Select * from Buchungsstornierung Where BNR = 1;", QueryBuilder.getBuchungsStornierungByBNR(1));
 
         //getReservierungsStornierungByRNR
-        Assert.assertEquals("Select * from Reservierungsstornierung Where BNR = 1;", QueryBuilder.getReservierungsStornierungByRNR(1));
+        Assert.assertEquals("Select * from Reservierungsstornierung Where RNR = 1;", QueryBuilder.getReservierungsStornierungByRNR(1));
 
         //getReservierungsStornierungByStrnNR
         Assert.assertEquals("Select * from Reservierungsstornierung Where StrnNR = 1;", QueryBuilder.getReservierungsStornierungByStrnNR(1));
 
         //getBuchungsStornierungByKID
-        Assert.assertEquals("Select * From Buchungsstonierung Join Buchungsbeleg On `Buchungsstonierung.BNR` = `buchungsbeleg.BNR` Where KID = 1;", QueryBuilder.getBuchungsStornierungByKID(1));
+        Assert.assertEquals("Select * From Buchungsstornierung Join Buchungsbeleg On `Buchungsstornierung.BNR` = `buchungsbeleg.BNR` Where KID = 1;", QueryBuilder.getBuchungsStornierungByKID(1));
 
         //getReservierungsStornierungByKID
-        Assert.assertEquals("Select * From Buchungsstonierung Join Buchungsbeleg On `Buchungsstonierung.BNR` = `Buchungsbeleg.BNR` Where KID = 1;", QueryBuilder.getReservierungsStornierungByKID(1));
+        Assert.assertEquals("Select * From Reservierungsstornierung Join Buchungsbeleg On `Buchungsstornierung.BNR` = `Buchungsbeleg.BNR` Where KID = 1;", QueryBuilder.getReservierungsStornierungByKID(1));
     }
 
     // TESTS FOR HELPERS
@@ -1306,12 +1326,12 @@ public class Test {
 
         // Remove HTML Tags from String
         String html = "<html>Test</html>#123+?Test.|A BC";
-        String checkString = " html Test /html  123  Test. A BC";
+        String checkString = "htmlTest/html123Test.A BC";
 
         Assert.assertEquals(checkString, SupportMethods.removeHTMLCode(html));
 
         String sqlInject = "Test#A-B--C/*D";
-        String checkStringSQL = "Test A B  C  D";
+        String checkStringSQL = "TestA-BC/*D";
 
         Assert.assertEquals(checkStringSQL, SupportMethods.removeSQLInjections(sqlInject));
 
