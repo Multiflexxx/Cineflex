@@ -20,11 +20,17 @@ public class RegistrierungFactory {
     public static Registrierung createRegistrierung(String vorname, String nachname, Date geburtsdatum, String email, String passwordHash, String passwordHashWdh, String wohnort, int plz, String straße, int hausnummer, String adresszusatz)
             throws UnmatchingPasswordException, EmptyInputValueException, UserAlreadyExistsException, RequiredFactoryFailedException, EmptyResultSetException {
         vorname = SupportMethods.removeHTMLCode(vorname);
+        vorname = SupportMethods.removeSQLInjections(vorname);
         nachname = SupportMethods.removeHTMLCode(nachname);
+        nachname = SupportMethods.removeSQLInjections(nachname);
         email = SupportMethods.removeHTMLCode(email);
+        email = SupportMethods.removeSQLInjections(email);
         wohnort = SupportMethods.removeHTMLCode(wohnort);
+        wohnort = SupportMethods.removeSQLInjections(wohnort);
         straße = SupportMethods.removeHTMLCode(straße);
+        straße = SupportMethods.removeSQLInjections(straße);
         adresszusatz = SupportMethods.removeHTMLCode(adresszusatz);
+        adresszusatz = SupportMethods.removeSQLInjections(adresszusatz);
 
         // Cast Email to lower case
         email = email.toLowerCase();

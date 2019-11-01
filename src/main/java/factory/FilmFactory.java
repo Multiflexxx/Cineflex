@@ -24,6 +24,15 @@ public class FilmFactory {
      * @return
      */
     public static Film[] getFilme(String search, String date, String time, int fsk, String plz, ResultSet mockRs1, ResultSet mockRs2, ResultSet mockRs3) {
+        search = SupportMethods.removeHTMLCode(search);
+        search = SupportMethods.removeSQLInjections(search);
+        date = SupportMethods.removeHTMLCode(date);
+        date = SupportMethods.removeSQLInjections(date);
+        time = SupportMethods.removeHTMLCode(time);
+        time = SupportMethods.removeSQLInjections(time);
+        plz = SupportMethods.removeHTMLCode(plz);
+        plz = SupportMethods.removeSQLInjections(plz);
+
         Film[] filme;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.defaultSearchQuery(search, date, time, fsk, plz);

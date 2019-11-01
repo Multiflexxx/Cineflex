@@ -38,7 +38,7 @@ public class SupportMethods {
      */
     public static String removeHTMLCode(String input)
     {
-        return input.replaceAll("[<(|\\n)+?>%\\\\#]", " ");
+        return input.replaceAll("[<(|\\n)+?>%\\\\#]", "");
     }
 
     /**
@@ -73,7 +73,7 @@ public class SupportMethods {
      * @return string
      */
     public static String removeSQLInjections(String input) {
-        return input.replaceAll("[*#'\\-\\/(),\\[\\]\\^(--)]", " ");
+        return input.replaceAll("\\-{2}|\\#|\\/\\/", "");
     }
 
 

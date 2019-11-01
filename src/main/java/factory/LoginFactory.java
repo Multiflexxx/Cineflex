@@ -2,6 +2,7 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
+import helper.SupportMethods;
 import oo.UserLogin;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,6 +18,11 @@ public class LoginFactory {
      * @return userLogin
      */
     public static UserLogin getUserLogin(String email, String passwordHash, ResultSet mockRs) {
+        email = SupportMethods.removeHTMLCode(email);
+        email = SupportMethods.removeSQLInjections(email);
+        passwordHash = SupportMethods.removeHTMLCode(passwordHash);
+        passwordHash = SupportMethods.removeSQLInjections(passwordHash);
+
         UserLogin userLogin = null;
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.createLoginQuery(email, passwordHash);
