@@ -338,7 +338,7 @@ public class QueryBuilder {
         return "Insert Into stay_logged_in (id, passwordHash, `E-Mail`) Values ('" + id + "', '" + passwordHash + "', '" + email + "');";
     }
     public static String deleteStayLoggedIn(String id) {
-        return "Delete stay_logged_in Where id = '" + id + "';";
+        return "Delete From stay_logged_in Where id = '" + id + "';";
     }
 
     public static String getStayLoggedIn(String id) {
