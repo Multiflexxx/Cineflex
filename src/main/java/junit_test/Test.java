@@ -914,6 +914,102 @@ public class Test {
     }
     //----
 
+    // Tests for class TicketHistory
+    @org.junit.Test
+    public void testeTicketHistory()
+    {
+        Sitz sitz1 = new Sitz(6, 5, 'A', 'L');
+        Sitz sitz2 = new Sitz(7, 6, 'B', 'L');
+        Sitz sitz3 = new Sitz(8, 5, 'B', 'B');
+
+        Sitz[] sitzplan = {sitz1, sitz2, sitz3};
+
+        Sitz sitz4 = new Sitz(6, 5, 'A', 'L');
+        Sitz sitz5 = new Sitz(7, 6, 'B', 'L');
+
+        Sitz[] sitzauswahl = {sitz4, sitz5};
+
+        Gebaeude gebaeude = new Gebaeude(8, "Teststraße", 25, 68165, "Mannheim");
+
+        Film film = new Film(56);
+
+        Kinosaal kinosaal = new Kinosaal(4, "großer Saal", sitzplan, gebaeude);
+
+        Date datum = new Date();
+        Date uhrzeit = new Date();
+
+        Vorstellung vorstellung = new Vorstellung(3, datum, uhrzeit, "deutsch", film, kinosaal);
+
+        Kunde kunde = new Kunde("68165", "testmail@mail.com", "Amy", "Musterfrau", "hash", "1970-01-01", 5, "Musterstraße", 36, 2, 0);
+
+        Date uhrzeit2 = new Date();
+
+        Buchungsbeleg buchungsbeleg = new Buchungsbeleg(1, 5f, vorstellung, kunde, uhrzeit2);
+
+        BuchungsStornierung buchungsStornierung = new BuchungsStornierung(5, 10);
+
+        TicketHistory ticketHistory = new TicketHistory(buchungsbeleg, sitzauswahl, null);
+
+
+        Assert.assertEquals(sitzauswahl, ticketHistory.getSitze());
+        Assert.assertEquals(buchungsbeleg.getBelegID(), ticketHistory.getBelegID());
+        Assert.assertEquals(kunde, ticketHistory.getBelegKunde());
+        Assert.assertEquals(buchungsbeleg.getVorstellung(), ticketHistory.getBelegVorstellung());
+        Assert.assertEquals(5f, ticketHistory.getBelegPreis(), 0);
+        Assert.assertEquals(false, ticketHistory.isStorniert());
+        Assert.assertEquals(uhrzeit2, ticketHistory.getBelegZeitstempel());
+        Assert.assertEquals("Buchung", ticketHistory.getBelegBezeichnung());
+
+        TicketHistory ticketHistory1 = new TicketHistory(buchungsbeleg, sitzauswahl, buchungsStornierung);
+
+        Assert.assertEquals(true, ticketHistory1.isStorniert());
+
+        Sitz sitz6 = new Sitz(46, 5, 'A', 'L');
+        Sitz sitz7 = new Sitz(47, 6, 'B', 'L');
+        Sitz sitz8 = new Sitz(48, 5, 'B', 'B');
+
+        Sitz[] sitzplan2 = {sitz6, sitz7, sitz8};
+
+        Sitz sitz9 = new Sitz(46, 5, 'A', 'L');
+        Sitz sitz10 = new Sitz(47, 6, 'B', 'L');
+
+        Sitz[] sitzauswahl2 = {sitz9, sitz10};
+
+        Gebaeude gebaeude2 = new Gebaeude(5, "Teststraße", 24, 68165, "Mannheim");
+
+        Film film2 = new Film(56);
+
+        Kinosaal kinosaal2 = new Kinosaal(12, "großer Saal", sitzplan2, gebaeude2);
+
+        Date datum2 = new Date();
+        Date uhrzeit3 = new Date();
+
+        Vorstellung vorstellung2 = new Vorstellung(3, datum2, uhrzeit3, "deutsch", film2, kinosaal2);
+
+        Kunde kunde2 = new Kunde("68165", "testmail@mail.com", "Magda", "Musterfrau", "hash", "1970-01-01", 5, "Musterstraße", 36, 2, 0);
+
+        Date uhrzeit4 = new Date();
+
+        Reservierungsbeleg reservierungsbeleg = new Reservierungsbeleg(3, 2f, vorstellung2, kunde2, uhrzeit4);
+
+        ReservierungsStornierung reservierungsStornierung = new ReservierungsStornierung(5, 10);
+
+        TicketHistory ticketHistory2 = new TicketHistory(reservierungsbeleg, sitzauswahl2, null);
+
+        Assert.assertEquals(sitzauswahl2, ticketHistory2.getSitze());
+        Assert.assertEquals(reservierungsbeleg.getBelegID(), ticketHistory2.getBelegID());
+        Assert.assertEquals(kunde2, ticketHistory2.getBelegKunde());
+        Assert.assertEquals(reservierungsbeleg.getVorstellung(), ticketHistory2.getBelegVorstellung());
+        Assert.assertEquals(2f, ticketHistory2.getBelegPreis(), 0);
+        Assert.assertEquals(false, ticketHistory2.isStorniert());
+        Assert.assertEquals(uhrzeit4, ticketHistory2.getBelegZeitstempel());
+        Assert.assertEquals("Reservierung", ticketHistory2.getBelegBezeichnung());
+
+        TicketHistory ticketHistory3 = new TicketHistory(reservierungsbeleg, sitzauswahl2, reservierungsStornierung);
+
+        Assert.assertEquals(true, ticketHistory3.isStorniert());
+    }
+    //----
 
     // TESTS FOR PASSWORD
     // Test for class PassMD5
