@@ -31,7 +31,7 @@
 //            }
         }
 
-        if (stay != null && !stay.equals("")) {
+        if (stay != null && !stay.equals("")  && session.getAttribute("KID") == null) {
             try {
                 StayLoggedIn stayLoggedIn = StayLoggedInFactory.getStayLoggedInById(stay);
 

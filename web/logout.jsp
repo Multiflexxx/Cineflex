@@ -21,11 +21,14 @@
     }
 
     HttpSession s = request.getSession();
+    s.removeAttribute("email");
+    s.removeAttribute("vorname");
+    s.removeAttribute("nachname");
+    s.removeAttribute("PID");
+    s.removeAttribute("KID");
     s.invalidate();
 %>
-
 <jsp:include page="elements/header.jsp"/>
-
 <jsp:include page="login.jsp"/>
 <jsp:include page="registration.jsp"/>
 <jsp:include page="search.jsp"/>
