@@ -87,7 +87,7 @@ CREATE TABLE `Film` (
   `TrailerLink` text NOT NULL,
   `Grundpreis` float DEFAULT '10',
   PRIMARY KEY (`FilmID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 --
 -- TABLE DATA: `Film`
 --
@@ -103,7 +103,8 @@ INSERT INTO `Film`(`FilmID`,`Titel`,`Beschreibung`,`Dauer`,`FSK`,`3D`,`BildLink`
 (9,'Ad Astra - Zu den Sternen','Astronaut Roy McBride (Brad Pitt) reist an den äußersten Rand des Sonnensystems, um seinen vermissten Vater zu finden und ein Rätsel zu lösen, dass das Überleben auf unserem Planeten bedroht. Auf seiner Reise enthüllt er Geheimnisse, die die menschliche Existenz und unseren Platz im Universum in Frage stellen.',123,12,0,'img/9.jpg','https://www.youtube.com/embed/0qpNZtvzQ4c',10.0),
 (10,'Get Lucky - Sex verändert alles','Sechs Teenager erleben turbulente Ferien am Meer mit viel Sonne und Strand. Untergebracht sind sie bei Ellen, der Tante von zwei der Teenager. Im Laufe des Sommers ist dann nicht nur die coole Tante gefragt, als Sexualberaterin antwortet sie auch mal auf Fragen, die ein Jugendlicher seinen Eltern wohl eher nicht stellen würde. Einige von ihnen erleben in diesem Sommer ihre erste Liebe, den ersten Sex und was dabei so alles schief laufen kann...',97,12,0,'img/10.jpg','https://www.youtube.com/embed/Wq0N3L5CRB4',10.0),
 (11,'Everest - Ein Yeti will hoch hinaus','Ein kleiner Yeti ist einem Versuchslabor in Shanghai entkommen und sucht Zuflucht auf den Dächern der Millionenstadt. Dort begegnet er ausgerechnet dem neugierigen Teenager-Mädchen Yi und ihren Freunden Jin und Peng. Schnell wird klar, dass das Trio den kleinen Yeti, den sie kurzerhand auf den Namen "Everest" taufen, nur vor dem finsteren Laborleiter Burnish und der Zoologin Dr. Zara retten können, wenn sie ihn zurück in seine Heimat bringen. Gemeinsam begeben sich die Freunde auf eine faszinierende Reise durch sagenhafte Landschaften, wunderliche Ereignisse und magische Momente, um Everest am höchsten Punkt der Erde wieder mit seiner Familie zu vereinen.',97,6,0,'img/11.jpg','https://www.youtube.com/embed/8Q7OY-NcTZM',10.0),
-(12,'Midsommar','Obwohl ihre Beziehung kriselt, schließt sich Dani ihrem Freund Christian auf einen Sommertrip in einen kleinen Ort in Schweden an. Gemeinsam mit Christians Clique sind sie zu einem einmaligen Mittsommerfestival eingeladen. Doch der anfänglich idyllische Eindruck der abgelegenen Gemeinschaft trügt, die freundlichen Dorfbewohner verhalten sich nach und nach merkwürdiger: Sie bereiten sich auf ein besonderes Mittsommer-Ritual vor, das nur alle 90 Jahre zelebriert wird. Was als puritanisches Fest der Liebe und Glückseligkeit beginnt, nimmt bald eine unheimliche Wendung, die das sonnengeflutete Paradies bis in die Eingeweide erschüttert. Nach dem Überraschungshit "Hereditary" legt Ausnahme-Regisseur Ari Aster den nächsten kultverdächtigen Horrorfilm vor, der sich zu einem albtraumhaften filmischen Märchen entfaltet. "Midsommar" spielt geschickt mit der Brutalität nordischer Mythen und entfesselt in atemraubenden Bildern die Kraft obskurer Riten in Nächten, die keine Dunkelheit kennen.',147,16,0,'img/12.jpg','https://www.youtube.com/embed/k9nVWv0EW5E',10.0);
+(12,'Midsommar','Obwohl ihre Beziehung kriselt, schließt sich Dani ihrem Freund Christian auf einen Sommertrip in einen kleinen Ort in Schweden an. Gemeinsam mit Christians Clique sind sie zu einem einmaligen Mittsommerfestival eingeladen. Doch der anfänglich idyllische Eindruck der abgelegenen Gemeinschaft trügt, die freundlichen Dorfbewohner verhalten sich nach und nach merkwürdiger: Sie bereiten sich auf ein besonderes Mittsommer-Ritual vor, das nur alle 90 Jahre zelebriert wird. Was als puritanisches Fest der Liebe und Glückseligkeit beginnt, nimmt bald eine unheimliche Wendung, die das sonnengeflutete Paradies bis in die Eingeweide erschüttert. Nach dem Überraschungshit "Hereditary" legt Ausnahme-Regisseur Ari Aster den nächsten kultverdächtigen Horrorfilm vor, der sich zu einem albtraumhaften filmischen Märchen entfaltet. "Midsommar" spielt geschickt mit der Brutalität nordischer Mythen und entfesselt in atemraubenden Bildern die Kraft obskurer Riten in Nächten, die keine Dunkelheit kennen.',147,16,0,'img/12.jpg','https://www.youtube.com/embed/k9nVWv0EW5E',10.0),
+(13,'Terminator 6','Das Computerprogramm Skynet hat sich weiterentwickelt und neue Wege gefunden, die Menschheit zu vernichten. Die alles entscheidende Schlacht findet in Mexiko statt. Hier gerät Dani Ramos mit ihrem Bruder zwischen die Fronten.',128,16,0,'img/13.jpg','https://www.youtube.com/embed/oxy8udgWRmo',10.0);
 -- ------------------------------------------------------------------
 
 --
@@ -370,13 +371,11 @@ CREATE TABLE `Kunde` (
   `Treuepunkte` int(11) DEFAULT NULL,
   PRIMARY KEY (`KID`),
   KEY `PID` (`PID`)
-  ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- TABLE DATA: `Kunde`
 --
-INSERT INTO `Kunde`(`PID`,`KID`,`Treuepunkte`) VALUES 
-(2,1,0),
-(4,2,0);
+
 -- ------------------------------------------------------------------
 
 --
@@ -13344,13 +13343,11 @@ CREATE TABLE `Person` (
   `PLZ` int(11) DEFAULT NULL,
   PRIMARY KEY (`PID`),
   KEY `PLZ` (`PLZ`)
-  ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- TABLE DATA: `Person`
 --
-INSERT INTO `Person`(`PID`,`Vorname`,`Nachname`,`GebDatum`,`E-Mail`,`Passwort`,`Hausnummer`,`Straße`,`Adresszusatz`,`PLZ`) VALUES 
-(2,'Harry','Potter','1970-01-01','harry@potter.com','e10adc3949ba59abbe56e057f20f883e',6,'Schrank','',68165),
-(4,'Benno','Grimm','2000-05-18','benno@test.de','5f4dcc3b5aa765d61d8327deb882cf99',62,'Elbeallee','',14612);
+
 -- ------------------------------------------------------------------
 
 --
@@ -13368,6 +13365,7 @@ CREATE TABLE `Preisänderung` (
 -- TABLE DATA: `Preisänderung`
 --
 INSERT INTO `Preisänderung`(`PreisänderungsID`,`Änderungswert`,`Änderungsbeschreibung`,`TooltipDeskriptor`,`grundpreis_relevant`) VALUES 
+(0,0.0,'Normalpreis',NULL,NULL),
 (1,-2.0,'Seniorenrabatt','Bist du <b>69</b> oder älter? Dann kannst du hier sparen!',NULL),
 (2,-3.0,'Studenten- & Schülerrabatt','Bist du noch in deiner Blütezeit? Dann zeige deinen <b>Schwanz</b> oder <b>Titten</b> an der Kasse und spare damit wertvolles Geld!!!',NULL),
 (3,2.0,'Logenaufpreis',NULL,1),
@@ -33106,28 +33104,7 @@ CREATE TABLE `Sitzsperre` (
 --
 -- TABLE DATA: `Sitzsperre`
 --
-INSERT INTO `Sitzsperre`(`SitzplatzID`,`VorstellungsID`,`KID`,`Zeitstempel`) VALUES 
-(26989,81,1,'2019-10-21 19:38:08'),
-(26990,81,1,'2019-10-21 19:38:08'),
-(26991,81,1,'2019-10-21 19:38:08'),
-(26992,81,1,'2019-10-21 19:38:08'),
-(26993,81,1,'2019-10-21 19:38:08'),
-(26994,81,1,'2019-10-21 19:38:08'),
-(27027,81,1,'2019-10-21 19:38:47'),
-(27028,81,1,'2019-10-21 19:38:47'),
-(27044,81,1,'2019-10-21 19:38:34'),
-(27045,81,1,'2019-10-21 19:38:34'),
-(27075,81,1,'2019-10-21 19:41:22'),
-(27076,81,1,'2019-10-21 19:41:22'),
-(27077,81,1,'2019-10-21 19:41:22'),
-(27080,81,1,'2019-10-21 19:38:25'),
-(27081,81,1,'2019-10-21 19:38:25'),
-(27082,81,1,'2019-10-21 19:38:25'),
-(27083,81,1,'2019-10-21 19:38:25'),
-(27111,81,1,'2019-10-21 19:38:55'),
-(27112,81,1,'2019-10-21 19:38:55'),
-(27113,81,1,'2019-10-21 19:38:55'),
-(27114,81,1,'2019-10-21 19:38:55');
+
 -- ------------------------------------------------------------------
 
 --
