@@ -49,6 +49,18 @@
 
     setInputUrl();
 </script>
+<script>
+    var input = document.getElementById("inputPassword");
+
+    // Login if Enter is hit
+    input.addEventListener("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            submitLogin();
+        }
+    });
+</script>
+
 
 <%
     if (session.getAttribute("loginfailed") == "1") {
