@@ -54,6 +54,12 @@
         </div>
     </div>
 </div>
+<script>window.setTimeout(function(){
+
+    // Move to a new location or you can do something else
+    window.location.href = "/index.jsp";
+
+}, 5000);</script>
 
 <jsp:include page="elements/footer.jsp"/>
 </body>
