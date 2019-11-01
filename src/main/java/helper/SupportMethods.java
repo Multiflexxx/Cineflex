@@ -19,7 +19,6 @@ public class SupportMethods {
         }
         else {
             try {
-//                rs.beforeFirst();
                 while (rs.next()) {
                     rowCount++;
                 }

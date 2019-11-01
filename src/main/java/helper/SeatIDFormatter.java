@@ -1,7 +1,5 @@
 package helper;
 
-import oo.Sitz;
-
 public class SeatIDFormatter
 {
     /**

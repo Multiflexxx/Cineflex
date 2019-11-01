@@ -74,12 +74,6 @@ public class Email_Sender
             // Create new MimeMessage
             MimeMessage msg = new MimeMessage(session);
 
-            /*
-            // Set message headers
-            msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
-            msg.addHeader("format", "flowed");
-            msg.addHeader("Content-Transfer-Encoding", "8bit");*/
-
             // Set sender mail
             msg.setFrom(new InternetAddress(senderMail, "Cineflex Ticket System"));
 

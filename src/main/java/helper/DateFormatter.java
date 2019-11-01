@@ -10,7 +10,6 @@ public class DateFormatter {
     private static SimpleDateFormat sqlDate = new SimpleDateFormat("yyyy-MM-dd");
     private static SimpleDateFormat sqlTime = new SimpleDateFormat("HH:mm:ss");
     private static SimpleDateFormat sqlDateAndTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    // private static SimpleDateFormat timestamp = new SimpleDateFormat("dd MMM yyyy, HH:mm:ss", new Locale("de", "DE"));
 
     /**
      *

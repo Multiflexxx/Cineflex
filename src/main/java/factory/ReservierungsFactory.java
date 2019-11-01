@@ -7,13 +7,11 @@ import db_connector.QueryBuilder;
 import exception.RequiredFactoryFailedException;
 import helper.DateFormatter;
 import helper.SupportMethods;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-
 import oo.Kunde;
 import oo.Reservierungsbeleg;
 import oo.Sitz;
@@ -53,7 +51,6 @@ public class ReservierungsFactory {
         } catch (RequiredFactoryFailedException e) {
             e.printStackTrace();
         }
-
 
         // Create reservierungsbeleg with timestamp
         Connection c = Connector.getConnection();
@@ -156,7 +153,6 @@ public class ReservierungsFactory {
         }
         SupportMethods.close(c, rs);
         return reservierungsbelege;
-
     }
 
     /**

@@ -6,11 +6,9 @@ import exception.EmptyResultSetException;
 import exception.FailedObjectCreationException;
 import exception.ResultSetIsNullException;
 import helper.SupportMethods;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Date;
-
 import oo.Sitz;
 import oo.Sitzsperre;
 import oo.Vorstellung;

@@ -2,7 +2,6 @@ package factory;
 
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-
 import java.sql.Connection;
 
 public class ProfilFactory {

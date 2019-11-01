@@ -3,7 +3,6 @@ package factory;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
 import oo.Vorstellung;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

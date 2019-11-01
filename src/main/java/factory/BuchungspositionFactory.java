@@ -6,13 +6,10 @@ import exception.EmptyResultSetException;
 import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
 import helper.SupportMethods;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import oo.BuchungsPosition;
-import oo.Buchungsbeleg;
 
 public class BuchungspositionFactory {
     public static BuchungsPosition[] getBuchungspositionenByBNR(int BNR, ResultSet mockRs)
@@ -48,8 +45,6 @@ public class BuchungspositionFactory {
 
         buchungspositionen = new BuchungsPosition[rsSize];
         try {
-            //int counter = 0;
-            //while (rs.next()) {
             for (int i = 0; i < rsSize; i++){
                 rs.next();
                 buchungspositionen[i] = new BuchungsPosition(
@@ -57,7 +52,6 @@ public class BuchungspositionFactory {
                         rs.getInt("BNR"),
                         rs.getInt("SitzID")
                 );
-                //counter++;
             }
         } catch (SQLException e) {
             e.printStackTrace();

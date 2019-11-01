@@ -6,7 +6,6 @@ import exception.EmptyResultSetException;
 import exception.ResultSetIsNullException;
 import helper.SupportMethods;
 import oo.Preisänderung;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

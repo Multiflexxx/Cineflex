@@ -8,7 +8,6 @@ import exception.ResultSetIsNullException;
 import helper.SupportMethods;
 import java.sql.SQLException;
 import oo.Gebaeude;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -36,17 +35,10 @@ public class GebaeudeFactory {
 
         if (rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
-            /*try {
-                rs.beforeFirst();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
 
             if (rsSize > 0) {
-                //int counter = 0;
                 gebäude = new Gebaeude[rsSize];
                 try {
-                    //while (rs.next()) {
                     for(int i = 0; i < rsSize; i++){
                         rs.next();
                         int gebID = rs.getInt("GebäudeId");
@@ -56,8 +48,6 @@ public class GebaeudeFactory {
                         String ort = rs.getString("Ort.Ortsname");
 
                         gebäude[i] = new Gebaeude(gebID, strasse, hausnummer, plz, ort);
-
-                        //counter++;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -5,16 +5,24 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import helper.DateFormatter;
-import helper.SupportMethods;
 import oo.*;
-import qr_code.QrCodeGenerator;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 
 public class PdfGenerator {
 
+    /**
+     *
+     * @param pathPDF
+     * @param pathQR
+     * @param buchungsbeleg
+     * @param vorstellung
+     * @param sitze
+     * @param kunde
+     * @throws IOException
+     * @throws DocumentException
+     */
     public static void createBuchungsPDF(String pathPDF, String pathQR, Buchungsbeleg buchungsbeleg, Vorstellung vorstellung, Sitz[] sitze, Kunde kunde) throws IOException, DocumentException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, new FileOutputStream(pathPDF));
@@ -123,6 +131,17 @@ public class PdfGenerator {
         document.close();
     }
 
+    /**
+     *
+     * @param pathPDF
+     * @param pathQR
+     * @param reservierungsbeleg
+     * @param vorstellung
+     * @param sitze
+     * @param kunde
+     * @throws IOException
+     * @throws DocumentException
+     */
     public static void createReservierungsPDF(String pathPDF, String pathQR, Reservierungsbeleg reservierungsbeleg, Vorstellung vorstellung, Sitz[] sitze, Kunde kunde) throws IOException, DocumentException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, new FileOutputStream(pathPDF));

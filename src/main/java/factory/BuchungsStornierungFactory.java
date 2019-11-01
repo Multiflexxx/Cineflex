@@ -5,7 +5,6 @@ import db_connector.QueryBuilder;
 import exception.*;
 import helper.SupportMethods;
 import oo.BuchungsStornierung;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

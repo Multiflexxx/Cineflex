@@ -10,10 +10,22 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
-//https://www.callicoder.com/generate-qr-code-in-java-using-zxing/
+/**
+ * Found at:
+ * https://www.callicoder.com/generate-qr-code-in-java-using-zxing/
+ */
+
 public class QrCodeGenerator {
+
     private static final String QR_CODE_IMAGE_PATH = "../../../GitProjekte/Cineflex/web/img/qrcode/MyQRCode.png;";  //"web/img/qrcode/MyQRCode.png";
 
+    /**
+     *
+     * @param text
+     * @param filepath
+     * @throws WriterException
+     * @throws IOException
+     */
     public static void generateQRCodeImage(String text, String filepath)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -25,6 +37,10 @@ public class QrCodeGenerator {
 
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             generateQRCodeImage("Test", "web/img/qrcode/MyQRCode.png");

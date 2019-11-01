@@ -4,10 +4,7 @@ import db_connector.Connector;
 import db_connector.QueryBuilder;
 import helper.SupportMethods;
 import oo.Film;
-import oo.Kinosaal;
-import oo.Sitz;
 import oo.Vorstellung;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,26 +51,10 @@ public class VorstellungsFactory {
 
         if(rs != null) {
             int rsSize = SupportMethods.getResultSetSize(rs);
-
-//            if(rsSize >= 0)
-//            {
-//               Vorstellung v =  new Vorstellung(5,
-//                        null,
-//                        null,
-//                        "",
-//                        new Film(1),
-//                        new Kinosaal(1, "", null));
-//
-//               Vorstellung[] v2 = new Vorstellung[1];
-//               v2[0] = v;
-//              Connector.closeConnection(c);
-//               return v2;
-//            }
             vorstellungen = new Vorstellung[rsSize];
+
             if(rsSize > 0) {
                 try {
-                    //int counter = 0;
-                    //while (rs.next()) {
                     for (int i = 0; i < rsSize; i++){
                         rs.next();
                         // `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname
@@ -105,7 +86,6 @@ public class VorstellungsFactory {
                                                                     rs.getString("Sprache.Sprachenname"),
                                                                     film,
                                                                     KinosaalFactory.getKinosaal(rs.getInt("Kinosaal.SaalID")));
-                        //counter++;
                     }
                 }catch(SQLException e) {
                     e.printStackTrace();
@@ -174,7 +154,6 @@ public class VorstellungsFactory {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-
 
                         vorstellung = new Vorstellung(rs.getInt("VorstellungsID"),
                                 date_Datum,

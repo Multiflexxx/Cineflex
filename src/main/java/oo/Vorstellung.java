@@ -1,7 +1,5 @@
 package oo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Date;
 
 public class Vorstellung {
@@ -125,5 +123,4 @@ public class Vorstellung {
     public void setSaal(Kinosaal saal) {
         this.saal = saal;
     }
-
 }

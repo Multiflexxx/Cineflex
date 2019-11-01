@@ -8,8 +8,6 @@ import exception.ResultSetIsNullException;
 import helper.ArrayBuilder;
 import helper.SupportMethods;
 import oo.Preisänderung;
-
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 

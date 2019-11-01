@@ -4,11 +4,9 @@ import exception.EmptyResultSetException;
 import exception.FailedObjectCreationException;
 import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-
 import oo.BuchungsStornierung;
 import oo.Buchungsbeleg;
 import oo.ReservierungsStornierung;

@@ -5,8 +5,6 @@ import db_connector.QueryBuilder;
 import helper.SupportMethods;
 import helper.DateFormatter;
 import oo.Film;
-
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.ResultSet;
@@ -47,8 +45,6 @@ public class FilmFactory {
             if(rsSize > 0) {
                 filme = new Film[rsSize];
                 try {
-                    //int counter = 0;
-                    //while (rs.next()) {
                     for (int i = 0; i < rsSize; i++){
                         rs.next();
                         // Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung
@@ -61,8 +57,6 @@ public class FilmFactory {
                                             rs.getInt("FSK"),
                                             rs.getInt("Vorstellung.FilmID"),
                                             rs.getBoolean("3D"));
-
-                        //counter++;
                     }
                 }catch(SQLException e) {
                     e.printStackTrace();
@@ -132,8 +126,6 @@ public class FilmFactory {
             if(rsSize > 0) {
                 filme = new Film[rsSize];
                 try {
-                    //int counter = 0;
-                    //while (rs.next()) {
                     for (int i = 0; i < rsSize; i++){
                         rs.next();
                         // Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung
@@ -146,8 +138,6 @@ public class FilmFactory {
                             rs.getInt("FSK"),
                             rs.getInt("Vorstellung.FilmID"),
                             rs.getBoolean("3D"));
-
-                        //counter++;
                     }
                 }catch(SQLException e) {
                     e.printStackTrace();
@@ -224,8 +214,6 @@ public class FilmFactory {
             if(rsSize > 0) {
                 filme = new Film[rsSize];
                 try {
-                    //int counter = 0;
-                    //while (rs.next()) {
                     for (int i = 0; i < rsSize; i++){
                         rs.next();
                         filme[i] = new Film(
@@ -237,8 +225,6 @@ public class FilmFactory {
                                 rs.getInt("FSK"),
                                 rs.getInt("Film.FilmID"),
                                 rs.getBoolean("3D"));
-
-                        //counter++;
                     }
                 }catch(SQLException e) {
                     e.printStackTrace();
@@ -297,7 +283,6 @@ public class FilmFactory {
             int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0 && rsSize == 1) {
                 try {
-                    //while (rs.next()) {
                     rs.next();
                         film = new Film(rs.getString("Titel"),
                                 rs.getString("Beschreibung"),
@@ -307,7 +292,6 @@ public class FilmFactory {
                                 rs.getInt("FSK"),
                                 rs.getInt("Film.FilmID"),
                                 rs.getBoolean("3D"));
-                    //}
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -351,17 +335,14 @@ public class FilmFactory {
             rs = mockRs;
         }
 
-        // Connector.closeConnection(c);
         try {
             int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
-                //int counter = 0;
                 String[] genres = null;
                 genres = new String[rsSize];
                 for (int i = 0; i < rsSize; i++){
                     rs.next();
                     genres[i] = rs.getString("Genrebezeichnung");
-                    //counter++;
                 }
                 film.setGenre(genres);
             }
@@ -396,14 +377,11 @@ public class FilmFactory {
         try {
             int rsSize = SupportMethods.getResultSetSize(rs);
             if(rsSize > 0) {
-                //int counter = 0;
                 String[] sprachen = null;
                 sprachen = new String[rsSize];
-                //while(rs.next()) {
                 for (int i = 0; i < rsSize; i++){
                     rs.next();
                     sprachen[i] = rs.getString("Sprachenname");
-                    //counter++;
                 }
                 film.setSprache(sprachen);
             }

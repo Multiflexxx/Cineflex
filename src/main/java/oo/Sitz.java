@@ -1,13 +1,5 @@
 package oo;
 
-/**
- * CineflexV1;
- * <p>
- * Copyright by @author Marcel Mertens
- * Website: https://mertens-web.ddns.net
- * <p>
- * Date: 24.09.2019
- */
 public class Sitz {
 
     private int sitzplatzID, nummer;
@@ -26,7 +18,6 @@ public class Sitz {
         this.nummer = nummer;
         this.reihe = reihe;
         this.sitzklasse = sitzklasse;
-
     }
 
     /**

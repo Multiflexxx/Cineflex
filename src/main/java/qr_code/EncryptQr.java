@@ -12,6 +12,10 @@ public class EncryptQr {
     private static SecretKeySpec secretKey;
     private static byte[] key;
 
+    /**
+     *
+     * @param myKey
+     */
     public static void setKey(String myKey)
     {
         MessageDigest sha = null;
@@ -27,6 +31,12 @@ public class EncryptQr {
         }
     }
 
+    /**
+     *
+     * @param strToEncrypt
+     * @param secret
+     * @return encrypted String
+     */
     public static String encrypt(String strToEncrypt, String secret)
     {
         try

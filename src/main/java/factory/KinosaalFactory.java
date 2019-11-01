@@ -8,7 +8,6 @@ import exception.ResultSetIsNullException;
 import helper.SupportMethods;
 import oo.Kinosaal;
 import oo.Sitz;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

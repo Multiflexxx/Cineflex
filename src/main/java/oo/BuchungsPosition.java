@@ -1,37 +1,67 @@
 package oo;
 
 public class BuchungsPosition {
-		private int positionsID;
-		private int BNR;
-		private int sitzID;
+    private int positionsID;
+    private int BNR;
+    private int sitzID;
 
-		public BuchungsPosition(int positionsID, int BNR, int sitzID) {
-				this.positionsID = positionsID;
-				this.BNR = BNR;
-				this.sitzID = sitzID;
-		}
+    /**
+     *
+     * @param positionsID
+     * @param BNR
+     * @param sitzID
+     */
+    public BuchungsPosition(int positionsID, int BNR, int sitzID) {
+        this.positionsID = positionsID;
+        this.BNR = BNR;
+        this.sitzID = sitzID;
+    }
 
-		public int getPositionsID() {
-				return positionsID;
-		}
+    /**
+     *
+     * @return positionsID
+     */
+    public int getPositionsID() {
+        return positionsID;
+    }
 
-		public void setPositionsID(int positionsID) {
-				this.positionsID = positionsID;
-		}
+    /**
+     *
+     * @param positionsID
+     */
+    public void setPositionsID(int positionsID) {
+        this.positionsID = positionsID;
+    }
 
-		public int getBNR() {
-				return BNR;
-		}
+    /**
+     *
+     * @return BNR
+     */
+    public int getBNR() {
+        return BNR;
+    }
 
-		public void setBNR(int BNR) {
-				this.BNR = BNR;
-		}
+    /**
+     *
+     * @param BNR
+     */
+    public void setBNR(int BNR) {
+        this.BNR = BNR;
+    }
 
-		public int getSitzID() {
-				return sitzID;
-		}
+    /**
+     *
+     * @return sitzID
+     */
+    public int getSitzID() {
+        return sitzID;
+    }
 
-		public void setSitzID(int sitzID) {
-				this.sitzID = sitzID;
-		}
+    /**
+     *
+     * @param sitzID
+     */
+    public void setSitzID(int sitzID) {
+        this.sitzID = sitzID;
+    }
 }

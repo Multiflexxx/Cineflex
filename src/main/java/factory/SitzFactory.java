@@ -8,7 +8,6 @@ import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
 import helper.SupportMethods;
 import oo.*;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -86,7 +85,6 @@ public class SitzFactory {
      * @throws RequiredFactoryFailedException
      */
     public static Sitz[] getAllLockedSeats(int vorstellungsID) throws RequiredFactoryFailedException {
-
         // Get all booked seats for Vorstellung with vorstellungsID
         Sitz[] bookedSeats = null;
         try {
@@ -186,7 +184,6 @@ public class SitzFactory {
             throw new EmptyResultSetException();
         }
 
-
         reservedSeats = new Sitz[rsSize];
         try {
             reservedSeats = new Sitz[rsSize];
@@ -199,27 +196,10 @@ public class SitzFactory {
             e.printStackTrace();
             throw new FailedObjectCreationException();
         }
-//        try {
-//            int counter = 0;
-//            while(rs.next()) {
-//                reservedSeats[counter] = new Sitz(
-//                        rs.getInt("SitzplatzID"),
-//                        rs.getInt("Nummer"),
-//                        rs.getString("Reihe").charAt(0),
-//                        rs.getString("Sitzklasse").charAt(0)
-//                );
-//                counter++;
-//            }
-//        } catch(SQLException e) {
-//            e.printStackTrace();
-//            SupportMethods.close(c, rs);
-//
-//            throw new FailedObjectCreationException();
-//        }
+
         SupportMethods.close(c, rs);
         return reservedSeats;
     }
-
 
     public static Sitz[] getSitzeByBNR(int BNR) throws RequiredFactoryFailedException {
         BuchungsPosition[] buchungspositionen = null;

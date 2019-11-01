@@ -96,19 +96,7 @@ public class QueryBuilder {
     }
 
     public static String showMovieById(String id, String date, String time, String plz) {
-
-
-//        SELECT `VorstellungsID`, concat(`Datum`,  ' ', `Uhrzeit`) AS timestamp, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID FROM Vorstellung
-//        Join Film ON Vorstellung.FilmID = Film.FilmID
-//        JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID
-//        JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID
-//        JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID
-//        WHERE Film.FilmID = '11'
-//        AND concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-10-11 08:28'
-//        AND Gebäude.PLZ = '86153' ORDER BY `Datum` ASC LIMIT 6;
-
-
-        return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID " +
+                return "SELECT `VorstellungsID`, `Datum`, `Uhrzeit`, `Titel`, `Beschreibung`, `Dauer`, `FSK`, `3D`, `BildLink`, `TrailerLink`, Sprache.Sprachenname, Kinosaal.SaalID " +
                 "FROM Vorstellung " +
                 "JOIN Film ON Vorstellung.FilmID = Film.FilmID " +
                 "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
@@ -345,14 +333,6 @@ public class QueryBuilder {
     public static String subtractTreuepunkte(int KID, int punkte) {
         return "Update Kunde Set Treuepunkte = Treuepunkte - " + punkte + " Where KID = " + KID + ";";
     }
-
-    // NOT USED
-    /*
-    public static String getSeatInfo(int vorstellungsID)
-    {
-        return "SELECT Sitz.SitzplatzID, Sitz.SitzplanID, `Reihe`, `Nummer`, `Sitzklasse`, Sitzplan.SaalID, Vorstellung.VorstellungsID FROM Sitz JOIN Sitzplan On Sitz.SitzplanID = Sitzplan.SitzplanID JOIN Vorstellung ON Vorstellung.SaalID = Sitzplan.SaalID WHERE Vorstellung.VorstellungsID = "+ vorstellungsID +";";
-    }*/
-
 
     private static String getDateAsString() {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

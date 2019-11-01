@@ -6,9 +6,7 @@ import exception.EmptyResultSetException;
 import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
 import helper.SupportMethods;
-import oo.BuchungsPosition;
 import oo.ReservierungsPosition;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,8 +42,6 @@ public class ReservierungspositionFactory {
 
         reservierungspositionen = new ReservierungsPosition[rsSize];
         try {
-            //int counter = 0;
-            //while (rs.next()) {
             for (int i = 0; i < rsSize; i++) {
                 rs.next();
                 reservierungspositionen[i] = new ReservierungsPosition(
@@ -53,7 +49,6 @@ public class ReservierungspositionFactory {
                         rs.getInt("RNR"),
                         rs.getInt("SitzID")
                 );
-                //counter++;
             }
         } catch (
                 SQLException e) {

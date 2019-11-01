@@ -30,13 +30,6 @@ import java.util.Enumeration;
 import java.util.Locale;
 
 public class Test {
-
-    @InjectMocks
-    Connector connector;
-    @Mock
-    Connection mockConnection;
-    @Mock
-    Statement mockStatement;
     @Mock
     private ResultSet resultSetMock1;
     @Mock
@@ -1047,13 +1040,6 @@ public class Test {
             "Select person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From person Join kunde k on person.PID = k.PID Where `E-Mail` = 'dieter@mail.com' AND Passwort = 'sicheresPasswort123';",
             QueryBuilder.createLoginQuery("dieter@mail.com", "sicheresPasswort123"));
 
-        //createUser
-       /* Assert.assertEquals(
-            "INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`) VALUES ('Max', 'Mustermann', '1990-08-07', 'max.mustermann@mail.com', 'passwort123'); "
-                + "\n INSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Max' AND `Nachname` = 'Mustermann' AND `GebDatum` = '1990-08-07' AND `E-Mail` = 'max.mustermann@mail.com' AND `Passwort` = 'passwort123'), 0);",
-            QueryBuilder.createUser("Max", "Mustermann", "1990-08-07", "max.mustermann@mail.com",
-                "passwort123"));*/
-
         // ShowAllCinemas
         Assert.assertEquals("SELECT Ort.Ortsname, Ort.PLZ, `GebäudeId`, `Straße`, `Hausnummer` FROM Ort INNER JOIN Gebäude ON Ort.PLZ=Gebäude.PLZ ORDER BY `Ortsname`;", QueryBuilder.showAllCinemas());
 
@@ -1082,8 +1068,6 @@ public class Test {
 
         //showGeneresForFilmTitle
         Assert.assertEquals("SELECT `Genrebezeichnung`, `Deskriptor` FROM Genre, Film, FilmGenre WHERE FilmGenre.GenreID = Genre.GenreID AND Film.FilmID = FilmGenre.FilmID AND `Titel` = 'Der Herr der Ringe';", QueryBuilder.showGenresForFilmTitle("Der Herr der Ringe"));
-
-        //TODO: Change concat with Date and Time
 
         // defaultSearchQuery with Search Text
         Assert.assertEquals("SELECT DISTINCT Vorstellung.FilmID, `Titel`, `Dauer`, `FSK`, `BildLink`, Film.Beschreibung, `TrailerLink`, `3D` FROM Vorstellung JOIN Film ON Vorstellung.FilmID = Film.FilmID JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID WHERE (`Titel` LIKE '%Toy%' OR `Beschreibung` LIKE '%Toy%') WHERE concat(`Datum`,  ' ', `Uhrzeit`) >= '2019-08-08 20:00:00' AND Gebäude.PLZ = '68165' AND `FSK` <= 18 ;", QueryBuilder.defaultSearchQuery("Toy", "2019-08-08", "20:00:00", 18, "68165"));
@@ -1269,7 +1253,6 @@ public class Test {
         Assert.assertEquals(checkArray[1], ArrayBuilder.stringToIntArray(inputString, ", ")[1]);
         Assert.assertEquals(checkArray[2], ArrayBuilder.stringToIntArray(inputString, ", ")[2]);
 
-
         Assert.assertEquals("6, 7, 8", ArrayBuilder.intArrayToString(array));
 
         Assert.assertEquals("6< 7< 8", ArrayBuilder.intArrayToString(array, "< "));
@@ -1319,16 +1302,6 @@ public class Test {
         Assert.assertEquals(null, session.getAttribute("temp_preisänderungen"));
         Assert.assertEquals(null, session.getAttribute("temp_vorstellung"));
     }
-
-
-    //TODO: ÄNDERN
-
-    // TESTS FOR CONNECTOR
-    /*@org.junit.Test
-    public void testeConnector() throws Exception
-    {
-
-    }*/
 
     // TESTS FOR FACTORIES
 
@@ -1576,8 +1549,6 @@ public class Test {
 
         // Check if Object is not null
         Assert.assertNotNull(resultKinosaal);
-
-        //TODO: Add RS in call for getGebäudeByID Line 72
 
         // Test if Sitzplan array is filled correctly
         Assert.assertEquals(15, resultKinosaal.getSaalID());
@@ -1925,37 +1896,7 @@ public class Test {
         Assert.assertEquals(9, reservierungsPositions[0].getSitzID());
         Assert.assertEquals(10, reservierungsPositions[1].getSitzID());
     }
-/*
-    @org.junit.Test
-    public void testeBuchungsFactory()
-    {
 
-    }
-
-    @org.junit.Test
-    public void testePreisFactory()
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeProfilFactory()
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeReservierungsFactory()
-    {
-
-    }
-
-    @org.junit.Test
-    public void testeSitzSperreFactory()
-    {
-
-    }
-*/
     // TESTS FOR EXCEPTIONS
 
     // Tests for UnequalParameterLength Exception
@@ -2097,10 +2038,4 @@ public class Test {
         // Throw new Exception to catch
         throw new UserAlreadyExistsException();
     }
-
-    //Mockito.when(resultSetMock1.getString("Straße")).thenReturn("Kurze Straße").thenReturn("Lange Straße").thenReturn("Test Straße");
-    //        Mockito.when(resultSetMock1.getString("Hausnummer")).thenReturn("2").thenReturn("4").thenReturn("6");
-    //        Mockito.when(resultSetMock1.getString("PLZ")).thenReturn("32839").thenReturn("68165").thenReturn("68163");
-    //        Mockito.when(resultSetMock1.getString("Ortsname")).thenReturn("Steinheim").thenReturn("Mannheim").thenReturn("Mannheim");
-
 }

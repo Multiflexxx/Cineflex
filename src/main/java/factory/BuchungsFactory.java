@@ -4,7 +4,6 @@ import com.google.zxing.WriterException;
 import com.itextpdf.text.DocumentException;
 import db_connector.Connector;
 import db_connector.QueryBuilder;
-//import oo.Buchungsbeleg;
 import exception.RequiredFactoryFailedException;
 import helper.DateFormatter;
 import helper.SupportMethods;
@@ -15,7 +14,6 @@ import oo.Vorstellung;
 import pdf_generator.PdfGenerator;
 import qr_code.QrCodeGenerator;
 import send_mail.Email_Sender;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -67,22 +65,6 @@ public class BuchungsFactory {
             }
         }
 
-        // In one loop
-        // Create Buchungsposition(en)
-        // PositionsID -> 1++
-        // SitzID sitze[i]
-//        if(lastBNR > 0) {
-//            for (int i = 0; i < sitze.length; i++) {
-//                sql = QueryBuilder.createBuchungsposition(i + 1, lastBNR, sitze[i].getSitzID());
-//                Connector.executeQuery(c, sql);
-//
-//                // Create PreisänderungBuchung
-//                // PositionsID
-//                // PreisänderungsID
-//                sql = QueryBuilder.createPreisänderungBuchung(i + 1, lastBNR, preiseVerIDs[i]);
-//                Connector.executeQuery(c, sql);
-//            }
-//        }
         createBuchungsPositionen(c, lastBNR, sitze, preiseVerIDs);
         createBuchungsbelegPDF(KNR, vorstellung, sitze);
         SitzsperreFactory.deleteSitzsperrenByVorstellung(vorstellungsID);

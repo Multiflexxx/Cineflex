@@ -4,8 +4,6 @@ import db_connector.Connector;
 import db_connector.QueryBuilder;
 import helper.SupportMethods;
 import oo.Kunde;
-import oo.UserLogin;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
