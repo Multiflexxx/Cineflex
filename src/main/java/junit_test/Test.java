@@ -1224,6 +1224,8 @@ public class Test {
         String checkStringSQL = "Test A B  C  D";
 
         Assert.assertEquals(checkStringSQL, SupportMethods.removeSQLInjections(sqlInject));
+
+        Assert.assertEquals(5, SupportMethods.preisToTreuepunkte(5f));
     }
 
     // Tests for class Exception Handler
@@ -1322,11 +1324,11 @@ public class Test {
     //TODO: ÄNDERN
 
     // TESTS FOR CONNECTOR
-    @org.junit.Test
+    /*@org.junit.Test
     public void testeConnector() throws Exception
     {
 
-    }
+    }*/
 
     // TESTS FOR FACTORIES
 
@@ -1806,6 +1808,7 @@ public class Test {
         Film[] resultFilmeArray6 = FilmFactory.getTitelPageFilme("68165", null, resultSetMock20, resultSetMock21);
 
         Assert.assertNull(resultFilmeArray6[0]);
+        Assert.assertNull(resultFilmeArray6[0]);
 
         // Mock for Method:
         // getFilm(int id)
@@ -1922,7 +1925,7 @@ public class Test {
         Assert.assertEquals(9, reservierungsPositions[0].getSitzID());
         Assert.assertEquals(10, reservierungsPositions[1].getSitzID());
     }
-
+/*
     @org.junit.Test
     public void testeBuchungsFactory()
     {
@@ -1952,7 +1955,7 @@ public class Test {
     {
 
     }
-
+*/
     // TESTS FOR EXCEPTIONS
 
     // Tests for UnequalParameterLength Exception
