@@ -1129,7 +1129,7 @@ public class Test {
         Assert.assertEquals("Select `Genrebezeichnung` FROM FilmGenre JOIN Genre ON Genre.GenreID = Filmgenre.GenreID Where `GenreID` = 15 ;", QueryBuilder.getGenreByID(15));
 
         //createUser
-        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('Hans', 'Meier', '2019-10-27', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', '', '68165');\nINSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '2019-10-27' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
+        Assert.assertEquals("INSERT INTO Person (`Vorname`, `Nachname`, `GebDatum`, `E-Mail`, `Passwort`, `Hausnummer`, `Straße`, `Adresszusatz`, `PLZ`) VALUES ('Hans', 'Meier', '"+DateFormatter.getSQLDate(date4)+"', 'mail@mail.com', 'hashCode', '15', 'Langer Weg', '', '68165');\nINSERT INTO Kunde (`PID`, `Treuepunkte`) VALUES ((SELECT `PID` FROM Person WHERE `Vorname` = 'Hans' AND `Nachname` = 'Meier' AND `GebDatum` = '"+DateFormatter.getSQLDate(date4)+"' AND `E-Mail` = 'mail@mail.com' AND `Passwort` = 'hashCode'), 0);", QueryBuilder.createUser("Hans", "Meier", date4, "mail@mail.com", "hashCode", 15,"Langer Weg", "", 68165));
 
         //getGenres
         Assert.assertEquals("SELECT DISTINCT `GenreID`, `Genrebezeichnung`, `Deskriptor` FROM Genre;", QueryBuilder.getGenres());
