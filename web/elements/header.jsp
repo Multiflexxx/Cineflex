@@ -2,6 +2,11 @@
 <%@ page import="factory.GebaeudeFactory" %>
 <%@ page import="oo.UserLogin" %>
 <%@ page import="factory.LoginFactory" %>
+<%@ page import="factory.StayLoggedInFactory" %>
+<%@ page import="oo.StayLoggedIn" %>
+<%@ page import="exception.ResultSetIsNullException" %>
+<%@ page import="exception.EmptyResultSetException" %>
+<%@ page import="exception.FailedObjectCreationException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
@@ -12,38 +17,57 @@
 
     if (cookies != null) {
         String stay = "";
-        String email = "";
-        String pw = "";
         for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("stay")) {
+            if (cookies[i].getName().equals("stayLoggedIn")) {
                 stay = cookies[i].getValue();
             }
 
-            if (cookies[i].getName().equals("email")) {
-                email = cookies[i].getValue();
-            }
-
-            if (cookies[i].getName().equals("pw")) {
-                pw = cookies[i].getValue();
-            }
+//            if (cookies[i].getName().equals("email")) {
+//                email = cookies[i].getValue();
+//            }
+//
+//            if (cookies[i].getName().equals("pw")) {
+//                pw = cookies[i].getValue();
+//            }
         }
 
-        if (stay.equals("yes") && session.getAttribute("KID") == null) {
-            UserLogin userLogin = LoginFactory.getUserLogin(email, pw);
+        if (stay != null && !stay.equals("")) {
+            try {
+                StayLoggedIn stayLoggedIn = StayLoggedInFactory.getStayLoggedInById(stay);
 
-            if (userLogin == null) {
-                session.setAttribute("loginfailed", "1");
-            } else {
-                session.setAttribute("email", email);
-                session.setAttribute("vorname", userLogin.getFirstname());
-                session.setAttribute("nachname", userLogin.getLastname());
-                session.setAttribute("PID", userLogin.getPID());
-                session.setAttribute("KID", userLogin.getKID());
-                session.removeAttribute("login");
-                session.setMaxInactiveInterval(600);
+                UserLogin userLogin = LoginFactory.getUserLogin(stayLoggedIn.getEmail(), stayLoggedIn.getPasswordHash());
+
+                if (userLogin == null) {
+                    session.setAttribute("loginfailed", "1");
+                } else {
+                    session.setAttribute("email", userLogin.getEmail());
+                    session.setAttribute("vorname", userLogin.getFirstname());
+                    session.setAttribute("nachname", userLogin.getLastname());
+                    session.setAttribute("PID", userLogin.getPID());
+                    session.setAttribute("KID", userLogin.getKID());
+                    session.removeAttribute("login");
+                    session.setMaxInactiveInterval(600);
+                }
+            } catch (ResultSetIsNullException | FailedObjectCreationException | EmptyResultSetException e) {
+                e.printStackTrace();
             }
         }
     }
+
+//        if (stay.equals("yes") && session.getAttribute("KID") == null) {
+//            UserLogin userLogin = LoginFactory.getUserLogin(email, pw);
+//
+//            if (userLogin == null) {
+//                session.setAttribute("loginfailed", "1");
+//            } else {
+//                session.setAttribute("email", email);
+//                session.setAttribute("vorname", userLogin.getFirstname());
+//                session.setAttribute("nachname", userLogin.getLastname());
+//                session.setAttribute("PID", userLogin.getPID());
+//                session.setAttribute("KID", userLogin.getKID());
+//                session.removeAttribute("login");
+//                session.setMaxInactiveInterval(600);
+//            }
 %>
 
 <header>

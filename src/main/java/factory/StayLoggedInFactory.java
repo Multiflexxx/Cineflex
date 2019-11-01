@@ -23,7 +23,7 @@ public class StayLoggedInFactory {
         }
 
         try {
-            getLoggedInById(id);
+            getStayLoggedInById(id);
         } catch (ResultSetIsNullException | FailedObjectCreationException e) {
             e.printStackTrace();
             throw new RequiredFactoryFailedException();
@@ -37,7 +37,7 @@ public class StayLoggedInFactory {
 
         StayLoggedIn stayLoggedIn = null;
         try {
-            stayLoggedIn = getLoggedInById(id);
+            stayLoggedIn = getStayLoggedInById(id);
         } catch (ResultSetIsNullException | FailedObjectCreationException | EmptyResultSetException e) {
             e.printStackTrace();
             SupportMethods.close(c);
@@ -48,7 +48,7 @@ public class StayLoggedInFactory {
         return stayLoggedIn;
     }
 
-    public static StayLoggedIn getLoggedInById(String id) throws ResultSetIsNullException, EmptyResultSetException, FailedObjectCreationException {
+    public static StayLoggedIn getStayLoggedInById(String id) throws ResultSetIsNullException, EmptyResultSetException, FailedObjectCreationException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getStayLoggedIn(id);
         ResultSet rs = Connector.getQueryResult(c, sql);

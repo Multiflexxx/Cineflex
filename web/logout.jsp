@@ -1,43 +1,28 @@
+<%@ page import="factory.StayLoggedInFactory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
 <body class="d-flex flex-column h-100">
 <%
-//    Cookie cookie = null;
-//    Cookie[] cookies = null;
-//
-//    cookies = request.getCookies();
-//
-//    if (cookies != null) {
-//        for (int i = 0; i < cookies.length; i++) {
-//            if (cookies[i].getName().equals("stay")) {
-//                Cookie stay = cookies[i];
-//                stay.setMaxAge(0);
-//                response.addCookie(stay);
-//            }
-//
-//            if (cookies[i].getName().equals("email")) {
-//                Cookie email = cookies[i];
-//                email.setMaxAge(0);
-//                response.addCookie(email);
-//            }
-//
-//            if (cookies[i].getName().equals("pw")) {
-//                Cookie pw = cookies[i];
-//                pw.setMaxAge(0);
-//                response.addCookie(pw);
-//            }
-//        }
-//    }
+    Cookie cookie = null;
+    Cookie[] cookies = null;
+
+    cookies = request.getCookies();
+
+    if (cookies != null) {
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("stayLoggedIn")) {
+                Cookie stay = cookies[i];
+                StayLoggedInFactory.deleteStayLoggedIn(stay.getValue());
+                stay.setMaxAge(0);
+                response.addCookie(stay);
+            }
+        }
+    }
 
     HttpSession s = request.getSession();
     s.invalidate();
 %>
-<script>
-    document.cookie = "stay" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    document.cookie = "email" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    document.cookie = "pw" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-</script>
 
 <jsp:include page="elements/header.jsp"/>
 
