@@ -334,6 +334,17 @@ public class QueryBuilder {
         return "Update Kunde Set Treuepunkte = Treuepunkte - " + punkte + " Where KID = " + KID + ";";
     }
 
+    public static String createStayLoggedIn(String id, String email, String passwordHash) {
+        return "Insert Into stay_logged_in (id, passwordHash, `E-Mail`) Values ( " + id + ", " + passwordHash + ", " + email + ");";
+    }
+    public static String deleteStayLoggedIn(String id) {
+        return "Delete stay_logged_in Where id = " + id + ";";
+    }
+
+    public static String getStayLoggedIn(String id) {
+        return "Select * From Where id = " + id + ";";
+    }
+
     private static String getDateAsString() {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return formatter.format(new Date());

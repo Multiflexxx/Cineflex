@@ -24,8 +24,10 @@
     String passWdh = request.getParameter("inputPasswordRegWdh");
     String wohnort = SupportMethods.removeHTMLCode(request.getParameter("inputOrt"));
     String postleitzahl = SupportMethods.removeHTMLCode(request.getParameter("inputPLZ"));
+    postleitzahl = SupportMethods.removeNoneNumericals(postleitzahl);
     String straße = SupportMethods.removeHTMLCode(request.getParameter("inputStr"));
     String hausnummer = SupportMethods.removeHTMLCode(request.getParameter("inputHNr"));
+    hausnummer = SupportMethods.removeNoneNumericals(hausnummer);
     String adresszusatz = SupportMethods.removeHTMLCode(request.getParameter("inputAdz"));
 
     if (!pass.equals(passWdh)) {

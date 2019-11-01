@@ -1,6 +1,7 @@
 package helper;
 
 import db_connector.Connector;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -76,8 +77,17 @@ public class SupportMethods {
         return input.replaceAll("\\-{2}|\\#|\\/\\/", "");
     }
 
+    public static String removeNoneNumericals(String input) {
+        return input.replaceAll("\\D", " ");
+    }
+
 
     public static int preisToTreuepunkte(float preis) {
         return (int) Math.floor(preis);
+    }
+
+    public static void debug(Object request) {
+        System.out.println("");
+//        HttpSession session = request
     }
 }
