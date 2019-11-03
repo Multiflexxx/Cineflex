@@ -33,7 +33,7 @@
 %>
 <div class="container">
     <%
-        if (filme != null) {
+        if (filme[0] != null) {
             for (Film f : filme) {
                 String hrefURL = "singleMovie.jsp?";
                 hrefURL += "id=" + f.getFilmID();
@@ -64,15 +64,15 @@
     </div>
     <%
                 }
-            }
-        } else {
-            out.write("<div class=\"card\">");
-            out.write("<div class=\"card-body text-center\">");
-            out.write("<h5 class=\"card-title\">Für dein ausgewähltes Kino gibt es keine Vorstellungen ..</h5>");
-            out.write("<p class=\"card-text\"><small class=\"text-muted\">Gerne kannst Du ein anderes Kino von uns besuchen.</small></p>");
-            out.write("</div>");
-            out.write("</div>");
-    }
+            } else {
+                    out.write("<div class=\"card mt-3 mb-3\">");
+                    out.write("<div class=\"card-body text-center\">");
+                    out.write("<h5 class=\"card-title\">Für dein ausgewähltes Kino gibt es keine Vorstellungen ..</h5>");
+                    out.write("<p class=\"card-text\"><small class=\"text-muted\">Gerne kannst Du ein anderes Kino von uns besuchen.</small></p>");
+                    out.write("</div>");
+                    out.write("</div>");
+                }
+        }
     %>
 </div>
 
