@@ -31,10 +31,10 @@
 <div class="container">
     <div class="card mt-3 mb-3">
         <div class="card-header">
-            <h1 class="card-title">Vielen Dank für Ihren Reservierung und viel Spaß beim Film!</h1>
+            <h1 class="card-title">Vielen Dank für Ihre Reservierung und viel Spaß beim Film!</h1>
         </div>
         <div class="card-body">
-            <p class="card-text">Ihr Reservierung bleibt bis 30 Minuten vor Filmbegin bestehen.</p>
+            <p class="card-text">Ihre Reservierung bleibt bis 30 Minuten vor Filmbeginn bestehen.</p>
             <button class="btn btn-outline-primary mb-2" onclick="download_reservierung(<%=RID%>)">Download</button>
             <p class="card-text">Sie können nun zurück zur Startseite</p>
             <a class="btn btn-primary btn-lg" href="index.jsp" role="button">Zurück zur Startseite</a>
