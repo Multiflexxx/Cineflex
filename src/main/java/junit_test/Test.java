@@ -1271,6 +1271,9 @@ public class Test {
 
         //getReservierungsStornierungByKID
         Assert.assertEquals("Select * From Reservierungsstornierung Join Buchungsbeleg On `Buchungsstornierung.BNR` = `Buchungsbeleg.BNR` Where KID = 1;", QueryBuilder.getReservierungsStornierungByKID(1));
+
+        //deleteAccount
+        Assert.assertEquals("DELETE FROM Kunde WHERE PID = 2;\nDELETE FROM Person WHERE PID = 2;", QueryBuilder.deleteAccount(2));
     }
 
     // TESTS FOR HELPERS
