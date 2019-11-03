@@ -70,7 +70,6 @@ public class SitzFactory {
                 bookedSeats[counter] = getSitzById(rs.getInt("SitzID"));
                 counter++;
             }
-
         }catch (SQLException e) {
             e.printStackTrace();
             throw new FailedObjectCreationException();
