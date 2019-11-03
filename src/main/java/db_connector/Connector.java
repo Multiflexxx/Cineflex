@@ -10,9 +10,8 @@ public class Connector {
      * @return c
      */
     public static Connection getConnection() {
-        // TODO: DO NOT REMOVE
         // Create new properties
-        /*Properties prop = new Properties();
+        Properties prop = new Properties();
 
         try
         {
@@ -31,13 +30,11 @@ public class Connector {
         String port = prop.getProperty("port");
         String database = prop.getProperty("database");
         String host = prop.getProperty("host");
-        */
 
         Connection c = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            //c = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+database+"?allowMultiQueries=true", username, password);
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/Cineflex?allowMultiQueries=true", "multiflex", "multiflexxx123");
+            c = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+database+"?allowMultiQueries=true", username, password);
         } catch (Exception e) {
             e.printStackTrace();
         }

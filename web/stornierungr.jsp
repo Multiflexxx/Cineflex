@@ -3,6 +3,7 @@
 <%@ page import="exception.FailedDataInsertionException" %>
 <%@ page import="oo.ReservierungsStornierung" %>
 <%@ page import="factory.ReservierungsStornierungFactory" %>
+<%@ page import="send_mail.Email_Sender" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -16,6 +17,8 @@
     int RID = Integer.parseInt(request.getParameter("RID"));
     try {
         ReservierungsStornierungFactory.createStornierung(RID);
+        Email_Sender.sendMail(session.getAttribute("email").toString(), "Stornierung", "Hallo " + session.getAttribute("vorname").toString()+" ,\ndeine Reservierung wurde storniert.");
+
     } catch (RequiredFactoryFailedException | FailedDataInsertionException e) {
         e.printStackTrace();
     }

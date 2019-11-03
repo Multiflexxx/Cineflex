@@ -1,6 +1,7 @@
 <%@ page import="factory.BuchungsStornierungFactory" %>
 <%@ page import="exception.RequiredFactoryFailedException" %>
 <%@ page import="exception.FailedDataInsertionException" %>
+<%@ page import="send_mail.Email_Sender" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <jsp:include page="elements/head.jsp"/>
@@ -14,6 +15,7 @@
     int BID = Integer.parseInt(request.getParameter("BID"));
     try {
         BuchungsStornierungFactory.createStornierung(BID);
+        Email_Sender.sendMail(session.getAttribute("email").toString(), "Stornierung", "Hallo " + session.getAttribute("vorname").toString()+" ,\ndeine Buchung wurde storniert.");
     } catch (RequiredFactoryFailedException | FailedDataInsertionException e) {
         e.printStackTrace();
     }

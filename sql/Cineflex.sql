@@ -33277,6 +33277,20 @@ INSERT INTO `Vorstellung`(`VorstellungsID`,`Datum`,`Uhrzeit`,`FilmID`,`SaalID`,`
 (133,'2020-10-11','20:45:00',12,14,1);
 -- ------------------------------------------------------------------
 
+--
+-- TABLE: `stay_logged_in`
+--
+CREATE TABLE `stay_logged_in` (
+                                `id` varchar(32) NOT NULL,
+                                `passwordHash` varchar(255) DEFAULT NULL,
+                                `E-Mail` varchar(255) DEFAULT NULL,
+                                PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+--
+-- TABLE DATA: `stay_logged_in`
+--
+
+-- ------------------------------------------------------------------
 
 -- CONSTRAINT STATEMENTS START
 

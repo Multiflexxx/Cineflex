@@ -17,7 +17,7 @@ public class StayLoggedInFactory {
      *
      * @param email
      * @param passwordHash
-     * @return
+     * @return stayLoggedIn
      * @throws FailedDataInsertionException
      * @throws RequiredFactoryFailedException
      * @throws FailedObjectCreationException
