@@ -78,7 +78,8 @@
                                 <a href="<%=hrefURL%>">
                                     <button class="film-btn" onclick="">
                                         <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
-                                        <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
+                                        <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr<br>
+                                        <%=vorstellung[i].getSprache()%>
                                     </button>
                                 </a>
                             </td>
@@ -93,7 +94,8 @@
                                 <a href="<%=hrefURL%>">
                                     <button class="film-btn" onclick="">
                                         <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
-                                        <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
+                                        <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr<br>
+                                        <%=vorstellung[i].getSprache()%>
                                     </button>
                                 </a>
                             </td>
@@ -107,7 +109,8 @@
                                 <a href="<%=hrefURL%>">
                                     <button class="film-btn" onclick="">
                                         <%=DateFormatter.getFrontendDate(vorstellung[i].getDatum())%><br>
-                                        <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr
+                                        <%=DateFormatter.getFrontendTime(vorstellung[i].getUhrzeit())%> Uhr<br>
+                                        <%=vorstellung[i].getSprache()%>
                                     </button>
                                 </a>
                             </td>
@@ -164,7 +167,7 @@
                     <h5 class="card-title"><%=film.getTitel()%>
                     </h5>
                     <p class="card-text"><small class="text-muted"><%=film.getDauer()%> Minuten | FSK <%=
-                    film.getFsk()%> | Sprache <%=vorstellung[0].getSprache()%>
+                    film.getFsk()%> | <%=vorstellung[0].getFilm().getSpracheString()%>
                     </small></p>
                     <p class="card-text mrb-justify"><%=film.getBeschreibung()%>
                     </p>
