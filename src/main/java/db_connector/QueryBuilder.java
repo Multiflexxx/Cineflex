@@ -104,7 +104,7 @@ public class QueryBuilder {
                 "JOIN Sprache ON Vorstellung.SprachID = Sprache.SprachID " +
                 "WHERE Film.FilmID = '" + id + "' " +
                 "AND concat(`Datum`,  ' ', `Uhrzeit`) >= '" + date + " " + time + "' " +
-                "AND Gebäude.PLZ = '" + plz + "' ORDER BY `Datum` ASC LIMIT 6;";
+                "AND Gebäude.PLZ = '" + plz + "' ORDER BY `Datum`, `Uhrzeit` ASC LIMIT 6;";
 
     }
 
