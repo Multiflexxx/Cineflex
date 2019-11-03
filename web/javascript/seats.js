@@ -23,7 +23,7 @@ function chooseSeat(id, row_length) {
                         countChoosenSeats += preisMultiplikator[i][j];
                         preisMultiplikator[i][j] = 0;
                     }
-                    document.getElementById("h4" + (i + 1)).innerHTML = "0 €";
+                    document.getElementById("h5" + (i + 1)).innerHTML = "0 €";
                     document.getElementById("span" + (i + 1)).innerHTML = 0;
                 }
                 if (countChoosenSeats > 0) {
@@ -136,9 +136,9 @@ function createTable(preistyp, tableLength) {
                 if (j == 0) {
                     td.setAttribute("class", "pay_info");
                 } else if (j == 1) {
-                    var h4 = document.createElement("H4");
-                    h4.innerHTML = "Nicht zugewiesen";
-                    td.appendChild(h4);
+                    var h5 = document.createElement("H5");
+                    h5.innerHTML = "Nicht zugewiesen";
+                    td.appendChild(h5);
                 } else if (j == 2) {
                     var span = document.createElement("SPAN");
                     span.setAttribute("id", "span" + i);
@@ -160,9 +160,9 @@ function createTable(preistyp, tableLength) {
                         td.appendChild(btnInfo);
                     }
                 } else if (j == 1) {
-                    var h4 = document.createElement("H4");
-                    h4.innerHTML = preistyp[i - 1].beschreibung;
-                    td.appendChild(h4);
+                    var h5 = document.createElement("H5");
+                    h5.innerHTML = preistyp[i - 1].beschreibung;
+                    td.appendChild(h5);
                 } else if (j == 2) {
                     var btn1 = document.createElement("BUTTON");
                     btn1.setAttribute("class", "btn btn-outline-light btn-sm btn-plus-minus text-center");
@@ -181,10 +181,10 @@ function createTable(preistyp, tableLength) {
                     td.appendChild(span);
                     td.appendChild(btn2);
                 } else {
-                    var h4 = document.createElement("H4");
-                    h4.setAttribute("id", "h4" + i);
-                    h4.innerHTML = preisMultiplikator[i - 1][0] * preistyp[i - 1].preis + preisMultiplikator[i - 1][1] * preistyp[i - 1].preisL + " €";
-                    td.appendChild(h4);
+                    var h5 = document.createElement("H5");
+                    h5.setAttribute("id", "h5" + i);
+                    h5.innerHTML = preisMultiplikator[i - 1][0] * preistyp[i - 1].preis + preisMultiplikator[i - 1][1] * preistyp[i - 1].preisL + "€";
+                    td.appendChild(h5);
                 }
             }
         }
@@ -218,7 +218,7 @@ function ticket_plus(i, preis, preisL) {
             }
         }
         countChoosenSeats -= 1;
-        document.getElementById("h4" + i).innerHTML = preisMultiplikator[i - 1][0] * preis + preisMultiplikator[i - 1][1] * preisL + " €";
+        document.getElementById("h5" + i).innerHTML = preisMultiplikator[i - 1][0] * preis + preisMultiplikator[i - 1][1] * preisL + "€";
         document.getElementById("span" + i).innerHTML = preisMultiplikator[i - 1][0] + preisMultiplikator[i - 1][1];
         document.getElementById("span0").innerHTML = countChoosenSeats;
     }
@@ -235,7 +235,7 @@ function ticket_minus(i, preis, preisL) {
         preisMultiplikator[i - 1][1] -= 1;
         countChoosenSeats += 1;
     }
-    document.getElementById("h4" + i).innerHTML = preisMultiplikator[i - 1][0] * preis + preisMultiplikator[i - 1][1] * preisL + " €";
+    document.getElementById("h5" + i).innerHTML = preisMultiplikator[i - 1][0] * preis + preisMultiplikator[i - 1][1] * preisL + "€";
     document.getElementById("span" + i).innerHTML = preisMultiplikator[i - 1][0] + preisMultiplikator[i - 1][1];
     document.getElementById("span0").innerHTML = countChoosenSeats;
     btndclickable(countChoosenSeats);
