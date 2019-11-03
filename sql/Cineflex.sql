@@ -59,16 +59,16 @@ CREATE TABLE `Buchungsposition` (
 -- ------------------------------------------------------------------
 
 --
--- TABLE: `Buchungsstonierung`
+-- TABLE: `Buchungsstornierung`
 --
-CREATE TABLE `Buchungsstonierung` (
+CREATE TABLE `Buchungsstornierung` (
   `StrnNR` int(11) NOT NULL AUTO_INCREMENT,
   `BNR` int(11) NOT NULL,
   PRIMARY KEY (`StrnNR`),
   KEY `BNR` (`BNR`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
--- TABLE DATA: `Buchungsstonierung`
+-- TABLE DATA: `Buchungsstornierung`
 --
 
 -- ------------------------------------------------------------------
@@ -371,11 +371,20 @@ CREATE TABLE `Kunde` (
   `Treuepunkte` int(11) DEFAULT NULL,
   PRIMARY KEY (`KID`),
   KEY `PID` (`PID`)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 --
 -- TABLE DATA: `Kunde`
 --
-
+INSERT INTO `Kunde`(`PID`,`KID`,`Treuepunkte`) VALUES 
+(1,1,0),
+(2,2,0),
+(4,3,0),
+(5,4,0),
+(6,5,0),
+(7,6,0),
+(8,7,0),
+(9,8,0),
+(10,9,10);
 -- ------------------------------------------------------------------
 
 --
@@ -13343,11 +13352,20 @@ CREATE TABLE `Person` (
   `PLZ` int(11) DEFAULT NULL,
   PRIMARY KEY (`PID`),
   KEY `PLZ` (`PLZ`)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 --
 -- TABLE DATA: `Person`
 --
-
+INSERT INTO `Person`(`PID`,`Vorname`,`Nachname`,`GebDatum`,`E-Mail`,`Passwort`,`Hausnummer`,`Straße`,`Adresszusatz`,`PLZ`) VALUES 
+(1,'Benno','Grimm','2000-01-01','benno.grimm@gmx.de','5f4dcc3b5aa765d61d8327deb882cf99',62,'Elbeallee','',14612),
+(2,'Max','Mustermann','1970-01-01','c7115248@urhen.com','e10adc3949ba59abbe56e057f20f883e',5,'Lange StraÃe','',68165),
+(4,'Benno','Grimm','2000-01-01','test@benno.com','e10adc3949ba59abbe56e057f20f883e',12,'Elbealleee','',14612),
+(5,'asdfasdf','asdfasdf','1970-01-01','tadeyipo@mailnet.top','e10adc3949ba59abbe56e057f20f883e',2,'df','',68165),
+(6,'kjhdfkjhkjh','kjhlkjhlkjhlkjh','1970-05-05','n2avl5wt.iat@20mail.it','e10adc3949ba59abbe56e057f20f883e',2,'JA','',68165),
+(7,'Name','NameName','1980-02-02','kflzm320.bq2@20minutemail.it','e10adc3949ba59abbe56e057f20f883e',65,'Lang','',68165),
+(8,'Maxi','Muster','1950-08-01','kc3sc5gd.e3y@20minutemail.it','e10adc3949ba59abbe56e057f20f883e',55,'Lang','',68165),
+(9,'Name','Nachname','1980-05-05','ypt4ppgu.n4n@20minutemail.it','e10adc3949ba59abbe56e057f20f883e',55,'Lange','',68165),
+(10,'Maximuaster','Name','1990-07-07','xhjk3pxz.jyq@20minutemail.it','e10adc3949ba59abbe56e057f20f883e',55,'Lang','',68165);
 -- ------------------------------------------------------------------
 
 --
@@ -13405,7 +13423,8 @@ CREATE TABLE `PreisänderungReservierung` (
 --
 -- TABLE DATA: `PreisänderungReservierung`
 --
-
+INSERT INTO `PreisänderungReservierung`(`PositionsID`,`RNR`,`PreisänderungsID`) VALUES 
+(1,1,0);
 -- ------------------------------------------------------------------
 
 --
@@ -13420,11 +13439,12 @@ CREATE TABLE `Reservierungsbeleg` (
   PRIMARY KEY (`RNR`),
   KEY `KID` (`KID`),
   KEY `VorstellungsID` (`VorstellungsID`)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 --
 -- TABLE DATA: `Reservierungsbeleg`
 --
-
+INSERT INTO `Reservierungsbeleg`(`RNR`,`KID`,`VorstellungsID`,`Preis`,`Zeitstempel`) VALUES 
+(1,9,124,10.00,'2019-11-03 13:30:30');
 -- ------------------------------------------------------------------
 
 --
@@ -13441,20 +13461,21 @@ CREATE TABLE `Reservierungsposition` (
 --
 -- TABLE DATA: `Reservierungsposition`
 --
-
+INSERT INTO `Reservierungsposition`(`PositionsID`,`RNR`,`SitzID`) VALUES 
+(1,1,2);
 -- ------------------------------------------------------------------
 
 --
--- TABLE: `Reservierungsstonierung`
+-- TABLE: `Reservierungsstornierung`
 --
-CREATE TABLE `Reservierungsstonierung` (
+CREATE TABLE `Reservierungsstornierung` (
   `StrnNR` int(11) NOT NULL AUTO_INCREMENT,
   `RNR` int(11) NOT NULL,
   PRIMARY KEY (`StrnNR`),
   KEY `RNR` (`RNR`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
--- TABLE DATA: `Reservierungsstonierung`
+-- TABLE DATA: `Reservierungsstornierung`
 --
 
 -- ------------------------------------------------------------------
@@ -33137,7 +33158,7 @@ CREATE TABLE `Vorstellung` (
   KEY `FilmID` (`FilmID`),
   KEY `SaalID` (`SaalID`),
   KEY `SprachID` (`SprachID`)
-  ) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4;
+  ) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8mb4;
 --
 -- TABLE DATA: `Vorstellung`
 --
@@ -33274,23 +33295,48 @@ INSERT INTO `Vorstellung`(`VorstellungsID`,`Datum`,`Uhrzeit`,`FilmID`,`SaalID`,`
 (130,'2020-10-09','21:45:00',12,11,1),
 (131,'2020-10-10','20:30:00',12,4,2),
 (132,'2020-10-10','21:30:00',12,5,2),
-(133,'2020-10-11','20:45:00',12,14,1);
+(133,'2020-10-11','20:45:00',12,14,1),
+(134,'2019-11-04','12:45:00',5,15,1),
+(135,'2019-11-04','14:00:00',6,16,1),
+(136,'2019-11-04','16:00:00',11,17,1),
+(137,'2019-11-04','18:30:00',13,18,1),
+(138,'2019-11-04','20:30:00',12,19,1),
+(139,'2019-11-04','20:30:00',12,20,2),
+(140,'2019-11-04','20:30:00',13,17,2),
+(141,'2019-11-04','22:00:00',10,21,1),
+(142,'2019-11-04','12:45:00',12,29,1),
+(143,'2019-11-04','12:45:00',12,30,2),
+(144,'2019-11-04','14:00:00',12,31,1),
+(145,'2019-11-04','16:00:00',11,32,1),
+(146,'2019-11-04','18:30:00',10,33,1),
+(147,'2019-11-04','20:30:00',12,34,1),
+(148,'2019-11-04','22:00:00',9,35,2),
+(149,'2019-11-05','12:45:00',11,36,1),
+(150,'2019-11-05','16:00:00',12,37,1),
+(151,'2019-11-05','18:30:00',9,38,1),
+(152,'2019-11-05','18:00:00',9,38,1),
+(153,'2019-11-05','20:30:00',8,39,1),
+(154,'2019-11-05','22:00:00',10,40,1),
+(155,'2019-11-05','12:45:00',12,41,1),
+(156,'2019-11-05','14:00:00',10,42,1),
+(157,'2019-11-05','16:00:00',11,43,1);
 -- ------------------------------------------------------------------
 
 --
 -- TABLE: `stay_logged_in`
 --
 CREATE TABLE `stay_logged_in` (
-                                `id` varchar(32) NOT NULL,
-                                `passwordHash` varchar(255) DEFAULT NULL,
-                                `E-Mail` varchar(255) DEFAULT NULL,
-                                PRIMARY KEY (`id`)
+  `id` varchar(32) NOT NULL,
+  `passwordHash` varchar(255) DEFAULT NULL,
+  `E-Mail` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- TABLE DATA: `stay_logged_in`
 --
 
 -- ------------------------------------------------------------------
+
 
 -- CONSTRAINT STATEMENTS START
 
@@ -33303,8 +33349,8 @@ ALTER TABLE `Sitzsperre`
   ADD CONSTRAINT `Sitzsperre_ibfk_2` FOREIGN KEY (`VorstellungsID`) REFERENCES `Vorstellung` (`VorstellungsID`),
   ADD CONSTRAINT `Sitzsperre_ibfk_3` FOREIGN KEY (`KID`) REFERENCES `Kunde` (`KID`);
 
-ALTER TABLE `Reservierungsstonierung`
-  ADD CONSTRAINT `Reservierungsstonierung_ibfk_1` FOREIGN KEY (`RNR`) REFERENCES `Reservierungsbeleg` (`RNR`);
+ALTER TABLE `Reservierungsstornierung`
+  ADD CONSTRAINT `Reservierungsstornierung_ibfk_1` FOREIGN KEY (`RNR`) REFERENCES `Reservierungsbeleg` (`RNR`);
 
 ALTER TABLE `Sitzplan`
   ADD CONSTRAINT `Sitzplan_ibfk_1` FOREIGN KEY (`SaalID`) REFERENCES `Kinosaal` (`SaalID`);
@@ -33341,9 +33387,6 @@ ALTER TABLE `Filmsprache`
   ADD CONSTRAINT `Filmsprache_ibfk_1` FOREIGN KEY (`FilmID`) REFERENCES `Film` (`FilmID`),
   ADD CONSTRAINT `Filmsprache_ibfk_2` FOREIGN KEY (`SprachID`) REFERENCES `Sprache` (`SprachID`);
 
-ALTER TABLE `Buchungsstonierung`
-  ADD CONSTRAINT `Buchungsstonierung_ibfk_1` FOREIGN KEY (`BNR`) REFERENCES `Buchungsbeleg` (`BNR`);
-
 ALTER TABLE `Sitz`
   ADD CONSTRAINT `Sitz_ibfk_1` FOREIGN KEY (`SitzplanID`) REFERENCES `Sitzplan` (`SitzplanID`);
 
@@ -33358,6 +33401,9 @@ ALTER TABLE `Vorstellung`
   ADD CONSTRAINT `Vorstellung_ibfk_1` FOREIGN KEY (`FilmID`) REFERENCES `Film` (`FilmID`),
   ADD CONSTRAINT `Vorstellung_ibfk_2` FOREIGN KEY (`SaalID`) REFERENCES `Kinosaal` (`SaalID`),
   ADD CONSTRAINT `Vorstellung_ibfk_3` FOREIGN KEY (`SprachID`) REFERENCES `Sprache` (`SprachID`);
+
+ALTER TABLE `Buchungsstornierung`
+  ADD CONSTRAINT `Buchungsstornierung_ibfk_1` FOREIGN KEY (`BNR`) REFERENCES `Buchungsbeleg` (`BNR`);
 
 ALTER TABLE `Reservierungsbeleg`
   ADD CONSTRAINT `Reservierungsbeleg_ibfk_1` FOREIGN KEY (`KID`) REFERENCES `Kunde` (`KID`),
@@ -33377,13 +33423,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`multiflex`@`localhost` SQL SECURITY DEFINER 
 -- VIEW: `buchungsbeleg`
 --
 CREATE ALGORITHM=UNDEFINED DEFINER=`multiflex`@`localhost` SQL SECURITY DEFINER VIEW `buchungsbeleg` AS select `Buchungsbeleg`.`BNR` AS `BNR`,`Buchungsbeleg`.`KID` AS `KID`,`Buchungsbeleg`.`VorstellungsID` AS `VorstellungsID`,`Buchungsbeleg`.`Preis` AS `Preis` from `Buchungsbeleg`;
--- ------------------------------------------------------------------
-
-
---
--- VIEW: `buchungsstonierung`
---
-CREATE ALGORITHM=UNDEFINED DEFINER=`multiflex`@`localhost` SQL SECURITY DEFINER VIEW `buchungsstonierung` AS select `Buchungsstonierung`.`StrnNR` AS `StrnNR`,`Buchungsstonierung`.`BNR` AS `BNR` from `Buchungsstonierung`;
 -- ------------------------------------------------------------------
 
 
