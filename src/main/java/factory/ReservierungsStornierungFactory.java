@@ -125,4 +125,6 @@ public class ReservierungsStornierungFactory {
 
         return reservierungsStornierungs;
     }
+
+    // public static
 }
