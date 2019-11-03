@@ -1,6 +1,5 @@
 <%@ page import="factory.BuchungsFactory" %>
 <%@ page import="helper.ArrayBuilder" %>
-<%@ page import="qr_code.QrCodeGenerator" %>
 <%@ page import="com.itextpdf.text.DocumentException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
