@@ -125,4 +125,11 @@ public class KundenFactory {
 
         return getKundeByKID(KID);
     }
+
+    public static void deleteKundenkonto(int PID) {
+    	Connection c = Connector.getConnection();
+    	String sql = QueryBuilder.deleteAccount(PID);
+    	Connector.executeQuery(c, sql);
+    	SupportMethods.close(c);
+	}
 }
