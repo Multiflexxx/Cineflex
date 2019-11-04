@@ -7,17 +7,56 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
+function enoughTreueG(treuepunkte) {
+    if (treuepunkte < 100) {
+        console.log(treuepunkte);
+        $('#gModalCenter').modal('hide');
+        document.getElementById("chest_denied").style.display = "inherit";
+    } else {
+        $('#gModalCenter').modal('show');
+        document.getElementById("chest_denied").style.display = "none";
+        document.getElementById("btnBoxG").style.display = "inherit";
+    }
+}
+
+function enoughTreueS(treuepunkte) {
+    if (treuepunkte < 400) {
+        console.log(treuepunkte);
+        $('#sModalCenter').modal('hide');
+        document.getElementById("chest_denied").style.display = "inherit";
+    } else {
+        $('#sModalCenter').modal('show');
+        document.getElementById("chest_denied").style.display = "none";
+        document.getElementById("btnBoxS").style.display = "inherit";
+    }
+}
+
+function enoughTreueE(treuepunkte) {
+    if (treuepunkte < 5000) {
+        console.log(treuepunkte);
+        $('#eModalCenter').modal('hide');
+        document.getElementById("chest_denied").style.display = "inherit";
+    } else {
+        $('#eModalCenter').modal('show');
+        document.getElementById("chest_denied").style.display = "none";
+        document.getElementById("btnBoxE").style.display = "inherit";
+    }
+}
+
 function openBoxG() {
+    document.getElementById("btnBoxG").style.display = "none";
     document.getElementById('gLoot').src = "img/specials/g_o.png";
     document.getElementById('gewinneg').innerHTML = "<ul><li>" + GewinneGewohnlich[getRandomInt(GewinneGewohnlich.length - 1)] + "</li><li>" + GewinneGewohnlich[getRandomInt(GewinneGewohnlich.length - 1)] + "</li><li>" + GewinneGewohnlich[getRandomInt(GewinneGewohnlich.length - 1)] + "</li><li>" + GewinneGewohnlich[getRandomInt(GewinneGewohnlich.length - 1)] + "</li><li>" + GewinneSelten[getRandomInt(GewinneSelten.length - 1)];
 }
 
 function openBoxS() {
+    document.getElementById("btnBoxS").style.display = "none";
     document.getElementById('sLoot').src = "img/specials/s_o.png";
     document.getElementById('gewinnes').innerHTML = "<ul><li>" + GewinneGewohnlich[getRandomInt(GewinneGewohnlich.length - 1)] + "</li><li>" + GewinneSelten[getRandomInt(GewinneSelten.length - 1)] + "</li><li>" + GewinneSelten[getRandomInt(GewinneSelten.length - 1)] + "</li><li>" + GewinneSelten[getRandomInt(GewinneSelten.length - 1)] + "</li><li>" + GewinneEpisch[getRandomInt(GewinneEpisch.length - 1)];
 }
 
 function openBoxE() {
+    document.getElementById("btnBoxE").style.display = "none";
     document.getElementById('eLoot').src = "img/specials/e_o.png";
     document.getElementById('gewinnee').innerHTML = "<ul><li>" + GewinneSelten[getRandomInt(GewinneSelten.length - 1)] + "</li><li>" + GewinneEpisch[getRandomInt(GewinneEpisch.length - 1)] + "</li><li>" + GewinneEpisch[getRandomInt(GewinneEpisch.length - 1)] + "</li><li>" + GewinneEpisch[getRandomInt(GewinneEpisch.length - 1)] + "</li><li>" + GewinneSuper[getRandomInt(GewinneSuper.length - 1)];
 }
