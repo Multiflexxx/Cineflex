@@ -22,6 +22,7 @@
             <h1>Willkommen, <%=k.getVorname()%>
             </h1>
             <h2>Deine Treuepunkte: <%=k.getTreuepunkte()%>
+
             </h2>
         </div>
     </div>

@@ -48,16 +48,6 @@
     }
 
     try {
-        OrtsFactory.getOrtByPLZ(Integer.parseInt(postleitzahl));
-    } catch (ResultSetIsNullException e) {
-        e.printStackTrace();
-        return;
-    } catch (EmptyResultSetException e) {
-        e.printStackTrace();
-        response.sendRedirect("error500.jsp");
-    }
-
-    try {
         pass = PassMD5.hash(pass);
         passWdh = PassMD5.hash(passWdh);
     } catch (NoSuchAlgorithmException e) {
