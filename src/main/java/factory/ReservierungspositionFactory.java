@@ -11,7 +11,18 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class ReservierungspositionFactory {
+
+    /**
+     * Returns an array of all Reservierungspositionen for a single Reservierung
+     * @param RNR ID of the reservierung
+     * @param mockRs For tests
+     * @return Returns ReservierungsBeleg array
+     * @throws ResultSetIsNullException
+     * @throws EmptyResultSetException
+     * @throws RequiredFactoryFailedException
+     */
     public static ReservierungsPosition[] getReservierungsPositionenByRNR(int RNR, ResultSet mockRs) throws ResultSetIsNullException, EmptyResultSetException, RequiredFactoryFailedException {
 
         Connection c = Connector.getConnection();
@@ -61,6 +72,14 @@ public class ReservierungspositionFactory {
         return reservierungspositionen;
     }
 
+    /**
+     * Returns an array of all Reservierungspositionen for a single Reservierung
+     * @param RNR ID of the reservierung
+     * @return Returns ReservierungsBeleg array
+     * @throws ResultSetIsNullException
+     * @throws EmptyResultSetException
+     * @throws RequiredFactoryFailedException
+     */
     public static ReservierungsPosition[] getReservierungsPositionenByRNR(int RNR) throws ResultSetIsNullException, EmptyResultSetException, RequiredFactoryFailedException {
         return getReservierungsPositionenByRNR(RNR, null);
     }

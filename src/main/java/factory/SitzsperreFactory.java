@@ -17,11 +17,11 @@ public class SitzsperreFactory {
     private static int minutesUntilTimeOut = 10;
 
     /**
-     *
-     * @param seatIDs
-     * @param vorstellungsID
-     * @param KID
-     * @return sitzSperre
+     * Locks and returns temp locked Seats for a Vorstellung
+     * @param seatIDs Integer Array containing the seat IDs to be locked
+     * @param vorstellungsID Vorstellung for which the Seats will be locked
+     * @param KID ID of the customer locking the seats
+     * @return Returns the created Sitzsperre Array
      */
     public static Sitzsperre[] lockSeats(int[] seatIDs, int vorstellungsID, int KID) {
         Connection c = null;
@@ -39,9 +39,9 @@ public class SitzsperreFactory {
     }
 
     /**
-     *
-     * @param vorstellungsID
-     * @return sitzSperre
+     * Returns all temporarily locked Seats for a Vorstellung
+     * @param vorstellungsID ID of Vorstellung
+     * @return Returns Sitzsperre Array
      * @throws EmptyResultSetException
      * @throws ResultSetIsNullException
      * @throws FailedObjectCreationException
@@ -89,8 +89,8 @@ public class SitzsperreFactory {
     }
 
     /**
-     *
-     * @return null
+     * Deletes timed out Sitzsperrre
+     * @return Returns null
      */
     public static Sitzsperre[] updateLockedSeats() {
         Connection c = Connector.getConnection();

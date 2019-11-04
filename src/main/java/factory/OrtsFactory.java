@@ -13,9 +13,11 @@ import java.sql.SQLException;
 import oo.Ort;
 
 public class OrtsFactory {
+
     /**
-     * @param plz
-     * @return ort
+     * Returns a Ort object given an existing PLZ
+     * @param plz PLZ of the ORT
+     * @return Returns a Ort object
      * @throws ResultSetIsNullException
      * @throws EmptyResultSetException
      */

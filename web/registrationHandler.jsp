@@ -15,6 +15,8 @@
 <%@ page import="exception.registrierung.UserAlreadyExistsException" %>
 <%@ page import="exception.RequiredFactoryFailedException" %>
 <%@ page import="exception.EmptyResultSetException" %>
+<%@ page import="factory.OrtsFactory" %>
+<%@ page import="exception.ResultSetIsNullException" %>
 <%
     String firstname = SupportMethods.removeHTMLCode(request.getParameter("inputVorname"));
     String lastname = SupportMethods.removeHTMLCode(request.getParameter("inputNachname"));
@@ -43,6 +45,16 @@
     if (firstname.equals("") || lastname.equals("") || date.equals("") || email.equals("") || pass.equals("") || passWdh.equals("") || wohnort.equals("") || postleitzahl.equals("") || straße.equals("") || hausnummer.equals("")) {
         response.getOutputStream().println("Bitte alle Pflichtfelder ausfüllen!");
         return;
+    }
+
+    try {
+        OrtsFactory.getOrtByPLZ(Integer.parseInt(postleitzahl));
+    } catch (ResultSetIsNullException e) {
+        e.printStackTrace();
+        return;
+    } catch (EmptyResultSetException e) {
+        e.printStackTrace();
+        response.sendRedirect("error500.jsp");
     }
 
     try {
