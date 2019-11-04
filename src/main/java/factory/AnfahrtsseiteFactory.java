@@ -12,10 +12,11 @@ import java.sql.SQLException;
 public class AnfahrtsseiteFactory {
 
     /**
-     * Used also for Mocks
-     * @param ort
-     * @param mockRs
-     * @return
+     * Returns an iframe containing the Google Maps Data for the currently selected location
+     *
+     * @param ort    current location
+     * @param mockRs For mocking and testing
+     * @return Returns the iframe as a String
      * @throws UnsupportedEncodingException
      * @throws SQLException
      */
@@ -26,13 +27,9 @@ public class AnfahrtsseiteFactory {
         ResultSet rs = null;
 
         // Set Mock Resultset, if available
-        if(mockRs == null)
-        {
+        if (mockRs == null) {
             rs = Connector.getQueryResult(c, QueryBuilder.getKinosByName(ort));
-        }
-
-        else
-        {
+        } else {
             rs = mockRs;
         }
 
@@ -45,14 +42,14 @@ public class AnfahrtsseiteFactory {
     }
 
     /**
+     * Overloaded Method head for normal operation, return an iframe for currently selected location
      *
-     * @param ort
-     * @return
+     * @param ort current location
+     * @return Return and iframe as a String
      * @throws UnsupportedEncodingException
      * @throws SQLException
      */
-    public static String getAnfahrtseite(String ort) throws UnsupportedEncodingException, SQLException
-    {
+    public static String getAnfahrtseite(String ort) throws UnsupportedEncodingException, SQLException {
         return getAnfahrtsseite(ort, null);
     }
 

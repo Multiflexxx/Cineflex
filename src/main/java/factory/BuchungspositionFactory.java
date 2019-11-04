@@ -6,12 +6,24 @@ import exception.EmptyResultSetException;
 import exception.RequiredFactoryFailedException;
 import exception.ResultSetIsNullException;
 import helper.SupportMethods;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import oo.BuchungsPosition;
 
 public class BuchungspositionFactory {
+    /**
+     * Returns Buchungspositionen for a single Buchung
+     *
+     * @param BNR    ID of the Buchung
+     * @param mockRs For testing
+     * @return Returns Buchungspoistionen for a single Buchung
+     * @throws EmptyResultSetException
+     * @throws ResultSetIsNullException
+     * @throws RequiredFactoryFailedException
+     */
     public static BuchungsPosition[] getBuchungspositionenByBNR(int BNR, ResultSet mockRs)
             throws EmptyResultSetException, ResultSetIsNullException, RequiredFactoryFailedException {
         Connection c = Connector.getConnection();
@@ -21,31 +33,27 @@ public class BuchungspositionFactory {
         ResultSet rs = null;
 
         // Set Mock Resultset, if available
-        if(mockRs == null)
-        {
+        if (mockRs == null) {
             rs = Connector.getQueryResult(c, sql);
-        }
-
-        else
-        {
+        } else {
             rs = mockRs;
         }
 
         if (rs == null) {
-			SupportMethods.close(c, rs);
+            SupportMethods.close(c, rs);
             throw new ResultSetIsNullException();
         }
 
         int rsSize = SupportMethods.getResultSetSize(rs);
 
         if (rsSize < 1) {
-			SupportMethods.close(c, rs);
+            SupportMethods.close(c, rs);
             throw new EmptyResultSetException();
         }
 
         buchungspositionen = new BuchungsPosition[rsSize];
         try {
-            for (int i = 0; i < rsSize; i++){
+            for (int i = 0; i < rsSize; i++) {
                 rs.next();
                 buchungspositionen[i] = new BuchungsPosition(
                         rs.getInt("PositionsID"),
@@ -55,7 +63,7 @@ public class BuchungspositionFactory {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-			SupportMethods.close(c, rs);
+            SupportMethods.close(c, rs);
             throw new RequiredFactoryFailedException();
         }
 
@@ -63,8 +71,7 @@ public class BuchungspositionFactory {
         return buchungspositionen;
     }
 
-    public static BuchungsPosition[] getBuchungspositionenByBNR(int BNR) throws EmptyResultSetException, ResultSetIsNullException, RequiredFactoryFailedException
-    {
+    public static BuchungsPosition[] getBuchungspositionenByBNR(int BNR) throws EmptyResultSetException, ResultSetIsNullException, RequiredFactoryFailedException {
         return getBuchungspositionenByBNR(BNR, null);
     }
 }

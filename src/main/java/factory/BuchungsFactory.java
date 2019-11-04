@@ -14,6 +14,7 @@ import oo.Vorstellung;
 import pdf_generator.PdfGenerator;
 import qr_code.QrCodeGenerator;
 import send_mail.Email_Sender;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,9 +23,20 @@ import java.util.Date;
 
 public class BuchungsFactory {
 
-    // TODO: Change Signature to Buchungsbeleg?
+    /**
+     * Creates Database entries for a Buchung
+     *
+     * @param sitzeIDs       IDs of the seats to be booked (integer array)
+     * @param preiseVerIDs   IDs of the pricing changes for the booked seats (integer array)
+     * @param seats          IDs of the seats to be booked (comma separated numbers as a String)
+     * @param preisVer       IDs of the pricing changes for the booked seats (comma separated numbers as a String)
+     * @param vorstellungsID ID of the Vorstellung for the Buchung
+     * @param KNR            ID of the customer
+     * @return Exit code
+     * @throws IOException
+     * @throws DocumentException
+     */
     public static int createBuchungBeleg(int[] sitzeIDs, int[] preiseVerIDs, String seats, String preisVer, int vorstellungsID, int KNR) throws IOException, DocumentException {
-        // TODO: sitzeIDs and preise must have the same length -> check
         if (sitzeIDs.length != preiseVerIDs.length) {
             // throw new UnequalParameterLength();
             return -1;
@@ -76,6 +88,12 @@ public class BuchungsFactory {
         return lastBNR;
     }
 
+    /**
+     * Return a Buchungsbeleg given a valid BNR
+     *
+     * @param BNR A valid BNR
+     * @return Returns a Buchungsbeleg
+     */
     public static Buchungsbeleg getBuchungsbelegByBNR(int BNR) {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getBuchungsbelegByBNR(BNR);
@@ -110,7 +128,16 @@ public class BuchungsFactory {
         return buchungsbeleg;
     }
 
-    public static void createBuchungsbelegPDF(int KID, Vorstellung vorstellung, Sitz [] sitze) throws IOException, DocumentException {
+    /**
+     * Creates a PDF and send it via Email to the specified customer
+     *
+     * @param KID         ID of the customer
+     * @param vorstellung ID of the vorstellung
+     * @param sitze       Booked seats
+     * @throws IOException
+     * @throws DocumentException
+     */
+    public static void createBuchungsbelegPDF(int KID, Vorstellung vorstellung, Sitz[] sitze) throws IOException, DocumentException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getJustCreatedBuchung(KID);
         ResultSet rs = Connector.getQueryResult(c, sql);
@@ -156,6 +183,12 @@ public class BuchungsFactory {
         Email_Sender.sendMultipartMail(kunde.getEmail(), "Buchung by Multiflexxx" + kunde.getKundenID() + buchungsbeleg.getBelegID(), m_body, pathPDF);
     }
 
+    /**
+     * Returns all Buchungsbelege in a customer's history
+     *
+     * @param KID ID of the customer
+     * @return Returns the customer's history as a Buchungsbeleg array
+     */
     public static Buchungsbeleg[] getBuchungsbelegeByKID(int KID) {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getBuchungsbelegeByKID(KID);
@@ -193,6 +226,14 @@ public class BuchungsFactory {
         return buchungsbelege;
     }
 
+    /**
+     * Creates databse entries for the Buchungspositionen for a Buchung
+     *
+     * @param c            Connection to the Database
+     * @param BNR          ID of the Buchung
+     * @param sitze        Booked Seats
+     * @param preiseVerIDs IDs of the pricing changes
+     */
     public static void createBuchungsPositionen(Connection c, int BNR, Sitz[] sitze, int[] preiseVerIDs) {
         if (BNR > 0) {
             for (int i = 0; i < sitze.length; i++) {
