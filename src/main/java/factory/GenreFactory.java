@@ -11,10 +11,10 @@ import oo.Genre;
 public class GenreFactory {
 
   /**
-   *
-   * @param id
-   * @param mockRs
-   * @return genre
+   * Returns a Genre Object from the database
+   * @param id ID of the Genre
+   * @param mockRs For tests
+   * @return Returns Genre Object
    */
   public static Genre getGenreById(int id, ResultSet mockRs) {
     Genre genre = null;
@@ -52,9 +52,9 @@ public class GenreFactory {
   }
 
   /**
-   *
-   * @param id
-   * @return Genre
+   * Returns a Genre Object from the database
+   * @param id ID of the Genre
+   * @return Returns Genre Object
    */
   public static Genre getGenreById(int id)
   {
@@ -62,9 +62,9 @@ public class GenreFactory {
   }
 
   /**
-   *
-   * @param mockRs
-   * @return genres
+   * Returns an array containing all Genres in the database
+   * @param mockRs For tests
+   * @return genres Returns Genre Array
    */
   public static Genre[] getGenre(ResultSet mockRs){
     Genre[] genres;
@@ -113,8 +113,8 @@ public class GenreFactory {
   }
 
   /**
-   *
-   * @return Genre[]
+   * Returns an array containing all Genres in the database
+   * @return genres Returns Genre Array
    */
   public static Genre[] getGenre()
   {

@@ -14,11 +14,11 @@ import java.sql.SQLException;
 
 public class KinosaalFactory {
     /**
-     *
-     * @param id
-     * @param mockRs1
-     * @param mockRs2
-     * @return Sitzplan
+     * Returns a Kinosaal Object from the database
+     * @param id ID of the Kinosaal
+     * @param mockRs1 For tests
+     * @param mockRs2 For tests
+     * @return Sitzplan Returns a Kinsosaal Object
      */
     public static Kinosaal getKinosaal(int id, ResultSet mockRs1, ResultSet mockRs2) {
 
@@ -82,9 +82,9 @@ public class KinosaalFactory {
     }
 
     /**
-     *
-     * @param id
-     * @return Kinosaal
+     * Returns a Kinosaal Object from the database
+     * @param id ID of the Kinosaal
+     * @return Sitzplan Returns a Kinsosaal Object
      */
     public static Kinosaal getKinosaal(int id) {
         return getKinosaal(id, null, null);

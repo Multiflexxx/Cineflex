@@ -8,14 +8,14 @@ import java.sql.Connection;
 
 public class ProfilFactory {
     /**
-     *
-     * @param vorname
-     * @param nachname
-     * @param email
-     * @param passwort
-     * @param strasse
-     * @param hausnummer
-     * @param PID
+     * Updates Information on a user Profil
+     * @param vorname Updated first name
+     * @param nachname Updated surname
+     * @param email updated email address
+     * @param passwort updated password hash
+     * @param strasse Updated Street
+     * @param hausnummer Updated Number
+     * @param PID ID of the user
      */
     public static void aendereProfil(String vorname, String nachname, String email, String passwort, String strasse, int hausnummer, int PID) {
         vorname = SupportMethods.removeHTMLCode(vorname);

@@ -11,6 +11,14 @@ import java.sql.SQLException;
 import oo.Reservierungsbeleg;
 
 public class ReservierungsStornierungFactory {
+
+    /**
+     *
+     * @param RNR
+     * @return
+     * @throws RequiredFactoryFailedException
+     * @throws FailedDataInsertionException
+     */
     public static ReservierungsStornierung createStornierung(int RNR) throws RequiredFactoryFailedException, FailedDataInsertionException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.createReservierungsStornierung(RNR);
