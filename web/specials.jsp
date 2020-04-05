@@ -12,11 +12,19 @@
 
 
 <%
-    int KID = Integer.parseInt(session.getAttribute("KID").toString());
-    Kunde k = KundenFactory.getKundeByKID(KID);
+    int KID;
+    if (session.getAttribute("KID") != null) {
+        KID= Integer.parseInt(session.getAttribute("KID").toString());
+        Kunde k = KundenFactory.getKundeByKID(KID);
 %>
 
 <div class="container">
+    <div class="alert alert-danger alert-dismissible fade show mt-3" id="booking_denied" role="alert" style="display: none">
+        Melde dich für das Buchen oder Reservieren zuerst an!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="card mt-3">
         <div class="card-header">
             <h1>Willkommen, <%=k.getVorname()%>
@@ -26,15 +34,6 @@
             </h2>
         </div>
     </div>
-
-    <div class="alert alert-danger alert-dismissible fade show mt-3" id="chest_denied" role="alert"
-         style="display: none">
-        Du hast nicht genügend Treuepunkte
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
     <div class="card-deck" style="max-width: 1400px;">
         <div class="card lootbox" style="width: 15rem;  margin-top:2rem; margin-bottom: 1rem;">
             <img src="img/specials/g_g.svg" class="card-img-top" alt="...">
@@ -151,7 +150,22 @@
     </div>
 </div>
 <script src="javascript/lootbox.js" crossorigin="anonymous" type="text/javascript"></script>
-<jsp:include page="elements/footer.jsp"/>
 
+<%
+} else {
+
+%>
+<div class="container">
+    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        Melde dich für das Angbot unserer Specials zuerst an!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<%
+    }
+%>
+<jsp:include page="elements/footer.jsp"/>
 </body>
 </html>
