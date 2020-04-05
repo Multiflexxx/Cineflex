@@ -15,7 +15,7 @@ public class QueryBuilder {
     }
 
     public static String createLoginQuery(String email, String passwordHash) {
-        return "Select person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From person Join kunde k on person.PID = k.PID Where `E-Mail` = '" + email + "' AND Passwort = '" + passwordHash + "';";
+        return "Select Person.PID as PID, Vorname, Nachname, GebDatum, `E-Mail`, KID, Treuepunkte From Person Join Kunde k on Person.PID = k.PID Where `E-Mail` = '" + email + "' AND Passwort = '" + passwordHash + "';";
     }
 
     public static String createUser(String name, String lastname, Date gebDate, String email, String passwordHash, int hausnummer, String straße, String adresszusatz, int plz) {
@@ -68,7 +68,7 @@ public class QueryBuilder {
                     "JOIN Kinosaal ON Vorstellung.SaalID = Kinosaal.SaalID " +
                     "JOIN Gebäude ON Kinosaal.GebäudeID = Gebäude.GebäudeID " +
                     "WHERE (`Titel` LIKE '%" + search + "%' OR `Beschreibung` LIKE '%" + search + "%') " +
-                    "WHERE concat(`Datum`,  ' ', `Uhrzeit`) >= '" + date + " " + time + "' " +
+                    "AND concat(`Datum`,  ' ', `Uhrzeit`) >= '" + date + " " + time + "' " +
                     "AND Gebäude.PLZ = '" + plz + "' " +
                     "AND `FSK` <= " + fsk + " ;";
         } else {
@@ -169,7 +169,7 @@ public class QueryBuilder {
     }
 
     public static String getSitzById(int id) {
-        return "Select * From sitz Where SitzplatzID = " + id + ";";
+        return "Select * From Sitz Where SitzplatzID = " + id + ";";
     }
 
     public static String createBuchungsBeleg(int KID, int vorstellungsID, float preis, String timestamp) {
