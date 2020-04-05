@@ -17,6 +17,27 @@ import java.sql.SQLException;
 import java.util.Date;
 
 public class RegistrierungFactory {
+
+    /**
+     * Creates an entry in the database for a newly registered user
+     * @param vorname First name of the new user
+     * @param nachname Surname of the new user
+     * @param geburtsdatum Birth of Date
+     * @param email Email address
+     * @param passwordHash Password Hash
+     * @param passwordHashWdh Password Hash
+     * @param wohnort City
+     * @param plz Postcode
+     * @param straße Street
+     * @param hausnummer House number
+     * @param adresszusatz Additional address information
+     * @return Return the created entry in hte database
+     * @throws UnmatchingPasswordException
+     * @throws EmptyInputValueException
+     * @throws UserAlreadyExistsException
+     * @throws RequiredFactoryFailedException
+     * @throws EmptyResultSetException
+     */
     public static Registrierung createRegistrierung(String vorname, String nachname, Date geburtsdatum, String email, String passwordHash, String passwordHashWdh, String wohnort, int plz, String straße, int hausnummer, String adresszusatz)
             throws UnmatchingPasswordException, EmptyInputValueException, UserAlreadyExistsException, RequiredFactoryFailedException, EmptyResultSetException {
         vorname = SupportMethods.removeHTMLCode(vorname);
@@ -86,6 +107,13 @@ public class RegistrierungFactory {
         return registrierung;
     }
 
+    /**
+     * Returns a Registrierung for a given Email address. Use this to check whether a account already exists for an email
+     * @param email Email address of th eaccount
+     * @return Returns registration object
+     * @throws ResultSetIsNullException
+     * @throws EmptyResultSetException
+     */
     public static Registrierung getRegistrierungByEmail(String email)
             throws ResultSetIsNullException, EmptyResultSetException {
         Connection c = Connector.getConnection();

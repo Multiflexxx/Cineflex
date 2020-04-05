@@ -15,6 +15,8 @@
 <%@ page import="exception.registrierung.UserAlreadyExistsException" %>
 <%@ page import="exception.RequiredFactoryFailedException" %>
 <%@ page import="exception.EmptyResultSetException" %>
+<%@ page import="factory.OrtsFactory" %>
+<%@ page import="exception.ResultSetIsNullException" %>
 <%
     String firstname = SupportMethods.removeHTMLCode(request.getParameter("inputVorname"));
     String lastname = SupportMethods.removeHTMLCode(request.getParameter("inputNachname"));

@@ -12,9 +12,9 @@ import java.sql.SQLException;
 
 public class PreisänderungsFactory {
     /**
-     *
-     * @param preisänderungsID
-     * @return preisänderung
+     * Returns a Preisänderung from the database
+     * @param preisänderungsID ID of the Preisänderung
+     * @return preisänderung Preisänderung Object
      * @throws ResultSetIsNullException
      * @throws EmptyResultSetException
      */

@@ -13,6 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SitzFactory {
+
+    /**
+     * Returns a Seat object from the database given specific Seat ID
+     * @param id ID of the seat
+     * @param mockRs For tests
+     * @return Returns Seat object
+     */
     public static Sitz getSitzById(int id, ResultSet mockRs) {
         Sitz sitz = null;
         Connection c = Connector.getConnection();
@@ -48,6 +55,14 @@ public class SitzFactory {
         return sitz;
     }
 
+    /**
+     * Returns a Seat Array containing all booked seats for a single Vorstellung
+     * @param vorstellungsID ID of the Vorstellung
+     * @return Returns Seat Array
+     * @throws FailedObjectCreationException
+     * @throws EmptyResultSetException
+     * @throws ResultSetIsNullException
+     */
     private static Sitz[] getBookedSeats(int vorstellungsID) throws FailedObjectCreationException, EmptyResultSetException, ResultSetIsNullException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getBookedSeats(vorstellungsID);
@@ -166,6 +181,15 @@ public class SitzFactory {
         return allLockedSeats;
     }
 
+
+    /**
+     *  Returns a Seat Array containing all reserved seats for a single Vorstellung
+     * @param vorstellungsID ID of the Vorstellung
+     * @return Seat Array
+     * @throws ResultSetIsNullException
+     * @throws EmptyResultSetException
+     * @throws FailedObjectCreationException
+     */
     private static Sitz[] getReservedSeats(int vorstellungsID) throws ResultSetIsNullException, EmptyResultSetException, FailedObjectCreationException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getReservedSeats(vorstellungsID);
@@ -200,6 +224,12 @@ public class SitzFactory {
         return reservedSeats;
     }
 
+    /**
+     * Returns a Seats Array for all seats in a Buchungsbeleg
+     * @param BNR ID of the Buchungsbeleg
+     * @return returns Sitz Array
+     * @throws RequiredFactoryFailedException
+     */
     public static Sitz[] getSitzeByBNR(int BNR) throws RequiredFactoryFailedException {
         BuchungsPosition[] buchungspositionen = null;
         Sitz[] sitze = null;

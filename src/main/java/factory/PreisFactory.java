@@ -22,7 +22,7 @@ public class PreisFactory {
     /**
      *
      * @param id
-     * @return lJSONDataArray
+     * @return
      */
     public static String[] getPreisJSONArray(int id) {
         Connection connection = Connector.getConnection();

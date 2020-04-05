@@ -23,11 +23,16 @@ import send_mail.Email_Sender;
 public class ReservierungsFactory {
 
     /**
-     * @param sitzeIDs
-     * @param preiseVerIDs
-     * @param vorstellungsID
-     * @param KNR
-     * @return
+     * Creates a Reservierungsbeleg entry on the database, also sends an Email with registration information to the user
+     * @param sitzeIDs Integer array containing the IDs of the seats
+     * @param preiseVerIDs Integer array containing the IDs of the Preisveränderungen
+     * @param seats Comma separated IDs of the seats as a String
+     * @param preisVer Comma separated IDs of the Preisveränderungen
+     * @param vorstellungsID ID of the Vrstellung
+     * @param KNR ID of the customer
+     * @return Returns an exit code, 0 means successful creation
+     * @throws IOException
+     * @throws DocumentException
      */
     public static int createReservierungsBelege(int[] sitzeIDs, int[] preiseVerIDs, String seats,
                                                 String preisVer, int vorstellungsID, int KNR) throws IOException, DocumentException {
@@ -87,8 +92,9 @@ public class ReservierungsFactory {
     }
 
     /**
-     * @param RNR
-     * @return reservierungsbeleg
+     * Returns a Reservierungsbeleg for a specified RNR
+     * @param RNR ID of the Beleg
+     * @return Returns Reservierungsbeleg object
      */
     public static Reservierungsbeleg getReservierungsbelegByRNR(int RNR) {
         Connection c = Connector.getConnection();
@@ -118,8 +124,9 @@ public class ReservierungsFactory {
     }
 
     /**
-     * @param KID
-     * @return reservierungsbelege
+     * Returns all Reservierungsbelege of a Kunde
+     * @param KID ID of the customer
+     * @return Returns a Reservierungsbeleg array
      */
     public static Reservierungsbeleg[] getReservierungsbelegByKID(int KID) {
         Connection c = Connector.getConnection();
@@ -156,10 +163,11 @@ public class ReservierungsFactory {
     }
 
     /**
-     * @param c
-     * @param RNR
-     * @param sitze
-     * @param preiseVerIDs
+     * Creates Reservierungspositionen for a single Reservierungsbeleg
+     * @param c Connection to the database
+     * @param RNR ID of the Reservireungsbeleg
+     * @param sitze Array of seats
+     * @param preiseVerIDs Integer array of the IDs of the pricing changes
      */
     public static void createReservierungsPositionen(Connection c, int RNR, Sitz[] sitze,
                                                      int[] preiseVerIDs) {
@@ -177,6 +185,14 @@ public class ReservierungsFactory {
         }
     }
 
+    /**
+     * Creates a Booking confirmation as a PDF to the customer
+     * @param KID ID of the customer
+     * @param vorstellung Vorstellung object
+     * @param sitze Array of seats
+     * @throws IOException
+     * @throws DocumentException
+     */
     public static void createReservierungsBelegPDF(int KID, Vorstellung vorstellung, Sitz[] sitze) throws IOException, DocumentException {
         Connection c = Connector.getConnection();
         String sql = QueryBuilder.getJustCreatedReservierung(KID);

@@ -11,11 +11,11 @@ import java.sql.SQLException;
 public class LoginFactory {
 
     /**
-     *
-     * @param email
-     * @param passwordHash
-     * @param mockRs
-     * @return userLogin
+     * Used for logging in a user, returns a UserLogin object that can be used to log in a user
+     * @param email Email address of the customer
+     * @param passwordHash Password Hash
+     * @param mockRs For tests
+     * @return userLogin Returns a UserLogin object
      */
     public static UserLogin getUserLogin(String email, String passwordHash, ResultSet mockRs) {
         email = SupportMethods.removeHTMLCode(email);
@@ -61,10 +61,10 @@ public class LoginFactory {
     }
 
     /**
-     *
-     * @param email
-     * @param passwordHash
-     * @return UserLogin
+     * Used for logging in a user, returns a UserLogin object that can be used to log in a user
+     * @param email Email address of the customer
+     * @param passwordHash Password Hash
+     * @return userLogin Returns a UserLogin object
      */
     public static UserLogin getUserLogin(String email, String passwordHash)
     {

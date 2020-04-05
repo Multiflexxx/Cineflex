@@ -13,9 +13,9 @@ import java.sql.ResultSet;
 
 public class GebaeudeFactory {
     /**
-     *
-     * @param mockRs
-     * @return Gebaeude[]
+     * Returns an array of all buildings in the database
+     * @param mockRs For tests
+     * @return Returns Gebäude Array
      */
     public static Gebaeude[] getGebaeude(ResultSet mockRs) {
         Gebaeude[] gebäude = null;
@@ -62,8 +62,8 @@ public class GebaeudeFactory {
     }
 
     /**
-     *
-     * @return Gebaeude[]
+     *  Returns an array of all buildings in the database
+     * @return returns Gebäude Array
      */
     public static Gebaeude[] getGebaeude()
     {
@@ -71,9 +71,9 @@ public class GebaeudeFactory {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Returns the Gebäude with the specified ID
+     * @param id ID of the building
+     * @return Returns a single Gebäude
      * @throws ResultSetIsNullException
      * @throws EmptyResultSetException
      * @throws FailedObjectCreationException
