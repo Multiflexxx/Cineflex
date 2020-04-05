@@ -114,7 +114,15 @@
                             <div class="row">
                                 <div class="col-lg-6 mb-2">
                                     <button class="btn btn-primary btn-block"
-                                            onclick="download_buchung(<%=b.getBelegID()%>)">Download
+                                            <%
+                                                String js_call_dow = "";
+                                                if (b.getBelegBezeichnung().equals("Buchung")) {
+                                                    js_call_dow = "download_buchung(" + b.getBelegID() + ")";
+                                                } else if (b.getBelegBezeichnung().equals("Reservierung")) {
+                                                    js_call_dow = "download_reservierung(" + b.getBelegID() + ")";
+                                                }
+                                            %>
+                                            onclick="<%=js_call_dow%>">Download
                                     </button>
                                 </div>
                                 <div class="col-lg-6 mb-2">
